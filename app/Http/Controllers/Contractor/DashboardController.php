@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Contractor;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,43 +15,43 @@ class DashboardController extends Controller
 
         // Get contractor statistics from database
         $stats = [
-            'ongoing_projects' => Project::where('selected_contractor_id', $user->id)->where('status', 'published')->count(),
-            'completed_projects' => Project::where('selected_contractor_id', $user->id)->where('status', 'completed')->count(),
+            'tenders_participated' => 0, // Will be implemented when contractor proposals are added
+            'accepted_proposals' => 0, // Will be implemented when contractor proposals are added
             'monthly_earnings' => 0, // Will be implemented when earnings table is created
             'team_members' => 5, // Will be implemented when team table is created
         ];
 
-        // Get recent projects from database
-        $recentProjects = Project::where('selected_contractor_id', $user->id)
-            ->latest()
-            ->take(5)
-            ->get()
-            ->map(function($project) {
-                return [
-                    'title' => $project->title,
-                    'location' => $project->location,
-                    'status' => $project->status,
-                    'budget' => number_format($project->estimated_cost) . ' ريال'
-                ];
-            })
-            ->toArray();
+        // Get recent tenders (simulated for now)
+        $recentTenders = [
+            [
+                'title' => 'بناء فيلا سكنية',
+                'location' => 'الرياض',
+                'status' => 'open',
+                'budget' => '500,000 درهم إماراتي'
+            ],
+            [
+                'title' => 'تطوير مجمع تجاري',
+                'location' => 'دبي',
+                'status' => 'open',
+                'budget' => '1,200,000 درهم إماراتي'
+            ]
+        ];
 
-        // Get recent bids (projects in contractor bidding phase)
-        $recentBids = Project::whereNull('selected_contractor_id')
-            ->where('status', 'contractor_bidding')
-            ->with('client')
-            ->latest()
-            ->take(5)
-            ->get()
-            ->map(function($project) {
-                return [
-                    'project' => $project->title,
-                    'client' => $project->client->name ?? 'غير محدد',
-                    'amount' => number_format($project->estimated_cost) . ' ريال',
-                    'status' => 'pending'
-                ];
-            })
-            ->toArray();
+        // Get recent bids (simulated for now)
+        $recentBids = [
+            [
+                'tender' => 'بناء فيلا سكنية',
+                'client' => 'أحمد محمد',
+                'amount' => '450,000 درهم إماراتي',
+                'status' => 'pending'
+            ],
+            [
+                'tender' => 'تطوير مجمع تجاري',
+                'client' => 'سارة أحمد',
+                'amount' => '1,100,000 درهم إماراتي',
+                'status' => 'pending'
+            ]
+        ];
 
         // Get team status (simulated for now)
         $teamStatus = [
@@ -73,7 +72,7 @@ class DashboardController extends Controller
             ]
         ];
 
-        return view('contractor.dashboard', compact('stats', 'recentProjects', 'recentBids', 'teamStatus'));
+        return view('contractor.dashboard', compact('stats', 'recentTenders', 'recentBids', 'teamStatus'));
     }
 
     public function profile()
@@ -82,11 +81,6 @@ class DashboardController extends Controller
         return view('contractor.profile', compact('user'));
     }
 
-    public function projects()
-    {
-        $projects = []; // Will be implemented later
-        return view('contractor.projects', compact('projects'));
-    }
 
     public function bids()
     {

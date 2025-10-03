@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
             UserTypeSeeder::class,
             UserSeeder::class,
             ProjectSeeder::class,
+            CategorySeeder::class,
+            ItemSeeder::class,
+            DesignSeeder::class,
+            TenderSeeder::class,
             OfferSeeder::class,
         ]);
     }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-        public function index()
+    public function index()
     {
         $user = Auth::user();
 
@@ -22,39 +22,43 @@ class DashboardController extends Controller
         $stats = [
             'saved_designs' => 0, // Will be implemented when designs table is created
             'favorite_consultants' => 0, // Will be implemented when favorites table is created
-            'ongoing_projects' => $user->clientProjects()->where('status', 'published')->count(),
-            'completed_projects' => $user->clientProjects()->where('status', 'completed')->count(),
+            'tenders_created' => $user->tenders()->count(),
+            'proposals_received' => $user->tenders()->withCount('proposals')->get()->sum('proposals_count'),
+            'accepted_proposals' => $user->tenders()->whereHas('proposals', function ($q) {
+                $q->where('status', 'accepted');
+            })->count(),
+            'active_tenders' => $user->tenders()->where('status', 'active')->count(),
         ];
 
-        // Get recent projects from database
-        $recentProjects = $user->clientProjects()
+        // Get recent tenders from database
+        $recentTenders = $user->tenders()
             ->latest()
             ->take(5)
             ->get()
-            ->map(function($project) {
+            ->map(function ($tender) {
                 return [
-                    'title' => $project->title,
-                    'location' => $project->location,
-                    'status' => $project->status,
-                    'budget' => number_format($project->estimated_cost) . ' ريال'
+                    'title' => $tender->title,
+                    'location' => $tender->location,
+                    'status' => $tender->status,
+                    'budget' => $tender->formatted_budget
                 ];
             })
             ->toArray();
 
         // Get recommended consultants from database
-        $recommendedConsultants = User::whereHas('userType', function($q) {
-                $q->where('name', 'consultant');
-            })
-            ->withCount('consultantProjects')
-            ->orderBy('consultant_projects_count', 'desc')
+        $recommendedConsultants = User::whereHas('userType', function ($q) {
+            $q->where('name', 'consultant');
+        })
+            ->withCount('designs')
+            ->orderBy('designs_count', 'desc')
             ->take(3)
             ->get()
-            ->map(function($consultant) {
+            ->map(function ($consultant) {
                 return [
                     'name' => $consultant->name,
                     'specialization' => 'تصميم معماري', // Will be enhanced when profile table is created
                     'rating' => 4.5, // Will be implemented when ratings table is created
-                    'projects_count' => $consultant->consultant_projects_count,
+                    'designs_count' => $consultant->designs_count,
                     'location' => 'الرياض' // Will be enhanced when profile table is created
                 ];
             })
@@ -63,13 +67,13 @@ class DashboardController extends Controller
         // Get recent activities (simulated for now)
         $recentActivities = [
             [
-                'type' => 'project_created',
-                'description' => 'تم إنشاء مشروع جديد: ' . ($recentProjects[0]['title'] ?? 'مشروع جديد'),
+                'type' => 'tender_created',
+                'description' => 'تم إنشاء مناقصة جديدة: ' . ($recentTenders[0]['title'] ?? 'مناقصة جديدة'),
                 'time' => 'منذ ساعتين'
             ],
             [
-                'type' => 'consultant_hired',
-                'description' => 'تم تعيين الاستشاري: ' . ($recommendedConsultants[0]['name'] ?? 'استشاري'),
+                'type' => 'proposal_received',
+                'description' => 'تم استلام عرض جديد',
                 'time' => 'منذ يوم واحد'
             ],
             [
@@ -79,7 +83,7 @@ class DashboardController extends Controller
             ]
         ];
 
-        return view('client.dashboard', compact('stats', 'recentActivities', 'recommendedConsultants', 'recentProjects'));
+        return view('client.dashboard', compact('stats', 'recentActivities', 'recommendedConsultants', 'recentTenders'));
     }
 
     public function profile()
@@ -106,7 +110,7 @@ class DashboardController extends Controller
         return view('client.favorite-consultants', compact('favoriteConsultants'));
     }
 
-    public function projects()
+    public function myTenders()
     {
         $user = Auth::user();
 
@@ -115,87 +119,13 @@ class DashboardController extends Controller
             abort(403, 'هذه الصفحة متاحة للعملاء فقط');
         }
 
-        // Get all client projects with filters
-        $query = $user->clientProjects()->with(['client']);
+        $tenders = $user->tenders()
+            ->with(['proposals' => function ($q) {
+                $q->with('consultant');
+            }])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
-        // Apply status filter if provided
-        $status = request('status');
-        if ($status) {
-            $query->where('status', $status);
-        }
-
-        // Apply search filter if provided
-        $search = request('search');
-        if ($search) {
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('location', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
-            });
-        }
-
-        $projects = $query->latest()->paginate(10);
-
-        // Get statistics for the client
-        $stats = [
-            'total_projects' => $user->clientProjects()->count(),
-            'published_projects' => $user->clientProjects()->where('status', 'published')->count(),
-            'draft_projects' => $user->clientProjects()->where('status', 'draft')->count(),
-            'completed_projects' => $user->clientProjects()->where('status', 'completed')->count(),
-        ];
-
-        return view('client.projects', compact('projects', 'stats'));
-    }
-
-    public function offers()
-    {
-        $user = Auth::user();
-
-        // Ensure only clients can access this page
-        if (!$user->isClient()) {
-            abort(403, 'هذه الصفحة متاحة للعملاء فقط');
-        }
-
-        // Get all projects with their offers
-        $projects = $user->clientProjects()
-            ->with(['offers.professional', 'offers.professional.userType'])
-            ->whereHas('offers')
-            ->latest()
-            ->get();
-
-        // Get statistics
-        $stats = [
-            'total_offers' => $projects->sum(function($project) {
-                return $project->offers->count();
-            }),
-            'accepted_offers' => $projects->sum(function($project) {
-                return $project->offers->where('status', 'accepted')->count();
-            }),
-            'pending_offers' => $projects->sum(function($project) {
-                return $project->offers->where('status', 'pending')->count();
-            }),
-            'rejected_offers' => $projects->sum(function($project) {
-                return $project->offers->where('status', 'rejected')->count();
-            }),
-        ];
-
-        // Group offers by project
-        $projectsWithOffers = $projects->map(function($project) {
-            $consultantOffers = $project->offers->where('professional_type', 'consultant');
-            $contractorOffers = $project->offers->where('professional_type', 'contractor');
-            $supplierOffers = $project->offers->where('professional_type', 'supplier');
-
-            return [
-                'project' => $project,
-                'consultant_offers' => $consultantOffers,
-                'contractor_offers' => $contractorOffers,
-                'supplier_offers' => $supplierOffers,
-                'has_accepted_consultant' => $project->selected_consultant_id !== null,
-                'has_accepted_contractor' => $project->selected_contractor_id !== null,
-                'has_accepted_supplier' => $project->selected_supplier_id !== null,
-            ];
-        });
-
-        return view('client.offers', compact('projectsWithOffers', 'stats'));
+        return view('client.my-tenders', compact('tenders'));
     }
 }

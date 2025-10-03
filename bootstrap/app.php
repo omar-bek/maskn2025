@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Http\Middleware\OptimizePerformance::class,
         ]);
+
+        $middleware->alias([
+            'consultant' => \App\Http\Middleware\ConsultantOnly::class,
+            'client' => \App\Http\Middleware\ClientOnly::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

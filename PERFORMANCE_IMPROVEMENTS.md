@@ -164,3 +164,9 @@ class OptimizePerformance
 4. **Accessibility**: تم الحفاظ على إمكانية الوصول للمستخدمين ذوي الاحتياجات الخاصة
 
 
+
+
+
+
+
+

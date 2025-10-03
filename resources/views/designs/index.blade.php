@@ -796,42 +796,153 @@
 <section class="py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="designs-grid" id="designsGrid">
-            <!-- Design Card 1 -->
-            <div class="design-card" data-category="modern luxury">
+            @forelse($designs as $design)
+            <div class="design-card" data-category="{{ $design->style }}">
                 <div class="design-image">
-                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="فيلا عصرية فاخرة">
+                    <img src="{{ $design->main_image_url }}" alt="{{ $design->title }}">
                     <div class="design-overlay">
                         <div class="overlay-content">
-                            <div class="overlay-title">فيلا عصرية فاخرة</div>
-                            <div class="overlay-subtitle">تصميم عصري مع لمسة من الفخامة</div>
+                            <div class="overlay-title">{{ $design->title }}</div>
+                            <div class="overlay-subtitle">{{ $design->description }}</div>
                         </div>
                     </div>
-                    <div class="design-badge">عصري</div>
+                    <div class="design-badge">{{ $design->style }}</div>
                 </div>
                 <div class="design-content">
-                    <h3 class="design-title">فيلا عصرية فاخرة في دبي</h3>
+                    <h3 class="design-title">{{ $design->title }}</h3>
                     <p class="design-description">
-                        فيلا فاخرة بتصميم عصري يجمع بين الأناقة والراحة. تتميز بمساحات واسعة وإطلالات خلابة على المدينة.
+                        {{ Str::limit($design->description, 100) }}
                     </p>
                     <div class="design-meta">
-                        <div class="design-price">2,500,000 درهم</div>
-                        <div class="design-area">450 متر مربع</div>
+                        <div class="design-price">{{ $design->formatted_price }}</div>
+                        <div class="design-area">{{ $design->formatted_area }}</div>
                     </div>
                     <div class="design-features">
-                        <span class="feature-tag">5 غرف نوم</span>
-                        <span class="feature-tag">مسبح</span>
-                        <span class="feature-tag">حديقة</span>
-                        <span class="feature-tag">مصعد</span>
+                        <span class="feature-tag">{{ $design->bedrooms }} غرف نوم</span>
+                        <span class="feature-tag">{{ $design->bathrooms }} حمامات</span>
+                        <span class="feature-tag">{{ $design->floors }} طوابق</span>
+                        @if($design->features)
+                            @foreach(array_slice($design->features, 0, 2) as $feature)
+                                <span class="feature-tag">{{ $feature }}</span>
+                            @endforeach
+                        @endif
                     </div>
                     <div class="design-actions">
-                        <a href="#" class="btn-primary">عرض التفاصيل</a>
-                        <a href="#" class="btn-secondary">احسب التكلفة</a>
+                        <a href="{{ route('designs.show-with-pricing', $design->id) }}" class="btn-primary">عرض مع التسعير</a>
+                        <a href="{{ route('designs.show', $design->id) }}" class="btn-secondary">عرض التفاصيل</a>
+
+                        @auth
+                        @if(auth()->user()->isConsultant() && auth()->id() == $design->consultant_id)
+                        <a href="{{ route('designs.edit', $design->id) }}" class="btn-primary bg-blue-600 hover:bg-blue-700">تعديل</a>
+                        <button onclick="deleteDesign({{ $design->id }})" class="btn-secondary bg-red-600 hover:bg-red-700 text-white">حذف</button>
+                        @endif
+                        @endauth
                     </div>
                 </div>
             </div>
+            @empty
+            <div class="col-span-full text-center py-12">
+                <div class="text-gray-500 text-lg">
+                    <i class="fas fa-home text-4xl mb-4"></i>
+                    <p>لا توجد تصاميم متاحة حالياً</p>
+                    <p class="text-sm mt-2">كن أول من يضيف تصميم جديد</p>
+                </div>
+            </div>
+            @endforelse
 
-            <!-- Design Card 2 -->
-            <div class="design-card" data-category="classic luxury">
+        </div>
+
+        <!-- Pagination -->
+        @if($designs->hasPages())
+        <div class="mt-12 flex justify-center">
+            {{ $designs->links() }}
+        </div>
+        @endif
+    </div>
+</section>
+
+<!-- Inspiration Section -->
+<section class="inspiration-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">لماذا تختار تصاميمنا؟</h2>
+            <p class="text-xl text-gray-600">
+                نقدم لك تجربة تصميم استثنائية تجمع بين الإبداع والوظائفية
+            </p>
+        </div>
+
+        <div class="inspiration-grid">
+            <div class="inspiration-card">
+                <div class="inspiration-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">تصاميم مبدعة</h3>
+                <p class="text-gray-600">
+                    فريق من المصممين المبدعين الذين يبتكرون حلول معمارية فريدة تناسب احتياجاتك
+                </p>
+            </div>
+
+            <div class="inspiration-card">
+                <div class="inspiration-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">تسعير دقيق</h3>
+                <p class="text-gray-600">
+                    حساب دقيق للتكاليف مع تفاصيل شاملة لكل بند في التصميم لضمان الشفافية
+                </p>
+            </div>
+
+            <div class="inspiration-card">
+                <div class="inspiration-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">دعم مستمر</h3>
+                <p class="text-gray-600">
+                    فريق دعم متخصص لمساعدتك في كل خطوة من رحلة التصميم والتنفيذ
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section bg-gradient-to-r from-teal-600 to-amber-600 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="cta-title text-3xl font-bold mb-4">هل لديك رؤية لمشروعك؟</h2>
+        <p class="cta-description text-lg mb-8">
+            ابدأ رحلتك نحو منزل أحلامك مع فريقنا من الخبراء
+        </p>
+        <div class="cta-buttons flex flex-wrap justify-center gap-4">
+            <a href="{{ route('designs.create') }}" class="cta-btn bg-white text-teal-600 hover:bg-gray-100 transition duration-300">
+                ابدأ تصميمك الآن
+            </a>
+            <a href="{{ route('designs.create') }}" class="cta-btn border-2 border-white text-white hover:bg-white hover:text-teal-600 transition duration-300">
+                احسب التكلفة
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    function filterDesigns(category) {
+        const cards = document.querySelectorAll('.design-card');
+        const tabs = document.querySelectorAll('.filter-tab');
+
+        // Update active tab
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Filter cards
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category.includes(category)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+
                 <div class="design-image">
                     <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="فيلا كلاسيكية">
                     <div class="design-overlay">
@@ -858,7 +969,7 @@
                         <span class="feature-tag">مطبخ فاخر</span>
                     </div>
                     <div class="design-actions">
-                        <a href="#" class="btn-primary">عرض التفاصيل</a>
+                        <a href="{{ route('designs.show-with-pricing', 1) }}" class="btn-primary">عرض مع التسعير</a>
                         <a href="#" class="btn-secondary">احسب التكلفة</a>
                     </div>
                 </div>
@@ -892,7 +1003,7 @@
                         <span class="feature-tag">نافورة</span>
                     </div>
                     <div class="design-actions">
-                        <a href="#" class="btn-primary">عرض التفاصيل</a>
+                        <a href="{{ route('designs.show-with-pricing', 1) }}" class="btn-primary">عرض مع التسعير</a>
                         <a href="#" class="btn-secondary">احسب التكلفة</a>
                     </div>
                 </div>
@@ -926,7 +1037,7 @@
                         <span class="feature-tag">موقف سيارات</span>
                     </div>
                     <div class="design-actions">
-                        <a href="#" class="btn-primary">عرض التفاصيل</a>
+                        <a href="{{ route('designs.show-with-pricing', 1) }}" class="btn-primary">عرض مع التسعير</a>
                         <a href="#" class="btn-secondary">احسب التكلفة</a>
                     </div>
                 </div>
@@ -960,7 +1071,7 @@
                         <span class="feature-tag">قبو للسيارات</span>
                     </div>
                     <div class="design-actions">
-                        <a href="#" class="btn-primary">عرض التفاصيل</a>
+                        <a href="{{ route('designs.show-with-pricing', 1) }}" class="btn-primary">عرض مع التسعير</a>
                         <a href="#" class="btn-secondary">احسب التكلفة</a>
                     </div>
                 </div>
@@ -994,7 +1105,7 @@
                         <span class="feature-tag">مطبخ كبير</span>
                     </div>
                     <div class="design-actions">
-                        <a href="#" class="btn-primary">عرض التفاصيل</a>
+                        <a href="{{ route('designs.show-with-pricing', 1) }}" class="btn-primary">عرض مع التسعير</a>
                         <a href="#" class="btn-secondary">احسب التكلفة</a>
                     </div>
                 </div>
@@ -1060,10 +1171,6 @@
                 <i class="fas fa-plus ml-2"></i>
                 أضف تصميمك
             </a>
-            <a href="{{ route('cost-calculator.index') }}" class="cta-btn outline">
-                <i class="fas fa-calculator ml-2"></i>
-                احسب التكلفة
-            </a>
         </div>
     </div>
 </section>
@@ -1116,6 +1223,33 @@
             observer.observe(card);
         });
     });
+
+    // Delete design function
+    function deleteDesign(designId) {
+        if (confirm('هل أنت متأكد من حذف هذا التصميم؟ لا يمكن التراجع عن هذا الإجراء.')) {
+            // Create form and submit
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = `/designs/${designId}`;
+
+            // Add CSRF token
+            const csrfToken = document.createElement('input');
+            csrfToken.type = 'hidden';
+            csrfToken.name = '_token';
+            csrfToken.value = '{{ csrf_token() }}';
+            form.appendChild(csrfToken);
+
+            // Add method override
+            const methodField = document.createElement('input');
+            methodField.type = 'hidden';
+            methodField.name = '_method';
+            methodField.value = 'DELETE';
+            form.appendChild(methodField);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
 </script>
 
 <style>
@@ -1131,3 +1265,4 @@
     }
 </style>
 @endsection
+

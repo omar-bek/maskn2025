@@ -43,7 +43,7 @@
                         <i class="fas fa-handshake text-2xl text-teal-600"></i>
                     </div>
                     <div class="mr-4">
-                        <h3 class="text-2xl font-bold text-gray-900">{{ count($offers) }}</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $offers->count() }}</h3>
                         <p class="text-gray-600">عرض إجمالي</p>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         <i class="fas fa-clock text-2xl text-yellow-600"></i>
                     </div>
                     <div class="mr-4">
-                        <h3 class="text-2xl font-bold text-gray-900">{{ count(array_filter($offers, fn($offer) => $offer['status'] === 'معلق')) }}</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $offers->where('status', 'معلق')->count() }}</h3>
                         <p class="text-gray-600">في انتظار الرد</p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                         <i class="fas fa-check text-2xl text-green-600"></i>
                     </div>
                     <div class="mr-4">
-                        <h3 class="text-2xl font-bold text-gray-900">{{ count(array_filter($offers, fn($offer) => $offer['status'] === 'مقبول')) }}</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $offers->where('status', 'مقبول')->count() }}</h3>
                         <p class="text-gray-600">مقبول</p>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         <i class="fas fa-times text-2xl text-red-600"></i>
                     </div>
                     <div class="mr-4">
-                        <h3 class="text-2xl font-bold text-gray-900">{{ count(array_filter($offers, fn($offer) => $offer['status'] === 'مرفوض')) }}</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $offers->where('status', 'مرفوض')->count() }}</h3>
                         <p class="text-gray-600">مرفوض</p>
                     </div>
                 </div>

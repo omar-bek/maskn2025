@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Consultant;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,40 +15,43 @@ class DashboardController extends Controller
 
         // Get consultant statistics from database
         $stats = [
-            'active_projects' => Project::where('selected_consultant_id', $user->id)->where('status', 'published')->count(),
-            'completed_projects' => Project::where('selected_consultant_id', $user->id)->where('status', 'completed')->count(),
-            'monthly_earnings' => 0, // Will be implemented when earnings table is created
+            'designs_created' => $user->designs()->count(),
+            'tenders_participated' => $user->proposals()->count(),
+            'accepted_proposals' => $user->proposals()->where('status', 'accepted')->count(),
             'average_rating' => 4.5, // Will be implemented when ratings table is created
+            'monthly_earnings' => $user->proposals()->where('status', 'accepted')
+                ->whereMonth('created_at', now()->month)
+                ->whereYear('created_at', now()->year)
+                ->sum('proposed_price') ?? 0,
         ];
 
-        // Get recent projects from database
-        $recentProjects = Project::where('selected_consultant_id', $user->id)
+        // Get recent designs from database
+        $recentDesigns = $user->designs()
             ->latest()
             ->take(5)
             ->get()
-            ->map(function($project) {
+            ->map(function ($design) {
                 return [
-                    'title' => $project->title,
-                    'location' => $project->location,
-                    'status' => $project->status,
-                    'budget' => number_format($project->estimated_cost) . ' ريال'
+                    'title' => $design->title,
+                    'style' => $design->style,
+                    'area' => $design->formatted_area,
+                    'price' => $design->formatted_price
                 ];
             })
             ->toArray();
 
-        // Get recent inquiries (projects without consultant)
-        $recentInquiries = Project::whereNull('selected_consultant_id')
-            ->where('status', 'published')
-            ->with('client')
+        // Get recent proposals from database
+        $recentProposals = $user->proposals()
+            ->with('tender')
             ->latest()
             ->take(5)
             ->get()
-            ->map(function($project) {
+            ->map(function ($proposal) {
                 return [
-                    'client_name' => $project->client->name ?? 'غير محدد',
-                    'project_type' => $project->design_type ?? 'غير محدد',
-                    'budget' => number_format($project->estimated_cost) . ' ريال',
-                    'date' => $project->created_at->diffForHumans()
+                    'tender_title' => $proposal->tender->title,
+                    'proposed_price' => $proposal->formatted_price,
+                    'status' => $proposal->status,
+                    'date' => $proposal->created_at->diffForHumans()
                 ];
             })
             ->toArray();
@@ -57,18 +59,18 @@ class DashboardController extends Controller
         // Get recent earnings (simulated for now)
         $recentEarnings = [
             [
-                'project' => $recentProjects[0]['title'] ?? 'مشروع جديد',
+                'tender' => $recentProposals[0]['tender_title'] ?? 'مناقصة جديدة',
                 'amount' => '25,000',
                 'date' => 'منذ أسبوع'
             ],
             [
-                'project' => $recentProjects[1]['title'] ?? 'مشروع آخر',
+                'tender' => $recentProposals[1]['tender_title'] ?? 'مناقصة أخرى',
                 'amount' => '15,000',
                 'date' => 'منذ أسبوعين'
             ]
         ];
 
-        return view('consultant.dashboard', compact('stats', 'recentProjects', 'recentInquiries', 'recentEarnings'));
+        return view('consultant.dashboard', compact('stats', 'recentDesigns', 'recentProposals', 'recentEarnings'));
     }
 
     public function profile()
@@ -77,11 +79,6 @@ class DashboardController extends Controller
         return view('consultant.profile', compact('user'));
     }
 
-    public function projects()
-    {
-        $projects = []; // Will be implemented later
-        return view('consultant.projects', compact('projects'));
-    }
 
     public function portfolio()
     {

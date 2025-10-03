@@ -122,6 +122,21 @@
                             <i class="fas fa-heart ml-2"></i>
                             أضف للمفضلة
                         </button>
+
+                        @auth
+                        @if(auth()->user()->isConsultant() && auth()->id() == $design->consultant_id)
+                        <div class="border-t pt-3 mt-3">
+                            <button onclick="editDesign()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 mb-2">
+                                <i class="fas fa-edit ml-2"></i>
+                                تعديل التصميم
+                            </button>
+                            <button onclick="deleteDesign()" class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-300">
+                                <i class="fas fa-trash ml-2"></i>
+                                حذف التصميم
+                            </button>
+                        </div>
+                        @endif
+                        @endauth
                     </div>
                 </div>
 
@@ -231,5 +246,37 @@ document.getElementById('costModal').addEventListener('click', function(e) {
         closeCostModal();
     }
 });
+
+// Edit design function
+function editDesign() {
+    window.location.href = '{{ route("designs.edit", $design->id) }}';
+}
+
+// Delete design function
+function deleteDesign() {
+    if (confirm('هل أنت متأكد من حذف هذا التصميم؟ لا يمكن التراجع عن هذا الإجراء.')) {
+        // Create form and submit
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{{ route("designs.destroy", $design->id) }}';
+
+        // Add CSRF token
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = '_token';
+        csrfToken.value = '{{ csrf_token() }}';
+        form.appendChild(csrfToken);
+
+        // Add method override
+        const methodField = document.createElement('input');
+        methodField.type = 'hidden';
+        methodField.name = '_method';
+        methodField.value = 'DELETE';
+        form.appendChild(methodField);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
 </script>
 @endsection

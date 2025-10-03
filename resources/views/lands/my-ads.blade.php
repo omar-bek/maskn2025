@@ -55,7 +55,7 @@
                         <i class="fas fa-eye text-2xl text-green-600"></i>
                     </div>
                     <div class="mr-4">
-                        <h3 class="text-2xl font-bold text-gray-900">{{ array_sum(array_column($myLands, 'views')) }}</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $myLands->sum('views') }}</h3>
                         <p class="text-gray-600">مشاهدات</p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                         <i class="fas fa-handshake text-2xl text-blue-600"></i>
                     </div>
                     <div class="mr-4">
-                        <h3 class="text-2xl font-bold text-gray-900">{{ array_sum(array_column($myLands, 'offers')) }}</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $myLands->sum('offers_count') }}</h3>
                         <p class="text-gray-600">عروض مقدمة</p>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         <i class="fas fa-chart-line text-2xl text-purple-600"></i>
                     </div>
                     <div class="mr-4">
-                        <h3 class="text-2xl font-bold text-gray-900">{{ count(array_filter($myLands, fn($land) => $land['status'] === 'نشط')) }}</h3>
+                        <h3 class="text-2xl font-bold text-gray-900">{{ $myLands->where('status', 'active')->count() }}</h3>
                         <p class="text-gray-600">إعلانات نشطة</p>
                     </div>
                 </div>
@@ -120,19 +120,23 @@
             <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <!-- Image and Status -->
                 <div class="relative h-48 bg-gradient-to-br from-teal-400 to-blue-500">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <i class="fas fa-map text-6xl text-white opacity-20"></i>
-                    </div>
+                    @if($land->images && count($land->images) > 0)
+                        <img src="{{ $land->images[0] }}" alt="{{ $land->title }}" class="w-full h-full object-cover">
+                    @else
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-map text-6xl text-white opacity-20"></i>
+                        </div>
+                    @endif
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 rounded-full text-xs font-semibold
-                            {{ $land['status'] === 'نشط' ? 'bg-green-100 text-green-800' :
-                               ($land['status'] === 'معلق' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800') }}">
-                            {{ $land['status'] }}
+                            {{ $land->status === 'active' ? 'bg-green-100 text-green-800' :
+                               ($land->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800') }}">
+                            {{ $land->status_text }}
                         </span>
                     </div>
                     <div class="absolute top-4 left-4">
-                        <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $land['type'] === 'بيع' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800' }}">
-                            {{ $land['type'] }}
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $land->transaction_type === 'sale' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800' }}">
+                            {{ $land->transaction_type_text }}
                         </span>
                     </div>
                 </div>
@@ -140,23 +144,23 @@
                 <!-- Content -->
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-gray-900">{{ $land['title'] }}</h3>
+                        <h3 class="text-xl font-bold text-gray-900">{{ $land->title }}</h3>
                         <div class="text-right">
-                            <p class="text-2xl font-bold text-teal-600">{{ $land['price'] }} ريال</p>
-                            <p class="text-sm text-gray-500">{{ $land['created_at'] }}</p>
+                            <p class="text-2xl font-bold text-teal-600">{{ $land->formatted_price }}</p>
+                            <p class="text-sm text-gray-500">{{ $land->created_at->format('Y-m-d') }}</p>
                         </div>
                     </div>
 
-                    <p class="text-gray-600 mb-4">{{ $land['description'] }}</p>
+                    <p class="text-gray-600 mb-4">{{ Str::limit($land->description, 100) }}</p>
 
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-map-marker-alt text-teal-500 ml-2"></i>
-                            <span>{{ $land['location'] }}</span>
+                            <span>{{ $land->location }}</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-ruler-combined text-blue-500 ml-2"></i>
-                            <span>{{ $land['area'] }}</span>
+                            <span>{{ $land->formatted_area }}</span>
                         </div>
                     </div>
 
@@ -164,25 +168,29 @@
                     <div class="flex items-center justify-between mb-4 p-3 bg-gray-50 rounded-lg">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-eye text-gray-400 ml-2"></i>
-                            <span>{{ $land['views'] }} مشاهدة</span>
+                            <span>{{ $land->views }} مشاهدة</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-handshake text-gray-400 ml-2"></i>
-                            <span>{{ $land['offers'] }} عرض</span>
+                            <span>{{ $land->offers_count }} عرض</span>
                         </div>
                     </div>
 
                     <!-- Actions -->
                     <div class="flex gap-2">
-                        <a href="{{ route('lands.show', $land['id']) }}" class="flex-1 bg-teal-600 text-white py-2 px-4 rounded-lg text-center font-semibold hover:bg-teal-700 transition-colors">
+                        <a href="{{ route('lands.show', $land->id) }}" class="flex-1 bg-teal-600 text-white py-2 px-4 rounded-lg text-center font-semibold hover:bg-teal-700 transition-colors">
                             عرض التفاصيل
                         </a>
-                        <button class="p-2 text-gray-400 hover:text-blue-500 transition-colors" title="تعديل">
+                        <a href="{{ route('lands.edit', $land->id) }}" class="p-2 text-gray-400 hover:text-blue-500 transition-colors" title="تعديل">
                             <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="p-2 text-gray-400 hover:text-red-500 transition-colors" title="حذف">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        </a>
+                        <form method="POST" action="{{ route('lands.destroy', $land->id) }}" style="display: inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذا الإعلان؟')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="p-2 text-gray-400 hover:text-red-500 transition-colors" title="حذف">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

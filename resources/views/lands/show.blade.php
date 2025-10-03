@@ -57,40 +57,58 @@
             <div class="lg:col-span-2">
                 <!-- Image Gallery -->
                 <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden mb-8">
-                    <div class="relative h-96 bg-gradient-to-br from-teal-400 to-blue-500">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="fas fa-map text-8xl text-white opacity-20"></i>
-                        </div>
-                        <div class="absolute top-4 right-4">
-                            <span class="px-4 py-2 rounded-full text-sm font-semibold {{ $land['type'] === 'بيع' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800' }}">
-                                {{ $land['type'] }}
-                            </span>
-                        </div>
-                        <div class="absolute top-4 left-4">
-                            <button class="p-2 bg-white bg-opacity-90 rounded-lg text-gray-600 hover:text-red-500 transition-colors">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Thumbnail Images -->
-                    <div class="p-4 border-t border-gray-100">
-                        <div class="flex space-x-2 space-x-reverse">
-                            @foreach($land['images'] as $image)
-                            <div class="w-20 h-20 bg-gradient-to-br from-teal-300 to-blue-400 rounded-lg cursor-pointer hover:opacity-80 transition-opacity">
-                                <div class="w-full h-full flex items-center justify-center">
-                                    <i class="fas fa-map text-white opacity-60"></i>
-                                </div>
+                    @if($land->images && count($land->images) > 0)
+                        <!-- Main Image -->
+                        <div class="relative h-96">
+                            <img id="main-image" src="{{ $land->images[0] }}" alt="{{ $land->title }}" class="w-full h-full object-cover">
+                            <div class="absolute top-4 right-4">
+                                <span class="px-4 py-2 rounded-full text-sm font-semibold {{ $land->transaction_type === 'sale' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800' }}">
+                                    {{ $land->transaction_type_text }}
+                                </span>
                             </div>
-                            @endforeach
+                            <div class="absolute top-4 left-4">
+                                <button class="p-2 bg-white bg-opacity-90 rounded-lg text-gray-600 hover:text-red-500 transition-colors">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+
+                        <!-- Thumbnail Images -->
+                        @if(count($land->images) > 1)
+                        <div class="p-4 border-t border-gray-100">
+                            <div class="flex space-x-2 space-x-reverse overflow-x-auto">
+                                @foreach($land->images as $index => $image)
+                                <div class="w-20 h-20 rounded-lg cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0 thumbnail {{ $index === 0 ? 'ring-2 ring-teal-500' : '' }}" onclick="changeMainImage('{{ $image }}', this)">
+                                    <img src="{{ $image }}" alt="{{ $land->title }}" class="w-full h-full object-cover rounded-lg">
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
+                    @else
+                        <!-- No Images Placeholder -->
+                        <div class="relative h-96 bg-gradient-to-br from-teal-400 to-blue-500">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-map text-8xl text-white opacity-20"></i>
+                            </div>
+                            <div class="absolute top-4 right-4">
+                                <span class="px-4 py-2 rounded-full text-sm font-semibold {{ $land->transaction_type === 'sale' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800' }}">
+                                    {{ $land->transaction_type_text }}
+                                </span>
+                            </div>
+                            <div class="absolute top-4 left-4">
+                                <button class="p-2 bg-white bg-opacity-90 rounded-lg text-gray-600 hover:text-red-500 transition-colors">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Property Details -->
                 <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mb-8">
-                    <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $land['title'] }}</h1>
-                    <p class="text-gray-600 text-lg mb-6">{{ $land['description'] }}</p>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $land->title }}</h1>
+                    <p class="text-gray-600 text-lg mb-6">{{ $land->description }}</p>
 
                     <!-- Key Features -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -100,7 +118,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500">الموقع</p>
-                                <p class="font-semibold text-gray-900">{{ $land['location'] }}</p>
+                                <p class="font-semibold text-gray-900">{{ $land->location }}</p>
                             </div>
                         </div>
 
@@ -110,7 +128,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500">المساحة</p>
-                                <p class="font-semibold text-gray-900">{{ $land['area'] }}</p>
+                                <p class="font-semibold text-gray-900">{{ $land->formatted_area }}</p>
                             </div>
                         </div>
 
@@ -120,7 +138,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500">السعر</p>
-                                <p class="font-semibold text-gray-900">{{ $land['price'] }} ريال</p>
+                                <p class="font-semibold text-gray-900">{{ $land->formatted_price }}</p>
                             </div>
                         </div>
 
@@ -130,7 +148,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500">تاريخ النشر</p>
-                                <p class="font-semibold text-gray-900">منذ 3 أيام</p>
+                                <p class="font-semibold text-gray-900">{{ $land->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
                     </div>
@@ -174,7 +192,7 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500">المعلن</p>
-                                <p class="font-semibold text-gray-900">أحمد محمد</p>
+                                <p class="font-semibold text-gray-900">{{ $land->contact_name }}</p>
                             </div>
                         </div>
 
@@ -184,22 +202,50 @@
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500">الهاتف</p>
-                                <p class="font-semibold text-gray-900">+966 50 123 4567</p>
+                                <p class="font-semibold text-gray-900">{{ $land->contact_phone }}</p>
                             </div>
                         </div>
 
+                        @if($land->contact_whatsapp)
                         <div class="flex items-center">
                             <div class="p-2 bg-green-100 rounded-lg ml-3">
                                 <i class="fab fa-whatsapp text-green-600"></i>
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500">واتساب</p>
-                                <p class="font-semibold text-gray-900">+966 50 123 4567</p>
+                                <p class="font-semibold text-gray-900">{{ $land->contact_whatsapp }}</p>
                             </div>
                         </div>
+                        @endif
+
+                        @if($land->contact_email)
+                        <div class="flex items-center">
+                            <div class="p-2 bg-purple-100 rounded-lg ml-3">
+                                <i class="fas fa-envelope text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">البريد الإلكتروني</p>
+                                <p class="font-semibold text-gray-900">{{ $land->contact_email }}</p>
+                            </div>
+                        </div>
+                        @endif
                     </div>
 
                     <div class="space-y-3">
+                        @auth
+                            @if(auth()->id() !== $land->user_id)
+                                <a href="{{ route('lands.submit-offer', $land->id) }}" class="w-full bg-gradient-to-r from-teal-600 to-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-teal-700 hover:to-blue-700 transition-all transform hover:scale-105 flex items-center justify-center">
+                                    <i class="fas fa-handshake ml-2"></i>
+                                    تقديم عرض
+                                </a>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="w-full bg-gradient-to-r from-teal-600 to-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-teal-700 hover:to-blue-700 transition-all transform hover:scale-105 flex items-center justify-center">
+                                <i class="fas fa-handshake ml-2"></i>
+                                تسجيل الدخول لتقديم عرض
+                            </a>
+                        @endauth
+
                         <button class="w-full bg-teal-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-teal-700 transition-colors">
                             <i class="fas fa-phone ml-2"></i>
                             اتصل الآن
@@ -260,4 +306,17 @@
         </div>
     </div>
 </div>
+
+<script>
+function changeMainImage(imageSrc, thumbnail) {
+    // Update main image
+    document.getElementById('main-image').src = imageSrc;
+
+    // Update thumbnail selection
+    document.querySelectorAll('.thumbnail').forEach(thumb => {
+        thumb.classList.remove('ring-2', 'ring-teal-500');
+    });
+    thumbnail.classList.add('ring-2', 'ring-teal-500');
+}
+</script>
 @endsection

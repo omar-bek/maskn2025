@@ -65,49 +65,21 @@ class User extends Authenticatable
     }
 
     // Project relationships
-    public function clientProjects()
+
+
+    public function tenders()
     {
-        return $this->hasMany(Project::class, 'client_id');
+        return $this->hasMany(Tender::class, 'client_id');
     }
 
-    public function consultantProjects()
+    public function proposals()
     {
-        return $this->hasMany(Project::class, 'selected_consultant_id');
+        return $this->hasMany(Proposal::class, 'consultant_id');
     }
 
-    public function contractorProjects()
+    public function designs()
     {
-        return $this->hasMany(Project::class, 'selected_contractor_id');
-    }
-
-    public function supplierProjects()
-    {
-        return $this->hasMany(Project::class, 'selected_supplier_id');
-    }
-
-    public function offers()
-    {
-        return $this->hasMany(Offer::class, 'professional_id');
-    }
-
-    public function consultantOffers()
-    {
-        return $this->hasMany(Offer::class, 'professional_id')->where('professional_type', 'consultant');
-    }
-
-    public function contractorOffers()
-    {
-        return $this->hasMany(Offer::class, 'professional_id')->where('professional_type', 'contractor');
-    }
-
-    public function supplierOffers()
-    {
-        return $this->hasMany(Offer::class, 'professional_id')->where('professional_type', 'supplier');
-    }
-
-    public function uploadedFiles()
-    {
-        return $this->hasMany(ProjectFile::class, 'uploaded_by');
+        return $this->hasMany(Design::class, 'consultant_id');
     }
 
     // Helper methods

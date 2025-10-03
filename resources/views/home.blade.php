@@ -251,10 +251,10 @@
                         <div class="text-3xl font-bold text-teal-600 mb-2">3.5k+</div>
                         <div class="text-gray-600 mb-4">مشروع مكتمل في الإمارات</div>
                         <p class="text-sm text-gray-500 mb-4">
-                            منصة متكاملة لتقدير تكلفة مشاريع البناء مع انشاءات
+                            منصة متكاملة لطلب عرض أسعار الإستشارات والمقاولات
                         </p>
                         <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                            <a href="{{ route('cost-calculator.index') }}" class="uae-gradient text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition duration-300 transform inline-block text-sm">
+                            <a href="{{ route('designs.create') }}" class="uae-gradient text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition duration-300 transform inline-block text-sm">هشاريلح
                                 🚀 ابدأ مشروعك الآن
                             </a>
                             <a href="{{ route('lands.create') }}" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition duration-300 transform inline-block text-sm">
@@ -304,7 +304,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {{--  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <!-- Image -->
             <div class="relative">
                 <div class="bg-gradient-to-br from-teal-50 to-amber-50 rounded-3xl p-8">
@@ -404,7 +404,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  --}}
     </div>
 </section>
 
@@ -416,7 +416,7 @@
                 قدر التكلفة التقديرية لمشروعك في الإمارات
             </h2>
             <p class="text-xl text-gray-600">
-                حاسبة ذكية تعتمد على أسعار السوق الإماراتي
+                إرفع متطلبات البناء وأحصل على أفضل العروض من نخبة الإستشاريين والمقاوليين وموردي المواد
             </p>
         </div>
 
@@ -462,8 +462,8 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('cost-calculator.index') }}" class="uae-gradient text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 transition duration-300 transform text-lg inline-block">
-                        احسب التكلفة الآن
+                    <a href="{{ route('designs.create') }}" class="uae-gradient text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 transition duration-300 transform text-lg inline-block">
+                        إرفع متطلباتك الآن
                     </a>
                     <a href="{{ route('lands.create') }}" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 transition duration-300 transform text-lg inline-block">
                         <i class="fas fa-exchange-alt ml-2"></i>

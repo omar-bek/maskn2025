@@ -13,9 +13,9 @@
                     <p class="text-gray-600">إدارة مشاريعك الإنشائية</p>
                 </div>
                 <div class="flex space-x-3 space-x-reverse">
-                    <a href="{{ route('contractor.projects') }}" class="btn-primary">
-                        <i class="fas fa-project-diagram ml-2"></i>
-                        المشاريع
+                    <a href="{{ route('tenders.index') }}" class="btn-primary">
+                        <i class="fas fa-gavel ml-2"></i>
+                        المناقصات
                     </a>
                     <a href="{{ route('contractor.profile') }}" class="btn-secondary">
                         <i class="fas fa-user ml-2"></i>
@@ -94,7 +94,7 @@
                         <h3 class="text-lg font-medium text-gray-900">المشاريع الحديثة</h3>
                     </div>
                     <div class="p-6">
-                        @if(count($recentProjects) > 0)
+                        @if(isset($recentProjects) && count($recentProjects) > 0)
                             <div class="space-y-4">
                                 @foreach($recentProjects as $project)
                                     <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">

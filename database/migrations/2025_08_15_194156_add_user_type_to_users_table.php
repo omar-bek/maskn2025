@@ -31,7 +31,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['user_type_id']);
             $table->dropColumn([
-                'user_type_id', 'phone', 'whatsapp', 'address', 
+                'user_type_id', 'phone', 'whatsapp', 'address',
                 'city', 'country', 'is_verified', 'is_active'
             ]);
         });

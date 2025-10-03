@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DesignController;
+use App\Http\Controllers\TenderController;
+use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\LandController;
-use App\Http\Controllers\CostCalculatorController;
 
 // Admin Routes
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -21,8 +22,7 @@ use App\Http\Controllers\Contractor\DashboardController as ContractorDashboardCo
 
 // Supplier Routes
 use App\Http\Controllers\Supplier\DashboardController as SupplierDashboardController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\OfferController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -56,9 +56,52 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Designs Routes
 Route::get('/designs', [DesignController::class, 'index'])->name('designs.index');
+Route::get('/designs/{id}/pricing', [DesignController::class, 'showWithPricing'])->name('designs.show-with-pricing');
 Route::get('/designs/{id}', [DesignController::class, 'show'])->name('designs.show');
-Route::get('/designs/create', [DesignController::class, 'create'])->name('designs.create');
-Route::post('/designs', [DesignController::class, 'store'])->name('designs.store');
+
+// Consultant Only Routes - Designs
+Route::middleware(['auth', 'consultant'])->group(function () {
+    Route::get('/designs/create', [DesignController::class, 'create'])->name('designs.create');
+    Route::post('/designs', [DesignController::class, 'store'])->name('designs.store');
+    Route::get('/designs/{id}/edit', [DesignController::class, 'edit'])->name('designs.edit');
+    Route::put('/designs/{id}', [DesignController::class, 'update'])->name('designs.update');
+    Route::delete('/designs/{id}', [DesignController::class, 'destroy'])->name('designs.destroy');
+});
+
+// Tenders Routes (Public)
+Route::get('/tenders', [TenderController::class, 'index'])->name('tenders.index');
+Route::get('/tenders/{id}', [TenderController::class, 'show'])->name('tenders.show');
+
+// Client Only Routes - Tenders
+Route::middleware(['auth'])->group(function () {
+    Route::get('/tenders/create', [TenderController::class, 'create'])->name('tenders.create');
+    Route::post('/tenders', [TenderController::class, 'store'])->name('tenders.store');
+    Route::get('/tenders/{id}/edit', [TenderController::class, 'edit'])->name('tenders.edit');
+    Route::put('/tenders/{id}', [TenderController::class, 'update'])->name('tenders.update');
+    Route::delete('/tenders/{id}', [TenderController::class, 'destroy'])->name('tenders.destroy');
+    Route::post('/tenders/{id}/close', [TenderController::class, 'close'])->name('tenders.close');
+    Route::post('/tenders/{id}/award', [TenderController::class, 'award'])->name('tenders.award');
+    Route::get('/tenders/{id}/compare-proposals', [TenderController::class, 'compareProposals'])->name('tenders.compare-proposals');
+    Route::get('/tenders/{id}/export-pdf', [TenderController::class, 'exportPdf'])->name('tenders.export-pdf');
+    Route::get('/tenders/{id}/export-excel', [TenderController::class, 'exportExcel'])->name('tenders.export-excel');
+});
+
+// Consultant Only Routes - Proposals
+Route::middleware(['auth', 'consultant'])->group(function () {
+    Route::get('/proposals', [ProposalController::class, 'index'])->name('proposals.index');
+    Route::get('/tenders/{tenderId}/proposals/create', [ProposalController::class, 'create'])->name('proposals.create');
+    Route::post('/tenders/{tenderId}/proposals', [ProposalController::class, 'store'])->name('proposals.store');
+    Route::get('/proposals/{id}', [ProposalController::class, 'show'])->name('proposals.show');
+    Route::get('/proposals/{id}/edit', [ProposalController::class, 'edit'])->name('proposals.edit');
+    Route::put('/proposals/{id}', [ProposalController::class, 'update'])->name('proposals.update');
+    Route::delete('/proposals/{id}', [ProposalController::class, 'destroy'])->name('proposals.destroy');
+});
+
+// Client Only Routes - Proposals Management
+Route::middleware(['auth'])->group(function () {
+    Route::post('/proposals/{id}/accept', [ProposalController::class, 'accept'])->name('proposals.accept');
+    Route::post('/proposals/{id}/reject', [ProposalController::class, 'reject'])->name('proposals.reject');
+});
 
 // Lands Routes
 Route::get('/lands', [LandController::class, 'index'])->name('lands.index');
@@ -76,10 +119,6 @@ Route::get('/lands/{land}/submit-offer', [LandController::class, 'showSubmitOffe
 Route::post('/lands/{land}/offers', [LandController::class, 'submitOffer'])->name('lands.offers.store');
 Route::put('/offers/{offerId}/status', [LandController::class, 'updateOfferStatus'])->name('offers.update-status');
 
-// Cost Calculator Routes
-Route::get('/cost-calculator', [CostCalculatorController::class, 'index'])->name('cost-calculator.index');
-Route::post('/cost-calculator/calculate', [CostCalculatorController::class, 'calculate'])->name('cost-calculator.calculate');
-Route::post('/cost-calculator/create-project', [CostCalculatorController::class, 'createProject'])->name('cost-calculator.create-project');
 
 // Admin Dashboard Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
@@ -94,18 +133,17 @@ Route::prefix('client')->name('client.')->middleware(['auth'])->group(function (
     Route::get('/profile', [ClientDashboardController::class, 'profile'])->name('profile');
     Route::get('/saved-designs', [ClientDashboardController::class, 'savedDesigns'])->name('saved-designs');
     Route::get('/favorite-consultants', [ClientDashboardController::class, 'favoriteConsultants'])->name('favorite-consultants');
-    Route::get('/projects', [ClientDashboardController::class, 'projects'])->name('projects');
-    Route::get('/offers', [ClientDashboardController::class, 'offers'])->name('offers');
+    Route::get('/my-tenders', [ClientDashboardController::class, 'myTenders'])->name('my-tenders');
 });
 
 // Consultant Dashboard Routes
 Route::prefix('consultant')->name('consultant.')->middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [ConsultantDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [ConsultantDashboardController::class, 'profile'])->name('profile');
-    Route::get('/projects', [ConsultantDashboardController::class, 'projects'])->name('projects');
-    Route::get('/portfolio', [ConsultantDashboardController::class, 'portfolio'])->name('portfolio');
-    Route::get('/inquiries', [ConsultantDashboardController::class, 'inquiries'])->name('inquiries');
-    Route::get('/earnings', [ConsultantDashboardController::class, 'earnings'])->name('earnings');
+    Route::get('/dashboard', [App\Http\Controllers\Consultant\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [App\Http\Controllers\Consultant\DashboardController::class, 'profile'])->name('profile');
+    Route::get('/projects', [App\Http\Controllers\Consultant\DashboardController::class, 'projects'])->name('projects');
+    Route::get('/portfolio', [App\Http\Controllers\Consultant\DashboardController::class, 'portfolio'])->name('portfolio');
+    Route::get('/inquiries', [App\Http\Controllers\Consultant\DashboardController::class, 'inquiries'])->name('inquiries');
+    Route::get('/earnings', [App\Http\Controllers\Consultant\DashboardController::class, 'earnings'])->name('earnings');
 });
 
 // Contractor Dashboard Routes
@@ -131,26 +169,3 @@ Route::prefix('supplier')->name('supplier.')->middleware(['auth'])->group(functi
 });
 
 // Project Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
-    Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
-    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
-    Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-    Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
-    Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
-    Route::post('/projects/{project}/publish', [ProjectController::class, 'publish'])->name('projects.publish');
-    Route::post('/projects/{project}/select-consultant/{offer}', [ProjectController::class, 'selectConsultant'])->name('projects.select-consultant');
-    Route::post('/projects/{project}/select-contractor/{offer}', [ProjectController::class, 'selectContractor'])->name('projects.select-contractor');
-    Route::post('/projects/{project}/select-supplier/{offer}', [ProjectController::class, 'selectSupplier'])->name('projects.select-supplier');
-    Route::post('/projects/{project}/upload-design', [ProjectController::class, 'uploadDesign'])->name('projects.upload-design');
-});
-
-// Offer Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/projects/{project}/offers/create', [OfferController::class, 'create'])->name('offers.create');
-    Route::post('/projects/{project}/offers', [OfferController::class, 'store'])->name('offers.store');
-    Route::get('/offers/{offer}', [OfferController::class, 'show'])->name('offers.show');
-    Route::post('/offers/{offer}/respond', [OfferController::class, 'respond'])->name('offers.respond');
-    Route::post('/offers/{offer}/withdraw', [OfferController::class, 'withdraw'])->name('offers.withdraw');
-});
