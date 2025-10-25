@@ -22,7 +22,14 @@
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #0f766e 0%, #14b8a6 50%, #0d9488 100%);
+            @if (\App\Models\SiteSetting::get('hero_background'))
+                background: linear-gradient(135deg, rgba(15, 118, 110, 0.8) 0%, rgba(20, 184, 166, 0.8) 50%, rgba(13, 148, 136, 0.8) 100%), url('{{ \App\Models\SiteSetting::get('hero_background') }}');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            @else
+                background: linear-gradient(135deg, #0f766e 0%, #14b8a6 50%, #0d9488 100%);
+            @endif
             position: relative;
             overflow: hidden;
             min-height: 100vh;
@@ -375,10 +382,17 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Content -->
                 <div class="text-right animate-fade-in">
-                    <div class="mb-6">
-                        <span class="glass-card text-gray-800 px-4 py-2 rounded-full text-sm font-medium">
-                            🏗️ منصة التصميم والبناء الرائدة
-                        </span>
+                    <div class="mb-6 flex items-center justify-end gap-4">
+                        @if (\App\Models\SiteSetting::get('site_logo'))
+                            <div class="w-20 h-20 bg-white rounded-full p-3 shadow-lg">
+                                <img src="{{ \App\Models\SiteSetting::get('site_logo') }}" alt="لوجو انشاءات"
+                                    class="w-full h-full object-contain">
+                            </div>
+                        @else
+                            <span class="glass-card text-gray-800 px-4 py-2 rounded-full text-sm font-medium">
+                                🏗️ منصة التصميم والبناء الرائدة
+                            </span>
+                        @endif
                     </div>
 
                     <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -670,6 +684,151 @@
                     </div>
                     <div class="text-4xl font-bold text-green-600 mb-2">4.9</div>
                     <p class="text-gray-600">تقييم العملاء</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Site Gallery Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    <span class="gradient-text">معرض صور الموقع</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    اكتشف جمال التصاميم المعمارية والإنجازات الهندسية في معرضنا المتنوع
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Site Logo -->
+                <div class="glass-card p-6 text-center hover-lift">
+                    <div
+                        class="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden border-2 border-gray-200">
+                        @if (\App\Models\SiteSetting::get('site_logo'))
+                            <img src="{{ \App\Models\SiteSetting::get('site_logo') }}" alt="لوجو الموقع"
+                                class="max-w-full max-h-full object-contain">
+                        @else
+                            <i class="fas fa-image text-3xl text-gray-400"></i>
+                        @endif
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">لوجو الموقع</h3>
+                    <p class="text-sm text-gray-600">الهوية البصرية لمنصة انشاءات</p>
+                </div>
+
+                <!-- Hero Background -->
+                <div class="glass-card p-6 text-center hover-lift">
+                    <div
+                        class="w-full h-20 mb-4 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden border-2 border-gray-200">
+                        @if (\App\Models\SiteSetting::get('hero_background'))
+                            <img src="{{ \App\Models\SiteSetting::get('hero_background') }}" alt="خلفية الصفحة الرئيسية"
+                                class="w-full h-full object-cover">
+                        @else
+                            <i class="fas fa-image text-2xl text-gray-400"></i>
+                        @endif
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">خلفية الصفحة الرئيسية</h3>
+                    <p class="text-sm text-gray-600">صورة تعبيرية عن رؤيتنا</p>
+                </div>
+
+                <!-- About Image -->
+                <div class="glass-card p-6 text-center hover-lift">
+                    <div
+                        class="w-full h-20 mb-4 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden border-2 border-gray-200">
+                        @if (\App\Models\SiteSetting::get('about_image'))
+                            <img src="{{ \App\Models\SiteSetting::get('about_image') }}" alt="صورة قسم من نحن"
+                                class="w-full h-full object-cover">
+                        @else
+                            <i class="fas fa-image text-2xl text-gray-400"></i>
+                        @endif
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">صورة قسم من نحن</h3>
+                    <p class="text-sm text-gray-600">تعرف على فريقنا وخبراتنا</p>
+                </div>
+
+                <!-- Site Favicon -->
+                <div class="glass-card p-6 text-center hover-lift">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden border-2 border-gray-200">
+                        @if (\App\Models\SiteSetting::get('site_favicon'))
+                            <img src="{{ \App\Models\SiteSetting::get('site_favicon') }}" alt="أيقونة الموقع"
+                                class="max-w-full max-h-full object-contain">
+                        @else
+                            <i class="fas fa-image text-xl text-gray-400"></i>
+                        @endif
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">أيقونة الموقع</h3>
+                    <p class="text-sm text-gray-600">الرمز المميز للمنصة</p>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-12">
+                <div class="glass-card p-8 max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">هل تريد رؤية المزيد؟</h3>
+                    <p class="text-gray-600 mb-6">استكشف مجموعتنا الكاملة من التصاميم والمشاريع المتنوعة</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{{ route('designs.index') }}" class="btn btn-primary">
+                            <i class="fas fa-drafting-compass ml-2"></i>
+                            تصفح التصاميم
+                        </a>
+                        <a href="{{ route('tenders.index') }}" class="btn btn-secondary">
+                            <i class="fas fa-file-contract ml-2"></i>
+                            المناقصات المتاحة
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-teal-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Content -->
+                <div class="text-right">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                        <span class="gradient-text">من نحن</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        منصة انشاءات هي منصة رائدة في مجال التصميم والبناء، تجمع بين أفضل الاستشاريين والمقاولين والموردين
+                        لتقديم حلول متكاملة لمشاريعكم المعمارية.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        نؤمن بأن كل مشروع له قصة فريدة، ونسعى لتحويل أحلامكم المعمارية إلى واقع ملموس من خلال فريق من
+                        الخبراء المتخصصين والتقنيات الحديثة.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="{{ route('designs.index') }}" class="btn btn-primary">
+                            <i class="fas fa-drafting-compass ml-2"></i>
+                            تصفح التصاميم
+                        </a>
+                        <a href="{{ route('tenders.index') }}" class="btn btn-secondary">
+                            <i class="fas fa-file-contract ml-2"></i>
+                            المناقصات المتاحة
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="text-center">
+                    <div class="glass-card p-8">
+                        @if (\App\Models\SiteSetting::get('about_image'))
+                            <img src="{{ \App\Models\SiteSetting::get('about_image') }}" alt="من نحن - انشاءات"
+                                class="w-full h-80 object-cover rounded-lg shadow-lg">
+                        @else
+                            <div
+                                class="w-full h-80 bg-gradient-to-br from-teal-100 to-blue-100 rounded-lg flex items-center justify-center">
+                                <div class="text-center">
+                                    <i class="fas fa-building text-6xl text-teal-500 mb-4"></i>
+                                    <h3 class="text-2xl font-bold text-gray-700">منصة انشاءات</h3>
+                                    <p class="text-gray-600">شركاؤك في بناء أحلامك</p>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

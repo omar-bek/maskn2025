@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            AdminSeeder::class, // يجب أن يكون أولاً لإنشاء أنواع المستخدمين
             UserTypeSeeder::class,
             UserSeeder::class,
             ProjectSeeder::class,

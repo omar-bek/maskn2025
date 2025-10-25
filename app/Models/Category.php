@@ -43,4 +43,16 @@ class Category extends Model
     {
         return $query->orderBy('category_order');
     }
+
+    // Accessor for name compatibility
+    public function getNameAttribute()
+    {
+        return $this->category_name;
+    }
+
+    // Mutator for name compatibility
+    public function setNameAttribute($value)
+    {
+        $this->attributes['category_name'] = $value;
+    }
 }

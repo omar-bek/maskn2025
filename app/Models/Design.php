@@ -101,4 +101,16 @@ class Design extends Model
     {
         return $query->where('style', $style);
     }
+
+    // Accessor for is_published compatibility
+    public function getIsPublishedAttribute()
+    {
+        return $this->status === 'published';
+    }
+
+    // Mutator for is_published compatibility
+    public function setIsPublishedAttribute($value)
+    {
+        $this->attributes['status'] = $value ? 'published' : 'draft';
+    }
 }

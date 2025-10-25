@@ -95,6 +95,11 @@ class User extends Authenticatable
         return $this->userType && $this->userType->name === 'consultant';
     }
 
+    public function isAdmin()
+    {
+        return $this->userType && $this->userType->name === 'admin';
+    }
+
     public function isContractor()
     {
         return $this->userType && $this->userType->name === 'contractor';
@@ -103,11 +108,6 @@ class User extends Authenticatable
     public function isSupplier()
     {
         return $this->userType && $this->userType->name === 'supplier';
-    }
-
-    public function isAdmin()
-    {
-        return $this->userType && $this->userType->name === 'admin';
     }
 
     public function getDashboardRoute()

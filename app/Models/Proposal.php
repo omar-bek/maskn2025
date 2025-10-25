@@ -93,4 +93,16 @@ class Proposal extends Model
     {
         return $query->where('consultant_id', $consultantId);
     }
+
+    // Accessor for proposed_duration compatibility
+    public function getProposedDurationAttribute()
+    {
+        return $this->duration_months * 30; // تحويل من أشهر إلى أيام
+    }
+
+    // Mutator for proposed_duration compatibility
+    public function setProposedDurationAttribute($value)
+    {
+        $this->attributes['duration_months'] = $value / 30; // تحويل من أيام إلى أشهر
+    }
 }

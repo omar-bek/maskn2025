@@ -126,10 +126,53 @@ Route::put('/offers/{offerId}/status', [LandController::class, 'updateOfferStatu
 
 
 // Admin Dashboard Routes
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Users Management
     Route::get('/users', [AdminDashboardController::class, 'users'])->name('users');
-    Route::get('/user-types', [AdminDashboardController::class, 'userTypes'])->name('user-types');
+    Route::post('/users/{user}/toggle-status', [AdminDashboardController::class, 'toggleUserStatus'])->name('users.toggle-status');
+    Route::delete('/users/{user}', [AdminDashboardController::class, 'deleteUser'])->name('users.delete');
+    Route::get('/users/export', [AdminDashboardController::class, 'exportUsers'])->name('users.export');
+
+    // Designs Management
+    Route::get('/designs', [AdminDashboardController::class, 'designs'])->name('designs');
+    Route::post('/designs/{design}/toggle-status', [AdminDashboardController::class, 'toggleDesignStatus'])->name('designs.toggle-status');
+    Route::delete('/designs/{design}', [AdminDashboardController::class, 'deleteDesign'])->name('designs.delete');
+
+    // Tenders Management
+    Route::get('/tenders', [AdminDashboardController::class, 'tenders'])->name('tenders');
+    Route::post('/tenders/{tender}/close', [AdminDashboardController::class, 'closeTender'])->name('tenders.close');
+    Route::delete('/tenders/{tender}', [AdminDashboardController::class, 'deleteTender'])->name('tenders.delete');
+    Route::get('/tenders/export', [AdminDashboardController::class, 'exportTenders'])->name('tenders.export');
+
+    // Proposals Management
+    Route::get('/proposals', [AdminDashboardController::class, 'proposals'])->name('proposals');
+    Route::delete('/proposals/{proposal}', [AdminDashboardController::class, 'deleteProposal'])->name('proposals.delete');
+
+    // Categories Management
+    Route::get('/categories', [AdminDashboardController::class, 'categories'])->name('categories');
+    Route::post('/categories', [AdminDashboardController::class, 'storeCategory'])->name('categories.store');
+    Route::put('/categories/{category}', [AdminDashboardController::class, 'updateCategory'])->name('categories.update');
+    Route::delete('/categories/{category}', [AdminDashboardController::class, 'deleteCategory'])->name('categories.delete');
+
+    // Profile
+    Route::get('/profile', [AdminDashboardController::class, 'profile'])->name('profile');
+    Route::post('/profile', [AdminDashboardController::class, 'updateProfile'])->name('profile.update');
+
+    // Settings
+    Route::get('/settings', [AdminDashboardController::class, 'settings'])->name('settings');
+    Route::post('/settings', [AdminDashboardController::class, 'updateSettings'])->name('settings.update');
+
+    // Site Images Management
+    Route::get('/site-images', [AdminDashboardController::class, 'siteImages'])->name('site-images');
+    Route::post('/upload-site-image', [AdminDashboardController::class, 'uploadSiteImage'])->name('upload-site-image');
+    Route::delete('/delete-site-image', [AdminDashboardController::class, 'deleteSiteImage'])->name('delete-site-image');
+
+    // System Management
+    Route::post('/clear-cache/{type}', [AdminDashboardController::class, 'clearCache'])->name('clear-cache');
+    Route::post('/create-backup', [AdminDashboardController::class, 'createBackup'])->name('create-backup');
+    Route::post('/optimize-database', [AdminDashboardController::class, 'optimizeDatabase'])->name('optimize-database');
 });
 
 // Client Dashboard Routes

@@ -120,6 +120,15 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
 }
 
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    background: white;
+    padding: 0.25rem;
+}
+
 .logo-icon::before {
     content: '';
     position: absolute;
@@ -915,6 +924,15 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--brand-green);
 }
 
+.mobile-logo .logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    background: white;
+    padding: 0.25rem;
+}
+
 .mobile-logo .logo-icon::before {
     background:
         linear-gradient(45deg, transparent 20%, var(--brand-gold) 25%, var(--brand-gold) 30%, transparent 35%),
@@ -1188,6 +1206,10 @@ h1, h2, h3, h4, h5, h6 {
         margin-left: 0.75rem;
     }
 
+    .logo-icon img {
+        padding: 0.2rem;
+    }
+
     .logo-title {
         font-size: 1.5rem;
     }
@@ -1247,6 +1269,10 @@ h1, h2, h3, h4, h5, h6 {
     .logo-icon {
         width: 2rem;
         height: 2rem;
+    }
+
+    .logo-icon img {
+        padding: 0.15rem;
     }
 
     .logo-title {
@@ -1458,6 +1484,10 @@ h1, h2, h3, h4, h5, h6 {
         height: 1.8rem;
     }
 
+    .logo-icon img {
+        padding: 0.1rem;
+    }
+
     .mobile-menu-toggle {
         padding: 0.5rem;
         font-size: 1.1rem;
@@ -1579,6 +1609,10 @@ h1, h2, h3, h4, h5, h6 {
     .logo-icon {
         width: 1.6rem;
         height: 1.6rem;
+    }
+
+    .logo-icon img {
+        padding: 0.05rem;
     }
 
     .mobile-menu-toggle {

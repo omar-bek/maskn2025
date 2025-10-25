@@ -33,6 +33,14 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
+    <!-- Favicon -->
+    @if (\App\Models\SiteSetting::get('site_favicon'))
+        <link rel="icon" type="image/x-icon" href="{{ \App\Models\SiteSetting::get('site_favicon') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ \App\Models\SiteSetting::get('site_favicon') }}">
+    @else
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    @endif
+
     <style>
         /* Critical CSS for better performance */
         :root {
@@ -328,7 +336,14 @@
             <div class="header-content">
                 <!-- Logo -->
                 <a href="{{ route('home') }}" class="logo" aria-label="الرئيسية">
-                    <div class="logo-icon"></div>
+                    @if (\App\Models\SiteSetting::get('site_logo'))
+                        <div class="logo-icon">
+                            <img src="{{ \App\Models\SiteSetting::get('site_logo') }}" alt="لوجو انشاءات"
+                                class="w-full h-full object-contain">
+                        </div>
+                    @else
+                        <div class="logo-icon"></div>
+                    @endif
                     <div class="logo-text">
                         <div class="logo-title">insha'at</div>
                         <div class="logo-subtitle">Your Partners for Your Home of Dreams</div>
@@ -441,7 +456,14 @@
                 <i class="fas fa-times"></i>
             </button>
             <div class="mobile-logo">
-                <div class="logo-icon"></div>
+                @if (\App\Models\SiteSetting::get('site_logo'))
+                    <div class="logo-icon">
+                        <img src="{{ \App\Models\SiteSetting::get('site_logo') }}" alt="لوجو انشاءات"
+                            class="w-full h-full object-contain">
+                    </div>
+                @else
+                    <div class="logo-icon"></div>
+                @endif
                 <div class="logo-text">
                     <div class="logo-title">insha'at</div>
                     <div class="logo-subtitle">Your Partners for Your Home of Dreams</div>
