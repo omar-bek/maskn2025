@@ -54,12 +54,11 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Designs Routes
-Route::get('/designs', [DesignController::class, 'index'])->name('designs.index');
-Route::get('/designs/{id}/pricing', [DesignController::class, 'showWithPricing'])->name('designs.show-with-pricing');
-Route::get('/designs/{id}', [DesignController::class, 'show'])->name('designs.show');
 
-// Consultant Only Routes - Designs
+// Designs Routes - Public
+Route::get('/designs', [DesignController::class, 'index'])->name('designs.index');
+
+// Consultant Only Routes - Designs (specific routes first to avoid conflicts)
 Route::middleware(['auth', 'consultant'])->group(function () {
     Route::get('/designs/create', [DesignController::class, 'create'])->name('designs.create');
     Route::post('/designs', [DesignController::class, 'store'])->name('designs.store');
@@ -68,6 +67,10 @@ Route::middleware(['auth', 'consultant'])->group(function () {
     Route::delete('/designs/{id}', [DesignController::class, 'destroy'])->name('designs.destroy');
 });
 
+// Designs Routes - Public (parameterized routes after specific ones)
+Route::get('/designs/{id}/pricing', [DesignController::class, 'showWithPricing'])->name('designs.show-with-pricing');
+Route::get('/designs/{id}', [DesignController::class, 'show'])->name('designs.show');
+
 // Tenders Routes (Public)
 Route::get('/tenders', [TenderController::class, 'index'])->name('tenders.index');
 Route::get('/tenders/{id}', [TenderController::class, 'show'])->name('tenders.show');
@@ -75,6 +78,7 @@ Route::get('/tenders/{id}', [TenderController::class, 'show'])->name('tenders.sh
 // Client Only Routes - Tenders
 Route::middleware(['auth'])->group(function () {
     Route::get('/tenders/create', [TenderController::class, 'create'])->name('tenders.create');
+    Route::get('/tenders/create-from-design/{designId}', [TenderController::class, 'createFromDesign'])->name('tenders.create-from-design');
     Route::post('/tenders', [TenderController::class, 'store'])->name('tenders.store');
     Route::get('/tenders/{id}/edit', [TenderController::class, 'edit'])->name('tenders.edit');
     Route::put('/tenders/{id}', [TenderController::class, 'update'])->name('tenders.update');
@@ -99,6 +103,7 @@ Route::middleware(['auth', 'consultant'])->group(function () {
 
 // Client Only Routes - Proposals Management
 Route::middleware(['auth'])->group(function () {
+    Route::get('/proposals/{id}/client-view', [ProposalController::class, 'showForClient'])->name('proposals.client-view');
     Route::post('/proposals/{id}/accept', [ProposalController::class, 'accept'])->name('proposals.accept');
     Route::post('/proposals/{id}/reject', [ProposalController::class, 'reject'])->name('proposals.reject');
 });

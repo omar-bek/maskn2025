@@ -25,32 +25,17 @@ class Category extends Model
         return $this->hasMany(Item::class);
     }
 
-    public function projectItems($projectId)
-    {
-        return $this->hasMany(Item::class)->where('project_id', $projectId);
-    }
+    // Note: projectItems method removed as project_id field is not used
 
     // Helper methods
-    public function getTotalPrice($projectId = null)
+    public function getTotalPrice()
     {
-        $query = $this->items();
-
-        if ($projectId) {
-            $query->where('project_id', $projectId);
-        }
-
-        return $query->sum('total_price') ?? 0;
+        return $this->items()->sum('total_price') ?? 0;
     }
 
-    public function getItemsCount($projectId = null)
+    public function getItemsCount()
     {
-        $query = $this->items();
-
-        if ($projectId) {
-            $query->where('project_id', $projectId);
-        }
-
-        return $query->count();
+        return $this->items()->count();
     }
 
     // Scope for ordering

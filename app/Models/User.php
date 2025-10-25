@@ -51,6 +51,8 @@ class User extends Authenticatable
         'password' => 'hashed',
         'is_verified' => 'boolean',
         'is_active' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     // Relationships
@@ -105,7 +107,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->email === 'admin@inshaat.com'; // You can modify this logic
+        return $this->userType && $this->userType->name === 'admin';
     }
 
     public function getDashboardRoute()

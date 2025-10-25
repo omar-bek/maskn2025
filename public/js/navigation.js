@@ -1,4 +1,5 @@
 // Optimized Navigation JavaScript for Insha'at Platform
+// Version: 2.0 - Enhanced Performance & Error Handling
 
 // Debounce function for better performance
 function debounce(func, wait) {
@@ -27,27 +28,26 @@ function throttle(func, limit) {
     }
 }
 
-// Mobile menu functionality
+// Mobile menu functionality with enhanced error handling
 function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
     const toggleButton = document.querySelector('.mobile-menu-toggle');
-    const closeButton = document.querySelector('.mobile-menu-close');
 
     if (!mobileMenu || !mobileMenuOverlay || !toggleButton) {
-        console.error('Mobile menu elements not found');
-        return;
+        console.warn('Mobile menu elements not found - skipping toggle');
+        return false;
     }
 
     const isActive = mobileMenu.classList.contains('active');
 
     if (isActive) {
-        // Close menu
         closeMobileMenu();
     } else {
-        // Open menu
         openMobileMenu();
     }
+
+    return true;
 }
 
 function openMobileMenu() {

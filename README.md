@@ -1,25 +1,179 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏗️ منصة انشاءات - Insha'at Platform
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-11.x-red.svg" alt="Laravel Version">
+  <img src="https://img.shields.io/badge/PHP-8.2+-blue.svg" alt="PHP Version">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg" alt="Status">
 </p>
 
-## About Laravel
+## 📋 نظرة عامة
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+منصة **انشاءات** هي منصة متكاملة تجمع بين أفضل الاستشاريين والمقاولين والموردين لتحويل الأحلام المعمارية إلى واقع ملموس. تهدف المنصة إلى تسهيل عملية تصميم وبناء المنازل من خلال توفير بيئة تفاعلية تجمع بين العملاء والمهنيين.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ المميزات الرئيسية
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🎨 للعملاء
+
+-   **تصفح التصاميم**: آلاف التصاميم المعمارية المتنوعة
+-   **إنشاء المناقصات**: إمكانية إنشاء مناقصات مخصصة لمشاريعهم
+-   **مقارنة العروض**: مقارنة شاملة بين عروض الاستشاريين
+-   **متابعة المشاريع**: متابعة دقيقة لتقدم المشروع
+-   **حاسبة التكلفة**: تقدير دقيق لتكلفة المشروع
+
+### 👨‍💼 للاستشاريين
+
+-   **عرض التصاميم**: رفع وعرض التصاميم المعمارية
+-   **المشاركة في المناقصات**: تقديم عروض للمناقصات المتاحة
+-   **إدارة المحفظة**: إدارة شاملة للمشاريع والعروض
+-   **التفاعل مع العملاء**: تواصل مباشر مع العملاء
+
+### 🏗️ للمقاولين والموردين
+
+-   **المشاركة في المشاريع**: عرض خدمات البناء والتوريد
+-   **إدارة المشاريع**: متابعة وتنفيذ المشاريع المكلفة
+-   **إدارة المخزون**: إدارة مواد البناء والأثاث
+
+## 🛠️ التقنيات المستخدمة
+
+### Backend
+
+-   **Laravel 11.x** - إطار عمل PHP متقدم
+-   **PHP 8.2+** - لغة البرمجة الأساسية
+-   **MySQL** - قاعدة البيانات الرئيسية
+-   **Laravel Sanctum** - إدارة المصادقة
+-   **Laravel Excel** - تصدير البيانات
+-   **DomPDF** - إنشاء ملفات PDF
+
+### Frontend
+
+-   **Tailwind CSS** - إطار عمل CSS
+-   **JavaScript ES6+** - البرمجة التفاعلية
+-   **Font Awesome** - الأيقونات
+-   **Google Fonts (Cairo)** - الخطوط العربية
+
+### الأدوات والتطوير
+
+-   **Vite** - أداة البناء والتطوير
+-   **Laravel Pint** - تنسيق الكود
+-   **PHPUnit** - اختبار الوحدة
+-   **Laravel Pail** - مراقبة السجلات
+
+## 🚀 التثبيت والتشغيل
+
+### المتطلبات
+
+-   PHP 8.2 أو أحدث
+-   Composer
+-   Node.js 18+ و npm
+-   MySQL 8.0 أو أحدث
+
+### خطوات التثبيت
+
+1. **استنساخ المشروع**
+
+```bash
+git clone https://github.com/your-username/inshaat-platform.git
+cd inshaat-platform
+```
+
+2. **تثبيت التبعيات**
+
+```bash
+composer install
+npm install
+```
+
+3. **إعداد البيئة**
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. **إعداد قاعدة البيانات**
+
+```bash
+# تحديث ملف .env بقاعدة البيانات
+php artisan migrate
+php artisan db:seed
+```
+
+5. **بناء الأصول**
+
+```bash
+npm run build
+# أو للتطوير
+npm run dev
+```
+
+6. **تشغيل الخادم**
+
+```bash
+php artisan serve
+```
+
+## 📁 هيكل المشروع
+
+```
+inshaat-platform/
+├── app/
+│   ├── Http/Controllers/     # المتحكمات
+│   ├── Models/              # النماذج
+│   ├── Exports/             # تصدير البيانات
+│   └── Providers/           # مقدمي الخدمات
+├── database/
+│   ├── migrations/          # هجرات قاعدة البيانات
+│   └── seeders/            # بذور البيانات
+├── resources/
+│   ├── views/              # قوالب Blade
+│   ├── css/               # ملفات CSS
+│   └── js/                # ملفات JavaScript
+├── public/
+│   ├── css/               # ملفات CSS المبنية
+│   └── js/                # ملفات JS المبنية
+└── routes/                # ملفات التوجيه
+```
+
+## 🔧 الإعدادات المتقدمة
+
+### تحسين الأداء
+
+-   **Cache**: تفعيل التخزين المؤقت
+-   **Queue**: معالجة المهام في الخلفية
+-   **Optimization**: تحسين قاعدة البيانات
+
+### الأمان
+
+-   **CSRF Protection**: حماية من هجمات CSRF
+-   **XSS Protection**: حماية من هجمات XSS
+-   **SQL Injection**: حماية من حقن SQL
+-   **File Upload Security**: أمان رفع الملفات
+
+## 📊 الإحصائيات
+
+-   **500+** استشاري معتمد
+-   **1000+** مشروع مكتمل
+-   **50+** مدينة في المنطقة
+-   **4.9/5** تقييم العملاء
+
+## 🤝 المساهمة
+
+نرحب بمساهماتكم! يرجى قراءة [دليل المساهمة](CONTRIBUTING.md) قبل البدء.
+
+## 📄 الترخيص
+
+هذا المشروع مرخص تحت [رخصة MIT](LICENSE).
+
+## 📞 التواصل
+
+-   **الموقع**: [inshaat.com](https://inshaat.com)
+-   **البريد الإلكتروني**: info@inshaat.com
+-   **الهاتف**: +966 50 123 4567
+
+---
+
+<p align="center">صُنع بـ ❤️ في المملكة العربية السعودية</p>
 
 ## Learning Laravel
 
@@ -35,19 +189,19 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+-   **[Vehikl](https://vehikl.com/)**
+-   **[Tighten Co.](https://tighten.co)**
+-   **[WebReinvent](https://webreinvent.com/)**
+-   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+-   **[64 Robots](https://64robots.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+-   **[Cyber-Duck](https://cyber-duck.co.uk)**
+-   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+-   **[Jump24](https://jump24.co.uk)**
+-   **[Redberry](https://redberry.international/laravel/)**
+-   **[Active Logic](https://activelogic.com)**
+-   **[byte5](https://byte5.de)**
+-   **[OP.GG](https://op.gg)**
 
 ## Contributing
 

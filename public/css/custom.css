@@ -1,6 +1,6 @@
-/* Custom CSS for Insha'at Platform */
+/* Custom CSS for Insha'at Platform - Optimized */
 
-/* Import Google Fonts */
+/* Import Google Fonts with display=swap for better performance */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
 
 /* Root Variables */
@@ -23,22 +23,26 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Base Styles */
-* {
+/* Base Styles - Optimized */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html, body {
+html {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 body {
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--bg-light);
@@ -47,6 +51,7 @@ body {
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 /* Typography */

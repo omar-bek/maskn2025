@@ -1,9 +1,15 @@
 {
+    "name": "inshaat-platform",
+    "version": "1.0.0",
+    "description": "منصة انشاءات - منصة متكاملة لتصميم وبناء البيوت",
     "private": true,
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "watch": "vite build --watch",
+        "hot": "vite --host",
+        "production": "vite build --mode production"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Project;
+// Note: Project model import removed as it doesn't exist
 use App\Models\Design;
 use App\Models\Category;
 use App\Models\Item;
@@ -14,10 +14,10 @@ class DesignController extends Controller
     public function index()
     {
         $designs = Design::with('consultant')
-                        ->published()
-                        ->orderBy('is_featured', 'desc')
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(12);
+            ->published()
+            ->orderBy('is_featured', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
 
         return view('designs.index', compact('designs'));
     }
@@ -25,8 +25,8 @@ class DesignController extends Controller
     public function show($id)
     {
         $design = Design::with(['consultant', 'items.category'])
-                        ->published()
-                        ->findOrFail($id);
+            ->published()
+            ->findOrFail($id);
 
         // Increment views count
         $design->increment('views_count');
@@ -44,22 +44,37 @@ class DesignController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'style' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'area' => 'required|numeric|min:0',
-            'bedrooms' => 'nullable|integer|min:0',
-            'bathrooms' => 'nullable|integer|min:0',
-            'floors' => 'nullable|integer|min:0',
-            'description' => 'required|string',
-            'features' => 'nullable|array',
+            'style' => 'required|string|max:100',
+            'price' => 'required|numeric|min:0|max:999999999',
+            'area' => 'required|numeric|min:0|max:999999',
+            'bedrooms' => 'nullable|integer|min:0|max:50',
+            'bathrooms' => 'nullable|integer|min:0|max:50',
+            'floors' => 'nullable|integer|min:0|max:20',
+            'description' => 'required|string|min:10|max:2000',
+            'features' => 'nullable|array|max:20',
             'consultant_name' => 'required|string|max:255',
-            'consultant_phone' => 'nullable|string|max:20',
-            'consultant_email' => 'nullable|email',
+            'consultant_phone' => 'nullable|string|max:20|regex:/^[0-9+\-\s()]+$/',
+            'consultant_email' => 'nullable|email|max:255',
             'location' => 'nullable|string|max:255',
-            'main_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'images' => 'nullable|array|max:10',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'pricing' => 'nullable|array'
+        ], [
+            'title.required' => 'عنوان التصميم مطلوب',
+            'title.max' => 'عنوان التصميم يجب أن يكون أقل من 255 حرف',
+            'style.required' => 'نوع التصميم مطلوب',
+            'price.required' => 'السعر مطلوب',
+            'price.min' => 'السعر يجب أن يكون أكبر من 0',
+            'price.max' => 'السعر كبير جداً',
+            'area.required' => 'المساحة مطلوبة',
+            'area.min' => 'المساحة يجب أن تكون أكبر من 0',
+            'description.required' => 'وصف التصميم مطلوب',
+            'description.min' => 'وصف التصميم يجب أن يكون 10 أحرف على الأقل',
+            'main_image.required' => 'الصورة الرئيسية مطلوبة',
+            'main_image.image' => 'يجب أن تكون الصورة من نوع صورة',
+            'main_image.mimes' => 'نوع الصورة غير مدعوم',
+            'main_image.max' => 'حجم الصورة كبير جداً (الحد الأقصى 5 ميجابايت)',
         ]);
 
         // Handle file uploads
@@ -120,7 +135,7 @@ class DesignController extends Controller
         }
 
         return redirect()->route('designs.index')
-                        ->with('success', 'تم إنشاء التصميم بنجاح');
+            ->with('success', 'تم إنشاء التصميم بنجاح');
     }
 
     /**
@@ -129,19 +144,19 @@ class DesignController extends Controller
     public function showWithPricing($id)
     {
         $design = Design::with(['items.category', 'consultant'])
-                        ->published()
-                        ->findOrFail($id);
+            ->published()
+            ->findOrFail($id);
 
         $itemsByCategory = $design->items()->with('category')->get()->groupBy('category.category_name');
         $totalAmount = $design->items()->sum('total_price');
 
         // Get category totals
         $categoryTotals = $design->items()
-                                ->join('categories', 'items.category_id', '=', 'categories.id')
-                                ->selectRaw('categories.id, categories.category_name, categories.category_order, SUM(items.total_price) as total')
-                                ->groupBy('categories.id', 'categories.category_name', 'categories.category_order')
-                                ->orderBy('categories.category_order')
-                                ->get();
+            ->join('categories', 'items.category_id', '=', 'categories.id')
+            ->selectRaw('categories.id, categories.category_name, categories.category_order, SUM(items.total_price) as total')
+            ->groupBy('categories.id', 'categories.category_name', 'categories.category_order')
+            ->orderBy('categories.category_order')
+            ->get();
 
         return view('designs.show-with-pricing', compact('design', 'itemsByCategory', 'totalAmount', 'categoryTotals'));
     }
@@ -254,7 +269,7 @@ class DesignController extends Controller
         }
 
         return redirect()->route('designs.show', $design->id)
-                        ->with('success', 'تم تحديث التصميم بنجاح');
+            ->with('success', 'تم تحديث التصميم بنجاح');
     }
 
     /**
@@ -276,8 +291,6 @@ class DesignController extends Controller
         $design->delete();
 
         return redirect()->route('designs.index')
-                        ->with('success', 'تم حذف التصميم بنجاح');
+            ->with('success', 'تم حذف التصميم بنجاح');
     }
 }
-
-

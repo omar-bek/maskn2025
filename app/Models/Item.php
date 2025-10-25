@@ -23,17 +23,13 @@ class Item extends Model
     ];
 
     protected $casts = [
-        'quantity' => 'decimal:2',
-        'unit_price' => 'decimal:2',
-        'total_price' => 'decimal:2',
+        'quantity' => 'float',
+        'unit_price' => 'float',
+        'total_price' => 'float',
         'item_order' => 'integer'
     ];
 
     // Relationships
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
 
     public function design()
     {
@@ -49,14 +45,15 @@ class Item extends Model
     public function calculateTotalPrice()
     {
         if ($this->quantity && $this->unit_price) {
-            return $this->quantity * $this->unit_price;
+            return (float)$this->quantity * (float)$this->unit_price;
         }
-        return 0;
+        return 0.0;
     }
 
     public function updateTotalPrice()
     {
-        $this->total_price = $this->calculateTotalPrice();
+        $calculatedPrice = $this->calculateTotalPrice();
+        $this->total_price = round($calculatedPrice, 2);
         $this->save();
     }
 
@@ -71,24 +68,21 @@ class Item extends Model
         return $query->where('category_id', $categoryId);
     }
 
-    public function scopeByProject($query, $projectId)
-    {
-        return $query->where('project_id', $projectId);
-    }
+    // Note: scopeByProject removed as project_id field is not used
 
     // Formatted attributes
     public function getFormattedQuantityAttribute()
     {
-        return number_format($this->quantity, 2);
+        return number_format((float)$this->quantity, 2);
     }
 
     public function getFormattedUnitPriceAttribute()
     {
-        return number_format($this->unit_price, 2) . ' درهم إماراتي';
+        return number_format((float)$this->unit_price, 2) . ' درهم إماراتي';
     }
 
     public function getFormattedTotalPriceAttribute()
     {
-        return number_format($this->total_price, 2) . ' درهم إماراتي';
+        return number_format((float)$this->total_price, 2) . ' درهم إماراتي';
     }
 }

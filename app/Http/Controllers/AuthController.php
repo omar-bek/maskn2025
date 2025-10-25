@@ -274,11 +274,16 @@ class AuthController extends Controller
             ]
         ];
 
-        foreach ($userTypes as $userType) {
-            UserType::updateOrCreate(
-                ['name' => $userType['name']],
-                $userType
-            );
+        try {
+            foreach ($userTypes as $userType) {
+                UserType::updateOrCreate(
+                    ['name' => $userType['name']],
+                    $userType
+                );
+            }
+            Log::info('Default user types created successfully');
+        } catch (\Exception $e) {
+            Log::error('Error creating default user types: ' . $e->getMessage());
         }
     }
 }

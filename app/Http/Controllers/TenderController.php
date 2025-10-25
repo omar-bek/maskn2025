@@ -19,8 +19,8 @@ class TenderController extends Controller
     public function index()
     {
         $tenders = Tender::with(['client', 'design', 'proposals'])
-                         ->orderBy('created_at', 'desc')
-                         ->paginate(12);
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
 
         return view('tenders.index', compact('tenders'));
     }
@@ -50,13 +50,29 @@ class TenderController extends Controller
     {
         $validated = $request->validate([
             'design_id' => 'required|exists:designs,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'requirements' => 'nullable|string',
-            'budget' => 'nullable|numeric|min:0',
-            'location' => 'required|string|max:255',
-            'deadline' => 'required|date|after:today',
-            'client_notes' => 'nullable|string',
+            'title' => 'required|string|max:255|min:5',
+            'description' => 'required|string|min:20|max:2000',
+            'requirements' => 'nullable|string|max:1000',
+            'budget' => 'nullable|numeric|min:0|max:999999999',
+            'location' => 'required|string|max:255|min:3',
+            'deadline' => 'required|date|after:today|before:+1 year',
+            'client_notes' => 'nullable|string|max:1000',
+        ], [
+            'design_id.required' => 'التصميم مطلوب',
+            'design_id.exists' => 'التصميم المحدد غير موجود',
+            'title.required' => 'عنوان المناقصة مطلوب',
+            'title.min' => 'عنوان المناقصة يجب أن يكون 5 أحرف على الأقل',
+            'title.max' => 'عنوان المناقصة يجب أن يكون أقل من 255 حرف',
+            'description.required' => 'وصف المناقصة مطلوب',
+            'description.min' => 'وصف المناقصة يجب أن يكون 20 حرف على الأقل',
+            'description.max' => 'وصف المناقصة يجب أن يكون أقل من 2000 حرف',
+            'location.required' => 'الموقع مطلوب',
+            'location.min' => 'الموقع يجب أن يكون 3 أحرف على الأقل',
+            'deadline.required' => 'تاريخ الإغلاق مطلوب',
+            'deadline.after' => 'تاريخ الإغلاق يجب أن يكون بعد اليوم',
+            'deadline.before' => 'تاريخ الإغلاق يجب أن يكون خلال سنة من الآن',
+            'budget.min' => 'الميزانية يجب أن تكون أكبر من 0',
+            'budget.max' => 'الميزانية كبيرة جداً',
         ]);
 
         $tender = Tender::create([
@@ -87,7 +103,7 @@ class TenderController extends Controller
         }
 
         return redirect()->route('tenders.show', $tender->id)
-                        ->with('success', 'تم إنشاء المناقصة بنجاح');
+            ->with('success', 'تم إنشاء المناقصة بنجاح');
     }
 
     /**
@@ -96,7 +112,7 @@ class TenderController extends Controller
     public function show($id)
     {
         $tender = Tender::with(['client', 'design', 'proposals.consultant', 'tenderItems.category'])
-                        ->findOrFail($id);
+            ->findOrFail($id);
 
         // Increment views count
         $tender->increment('views_count');
@@ -105,9 +121,9 @@ class TenderController extends Controller
         $userProposal = null;
         if (Auth::check() && Auth::user()->userType && Auth::user()->userType->name === 'consultant') {
             $userProposal = $tender->proposals()
-                                  ->with(['proposalItems.tenderItem.category'])
-                                  ->where('consultant_id', Auth::id())
-                                  ->first();
+                ->with(['proposalItems.tenderItem.category'])
+                ->where('consultant_id', Auth::id())
+                ->first();
         }
 
         // Group design items by category (instead of tender items)
@@ -162,7 +178,7 @@ class TenderController extends Controller
         $tender->update($validated);
 
         return redirect()->route('tenders.show', $tender->id)
-                        ->with('success', 'تم تحديث المناقصة بنجاح');
+            ->with('success', 'تم تحديث المناقصة بنجاح');
     }
 
     /**
@@ -184,7 +200,7 @@ class TenderController extends Controller
         $tender->delete();
 
         return redirect()->route('tenders.index')
-                        ->with('success', 'تم حذف المناقصة بنجاح');
+            ->with('success', 'تم حذف المناقصة بنجاح');
     }
 
     /**
@@ -202,7 +218,7 @@ class TenderController extends Controller
         $tender->update(['status' => 'closed']);
 
         return redirect()->back()
-                        ->with('success', 'تم إغلاق المناقصة بنجاح');
+            ->with('success', 'تم إغلاق المناقصة بنجاح');
     }
 
     /**
@@ -226,15 +242,15 @@ class TenderController extends Controller
 
         // Update proposal status
         Proposal::where('id', $validated['proposal_id'])
-                ->update(['status' => 'accepted']);
+            ->update(['status' => 'accepted']);
 
         // Reject other proposals
         Proposal::where('tender_id', $id)
-                ->where('id', '!=', $validated['proposal_id'])
-                ->update(['status' => 'rejected']);
+            ->where('id', '!=', $validated['proposal_id'])
+            ->update(['status' => 'rejected']);
 
         return redirect()->back()
-                        ->with('success', 'تم منح المناقصة بنجاح');
+            ->with('success', 'تم منح المناقصة بنجاح');
     }
 
     /**
@@ -290,7 +306,7 @@ class TenderController extends Controller
 
         // Group tender items by category (البنود من المناقصة + البنود الإضافية من العروض)
         $allTenderItems = $tender->tenderItems()->with('category')->get();
-        
+
         // إضافة البنود الإضافية من العروض (التي أنشأها الاستشاريون)
         foreach ($tender->proposals as $proposal) {
             foreach ($proposal->proposalItems as $proposalItem) {
@@ -299,12 +315,12 @@ class TenderController extends Controller
                 }
             }
         }
-        
+
         $itemsByCategory = $allTenderItems->groupBy('category.category_name');
 
         $pdf = PDF::loadView('tenders.export-pdf', compact('tender', 'itemsByCategory'));
         $pdf->setPaper('A4', 'landscape');
-        
+
         return $pdf->download('مقارنة_العروض_' . $tender->title . '_' . date('Y-m-d') . '.pdf');
     }
 
@@ -327,7 +343,7 @@ class TenderController extends Controller
 
         // Group tender items by category (البنود من المناقصة + البنود الإضافية من العروض)
         $allTenderItems = $tender->tenderItems()->with('category')->get();
-        
+
         // إضافة البنود الإضافية من العروض (التي أنشأها الاستشاريون)
         foreach ($tender->proposals as $proposal) {
             foreach ($proposal->proposalItems as $proposalItem) {
@@ -336,10 +352,12 @@ class TenderController extends Controller
                 }
             }
         }
-        
+
         $itemsByCategory = $allTenderItems->groupBy('category.category_name');
 
-        return Excel::download(new \App\Exports\ProposalsComparisonExport($tender, $itemsByCategory), 
-                               'مقارنة_العروض_' . $tender->title . '_' . date('Y-m-d') . '.xlsx');
+        return Excel::download(
+            new \App\Exports\ProposalsComparisonExport($tender, $itemsByCategory),
+            'مقارنة_العروض_' . $tender->title . '_' . date('Y-m-d') . '.xlsx'
+        );
     }
 }

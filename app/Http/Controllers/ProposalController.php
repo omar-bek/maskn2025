@@ -18,9 +18,9 @@ class ProposalController extends Controller
     public function index()
     {
         $proposals = Proposal::with(['tender.design', 'tender.client'])
-                            ->where('consultant_id', Auth::id())
-                            ->orderBy('created_at', 'desc')
-                            ->paginate(12);
+            ->where('consultant_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
 
         return view('proposals.index', compact('proposals'));
     }
@@ -31,7 +31,7 @@ class ProposalController extends Controller
     public function create($tenderId)
     {
         $tender = Tender::with(['design', 'client', 'tenderItems.category'])
-                        ->findOrFail($tenderId);
+            ->findOrFail($tenderId);
 
         // Check if tender is still open
         if (!$tender->isOpen()) {
@@ -40,12 +40,12 @@ class ProposalController extends Controller
 
         // Check if consultant already submitted a proposal
         $existingProposal = $tender->proposals()
-                                  ->where('consultant_id', Auth::id())
-                                  ->first();
+            ->where('consultant_id', Auth::id())
+            ->first();
 
         if ($existingProposal) {
             return redirect()->route('proposals.edit', $existingProposal->id)
-                            ->with('info', 'لقد قدمت عرضاً على هذه المناقصة بالفعل');
+                ->with('info', 'لقد قدمت عرضاً على هذه المناقصة بالفعل');
         }
 
         // Group tender items by category
@@ -68,12 +68,12 @@ class ProposalController extends Controller
 
         // Check if consultant already submitted a proposal
         $existingProposal = $tender->proposals()
-                                  ->where('consultant_id', Auth::id())
-                                  ->first();
+            ->where('consultant_id', Auth::id())
+            ->first();
 
         if ($existingProposal) {
             return redirect()->route('proposals.edit', $existingProposal->id)
-                            ->with('info', 'لقد قدمت عرضاً على هذه المناقصة بالفعل');
+                ->with('info', 'لقد قدمت عرضاً على هذه المناقصة بالفعل');
         }
 
         $validated = $request->validate([
@@ -179,7 +179,7 @@ class ProposalController extends Controller
         $proposal->update(['proposed_price' => $totalProposalPrice]);
 
         return redirect()->route('tenders.show', $tenderId)
-                        ->with('success', 'تم تقديم العرض بنجاح');
+            ->with('success', 'تم تقديم العرض بنجاح');
     }
 
     /**
@@ -188,15 +188,33 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::with(['tender.design', 'tender.client', 'consultant', 'proposalItems.tenderItem.category'])
-                           ->findOrFail($id);
+            ->findOrFail($id);
 
         // Check if user can view this proposal
-        if ($proposal->consultant_id !== Auth::id() &&
-            $proposal->tender->client_id !== Auth::id()) {
+        if (
+            $proposal->consultant_id !== Auth::id() &&
+            $proposal->tender->client_id !== Auth::id()
+        ) {
             abort(403, 'غير مصرح لك بعرض هذا العرض');
         }
 
         return view('proposals.show', compact('proposal'));
+    }
+
+    /**
+     * Display the specified proposal for client view
+     */
+    public function showForClient($id)
+    {
+        $proposal = Proposal::with(['tender.design', 'tender.client', 'consultant', 'proposalItems.tenderItem.category'])
+            ->findOrFail($id);
+
+        // Check if user is the tender owner (client)
+        if ($proposal->tender->client_id !== Auth::id()) {
+            abort(403, 'غير مصرح لك بعرض هذا العرض');
+        }
+
+        return view('proposals.client-view', compact('proposal'));
     }
 
     /**
@@ -205,7 +223,7 @@ class ProposalController extends Controller
     public function edit($id)
     {
         $proposal = Proposal::with(['tender.tenderItems.category', 'proposalItems'])
-                           ->findOrFail($id);
+            ->findOrFail($id);
 
         // Check if user is the owner
         if ($proposal->consultant_id !== Auth::id()) {
@@ -229,7 +247,7 @@ class ProposalController extends Controller
     public function update(Request $request, $id)
     {
         $proposal = Proposal::with(['tender'])
-                           ->findOrFail($id);
+            ->findOrFail($id);
 
         // Check if user is the owner
         if ($proposal->consultant_id !== Auth::id()) {
@@ -344,7 +362,7 @@ class ProposalController extends Controller
         $proposal->update(['proposed_price' => $totalProposalPrice]);
 
         return redirect()->route('tenders.show', $proposal->tender_id)
-                        ->with('success', 'تم تحديث العرض بنجاح');
+            ->with('success', 'تم تحديث العرض بنجاح');
     }
 
     /**
@@ -353,7 +371,7 @@ class ProposalController extends Controller
     public function destroy($id)
     {
         $proposal = Proposal::with(['tender'])
-                           ->findOrFail($id);
+            ->findOrFail($id);
 
         // Check if user is the owner
         if ($proposal->consultant_id !== Auth::id()) {
@@ -375,7 +393,7 @@ class ProposalController extends Controller
         $proposal->delete();
 
         return redirect()->route('tenders.show', $proposal->tender_id)
-                        ->with('success', 'تم حذف العرض بنجاح');
+            ->with('success', 'تم حذف العرض بنجاح');
     }
 
     /**
@@ -384,7 +402,7 @@ class ProposalController extends Controller
     public function accept(Request $request, $id)
     {
         $proposal = Proposal::with(['tender'])
-                           ->findOrFail($id);
+            ->findOrFail($id);
 
         // Check if user is the tender owner
         if ($proposal->tender->client_id !== Auth::id()) {
@@ -406,11 +424,11 @@ class ProposalController extends Controller
 
         // Reject other proposals for this tender
         Proposal::where('tender_id', $proposal->tender_id)
-                ->where('id', '!=', $id)
-                ->update(['status' => 'rejected']);
+            ->where('id', '!=', $id)
+            ->update(['status' => 'rejected']);
 
         return redirect()->back()
-                        ->with('success', 'تم قبول العرض بنجاح');
+            ->with('success', 'تم قبول العرض بنجاح');
     }
 
     /**
@@ -419,7 +437,7 @@ class ProposalController extends Controller
     public function reject(Request $request, $id)
     {
         $proposal = Proposal::with(['tender'])
-                           ->findOrFail($id);
+            ->findOrFail($id);
 
         // Check if user is the tender owner
         if ($proposal->tender->client_id !== Auth::id()) {
@@ -436,8 +454,6 @@ class ProposalController extends Controller
         ]);
 
         return redirect()->back()
-                        ->with('success', 'تم رفض العرض بنجاح');
+            ->with('success', 'تم رفض العرض بنجاح');
     }
-
-
 }

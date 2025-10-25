@@ -1,616 +1,800 @@
 @extends('layouts.app')
 
-@section('title', 'insha\'at - منصة تصميم البيوت في الإمارات')
+@section('title', 'انشاءات - منصة التصميم والبناء الرائدة')
 
 @section('content')
-<style>
-/* UAE Theme Styles */
-.hero-gradient {
-    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 30%, #e0f2fe 60%, #faf5ff 100%) !important;
-    position: relative;
-    overflow: hidden;
-}
+    <style>
+        /* Modern Design System */
+        :root {
+            --primary: #0f766e;
+            --primary-dark: #0d9488;
+            --secondary: #f59e0b;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gradient-primary: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+            --gradient-secondary: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+        }
 
-.hero-gradient::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23f0f9ff" opacity="0.3"/><circle cx="75" cy="75" r="1" fill="%23e0f2fe" opacity="0.3"/><circle cx="50" cy="10" r="0.5" fill="%23faf5ff" opacity="0.4"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    pointer-events: none;
-}
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #0f766e 0%, #14b8a6 50%, #0d9488 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+        }
 
-.uae-gradient {
-    background: linear-gradient(135deg, #0f766e 0%, #14b8a6 25%, #d97706 50%, #f59e0b 75%, #0f766e 100%) !important;
-    background-size: 200% 200% !important;
-    animation: uaeShimmer 3s ease-in-out infinite !important;
-}
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            pointer-events: none;
+        }
 
-@keyframes uaeShimmer {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
+        /* Glass Morphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.stats-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
-    border: 1px solid #e2e8f0 !important;
-    transition: all 0.3s ease !important;
-    position: relative;
-    overflow: hidden;
-}
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            background: rgba(255, 255, 255, 0.98);
+        }
 
-.stats-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(15, 118, 110, 0.1), transparent);
-    transition: left 0.5s;
-}
+        /* Modern Buttons */
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
 
-.stats-card:hover::before {
-    left: 100%;
-}
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
 
-.stats-card:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
-}
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
 
-.testimonial-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
-    border: 1px solid #e2e8f0 !important;
-    position: relative;
-}
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #f97316, #f59e0b);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
 
-.testimonial-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 30px 30px 0;
-    border-color: transparent #0f766e transparent transparent;
-}
+        /* Feature Cards */
+        .feature-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
 
-.language-toggle {
-    backdrop-filter: blur(10px) !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    border: 1px solid rgba(15, 118, 110, 0.2) !important;
-}
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
 
-.uae-badge {
-    backdrop-filter: blur(10px) !important;
-    background: linear-gradient(135deg, #0f766e 0%, #d97706 100%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-}
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
 
-.process-step {
-    transition: all 0.3s ease;
-    border-radius: 12px;
-    padding: 16px;
-}
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
 
-.process-step:hover {
-    background: linear-gradient(135deg, #f0fdfa 0%, #fef3c7 100%);
-    transform: translateX(-8px);
-    box-shadow: 0 10px 25px rgba(15, 118, 110, 0.1);
-}
+        /* Stats Cards */
+        .stats-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
 
-.step-number {
-    background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
-    box-shadow: 0 4px 15px rgba(15, 118, 110, 0.3);
-}
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(15, 118, 110, 0.1), transparent);
+            transition: left 0.5s;
+        }
 
-.cost-step {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    border: 1px solid #e2e8f0;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+        .stats-card:hover::before {
+            left: 100%;
+        }
 
-.cost-step::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(135deg, #0f766e 0%, #d97706 100%);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
 
-.cost-step:hover::before {
-    transform: scaleY(1);
-}
+        /* Process Steps */
+        .process-step {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 1rem;
+        }
 
-.cost-step:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
+        .process-step:hover {
+            background: linear-gradient(135deg, #f0fdfa 0%, #fef3c7 100%);
+            transform: translateX(-8px);
+            box-shadow: 0 10px 25px rgba(15, 118, 110, 0.1);
+        }
 
-.hero-image {
-    background: linear-gradient(135deg, #0f766e 0%, #14b8a6 25%, #d97706 50%, #f59e0b 75%, #0f766e 100%);
-    background-size: 200% 200%;
-    animation: uaeShimmer 4s ease-in-out infinite;
-}
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-left: 1rem;
+            box-shadow: 0 4px 15px rgba(15, 118, 110, 0.3);
+        }
 
-.image-hover {
-    transition: all 0.3s ease;
-}
+        /* Testimonial Card */
+        .testimonial-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
 
-.image-hover:hover {
-    transform: scale(1.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
+        .testimonial-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 30px 30px 0;
+            border-color: transparent #0f766e transparent transparent;
+        }
 
-.stats-image {
-    transition: all 0.3s ease;
-}
+        /* Animations */
+        .animate-fade-in {
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.stats-image:hover {
-    transform: scale(1.1);
-    border-radius: 50%;
-}
+        .animate-slide-in {
+            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.floating-elements {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-}
+        .animate-bounce-in {
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
 
-.floating-element {
-    position: absolute;
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
-}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
 
-.floating-element:nth-child(1) {
-    top: 10%;
-    left: 10%;
-    animation-delay: 0s;
-}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.floating-element:nth-child(2) {
-    top: 20%;
-    right: 15%;
-    animation-delay: 2s;
-}
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
 
-.floating-element:nth-child(3) {
-    bottom: 30%;
-    left: 20%;
-    animation-delay: 4s;
-}
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
-}
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
 
-/* Responsive improvements */
-@media (max-width: 768px) {
-    .hero-gradient {
-        background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%) !important;
-    }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
 
-    .process-step:hover {
-        transform: translateY(-5px);
-    }
-}
-</style>
+            70% {
+                transform: scale(0.9);
+            }
 
-<!-- Hero Section -->
-<section class="relative hero-gradient py-20">
-    <div class="floating-elements">
-        <div class="floating-element">
-            <i class="fas fa-building text-4xl text-teal-600"></i>
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 80vh;
+                padding: 2rem 0;
+            }
+
+            .feature-card,
+            .stats-card,
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .process-step:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+        }
+    </style>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white relative">
+        <div class="floating-elements">
+            <div class="floating-element">
+                <i class="fas fa-building text-4xl text-white"></i>
+            </div>
+            <div class="floating-element">
+                <i class="fas fa-home text-3xl text-white"></i>
+            </div>
+            <div class="floating-element">
+                <i class="fas fa-drafting-compass text-2xl text-white"></i>
+            </div>
         </div>
-        <div class="floating-element">
-            <i class="fas fa-home text-3xl text-amber-600"></i>
-        </div>
-        <div class="floating-element">
-            <i class="fas fa-drafting-compass text-2xl text-teal-500"></i>
-        </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <!-- Content -->
-            <div class="text-right">
-                <div class="mb-4">
-                    <span class="bg-gradient-to-r from-teal-600 to-amber-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-                        🇦🇪 الإمارات العربية المتحدة
-                    </span>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Content -->
+                <div class="text-right animate-fade-in">
+                    <div class="mb-6">
+                        <span class="glass-card text-gray-800 px-4 py-2 rounded-full text-sm font-medium">
+                            🏗️ منصة التصميم والبناء الرائدة
+                        </span>
+                    </div>
+
+                    <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        ابدأ رحلة مشروعك
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">
+                            مع انشاءات
+                        </span>
+                    </h1>
+
+                    <p class="text-xl text-white/90 mb-8 leading-relaxed">
+                        منصة متكاملة تجمع بين أفضل الاستشاريين والمقاولين والموردين لتحويل أحلامك المعمارية إلى واقع ملموس.
+                        من التصميم حتى التسليم النهائي.
+                    </p>
+
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div class="glass-card text-center p-4">
+                            <div class="text-2xl font-bold text-gray-800 mb-1">
+                                {{ number_format($stats['total_consultants']) }}+</div>
+                            <div class="text-sm text-gray-600">استشاري معتمد</div>
+                        </div>
+                        <div class="glass-card text-center p-4">
+                            <div class="text-2xl font-bold text-gray-800 mb-1">
+                                {{ number_format($stats['total_projects']) }}+</div>
+                            <div class="text-sm text-gray-600">مشروع مكتمل</div>
+                        </div>
+                        <div class="glass-card text-center p-4">
+                            <div class="text-2xl font-bold text-gray-800 mb-1">{{ number_format($stats['total_designs']) }}+
+                            </div>
+                            <div class="text-sm text-gray-600">تصميم متاح</div>
+                        </div>
+                        <div class="glass-card text-center p-4">
+                            <div class="text-2xl font-bold text-gray-800 mb-1">24/7</div>
+                            <div class="text-sm text-gray-600">دعم فني</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        @auth
+                            @if (auth()->user()->isConsultant())
+                                <a href="{{ route('designs.create') }}" class="btn-primary text-lg py-4 px-8">
+                                    <i class="fas fa-plus"></i>
+                                    إنشاء تصميم جديد
+                                </a>
+                            @else
+                                <a href="{{ route('tenders.create') }}" class="btn-primary text-lg py-4 px-8">
+                                    <i class="fas fa-file-contract"></i>
+                                    إنشاء مناقصة
+                                </a>
+                            @endif
+                        @else
+                            <a href="{{ route('register') }}" class="btn-primary text-lg py-4 px-8">
+                                <i class="fas fa-user-plus"></i>
+                                انضم إلينا الآن
+                            </a>
+                        @endauth
+
+                        <a href="{{ route('designs.index') }}" class="btn-secondary text-lg py-4 px-8">
+                            <i class="fas fa-eye"></i>
+                            تصفح التصميمات
+                        </a>
+                    </div>
                 </div>
 
-                <h1 class="text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                    أبدأ رحلة مشروعك في
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-amber-600">
-                        الإمارات
-                    </span>
-                </h1>
+                <!-- Hero Image -->
+                <div class="relative animate-slide-in">
+                    <div class="glass-card p-8">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+                                alt="مباني حديثة" class="w-full h-96 object-cover rounded-xl">
+                            <div class="absolute inset-0 bg-gradient-to-br from-teal-600/30 to-amber-600/30 rounded-xl">
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="glass-card p-6 text-center">
+                                    <i class="fas fa-building text-4xl text-teal-600 mb-3"></i>
+                                    <p class="font-semibold text-gray-800">تصميم وبناء احترافي</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                    منصة انشاءات الرائدة في الإمارات العربية المتحدة لتصميم وبناء المشاريع السكنية والتجارية. نقدم حلول متكاملة من التصميم حتى التسليم النهائي مع ضمان الجودة العالمية.
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    لماذا تختار منصة انشاءات؟
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    نقدم حلول متكاملة تجمع بين التكنولوجيا الحديثة والخبرة العملية لضمان نجاح مشروعك
                 </p>
-
-                <!-- Stats Card -->
-                <div class="stats-card rounded-2xl p-6 shadow-lg mb-8">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-teal-600 mb-2">3.5k+</div>
-                        <div class="text-gray-600 mb-4">مشروع مكتمل في الإمارات</div>
-                        <p class="text-sm text-gray-500 mb-4">
-                            منصة متكاملة لطلب عرض أسعار الإستشارات والمقاولات
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                            <a href="{{ route('designs.create') }}" class="uae-gradient text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition duration-300 transform inline-block text-sm">هشاريلح
-                                🚀 ابدأ مشروعك الآن
-                            </a>
-                            <a href="{{ route('lands.create') }}" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:scale-105 transition duration-300 transform inline-block text-sm">
-                                <i class="fas fa-exchange-alt ml-1"></i>
-                                بيع وتبادل الأراضي
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <!-- Image -->
-            <div class="relative">
-                <div class="bg-gradient-to-br from-teal-100 to-amber-100 rounded-3xl p-8 transform hover:scale-105 transition duration-300">
-                    <div class="bg-white rounded-2xl p-6 shadow-lg">
-                        <div class="hero-image h-80 rounded-xl relative overflow-hidden image-hover">
-                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                                 alt="مباني حديثة في دبي"
-                                 class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-br from-teal-600/30 to-amber-600/30"></div>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-white/90 backdrop-blur-sm rounded-lg p-4 text-center">
-                                    <i class="fas fa-building text-4xl text-teal-600 mb-2"></i>
-                                    <p class="text-sm font-semibold text-gray-800">تصميم وبناء في دبي</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <p class="text-sm text-gray-600">تصميم وبناء في دبي، أبوظبي، الشارقة</p>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card animate-fade-in">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-white text-2xl"></i>
                     </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">شبكة واسعة من الخبراء</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        أكثر من 500 استشاري ومقاول معتمد في جميع أنحاء المنطقة، مع ضمان الجودة والاحترافية
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card animate-fade-in" style="animation-delay: 0.1s">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-calculator text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">حاسبة تكلفة ذكية</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        احصل على تقدير دقيق لتكلفة مشروعك بناءً على المواصفات والموقع والمواد المطلوبة
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card animate-fade-in" style="animation-delay: 0.2s">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">ضمان الجودة</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        جميع المشاريع تخضع لمراجعة دقيقة وضمان الجودة مع متابعة مستمرة حتى التسليم
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card animate-fade-in" style="animation-delay: 0.3s">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">منصة متكاملة</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        إدارة مشروعك من مكان واحد: التصميم، المناقصات، المتابعة، والدفع الآمن
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card animate-fade-in" style="animation-delay: 0.4s">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">تسليم في الوقت المحدد</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        التزامنا بتسليم مشروعك في الوقت المحدد مع الحفاظ على أعلى معايير الجودة
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card animate-fade-in" style="animation-delay: 0.5s">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">دعم فني 24/7</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        فريق دعم فني متاح على مدار الساعة لمساعدتك في أي استفسار أو مشكلة تواجهها
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Process Section -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-900 mb-4">
-                تعرف على مراحل ومتطلبات بناء منزلك في الإمارات
-            </h2>
-            <p class="text-xl text-gray-600">
-                نتبع أعلى معايير الجودة العالمية مع مراعاة القوانين المحلية
-            </p>
-        </div>
-
-        {{--  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <!-- Image -->
-            <div class="relative">
-                <div class="bg-gradient-to-br from-teal-50 to-amber-50 rounded-3xl p-8">
-                    <div class="bg-white rounded-2xl p-6 shadow-lg">
-                        <div class="h-96 rounded-xl relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80"
-                                 alt="فيلا فاخرة في الإمارات"
-                                 class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-br from-teal-600/20 to-amber-600/20"></div>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-white/90 backdrop-blur-sm rounded-lg p-4 text-center">
-                                    <i class="fas fa-home text-4xl text-teal-600 mb-2"></i>
-                                    <p class="text-sm font-semibold text-gray-800">فيلا فاخرة</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <p class="text-sm text-gray-600">مشاريع سكنية وتجارية في جميع الإمارات</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- How It Works Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    كيف تعمل منصة انشاءات؟
+                </h2>
+                <p class="text-xl text-gray-600">
+                    خطوات بسيطة لتحويل فكرتك إلى مشروع حقيقي
+                </p>
             </div>
 
-            <!-- Content -->
-            <div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Steps -->
                 <div class="space-y-6">
                     <div class="process-step">
-                        <div class="flex items-start space-x-4 space-x-reverse">
-                            <div class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                                1
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900 mb-1">مراجعة المستندات والتراخيص</h3>
-                                <p class="text-gray-600 text-sm">فحص وتدقيق جميع المستندات المطلوبة وفقاً لقوانين الإمارات</p>
-                            </div>
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">أرفق متطلباتك</h3>
+                            <p class="text-gray-600 text-sm">اكتب تفاصيل مشروعك، المساحة، الموقع، والميزانية المتوقعة</p>
                         </div>
                     </div>
 
                     <div class="process-step">
-                        <div class="flex items-start space-x-4 space-x-reverse">
-                            <div class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                                2
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900 mb-1">اختيار التصميم الداخلي والخارجي</h3>
-                                <p class="text-gray-600 text-sm">تصميم شامل للمنزل مع مراعاة الطقس والبيئة الإماراتية</p>
-                            </div>
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">احصل على عروض متنوعة</h3>
+                            <p class="text-gray-600 text-sm">استقبل عروض من أفضل الاستشاريين والمقاولين في منطقتك</p>
                         </div>
                     </div>
 
                     <div class="process-step">
-                        <div class="flex items-start space-x-4 space-x-reverse">
-                            <div class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                                3
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900 mb-1">اختيار المواد والمواصفات</h3>
-                                <p class="text-gray-600 text-sm">اختيار أفضل المواد المناسبة للمناخ الإماراتي</p>
-                            </div>
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">قارن واختر الأفضل</h3>
+                            <p class="text-gray-600 text-sm">قارن العروض واختر الأنسب لمشروعك وميزانيتك</p>
                         </div>
                     </div>
 
                     <div class="process-step">
-                        <div class="flex items-start space-x-4 space-x-reverse">
-                            <div class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                                4
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900 mb-1">الحصول على التراخيص</h3>
-                                <p class="text-gray-600 text-sm">إتمام جميع الإجراءات القانونية مع البلديات المحلية</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="process-step">
-                        <div class="flex items-start space-x-4 space-x-reverse">
-                            <div class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                                5
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900 mb-1">بدء التنفيذ</h3>
-                                <p class="text-gray-600 text-sm">بدء العمل على المشروع مع فريق متخصص إماراتي</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="process-step">
-                        <div class="flex items-start space-x-4 space-x-reverse">
-                            <div class="step-number w-8 h-8 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                                6
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900 mb-1">التسليم النهائي</h3>
-                                <p class="text-gray-600 text-sm">تسليم المشروع مكتملاً مع ضمان الجودة الإماراتية</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  --}}
-    </div>
-</section>
-
-<!-- Cost Estimation Section -->
-<section class="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-900 mb-4">
-                قدر التكلفة التقديرية لمشروعك في الإمارات
-            </h2>
-            <p class="text-xl text-gray-600">
-                إرفع متطلبات البناء وأحصل على أفضل العروض من نخبة الإستشاريين والمقاوليين وموردي المواد
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <!-- Content -->
-            <div>
-                <div class="space-y-6 mb-8">
-                    <div class="cost-step rounded-xl p-6 shadow-md">
-                        <div class="flex items-center space-x-4 space-x-reverse">
-                            <div class="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold">
-                                1
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900">اختر الإمارة والمنطقة</h3>
-                                <p class="text-gray-600 text-sm">دبي، أبوظبي، الشارقة، عجمان، رأس الخيمة، الفجيرة، أم القيوين</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cost-step rounded-xl p-6 shadow-md">
-                        <div class="flex items-center space-x-4 space-x-reverse">
-                            <div class="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold">
-                                2
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900">أكمل تفاصيل المشروع</h3>
-                                <p class="text-gray-600 text-sm">أدخل مواصفات المشروع والمساحة المطلوبة</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cost-step rounded-xl p-6 shadow-md">
-                        <div class="flex items-center space-x-4 space-x-reverse">
-                            <div class="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold">
-                                3
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-gray-900">أدخل تفاصيل التصميم</h3>
-                                <p class="text-gray-600 text-sm">اختر نمط التصميم والمواد المفضلة</p>
-                            </div>
+                        <div class="step-number">4</div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">ابدأ مشروعك</h3>
+                            <p class="text-gray-600 text-sm">تابع تقدم المشروع مع فريق الدعم حتى التسليم النهائي</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('designs.create') }}" class="uae-gradient text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 transition duration-300 transform text-lg inline-block">
-                        إرفع متطلباتك الآن
-                    </a>
-                    <a href="{{ route('lands.create') }}" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 transition duration-300 transform text-lg inline-block">
-                        <i class="fas fa-exchange-alt ml-2"></i>
-                        بيع وتبادل الأراضي
-                    </a>
-                </div>
-            </div>
-
-            <!-- Image -->
-            <div class="relative">
-                <div class="bg-gradient-to-br from-amber-50 to-red-50 rounded-3xl p-8">
-                    <div class="bg-white rounded-2xl p-6 shadow-lg">
-                        <div class="h-96 rounded-xl relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80"
-                                 alt="مكتب تصميم معماري"
-                                 class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-br from-amber-600/20 to-red-600/20"></div>
+                <!-- Image -->
+                <div class="relative">
+                    <div class="glass-card p-8">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80"
+                                alt="مكتب تصميم معماري" class="w-full h-96 object-cover rounded-xl">
+                            <div class="absolute inset-0 bg-gradient-to-br from-teal-600/20 to-amber-600/20 rounded-xl">
+                            </div>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-white/90 backdrop-blur-sm rounded-lg p-4 text-center">
-                                    <i class="fas fa-calculator text-4xl text-amber-600 mb-2"></i>
-                                    <p class="text-sm font-semibold text-gray-800">حاسبة التكلفة</p>
+                                <div class="glass-card p-6 text-center">
+                                    <i class="fas fa-drafting-compass text-4xl text-teal-600 mb-3"></i>
+                                    <p class="font-semibold text-gray-800">تصميم احترافي</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-4 text-center">
-                            <p class="text-sm text-gray-600">حاسبة تكلفة دقيقة لجميع الإمارات</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">أرقام تتحدث عن نفسها</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    منصة انشاءات في أرقام - إنجازاتنا تتحدث عن جودة خدماتنا
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="stats-card animate-bounce-in">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-teal-600 mb-2">{{ number_format($stats['total_consultants']) }}+
+                    </div>
+                    <p class="text-gray-600">استشاري ومقاول معتمد</p>
+                </div>
+
+                <div class="stats-card animate-bounce-in" style="animation-delay: 0.1s">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-home text-white text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-amber-600 mb-2">{{ number_format($stats['total_projects']) }}+
+                    </div>
+                    <p class="text-gray-600">مشروع مكتمل بنجاح</p>
+                </div>
+
+                <div class="stats-card animate-bounce-in" style="animation-delay: 0.2s">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-drafting-compass text-white text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-purple-600 mb-2">{{ number_format($stats['total_designs']) }}+
+                    </div>
+                    <p class="text-gray-600">تصميم متاح</p>
+                </div>
+
+                <div class="stats-card animate-bounce-in" style="animation-delay: 0.3s">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-white text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-green-600 mb-2">4.9</div>
+                    <p class="text-gray-600">تقييم العملاء</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-teal-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">ماذا يقول عملاؤنا؟</h2>
+                <p class="text-xl text-gray-600">تجارب حقيقية من عملائنا الكرام</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card animate-fade-in">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-quote-right text-amber-600"></i>
+                        </div>
+                    </div>
+
+                    <blockquote class="text-gray-700 text-lg mb-6 leading-relaxed">
+                        "منصة انشاءات ساعدتني في بناء منزل أحلامي. الفريق متخصص ومحترف، والتكلفة كانت معقولة جداً. أنصح
+                        الجميع بالتعامل معهم."
+                    </blockquote>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div class="w-12 h-12 rounded-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
+                                    alt="أحمد محمد" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">أحمد محمد</div>
+                                <div class="text-gray-600 text-sm">عميل من دبي</div>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-1 space-x-reverse">
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card animate-fade-in" style="animation-delay: 0.1s">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-quote-right text-teal-600"></i>
+                        </div>
+                    </div>
+
+                    <blockquote class="text-gray-700 text-lg mb-6 leading-relaxed">
+                        "خدمة ممتازة ومتابعة دقيقة للمشروع. فريق الدعم متاح دائماً للإجابة على استفساراتي. مشروعي تم تسليمه
+                        في الوقت المحدد."
+                    </blockquote>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div class="w-12 h-12 rounded-full overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
+                                    alt="فاطمة علي" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">فاطمة علي</div>
+                                <div class="text-gray-600 text-sm">عميلة من أبوظبي</div>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-1 space-x-reverse">
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
+                            <i class="fas fa-star text-amber-400"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- About Us & Statistics Section -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-900 mb-6">عن منصة انشاءات</h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                انشاءات منصة رائدة في الإمارات العربية المتحدة في البناء وتصميم المشاريع الضخمة. نقدم حلول متكاملة من التصميم حتى التسليم النهائي مع ضمان الجودة العالمية.
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-teal-600 to-teal-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-4">جاهز لبدء مشروعك؟</h2>
+            <p class="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
+                انضم إلى آلاف العملاء الذين اختاروا منصة انشاءات لتحويل أحلامهم المعمارية إلى واقع
             </p>
-        </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="stats-card rounded-2xl p-8 shadow-lg text-center">
-                <div class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                         alt="مهندس معماري"
-                         class="w-full h-full object-cover stats-image">
-                </div>
-                <div class="text-3xl font-bold text-teal-600 mb-2">500+</div>
-                <p class="text-gray-600">مهندس معماري معتمد في الإمارات</p>
-            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                @auth
+                    @if (auth()->user()->isConsultant())
+                        <a href="{{ route('designs.create') }}"
+                            class="bg-white text-teal-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition duration-300 text-lg">
+                            <i class="fas fa-plus ml-2"></i>
+                            إنشاء تصميم جديد
+                        </a>
+                    @else
+                        <a href="{{ route('tenders.create') }}"
+                            class="bg-white text-teal-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition duration-300 text-lg">
+                            <i class="fas fa-file-contract ml-2"></i>
+                            إنشاء مناقصة
+                        </a>
+                    @endif
+                @else
+                    <a href="{{ route('register') }}"
+                        class="bg-white text-teal-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition duration-300 text-lg">
+                        <i class="fas fa-user-plus ml-2"></i>
+                        انضم إلينا الآن
+                    </a>
+                @endauth
 
-            <div class="stats-card rounded-2xl p-8 shadow-lg text-center">
-                <div class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                         alt="مستشار عقاري"
-                         class="w-full h-full object-cover">
-                </div>
-                <div class="text-3xl font-bold text-teal-600 mb-2">400+</div>
-                <p class="text-gray-600">مستشار عقاري مرخص في الإمارات</p>
-            </div>
-
-            <div class="stats-card rounded-2xl p-8 shadow-lg text-center">
-                <div class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                         alt="مشروع مكتمل"
-                         class="w-full h-full object-cover">
-                </div>
-                <div class="text-3xl font-bold text-teal-600 mb-2">1500+</div>
-                <p class="text-gray-600">مشروع مكتمل في جميع الإمارات</p>
+                <a href="{{ route('designs.index') }}"
+                    class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-teal-600 transition duration-300 text-lg">
+                    <i class="fas fa-eye ml-2"></i>
+                    تصفح التصميمات
+                </a>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-900 mb-6">ماذا يقول عملاؤنا في الإمارات</h2>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <!-- Testimonial Card -->
-            <div class="testimonial-card rounded-2xl p-8 shadow-lg">
-                <div class="flex justify-between items-start mb-6">
-                    <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
-                        <i class="fas fa-quote-right text-amber-600"></i>
-                    </div>
-                </div>
-
-                <blockquote class="text-gray-700 text-lg mb-6 leading-relaxed">
-                    "منصة انشاءات ساعدتني في بناء منزل أحلامي في دبي. الفريق متخصص ومحترف، والتكلفة كانت معقولة جداً. أنصح الجميع بالتعامل معهم."
-                </blockquote>
-
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3 space-x-reverse">
-                        <div class="w-12 h-12 rounded-full overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                                 alt="يحيى بن علي"
-                                 class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <div class="font-semibold text-gray-900">يحيى بن علي</div>
-                            <div class="text-gray-600 text-sm">عميل من دبي 🇦🇪</div>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-1 space-x-reverse">
-                        <i class="fas fa-star text-amber-400"></i>
-                        <i class="fas fa-star text-amber-400"></i>
-                        <i class="fas fa-star text-amber-400"></i>
-                        <i class="fas fa-star text-amber-400"></i>
-                        <i class="fas fa-star text-amber-400"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Navigation Arrows -->
-            <div class="flex justify-center space-x-4 space-x-reverse">
-                <button class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-teal-50 transition duration-300">
-                    <i class="fas fa-chevron-right text-teal-600"></i>
-                </button>
-                <button class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-teal-50 transition duration-300">
-                    <i class="fas fa-chevron-left text-teal-600"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Language Toggle -->
-<div class="fixed bottom-6 left-6 z-50">
-    <div class="language-toggle rounded-full shadow-lg p-2">
-        <div class="flex space-x-2 space-x-reverse">
-            <button class="px-4 py-2 rounded-full bg-teal-600 text-white text-sm font-medium">
-                عربي
-            </button>
-            <button class="px-4 py-2 rounded-full text-gray-600 text-sm font-medium hover:bg-gray-100">
-                English
-            </button>
-        </div>
-    </div>
-</div>
-
+    </section>
 
 @endsection

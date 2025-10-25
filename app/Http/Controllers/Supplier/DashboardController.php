@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Supplier;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Project;
+// Note: Project model import removed as it doesn't exist
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,9 +20,7 @@ class DashboardController extends Controller
             'monthly_orders' => 25, // Will be implemented when orders table is created
             'monthly_revenue' => 150000, // Will be implemented when orders table is created
             'low_stock_products' => 3, // Will be implemented when inventory table is created
-            'available_projects' => Project::whereNull('selected_supplier_id')
-                ->where('status', 'supplier_bidding')
-                ->count(),
+            'available_projects' => 0, // Will be implemented when projects table is created
         ];
 
         // Get recent orders (simulated for now)
@@ -77,23 +75,23 @@ class DashboardController extends Controller
             ]
         ];
 
-        // Get available projects for suppliers
-        $availableProjects = Project::whereNull('selected_supplier_id')
-            ->where('status', 'supplier_bidding')
-            ->with('client')
-            ->latest()
-            ->take(5)
-            ->get()
-            ->map(function($project) {
-                return [
-                    'title' => $project->title,
-                    'client' => $project->client->name ?? 'غير محدد',
-                    'location' => $project->location,
-                    'budget' => number_format($project->estimated_cost) . ' ريال',
-                    'date' => $project->created_at->diffForHumans()
-                ];
-            })
-            ->toArray();
+        // Get available projects for suppliers (simulated for now)
+        $availableProjects = [
+            [
+                'title' => 'مشروع بناء فيلا',
+                'client' => 'أحمد محمد',
+                'location' => 'الرياض',
+                'budget' => '500,000 ريال',
+                'date' => 'منذ يومين'
+            ],
+            [
+                'title' => 'تطوير مجمع سكني',
+                'client' => 'سارة أحمد',
+                'location' => 'جدة',
+                'budget' => '1,200,000 ريال',
+                'date' => 'منذ أسبوع'
+            ]
+        ];
 
         return view('supplier.dashboard', compact('stats', 'recentOrders', 'lowStockProducts', 'lowStockAlerts', 'availableProjects'));
     }
