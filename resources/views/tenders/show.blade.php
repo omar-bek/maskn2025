@@ -3,994 +3,256 @@
 @section('title', $tender->title . ' - انشاءات')
 
 @section('content')
-    <style>
-        /* Modern Design System - Fixed Colors */
-        body {
-            background-color: #f8fafc !important;
-            color: #0f172a !important;
-        }
-
-        /* Enhanced Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #0f766e 0%, #14b8a6 50%, #0d9488 100%);
-            position: relative;
-            overflow: hidden;
-            min-height: 400px;
-        }
-
-        /* Modern Glass Cards */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            background: rgba(255, 255, 255, 0.98);
-        }
-
-        /* Enhanced Status Badges */
-        .status-badge {
-            padding: 0.75rem 1.5rem;
-            border-radius: 20px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-        }
-
-        .status-badge:hover {
-            transform: scale(1.05);
-        }
-
-        .status-open {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            color: #166534;
-            border: 1px solid rgba(34, 197, 94, 0.2);
-        }
-
-        .status-closed {
-            background: linear-gradient(135deg, #fef2f2, #fee2e2);
-            color: #991b1b;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .status-awarded {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            color: #1e40af;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        /* Modern Tabs */
-        .tab-button {
-            position: relative;
-            padding: 1rem 1.5rem;
-            font-weight: 500;
-            color: #475569;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 12px 12px 0 0;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-        }
-
-        .tab-button:hover {
-            color: #0f766e;
-            background: rgba(15, 118, 110, 0.05);
-        }
-
-        .tab-button.tab-active {
-            color: #0f766e;
-            background: #ffffff;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .tab-button.tab-active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #0f766e, #14b8a6);
-            border-radius: 2px 2px 0 0;
-        }
-
-        /* Enhanced Progress Bar */
-        .progress-bar {
-            height: 12px;
-            border-radius: 12px;
-            background: #f1f5f9;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 12px;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Enhanced Animations */
-        .animate-fade-in {
-            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .animate-slide-in {
-            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .animate-bounce-in {
-            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-
-            70% {
-                transform: scale(0.9);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Enhanced Text Effects */
-        .gradient-text {
-            background: linear-gradient(135deg, #0f766e, #14b8a6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .text-shadow {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .icon-glow {
-            filter: drop-shadow(0 0 8px rgba(15, 118, 110, 0.3));
-        }
-
-        /* Enhanced Hover Effects */
-        .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Modern Buttons */
-        .btn-primary {
-            background: linear-gradient(135deg, #0f766e, #14b8a6);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #0d9488, #0f766e);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Enhanced Sidebar */
-        .sticky-sidebar {
-            position: sticky;
-            top: 2rem;
-        }
-
-        .sidebar-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .sidebar-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transform: translateY(-2px);
-        }
-
-        /* Enhanced Info Items */
-        .info-item {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-bottom: 0.75rem;
-        }
-
-        .info-item:hover {
-            background: #f1f5f9;
-            transform: translateX(-4px);
-        }
-
-        .info-item-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 1rem;
-            font-size: 1.1rem;
-        }
-
-        /* Enhanced Tables */
-        .modern-table {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        }
-
-        .modern-table th {
-            background: #f1f5f9;
-            padding: 1rem;
-            font-weight: 600;
-            color: #0f172a;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .modern-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #e2e8f0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .modern-table tr:hover td {
-            background: #f8fafc;
-        }
-
-        /* Enhanced Modals */
-        .fullscreen-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-            z-index: 9999;
-            overflow-y: auto;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .fullscreen-header {
-            position: sticky;
-            top: 0;
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10000;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        }
-
-        .fullscreen-content {
-            padding: 2rem;
-        }
-
-        /* Enhanced Image Slider */
-        .image-slider {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .slider-container {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .slider-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
-        }
-
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            padding: 1rem;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-        }
-
-        .slider-nav:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .slider-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            padding: 0.75rem;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-        }
-
-        .slider-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg);
-        }
-
-        .slider-counter {
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .slider-thumbnails {
-            position: absolute;
-            bottom: 4rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            max-width: 80%;
-            overflow-x: auto;
-            padding: 0.5rem;
-        }
-
-        .slider-thumbnail {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-        }
-
-        .slider-thumbnail.active {
-            opacity: 1;
-            border-color: white;
-            transform: scale(1.1);
-        }
-
-        .slider-thumbnail:hover {
-            opacity: 0.8;
-            transform: scale(1.05);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 12px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #0f766e;
-            border-radius: 12px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0d9488;
-        }
-
-        /* RTL Adjustments */
-        .rtl-grid {
-            direction: rtl;
-        }
-
-        .flip-icon {
-            transform: scaleX(-1);
-        }
-
-        /* Breadcrumb Enhancement */
-        .breadcrumb-item {
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .breadcrumb-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: -1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0.5rem;
-            height: 0.5rem;
-            border-right: 2px solid rgba(255, 255, 255, 0.6);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.6);
-            transform: translateY(-50%) rotate(-45deg);
-        }
-
-        .breadcrumb-item:hover {
-            color: white !important;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-section {
-                min-height: 300px;
-                padding: 1.5rem 1rem;
-            }
-
-            .glass-card {
-                margin: 0.5rem;
-                padding: 1rem;
-            }
-
-            .tab-button {
-                padding: 0.75rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .sidebar-card {
-                margin: 0.5rem;
-            }
-
-            .slider-nav {
-                font-size: 1.2rem;
-                padding: 0.75rem;
-            }
-
-            .slider-close {
-                font-size: 1.2rem;
-                padding: 0.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-section {
-                min-height: 250px;
-            }
-
-            .glass-card {
-                margin: 0.25rem;
-                padding: 0.75rem;
-            }
-
-            .tab-button {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Loading States */
-        .loading {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        /* Focus States */
-        *:focus {
-            outline: 2px solid #0f766e;
-            outline-offset: 2px;
-        }
-
-        /* Print Styles */
-        @media print {
-
-            .hero-section,
-            .sidebar-card,
-            .tab-button,
-            .btn-primary {
-                display: none !important;
-            }
-
-            .glass-card {
-                box-shadow: none;
-                border: 1px solid #ccc;
-            }
-        }
-
-        /* Additional Enhancements */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        /* Floating Animation */
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Shimmer Effect */
-        @keyframes shimmer {
-            0% {
-                background-position: -200px 0;
-            }
-
-            100% {
-                background-position: calc(200px + 100%) 0;
-            }
-        }
-
-        .shimmer {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200px 100%;
-            animation: shimmer 1.5s infinite;
-        }
-
-        /* Ripple Effect */
-        .ripple {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ripple::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .ripple:active::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Glass Morphism Enhancement */
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            border-radius: inherit;
-            pointer-events: none;
-        }
-
-        /* Enhanced Focus States */
-        .tab-button:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.3);
-        }
-
-        .btn-primary:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.3);
-        }
-
-        /* Loading States */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        /* Notification Styles */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #10b981;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            z-index: 10000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease-out;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        /* Enhanced Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #0f766e, #14b8a6);
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #0d9488, #0f766e);
-        }
-    </style>
-    <!-- Enhanced Hero Section -->
-    <section class="hero-section text-white relative">
-        <div class="container mx-auto px-4 py-16 relative z-10">
-            <!-- Main Hero Content -->
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
-                <!-- Left Content -->
-                <div class="flex-1 animate-fade-in">
-                    <!-- Title with enhanced styling -->
-                    <h1 class="text-4xl lg:text-5xl font-bold text-shadow mb-6 leading-tight">
-                        {{ $tender->title }}
-                    </h1>
-
-                    <!-- Location and Client Info -->
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-center text-white/90 group">
-                            <div
-                                class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center ml-4 group-hover:bg-white/30 transition-all duration-300">
-                                <i class="fas fa-map-marker-alt text-xl icon-glow"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-white/70">الموقع</p>
-                                <p class="text-xl font-semibold">{{ $tender->location }}</p>
-                            </div>
+   
+<section
+    class="hero-section text-white relative bg-gradient-to-br from-[#2f5c69] to-[#1a262a] pt-28 pb-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+            <div class="flex-1 animate-fade-in">
+                <h1
+                    class="text-4xl lg:text-5xl font-bold mb-8 leading-tight bg-gradient-to-r from-[#f3a446] to-white bg-clip-text text-transparent filter drop-shadow(0 2px 3px rgba(0,0,0,0.5))">
+                    {{ $tender->title }}
+                </h1>
+
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-center text-white/90 group">
+                        <div
+                            class="w-12 h-12 bg-[#f3a446]/10 rounded-xl flex items-center justify-center ml-4 group-hover:bg-[#f3a446]/20 transition-all duration-300 border border-[#f3a446]/20">
+                            <i class="fas fa-map-marker-alt text-xl text-[#f3a446]"></i>
                         </div>
-
-                        <div class="flex items-center text-white/90 group">
-                            <div
-                                class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center ml-4 group-hover:bg-white/30 transition-all duration-300">
-                                <i class="fas fa-user text-xl icon-glow"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-white/70">العميل</p>
-                                <p class="text-xl font-semibold">{{ $tender->client->name }}</p>
-                            </div>
+                        <div>
+                            <p class="text-sm text-white/70">الموقع</p>
+                            <p class="text-xl font-semibold">{{ $tender->location }}</p>
                         </div>
                     </div>
 
-                    <!-- Quick Stats -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="flex items-center text-white/90 group">
                         <div
-                            class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/20 transition-all duration-300">
-                            <i class="fas fa-calendar-alt text-2xl mb-2"></i>
-                            <p class="text-sm text-white/70">آخر موعد</p>
-                            <p class="font-semibold">{{ $tender->formatted_deadline }}</p>
+                            class="w-12 h-12 bg-[#f3a446]/10 rounded-xl flex items-center justify-center ml-4 group-hover:bg-[#f3a446]/20 transition-all duration-300 border border-[#f3a446]/20">
+                            <i class="fas fa-user text-xl text-[#f3a446]"></i>
                         </div>
-
-                        <div
-                            class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/20 transition-all duration-300">
-                            <i class="fas fa-file-alt text-2xl mb-2"></i>
-                            <p class="text-sm text-white/70">عدد العروض</p>
-                            <p class="font-semibold">{{ $tender->proposals_count }}</p>
+                        <div>
+                            <p class="text-sm text-white/70">العميل</p>
+                            <p class="text-xl font-semibold">{{ $tender->client->name }}</p>
                         </div>
-
-                        @if ($tender->budget)
-                            <div
-                                class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/20 transition-all duration-300">
-                                <i class="fas fa-money-bill-wave text-2xl mb-2"></i>
-                                <p class="text-sm text-white/70">الميزانية</p>
-                                <p class="font-semibold">{{ $tender->formatted_budget }}</p>
-                            </div>
-                        @endif
-
-                        @if ($tender->days_remaining !== null)
-                            <div
-                                class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/20 transition-all duration-300">
-                                <i class="fas fa-clock text-2xl mb-2"></i>
-                                <p class="text-sm text-white/70">الأيام المتبقية</p>
-                                <p class="font-semibold">{{ $tender->days_remaining }} يوم</p>
-                            </div>
-                        @endif
                     </div>
                 </div>
 
-                <!-- Right Content - Status and Actions -->
-                <div class="flex flex-col items-center lg:items-end gap-6 animate-slide-in">
-                    <!-- Enhanced Status Badge -->
-                    @if ($tender->status === 'open')
-                        <div class="status-badge status-open animate-bounce-in">
-                            <div class="w-3 h-3 bg-green-500 rounded-full ml-3 animate-pulse"></div>
-                            <span class="text-lg font-bold">مناقصة مفتوحة</span>
-                        </div>
-                    @elseif($tender->status === 'closed')
-                        <div class="status-badge status-closed animate-bounce-in">
-                            <i class="fas fa-lock ml-3 text-lg"></i>
-                            <span class="text-lg font-bold">مناقصة مغلقة</span>
-                        </div>
-                    @elseif($tender->status === 'awarded')
-                        <div class="status-badge status-awarded animate-bounce-in">
-                            <i class="fas fa-trophy ml-3 text-lg"></i>
-                            <span class="text-lg font-bold">مناقصة ممنوحة</span>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div
+                        class="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fas fa-calendar-alt text-2xl mb-2 text-[#f3a446] opacity-80"></i>
+                        <p class="text-sm text-white/70">آخر موعد</p>
+                        <p class="font-semibold">{{ $tender->formatted_deadline }}</p>
+                    </div>
+
+                    <div
+                        class="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fas fa-file-alt text-2xl mb-2 text-[#f3a446] opacity-80"></i>
+                        <p class="text-sm text-white/70">عدد العروض</p>
+                        <p class="font-semibold">{{ $tender->proposals_count }}</p>
+                    </div>
+
+                    @if ($tender->budget)
+                        <div
+                            class="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fas fa-money-bill-wave text-2xl mb-2 text-[#f3a446] opacity-80"></i>
+                            <p class="text-sm text-white/70">الميزانية</p>
+                            <p class="font-semibold">{{ $tender->formatted_budget }}</p>
                         </div>
                     @endif
 
-                    <!-- Client Info Card -->
-                    <div class="glass-card rounded-2xl p-6 w-full max-w-sm">
-                        <div class="flex items-center mb-4">
-                            <div
-                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center ml-4">
-                                <i class="fas fa-user text-white text-2xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-600 font-medium">معلومات العميل</p>
-                                <p class="text-lg font-bold text-gray-800">{{ $tender->client->name }}</p>
-                            </div>
+                    @if ($tender->days_remaining !== null)
+                        <div
+                            class="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fas fa-clock text-2xl mb-2 text-[#f3a446] opacity-80"></i>
+                            <p class="text-sm text-white/70">الأيام المتبقية</p>
+                            <p class="font-semibold">{{ $tender->days_remaining }} يوم</p>
                         </div>
-
-                        @if ($tender->client->phone)
-                            <div class="flex items-center text-gray-600 mb-2">
-                                <i class="fas fa-phone ml-3"></i>
-                                <span>{{ $tender->client->phone }}</span>
-                            </div>
-                        @endif
-
-                        @if ($tender->client->city)
-                            <div class="flex items-center text-gray-600">
-                                <i class="fas fa-map-marker-alt ml-3"></i>
-                                <span>{{ $tender->client->city }}</span>
-                            </div>
-                        @endif
-                    </div>
-
-                    <!-- Quick Actions -->
-                    @auth
-                        @if (auth()->user()->isConsultant() && $tender->status === 'open')
-                            @if ($userProposal)
-                                <a href="{{ route('proposals.edit', $userProposal->id) }}"
-                                    class="btn-primary w-full justify-center text-lg py-4">
-                                    <i class="fas fa-edit"></i>
-                                    تعديل العرض
-                                </a>
-                            @else
-                                <a href="{{ route('proposals.create', $tender->id) }}"
-                                    class="btn-primary w-full justify-center text-lg py-4">
-                                    <i class="fas fa-paper-plane"></i>
-                                    قدم عرض الآن
-                                </a>
-                            @endif
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="btn-primary w-full justify-center text-lg py-4">
-                            <i class="fas fa-sign-in-alt"></i>
-                            سجل دخول للمشاركة
-                        </a>
-                    @endauth
+                    @endif
                 </div>
             </div>
 
-            <!-- Enhanced Breadcrumb -->
-            <nav class="flex items-center mt-12 text-sm animate-fade-in">
-                <a href="{{ route('home') }}"
-                    class="breadcrumb-item text-white/80 hover:text-white transition-all duration-300 hover:scale-105">
-                    <i class="fas fa-home ml-2"></i>
-                    الرئيسية
-                </a>
-                <a href="{{ route('tenders.index') }}"
-                    class="breadcrumb-item text-white/80 hover:text-white transition-all duration-300 hover:scale-105">
-                    <i class="fas fa-file-contract ml-2"></i>
-                    المناقصات
-                </a>
-                <span class="text-white font-medium flex items-center">
-                    <i class="fas fa-arrow-left ml-2"></i>
-                    {{ Str::limit($tender->title, 30) }}
-                </span>
-            </nav>
+            <div
+                class="flex flex-col items-stretch md:items-end gap-6 animate-slide-in w-full md:max-w-sm flex-shrink-0">
+                
+                @if ($tender->status === 'open')
+                    <div class="status-badge bg-[#f3a446]/10 text-[#f3a446] border border-[#f3a446]/30 animate-bounce-in w-full">
+                        <div class="w-3 h-3 bg-[#f3a446] rounded-full ml-3 animate-pulse"></div>
+                        <span class="text-lg font-bold">مناقصة مفتوحة</span>
+                    </div>
+                @elseif($tender->status === 'closed')
+                    <div class="status-badge bg-gray-500/10 text-gray-300 border border-gray-500/30 animate-bounce-in w-full">
+                        <i class="fas fa-lock ml-3 text-lg"></i>
+                        <span class="text-lg font-bold">مناقصة مغلقة</span>
+                    </div>
+                @elseif($tender->status === 'awarded')
+                    <div class="status-badge bg-[#f3a446] text-[#1a262a] border border-[#f3a446] animate-bounce-in w-full">
+                        <i class="fas fa-trophy ml-3 text-lg"></i>
+                        <span class="text-lg font-bold">مناقصة ممنوحة</span>
+                    </div>
+                @endif
+
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 w-full max-w-sm">
+                    <div class="flex items-center mb-4">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-[#f3a446] to-[#d18a3a] rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                            <i class="fas fa-user text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-white/80 font-medium">معلومات العميل</p>
+                            <p class="text-lg font-bold text-white">{{ $tender->client->name }}</p>
+                        </div>
+                    </div>
+
+                    @if ($tender->client->phone)
+                        <div class="flex items-center text-white/80 mb-2">
+                            <i class="fas fa-phone ml-3"></i>
+                            <span>{{ $tender->client->phone }}</span>
+                        </div>
+                    @endif
+
+                    @if ($tender->client->city)
+                        <div class="flex items-center text-white/80">
+                            <i class="fas fa-map-marker-alt ml-3"></i>
+                            <span>{{ $tender->client->city }}</span>
+                        </div>
+                    @endif
+                </div>
+
+                @auth
+                    @if (auth()->user()->isConsultant() && $tender->status === 'open')
+                        @if ($userProposal)
+                            <a href="{{ route('proposals.edit', $userProposal->id) }}"
+                                class="btn-primary w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                <i class="fas fa-edit"></i>
+                                تعديل العرض
+                            </a>
+                        @else
+                            <a href="{{ route('proposals.create', $tender->id) }}"
+                                class="btn-primary w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                <i class="fas fa-paper-plane"></i>
+                                قدم عرض الآن
+                            </a>
+                        @endif
+                    @endif
+                @else
+                    <a href="{{ route('login') }}"
+                        class="btn-primary w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-sign-in-alt"></i>
+                        سجل دخول للمشاركة
+                    </a>
+                @endauth
+            </div>
         </div>
-    </section>
+
+    </div>
+
+    <div class="absolute bottom-0 left-0 w-full h-20 bg-white z-[1]"></div>
+
+    <div class="absolute bottom-0 left-0 w-full h-20 overflow-hidden" style="line-height: 0; z-index:2;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"
+    class="absolute block w-full h-full">
+    <defs>
+        <linearGradient id="heroWave" gradientTransform="rotate(45)">
+            <stop offset="0%" stop-color="#2f5c69" />
+            <stop offset="100%" stop-color="#1a262a" />
+        </linearGradient>
+    </defs>
+    <path fill="url(#heroWave)"
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z">
+    </path>
+</svg>
+    </div>
+</section>
+
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
+   <main class="bg-gray-50 py-12">
+    <div class="container mx-auto px-4">
         <div class="flex flex-col lg:flex-row gap-8 rtl-grid">
-            <!-- Left Column - Main Content -->
+
             <div class="lg:w-2/3">
-                <!-- Enhanced Tabs Navigation -->
-                <div class="glass-card rounded-2xl mb-8 overflow-hidden">
-                    <div class="flex overflow-x-auto bg-gradient-to-r from-gray-50 to-gray-100 p-2">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100/50 mb-8 overflow-hidden">
+                    <div class="flex overflow-x-auto p-2">
                         <button id="tab-overview"
-                            class="tab-button flex-shrink-0 px-8 py-4 font-semibold text-gray-700 hover:text-teal-600 transition-all duration-300 tab-active group">
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 bg-teal-100 group-hover:bg-teal-200 rounded-xl flex items-center justify-center ml-3 transition-all duration-300">
-                                    <i class="fas fa-info-circle text-teal-600"></i>
-                                </div>
-                                <span>نظرة عامة</span>
-                            </div>
+                            class="tab-button flex-shrink-0 px-6 py-4 font-bold transition-all duration-300 group flex items-center gap-3 tab-active">
+                            <i class="fas fa-info-circle text-xl text-[#f3a446]"></i>
+                            <span class="text-lg text-[#2f5c69]">نظرة عامة</span>
                         </button>
                         <button id="tab-design"
-                            class="tab-button flex-shrink-0 px-8 py-4 font-semibold text-gray-700 hover:text-purple-600 transition-all duration-300 group">
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 bg-purple-100 group-hover:bg-purple-200 rounded-xl flex items-center justify-center ml-3 transition-all duration-300">
-                                    <i class="fas fa-palette text-purple-600"></i>
-                                </div>
-                                <span>التصميم</span>
-                            </div>
+                            class="tab-button flex-shrink-0 px-6 py-4 font-bold text-gray-500 hover:text-[#2f5c69] transition-all duration-300 group flex items-center gap-3">
+                            <i class="fas fa-palette text-xl text-gray-400 group-hover:text-[#2f5c69] transition-all"></i>
+                            <span class="text-lg">التصميم</span>
                         </button>
                         <button id="tab-items"
-                            class="tab-button flex-shrink-0 px-8 py-4 font-semibold text-gray-700 hover:text-orange-600 transition-all duration-300 group">
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 bg-orange-100 group-hover:bg-orange-200 rounded-xl flex items-center justify-center ml-3 transition-all duration-300">
-                                    <i class="fas fa-list text-orange-600"></i>
-                                </div>
-                                <span>بنود المناقصة</span>
-                            </div>
+                            class="tab-button flex-shrink-0 px-6 py-4 font-bold text-gray-500 hover:text-[#2f5c69] transition-all duration-300 group flex items-center gap-3">
+                            <i class="fas fa-list text-xl text-gray-400 group-hover:text-[#2f5c69] transition-all"></i>
+                            <span class="text-lg">بنود المناقصة</span>
                         </button>
                         <button id="tab-proposals"
-                            class="tab-button flex-shrink-0 px-8 py-4 font-semibold text-gray-700 hover:text-green-600 transition-all duration-300 group">
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 bg-green-100 group-hover:bg-green-200 rounded-xl flex items-center justify-center ml-3 transition-all duration-300">
-                                    <i class="fas fa-file-alt text-green-600"></i>
-                                </div>
-                                <span>العروض</span>
-                            </div>
+                            class="tab-button flex-shrink-0 px-6 py-4 font-bold text-gray-500 hover:text-[#2f5c69] transition-all duration-300 group flex items-center gap-3">
+                            <i class="fas fa-file-alt text-xl text-gray-400 group-hover:text-[#2f5c69] transition-all"></i>
+                            <span class="text-lg">العروض</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Tab Content -->
                 <div id="tab-content" class="animate-fade-in">
-                    <!-- Overview Tab -->
                     <div id="content-overview" class="tab-content active">
-                        <!-- Description Card -->
-                        <div class="glass-card rounded-2xl p-8 mb-8 hover-lift">
+                        <div
+                            class="bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 mb-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                             <div class="flex items-center mb-6">
                                 <div
-                                    class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
-                                    <i class="fas fa-file-alt text-white text-2xl"></i>
+                                    class="w-16 h-16 bg-[#2f5c69]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                                    <i class="fas fa-file-alt text-[#2f5c69] text-2xl"></i>
                                 </div>
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-800 mb-2">وصف المشروع</h2>
                                     <p class="text-gray-600">تفاصيل المشروع والمتطلبات الأساسية</p>
                                 </div>
                             </div>
-                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+                            <div class="bg-gray-50/50 rounded-xl p-6 border border-gray-200/60">
                                 <p class="text-gray-700 leading-relaxed text-lg">{{ $tender->description }}</p>
                             </div>
                         </div>
 
-                        <!-- Requirements Card -->
                         @if ($tender->requirements)
-                            <div class="glass-card rounded-2xl p-8 mb-8 hover-lift">
+                            <div
+                                class="bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 mb-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                                 <div class="flex items-center mb-6">
                                     <div
-                                        class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
-                                        <i class="fas fa-clipboard-check text-white text-2xl"></i>
+                                        class="w-16 h-16 bg-[#2f5c69]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                                        <i class="fas fa-clipboard-check text-[#2f5c69] text-2xl"></i>
                                     </div>
                                     <div>
                                         <h2 class="text-2xl font-bold text-gray-800 mb-2">المتطلبات والشروط</h2>
                                         <p class="text-gray-600">الشروط والمتطلبات الفنية للمشروع</p>
                                     </div>
                                 </div>
-                                <div
-                                    class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100">
+                                <div class="bg-gray-50/50 rounded-xl p-6 border border-gray-200/60">
                                     <p class="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
                                         {{ $tender->requirements }}</p>
                                 </div>
                             </div>
                         @endif
 
-                        <!-- Client Notes Card -->
                         @if ($tender->client_notes)
-                            <div class="glass-card rounded-2xl p-8 mb-8 hover-lift border-2 border-yellow-200">
+                            <div
+                                class="bg-white shadow-xl border-2 border-[#f3a446]/30 rounded-2xl p-8 mb-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                                 <div class="flex items-center mb-6">
                                     <div
-                                        class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
-                                        <i class="fas fa-sticky-note text-white text-2xl"></i>
+                                        class="w-16 h-16 bg-[#f3a446]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                                        <i class="fas fa-sticky-note text-[#f3a446] text-2xl"></i>
                                     </div>
                                     <div>
                                         <h2 class="text-2xl font-bold text-gray-800 mb-2">ملاحظات التعديل المطلوبة</h2>
                                         <p class="text-gray-600">تعديلات إضافية مطلوبة من العميل</p>
                                     </div>
                                 </div>
-                                <div
-                                    class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200 relative">
+                                <div class="bg-[#f3a446]/5 rounded-xl p-6 border border-[#f3a446]/30 relative">
                                     <div class="absolute top-4 right-4">
-                                        <i class="fas fa-exclamation-triangle text-yellow-500 text-xl"></i>
+                                        <i class="fas fa-exclamation-triangle text-[#f3a446] text-xl"></i>
                                     </div>
                                     <p class="text-gray-700 leading-relaxed text-lg whitespace-pre-line pr-8">
                                         {{ $tender->client_notes }}
@@ -999,12 +261,12 @@
                             </div>
                         @endif
 
-                        <!-- Project Timeline Card -->
-                        <div class="glass-card rounded-2xl p-8 mb-8 hover-lift">
+                        <div
+                            class="bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 mb-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                             <div class="flex items-center mb-6">
                                 <div
-                                    class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
-                                    <i class="fas fa-calendar-alt text-white text-2xl"></i>
+                                    class="w-16 h-16 bg-[#2f5c69]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                                    <i class="fas fa-calendar-alt text-[#2f5c69] text-2xl"></i>
                                 </div>
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-800 mb-2">الجدول الزمني</h2>
@@ -1012,16 +274,15 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div
-                                    class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl p-6 border border-purple-100">
+                                <div class="bg-gray-50/50 rounded-xl p-6 border border-gray-200/60">
                                     <div class="flex items-center mb-3">
-                                        <i class="fas fa-calendar-plus text-purple-600 ml-3"></i>
+                                        <i class="fas fa-calendar-plus text-[#2f5c69] ml-3"></i>
                                         <h3 class="font-semibold text-gray-800">تاريخ الإنشاء</h3>
                                     </div>
-                                    <p class="text-lg font-bold text-purple-600">
+                                    <p class="text-lg font-bold text-[#2f5c69]">
                                         {{ $tender->created_at->format('Y-m-d') }}</p>
                                 </div>
-                                <div class="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-6 border border-red-100">
+                                <div class="bg-red-50 rounded-xl p-6 border border-red-100">
                                     <div class="flex items-center mb-3">
                                         <i class="fas fa-calendar-times text-red-600 ml-3"></i>
                                         <h3 class="font-semibold text-gray-800">آخر موعد للتقديم</h3>
@@ -1032,12 +293,13 @@
                         </div>
                     </div>
 
-                    <!-- Design Tab -->
                     <div id="content-design" class="tab-content hidden">
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6 card-hover">
+                        <div
+                            class="bg-white rounded-2xl shadow-xl border border-gray-100/50 p-6 mb-6 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                             <div class="flex items-center mb-6">
-                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center ml-3">
-                                    <i class="fas fa-home text-purple-600"></i>
+                                <div
+                                    class="w-10 h-10 bg-[#2f5c69]/10 rounded-lg flex items-center justify-center ml-3">
+                                    <i class="fas fa-home text-[#2f5c69]"></i>
                                 </div>
                                 <h2 class="text-xl font-bold text-gray-800">التصميم المطلوب</h2>
                             </div>
@@ -1071,16 +333,16 @@
                                     <h3 class="text-2xl font-bold text-gray-800 mb-3">{{ $tender->design->title }}</h3>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                                            <i class="fas fa-palette text-purple-500 ml-3"></i>
+                                        <div class="flex items-center p-3 bg-gray-50/50 rounded-lg border border-gray-200/60">
+                                            <i class="fas fa-palette text-[#2f5c69] ml-3"></i>
                                             <div>
                                                 <p class="text-sm text-gray-500">النمط</p>
                                                 <p class="font-medium">{{ $tender->design->style }}</p>
                                             </div>
                                         </div>
 
-                                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                                            <i class="fas fa-ruler-combined text-blue-500 ml-3"></i>
+                                        <div class="flex items-center p-3 bg-gray-50/50 rounded-lg border border-gray-200/60">
+                                            <i class="fas fa-ruler-combined text-[#2f5c69] ml-3"></i>
                                             <div>
                                                 <p class="text-sm text-gray-500">المساحة</p>
                                                 <p class="font-medium">{{ $tender->design->formatted_area }}</p>
@@ -1090,14 +352,14 @@
 
                                     <div class="flex flex-wrap gap-3">
                                         <a href="{{ route('designs.show', $tender->design->id) }}"
-                                            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-medium transition-colors">
+                                            class="inline-flex items-center bg-[#f3a446] text-[#1a262a] px-5 py-3 rounded-xl font-bold hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-lg">
                                             <i class="fas fa-eye ml-2"></i>
                                             عرض التفاصيل الكاملة
                                         </a>
 
                                         @if ($tender->design->images && count($tender->design->images) > 1)
                                             <button onclick="openGalleryModal()"
-                                                class="inline-flex items-center bg-purple-600 hover:bg-purple-700 text-white px-5 py-3 rounded-lg font-medium transition-colors">
+                                                class="inline-flex items-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-5 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
                                                 <i class="fas fa-images ml-2"></i>
                                                 معرض الصور
                                             </button>
@@ -1108,29 +370,29 @@
                         </div>
                     </div>
 
-                    <!-- Items Tab -->
                     <div id="content-items" class="tab-content hidden">
                         @if ($itemsByCategory && $itemsByCategory->count() > 0)
-                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+                            <div
+                                class="bg-white rounded-2xl shadow-xl border border-gray-100/50 overflow-hidden mb-6 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                                 <div
                                     class="flex flex-col md:flex-row justify-between items-start md:items-center p-6 border-b border-gray-200">
                                     <div class="flex items-center mb-4 md:mb-0">
                                         <div
-                                            class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center ml-3">
-                                            <i class="fas fa-list text-orange-600"></i>
+                                            class="w-10 h-10 bg-[#f3a446]/10 rounded-lg flex items-center justify-center ml-3">
+                                            <i class="fas fa-list text-[#f3a446]"></i>
                                         </div>
                                         <h2 class="text-xl font-bold text-gray-800">بنود المناقصة</h2>
                                     </div>
 
                                     <div class="flex gap-3">
                                         <button onclick="exportItemsToPDF()"
-                                            class="inline-flex items-center bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                                            class="inline-flex items-center bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm transition-colors shadow-lg transform hover:scale-105">
                                             <i class="fas fa-file-pdf ml-2"></i>
                                             تصدير PDF
                                         </button>
 
                                         <button onclick="toggleItemsView()"
-                                            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                                            class="inline-flex items-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-4 py-2 rounded-lg text-sm transition-colors shadow-lg transform hover:scale-105">
                                             <i class="fas fa-th-large ml-2"></i>
                                             تبديل العرض
                                         </button>
@@ -1138,7 +400,6 @@
                                 </div>
 
                                 <div id="items-container">
-                                    <!-- Default Table View -->
                                     <div id="items-table-view">
                                         <div class="overflow-x-auto">
                                             <table class="w-full">
@@ -1197,16 +458,15 @@
                                         </div>
                                     </div>
 
-                                    <!-- Card View (Hidden by default) -->
                                     <div id="items-card-view" class="hidden p-6">
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             @foreach ($itemsByCategory as $categoryName => $items)
                                                 @foreach ($items as $item)
                                                     <div
-                                                        class="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
+                                                        class="border border-gray-200 rounded-lg p-4 hover:border-[#f3a446]/50 transition-colors shadow-sm hover:shadow-md">
                                                         <div class="flex justify-between items-start mb-2">
                                                             <span
-                                                                class="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded-full">{{ $categoryName }}</span>
+                                                                class="text-xs font-medium bg-[#2f5c69]/10 text-[#2f5c69] px-2 py-1 rounded-full">{{ $categoryName }}</span>
                                                             <span
                                                                 class="text-lg font-bold text-green-600">{{ $item->total_price ?? 'N/A' }}</span>
                                                         </div>
@@ -1229,7 +489,8 @@
                                 </div>
                             </div>
                         @else
-                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+                            <div
+                                class="bg-white rounded-2xl shadow-xl border border-gray-100/50 p-8 text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                                 <i class="fas fa-inbox text-4xl text-gray-300 mb-4"></i>
                                 <h3 class="text-lg font-medium text-gray-700 mb-2">لا توجد بنود</h3>
                                 <p class="text-gray-500">لم يتم إضافة بنود لهذه المناقصة بعد</p>
@@ -1237,13 +498,12 @@
                         @endif
                     </div>
 
-                    <!-- Proposals Tab -->
                     <div id="content-proposals" class="tab-content hidden">
                         @auth
                             @if (auth()->user()->isClient() && auth()->id() == $tender->client_id)
-                                <!-- Client View -->
                                 @if ($tender->proposals->count() > 0)
-                                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+                                    <div
+                                        class="bg-white rounded-2xl shadow-xl border border-gray-100/50 overflow-hidden mb-6">
                                         <div class="p-6 border-b border-gray-200">
                                             <div class="flex items-center justify-between">
                                                 <div class="flex items-center">
@@ -1254,7 +514,7 @@
                                                     <h2 class="text-xl font-bold text-gray-800">العروض المقدمة</h2>
                                                 </div>
                                                 <span
-                                                    class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                                                    class="bg-[#2f5c69]/10 text-[#2f5c69] text-sm font-bold px-3 py-1 rounded-full">
                                                     {{ $tender->proposals_count }} عرض
                                                 </span>
                                             </div>
@@ -1267,7 +527,7 @@
                                                         class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                                                         <div class="flex items-center mb-3 md:mb-0">
                                                             <div
-                                                                class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold ml-3">
+                                                                class="w-12 h-12 bg-gradient-to-r from-[#2f5c69] to-[#1a262a] rounded-full flex items-center justify-center text-white font-bold ml-3 shadow-md">
                                                                 {{ substr($proposal->consultant->name, 0, 1) }}
                                                             </div>
                                                             <div>
@@ -1306,28 +566,30 @@
 
                                                     <div class="flex flex-wrap gap-3">
                                                         <a href="{{ route('proposals.client-view', $proposal->id) }}"
-                                                            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                                                            class="inline-flex items-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-4 py-2 rounded-lg text-sm transition-colors shadow-lg transform hover:scale-105">
                                                             <i class="fas fa-eye ml-2"></i>
                                                             عرض التفاصيل
                                                         </a>
 
                                                         @if ($tender->status === 'open')
-                                                            <form action="{{ route('proposals.accept', $proposal->id) }}"
+                                                            <form
+                                                                action="{{ route('proposals.accept', $proposal->id) }}"
                                                                 method="POST" class="inline">
                                                                 @csrf
                                                                 <button type="submit"
-                                                                    class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+                                                                    class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition-colors shadow-lg transform hover:scale-105"
                                                                     onclick="return confirm('هل أنت متأكد من قبول هذا العرض؟')">
                                                                     <i class="fas fa-check ml-2"></i>
                                                                     قبول العرض
                                                                 </button>
                                                             </form>
 
-                                                            <form action="{{ route('proposals.reject', $proposal->id) }}"
+                                                            <form
+                                                                action="{{ route('proposals.reject', $proposal->id) }}"
                                                                 method="POST" class="inline">
                                                                 @csrf
                                                                 <button type="submit"
-                                                                    class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+                                                                    class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition-colors shadow-lg transform hover:scale-105"
                                                                     onclick="return confirm('هل أنت متأكد من رفض هذا العرض؟')">
                                                                     <i class="fas fa-times ml-2"></i>
                                                                     رفض العرض
@@ -1340,32 +602,37 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+                                    <div
+                                        class="bg-white rounded-2xl shadow-xl border border-gray-100/50 p-8 text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                                         <i class="fas fa-inbox text-4xl text-gray-300 mb-4"></i>
                                         <h3 class="text-lg font-medium text-gray-700 mb-2">لا توجد عروض</h3>
                                         <p class="text-gray-500">لم يتم تقديم أي عروض لهذه المناقصة بعد</p>
                                     </div>
                                 @endif
                             @elseif(auth()->user()->isConsultant())
-                                <!-- Consultant View -->
-                                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                                <div
+                                    class="bg-white rounded-2xl shadow-xl border border-gray-100/50 p-6 mb-6 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                                     <div class="flex items-center mb-6">
-                                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center ml-3">
-                                            <i class="fas fa-file-contract text-blue-600"></i>
+                                        <div
+                                            class="w-10 h-10 bg-[#f3a446]/10 rounded-lg flex items-center justify-center ml-3">
+                                            <i class="fas fa-file-contract text-[#f3a446]"></i>
                                         </div>
                                         <h2 class="text-xl font-bold text-gray-800">عرضك</h2>
                                     </div>
 
                                     @if ($userProposal)
-                                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-                                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                        <div
+                                            class="bg-[#2f5c69]/5 border border-[#2f5c69]/20 rounded-lg p-6 mb-6 shadow-inner">
+                                            <div
+                                                class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                                                 <div>
                                                     <h3 class="text-lg font-semibold text-gray-800">عرضك المقدم</h3>
                                                     <p class="text-sm text-gray-600">تم التقديم في
                                                         {{ $userProposal->created_at->format('Y-m-d H:i') }}</p>
                                                 </div>
 
-                                                <div class="flex items-center space-x-4 space-x-reverse mt-3 md:mt-0">
+                                                <div
+                                                    class="flex items-center space-x-4 space-x-reverse mt-3 md:mt-0">
                                                     <span
                                                         class="text-xl font-bold text-green-600">{{ $userProposal->formatted_price }}</span>
 
@@ -1393,14 +660,14 @@
 
                                             <div class="flex flex-wrap gap-3">
                                                 <a href="{{ route('proposals.show', $userProposal->id) }}"
-                                                    class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                                                    class="inline-flex items-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-4 py-2 rounded-lg text-sm transition-colors shadow-lg transform hover:scale-105">
                                                     <i class="fas fa-eye ml-2"></i>
                                                     عرض التفاصيل
                                                 </a>
 
                                                 @if ($tender->status === 'open')
                                                     <a href="{{ route('proposals.edit', $userProposal->id) }}"
-                                                        class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                                                        class="inline-flex items-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-4 py-2 rounded-lg text-sm font-bold transition-colors shadow-lg transform hover:scale-105">
                                                         <i class="fas fa-edit ml-2"></i>
                                                         تعديل العرض
                                                     </a>
@@ -1408,15 +675,18 @@
                                             </div>
                                         </div>
                                     @else
-                                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+                                        <div
+                                            class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
                                             <i class="fas fa-exclamation-triangle text-yellow-500 text-2xl mb-3"></i>
-                                            <h3 class="text-lg font-semibold text-gray-800 mb-2">لم تقدم عرضاً بعد</h3>
-                                            <p class="text-gray-600 mb-4">يمكنك تقديم عرض لهذه المناقصة قبل انتهاء الموعد
+                                            <h3 class="text-lg font-semibold text-gray-800 mb-2">لم تقدم عرضاً بعد
+                                            </h3>
+                                            <p class="text-gray-600 mb-4">يمكنك تقديم عرض لهذه المناقصة قبل انتهاء
+                                                الموعد
                                                 النهائي</p>
 
                                             @if ($tender->status === 'open')
                                                 <a href="{{ route('proposals.create', $tender->id) }}"
-                                                    class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-lg font-medium transition-colors">
+                                                    class="inline-flex items-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-5 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
                                                     <i class="fas fa-paper-plane ml-2"></i>
                                                     قدم عرض الآن
                                                 </a>
@@ -1426,12 +696,13 @@
                                 </div>
                             @endif
                         @else
-                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+                            <div
+                                class="bg-white rounded-2xl shadow-xl border border-gray-100/50 p-8 text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                                 <i class="fas fa-lock text-4xl text-gray-300 mb-4"></i>
                                 <h3 class="text-lg font-medium text-gray-700 mb-2">يجب تسجيل الدخول</h3>
                                 <p class="text-gray-500 mb-4">يجب تسجيل الدخول لعرض العروض المقدمة</p>
                                 <a href="{{ route('login') }}"
-                                    class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition-colors">
+                                    class="inline-flex items-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-5 py-2 rounded-lg font-bold transition-colors shadow-lg transform hover:scale-105">
                                     <i class="fas fa-sign-in-alt ml-2"></i>
                                     تسجيل الدخول
                                 </a>
@@ -1441,76 +712,79 @@
                 </div>
             </div>
 
-            <!-- Right Column - Enhanced Sidebar -->
             <div class="lg:w-1/3">
-                <div class="sticky-sidebar space-y-8">
-                    <!-- Enhanced Tender Details Card -->
-                    <div class="sidebar-card hover-lift">
+                <div class="lg:sticky top-28 space-y-8">
+                    <div
+                        class="sidebar-card bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                         <div class="flex items-center mb-6">
                             <div
-                                class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center ml-4">
-                                <i class="fas fa-info-circle text-white text-xl"></i>
+                                class="w-12 h-12 bg-[#2f5c69]/10 rounded-xl flex items-center justify-center ml-4">
+                                <i class="fas fa-info-circle text-[#2f5c69] text-xl"></i>
                             </div>
                             <h2 class="text-2xl font-bold text-gray-800">تفاصيل المناقصة</h2>
                         </div>
 
                         <div class="space-y-4">
-                            <!-- Deadline -->
-                            <div class="info-item bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
-                                <div class="info-item-icon bg-blue-500 text-white">
+                            <div
+                                class="info-item bg-gray-50/50 border-gray-200/60 rounded-xl p-4 flex items-center">
+                                <div
+                                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#2f5c69] text-white ml-3">
                                     <i class="fas fa-calendar-alt"></i>
                                 </div>
                                 <div class="flex-1">
                                     <p class="text-sm text-gray-600 font-medium">آخر موعد للتقديم</p>
-                                    <p class="text-lg font-bold text-blue-600">{{ $tender->formatted_deadline }}</p>
+                                    <p class="text-lg font-bold text-[#2f5c69]">{{ $tender->formatted_deadline }}</p>
                                 </div>
                             </div>
 
-                            <!-- Budget -->
                             @if ($tender->budget)
                                 <div
-                                    class="info-item bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100">
-                                    <div class="info-item-icon bg-green-500 text-white">
+                                    class="info-item bg-green-50 border-green-100 rounded-xl p-4 flex items-center">
+                                    <div
+                                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-green-500 text-white ml-3">
                                         <i class="fas fa-money-bill-wave"></i>
                                     </div>
                                     <div class="flex-1">
                                         <p class="text-sm text-gray-600 font-medium">الميزانية المتوقعة</p>
-                                        <p class="text-lg font-bold text-green-600">{{ $tender->formatted_budget }}</p>
+                                        <p class="text-lg font-bold text-green-600">{{ $tender->formatted_budget }}
+                                        </p>
                                     </div>
                                 </div>
                             @endif
 
-                            <!-- Proposals Count -->
-                            <div class="info-item bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-100">
-                                <div class="info-item-icon bg-purple-500 text-white">
+                            <div
+                                class="info-item bg-[#f3a446]/5 border-[#f3a446]/20 rounded-xl p-4 flex items-center">
+                                <div
+                                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#f3a446] text-white ml-3">
                                     <i class="fas fa-file-alt"></i>
                                 </div>
                                 <div class="flex-1">
                                     <p class="text-sm text-gray-600 font-medium">عدد العروض المقدمة</p>
-                                    <p class="text-lg font-bold text-purple-600">{{ $tender->proposals_count }} عرض</p>
+                                    <p class="text-lg font-bold text-[#f3a446]">{{ $tender->proposals_count }} عرض
+                                    </p>
                                 </div>
                             </div>
 
-                            <!-- Days Remaining -->
                             @if ($tender->days_remaining !== null)
-                                <div class="info-item bg-gradient-to-r from-orange-50 to-red-50 border border-orange-100">
-                                    <div class="info-item-icon bg-orange-500 text-white">
+                                <div class="info-item bg-red-50 border-red-100 rounded-xl p-4 flex items-center">
+                                    <div
+                                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-red-500 text-white ml-3">
                                         <i class="fas fa-clock"></i>
                                     </div>
                                     <div class="flex-1">
                                         <p class="text-sm text-gray-600 font-medium">الأيام المتبقية</p>
-                                        <p class="text-lg font-bold text-orange-600">{{ $tender->days_remaining }} يوم</p>
+                                        <p class="text-lg font-bold text-red-600">{{ $tender->days_remaining }} يوم
+                                        </p>
                                     </div>
                                 </div>
 
-                                <!-- Enhanced Progress Bar -->
-                                <div class="mt-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
+                                <div class="mt-4 p-4 bg-gray-50/50 rounded-xl border border-gray-200/60">
                                     <div class="flex justify-between text-sm text-gray-600 mb-3">
                                         <span class="font-medium">وقت متبقي</span>
                                         <span class="font-bold">{{ $tender->days_remaining }} يوم</span>
                                     </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill bg-gradient-to-r from-orange-500 to-red-500"
+                                    <div class="progress-bar bg-gray-200 rounded-full h-2.5">
+                                        <div class="progress-fill bg-gradient-to-r from-orange-500 to-red-500 h-2.5 rounded-full"
                                             style="width: {{ min(100, max(5, 100 - ($tender->days_remaining / 30) * 100)) }}%">
                                         </div>
                                     </div>
@@ -1518,45 +792,49 @@
                                 </div>
                             @endif
 
-                            <!-- Created Date -->
-                            <div class="info-item bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-100">
-                                <div class="info-item-icon bg-indigo-500 text-white">
+                            <div
+                                class="info-item bg-gray-50/50 border-gray-200/60 rounded-xl p-4 flex items-center">
+                                <div
+                                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-gray-500 text-white ml-3">
                                     <i class="fas fa-calendar-plus"></i>
                                 </div>
                                 <div class="flex-1">
                                     <p class="text-sm text-gray-600 font-medium">تاريخ إنشاء المناقصة</p>
-                                    <p class="text-lg font-bold text-indigo-600">
+                                    <p class="text-lg font-bold text-gray-600">
                                         {{ $tender->created_at->format('Y-m-d') }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Enhanced Client Info Card -->
-                    <div class="sidebar-card hover-lift">
+                    <div
+                        class="sidebar-card bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                         <div class="flex items-center mb-6">
                             <div
-                                class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center ml-4">
-                                <i class="fas fa-user text-white text-xl"></i>
+                                class="w-12 h-12 bg-[#2f5c69]/10 rounded-xl flex items-center justify-center ml-4">
+                                <i class="fas fa-user text-[#2f5c69] text-xl"></i>
                             </div>
                             <h2 class="text-2xl font-bold text-gray-800">معلومات العميل</h2>
                         </div>
 
                         <div class="space-y-4">
-                            <div class="info-item bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100">
-                                <div class="info-item-icon bg-indigo-500 text-white">
+                            <div
+                                class="info-item bg-gray-50/50 border-gray-200/60 rounded-xl p-4 flex items-center">
+                                <div
+                                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#2f5c69] text-white ml-3">
                                     <i class="fas fa-user"></i>
                                 </div>
                                 <div class="flex-1">
                                     <p class="text-sm text-gray-600 font-medium">اسم العميل</p>
-                                    <p class="text-lg font-bold text-indigo-600">{{ $tender->client->name }}</p>
+                                    <p class="text-lg font-bold text-[#2f5c69]">{{ $tender->client->name }}</p>
                                 </div>
                             </div>
 
                             @if ($tender->client->phone)
                                 <div
-                                    class="info-item bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100">
-                                    <div class="info-item-icon bg-green-500 text-white">
+                                    class="info-item bg-green-50 border-green-100 rounded-xl p-4 flex items-center">
+                                    <div
+                                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-green-500 text-white ml-3">
                                         <i class="fas fa-phone"></i>
                                     </div>
                                     <div class="flex-1">
@@ -1567,8 +845,10 @@
                             @endif
 
                             @if ($tender->client->city)
-                                <div class="info-item bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100">
-                                    <div class="info-item-icon bg-blue-500 text-white">
+                                <div
+                                    class="info-item bg-blue-50 border-blue-100 rounded-xl p-4 flex items-center">
+                                    <div
+                                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-blue-500 text-white ml-3">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div class="flex-1">
@@ -1580,12 +860,12 @@
                         </div>
                     </div>
 
-                    <!-- Enhanced Actions Card -->
-                    <div class="sidebar-card hover-lift">
+                    <div
+                        class="sidebar-card bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                         <div class="flex items-center mb-6">
                             <div
-                                class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center ml-4">
-                                <i class="fas fa-bolt text-white text-xl"></i>
+                                class="w-12 h-12 bg-[#f3a446]/10 rounded-xl flex items-center justify-center ml-4">
+                                <i class="fas fa-bolt text-[#f3a446] text-xl"></i>
                             </div>
                             <h2 class="text-2xl font-bold text-gray-800">الإجراءات السريعة</h2>
                         </div>
@@ -1595,18 +875,18 @@
                                 @if (auth()->user()->isConsultant() && $tender->status === 'open')
                                     @if ($userProposal)
                                         <a href="{{ route('proposals.edit', $userProposal->id) }}"
-                                            class="w-full flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                                            class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
                                             <i class="fas fa-edit ml-3 text-lg"></i>
                                             تعديل العرض
                                         </a>
                                         <a href="{{ route('proposals.show', $userProposal->id) }}"
-                                            class="w-full flex items-center justify-center bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                                            class="w-full flex items-center justify-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
                                             <i class="fas fa-eye ml-3 text-lg"></i>
                                             عرض تفاصيل عرضي
                                         </a>
                                     @else
                                         <a href="{{ route('proposals.create', $tender->id) }}"
-                                            class="w-full flex items-center justify-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                                            class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
                                             <i class="fas fa-paper-plane ml-3 text-lg"></i>
                                             قدم عرض الآن
                                         </a>
@@ -1615,14 +895,14 @@
 
                                 @if (auth()->user()->isClient() && auth()->id() == $tender->client_id)
                                     <a href="{{ route('tenders.edit', $tender->id) }}"
-                                        class="w-full flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                                        class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
                                         <i class="fas fa-edit ml-3 text-lg"></i>
                                         تعديل المناقصة
                                     </a>
 
                                     @if ($tender->proposals->count() > 0)
                                         <a href="{{ route('tenders.compare-proposals', $tender->id) }}"
-                                            class="w-full flex items-center justify-center bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                                            class="w-full flex items-center justify-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
                                             <i class="fas fa-chart-bar ml-3 text-lg"></i>
                                             مقارنة العروض
                                         </a>
@@ -1633,7 +913,7 @@
                                             class="w-full">
                                             @csrf
                                             <button type="submit"
-                                                class="w-full flex items-center justify-center bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
+                                                class="w-full flex items-center justify-center bg-red-600 hover:bg-red-700 text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg"
                                                 onclick="return confirm('هل أنت متأكد من إغلاق المناقصة؟')">
                                                 <i class="fas fa-lock ml-3 text-lg"></i>
                                                 إغلاق المناقصة
@@ -1643,15 +923,14 @@
                                 @endif
                             @else
                                 <a href="{{ route('login') }}"
-                                    class="w-full flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                                    class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
                                     <i class="fas fa-sign-in-alt ml-3 text-lg"></i>
                                     سجل دخول للمشاركة
                                 </a>
                             @endauth
 
-                            <!-- Enhanced Share Button -->
                             <button onclick="shareTender()"
-                                class="w-full flex items-center justify-center bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
+                                class="w-full flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
                                 <i class="fas fa-share-alt ml-3 text-lg"></i>
                                 مشاركة المناقصة
                             </button>
@@ -1660,47 +939,130 @@
                 </div>
             </div>
         </div>
-    </main>
-
-    <!-- Image Modal -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
-        <div class="relative max-w-4xl max-h-full">
-            <button onclick="closeImageModal()"
-                class="absolute top-4 left-4 text-white text-2xl hover:text-gray-300 z-10">
-                <i class="fas fa-times"></i>
-            </button>
-            <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg">
-        </div>
     </div>
+</main>
 
-    <!-- Gallery Modal -->
-    <div id="galleryModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
-        <div class="relative max-w-6xl max-h-full w-full">
-            <button onclick="closeGalleryModal()"
-                class="absolute top-4 left-4 text-white text-2xl hover:text-gray-300 z-10">
-                <i class="fas fa-times"></i>
-            </button>
+<style>
+    @keyframes zoomIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
 
-            <div class="flex flex-col h-full">
-                <div class="flex-1 flex items-center justify-center mb-4">
-                    <img id="galleryMainImage" src="" alt=""
-                        class="max-w-full max-h-96 object-contain rounded-lg">
-                </div>
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
 
-                <div class="h-24 overflow-x-auto">
-                    <div class="flex space-x-2 space-x-reverse">
-                        @if ($tender->design->images)
-                            @foreach ($tender->design->images as $index => $image)
-                                <img src="{{ $image }}" alt="صورة {{ $index + 1 }}"
-                                    class="h-20 w-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
-                                    onclick="changeGalleryImage('{{ $image }}')">
-                            @endforeach
-                        @endif
-                    </div>
+    .animate-zoom-in {
+        animation: zoomIn 0.2s ease-out forwards;
+    }
+
+    .gallery-thumbnail.active {
+        border-color: #f3a446;
+        opacity: 1;
+        transform: scale(1.05);
+    }
+</style>
+
+<div id="imageModal"
+    class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-opacity duration-300"
+    onclick="closeImageModal()">
+    <div class="relative max-w-4xl max-h-[90vh] animate-zoom-in" onclick="event.stopPropagation()">
+        <button onclick="closeImageModal()"
+            class="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-gradient-to-br from-[#f3a446] to-[#d18a3a] text-[#1a262a] text-lg z-10 flex items-center justify-center shadow-lg transform hover:scale-110 transition-all duration-300">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="modalImage" src="" alt="عرض مكبر للصورة"
+            class="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl">
+    </div>
+</div>
+
+<div id="galleryModal"
+    class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-opacity duration-300"
+    onclick="closeGalleryModal()">
+    <div class="relative max-w-6xl max-h-[90vh] w-full bg-gradient-to-br from-[#2f5c69] to-[#1a262a] rounded-2xl shadow-2xl p-6 border border-[#f3a446]/20 animate-zoom-in"
+        onclick="event.stopPropagation()">
+
+        <button onclick="closeGalleryModal()"
+            class="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-[#f3a446] to-[#d18a3a] text-[#1a262a] text-xl z-10 flex items-center justify-center shadow-lg transform hover:scale-110 transition-all duration-300">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="flex flex-col h-full">
+            <div class="flex-1 flex items-center justify-center mb-4 bg-black/30 rounded-lg" style="min-height: 60vh;">
+                <img id="galleryMainImage" src="" alt="صورة المعرض الرئيسية"
+                    class="max-w-full max-h-[60vh] object-contain rounded-lg transition-all duration-300">
+            </div>
+
+            <div class="h-24 overflow-x-auto overflow-y-hidden">
+                <div id="galleryThumbnailContainer" class="flex space-x-2 space-x-reverse h-full py-2">
+                    @if ($tender->design->images)
+                        @foreach ($tender->design->images as $index => $image)
+                            <img src="{{ $image }}" alt="صورة مصغرة {{ $index + 1 }}"
+                                class="gallery-thumbnail h-20 w-20 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-[#f3a446]/50 opacity-70 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+                                onclick="changeGalleryImage(this, '{{ $image }}')">
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const galleryModal = document.getElementById('galleryModal');
+    const galleryMainImage = document.getElementById('galleryMainImage');
+
+    function openImageModal(imageUrl) {
+        modalImage.src = imageUrl;
+        imageModal.classList.remove('hidden');
+        imageModal.classList.add('flex');
+    }
+
+    function closeImageModal() {
+        imageModal.classList.add('hidden');
+        imageModal.classList.remove('flex');
+    }
+
+    function openGalleryModal() {
+        galleryModal.classList.remove('hidden');
+        galleryModal.classList.add('flex');
+
+        const firstThumbnail = document.querySelector('.gallery-thumbnail');
+        if (firstThumbnail) {
+            const firstImageUrl = firstThumbnail.getAttribute('src');
+            changeGalleryImage(firstThumbnail, firstImageUrl);
+        }
+    }
+
+    function closeGalleryModal() {
+        galleryModal.classList.add('hidden');
+        galleryModal.classList.remove('flex');
+    }
+
+    function changeGalleryImage(selectedThumbnail, imageUrl) {
+        galleryMainImage.src = imageUrl;
+
+        document.querySelectorAll('.gallery-thumbnail').forEach(thumb => {
+            thumb.classList.remove('active', 'border-[#f3a446]', 'opacity-100', 'scale-105');
+            thumb.classList.add('border-transparent', 'opacity-70');
+        });
+
+        selectedThumbnail.classList.add('active', 'border-[#f3a446]', 'opacity-100', 'scale-105');
+        selectedThumbnail.classList.remove('border-transparent', 'opacity-70');
+    }
+
+    window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeImageModal();
+            closeGalleryModal();
+        }
+    });
+</script>
 
     <script>
         // Tab functionality

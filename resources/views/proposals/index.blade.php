@@ -98,7 +98,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="space-y-3">
-                            <label class="block text-sm font-bold text-gray-800 flex items-center">
+                            <label class=" text-sm font-bold text-gray-800 flex items-center">
                                 <i class="fas fa-search text-green-600 ml-2"></i>
                                 البحث في العروض
                             </label>
@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="space-y-3">
-                            <label class="block text-sm font-bold text-gray-800 flex items-center">
+                            <label class=" text-sm font-bold text-gray-800 flex items-center">
                                 <i class="fas fa-flag text-teal-600 ml-2"></i>
                                 حالة العرض
                             </label>
