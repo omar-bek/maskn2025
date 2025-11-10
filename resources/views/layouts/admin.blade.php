@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+@php
+    $currentLocale = app()->getLocale();
+    $isRtl = $currentLocale === 'ar';
+@endphp
+<html lang="{{ str_replace('_', '-', $currentLocale) }}" dir="{{ $isRtl ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="UTF-8">

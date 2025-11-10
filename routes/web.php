@@ -36,6 +36,16 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+Route::get('/language/{locale}', function (string $locale) {
+    if (! in_array($locale, ['ar', 'en'], true)) {
+        abort(404);
+    }
+
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+})->name('language.switch');
+
 // Authentication Routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
