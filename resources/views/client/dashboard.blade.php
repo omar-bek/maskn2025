@@ -1,241 +1,335 @@
 @extends('layouts.app')
 
-@section('title', 'لوحة تحكم العميل - insha\'at')
+@section('title', __('app.client_dashboard.title'))
 
 @section('content')
-    @if (!Auth::user()->isClient())
-        <div class="min-h-screen bg-gray-50 flex items-center justify-center">
-            <div class="text-center">
-                <i class="fas fa-lock text-6xl text-red-500 mb-4"></i>
-                <h1 class="text-2xl font-bold text-gray-900 mb-2">غير مسموح</h1>
-                <p class="text-gray-600 mb-4">هذه الصفحة متاحة للعملاء فقط</p>
-                <a href="{{ Auth::user()->getDashboardRoute() }}" class="btn-primary">
-                    العودة للداشبورد
-                </a>
+  @if (!Auth::user()->isClient())
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div class="text-center max-w-md bg-white p-10 rounded-xl shadow-xl">
+        <i class="fas fa-lock text-6xl text-red-500 mb-6"></i>
+        <h1 class="text-3xl font-bold text-gray-900 mb-3">
+          {{ __('app.client_dashboard.access_denied.title') }}
+        </h1>
+        <p class="text-gray-600 mb-8 text-lg">
+          {{ __('app.client_dashboard.access_denied.message') }}
+        </p>
+        <a href="{{ Auth::user()->getDashboardRoute() }}" class="btn-primary">
+          <i class="fas fa-tachometer-alt ml-2"></i>
+          {{ __('app.client_dashboard.access_denied.button') }}
+        </a>
+      </div>
+    </div>
+  @else
+    <div class="min-h-screen bg-gray-50 page-fade-in">
+      <div
+        class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white shadow-lg pb-20"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6">
+          <div class="flex justify-between items-center pt-20">
+            <div>
+              <h1 class="text-3xl font-bold text-white">
+                {{ __('app.client_dashboard.header.welcome') }}
+                {{ Auth::user()->name }}
+              </h1>
+              <p class="text-gray-300 mt-2 text-lg">
+                {{ __('app.client_dashboard.header.subtitle') }}
+              </p>
             </div>
+            <div class="flex space-x-3 space-x-reverse">
+              <a href="{{ route('tenders.create') }}" class="btn-primary">
+                <i class="fas fa-plus ml-2"></i>
+                {{ __('app.client_dashboard.header.create_tender') }}
+              </a>
+              <a href="{{ route('tenders.index') }}" class="btn-secondary-light">
+                <i class="fas fa-list ml-2"></i>
+                {{ __('app.client_dashboard.header.all_tenders') }}
+              </a>
+            </div>
+          </div>
         </div>
-    @else
-        <div class="min-h-screen bg-gray-50">
-            <!-- Header -->
-            <div class="bg-white shadow">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between items-center py-6">
-                        <div>
-                            <h1 class="text-2xl font-bold text-gray-900">مرحباً، {{ Auth::user()->name }}</h1>
-                            <p class="text-gray-600">إدارة مناقصاتك والعروض المقدمة</p>
-                        </div>
-                        <div class="flex space-x-3 space-x-reverse">
-                            <a href="{{ route('tenders.create') }}" class="btn-primary">
-                                <i class="fas fa-gavel ml-2"></i>
-                                إنشاء مناقصة جديدة
-                            </a>
-                            <a href="{{ route('tenders.index') }}" class="btn-secondary">
-                                <i class="fas fa-list ml-2"></i>
-                                جميع المناقصات
-                            </a>
-                        </div>
-                    </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+          >
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-[#f3a446]/20 rounded-lg flex items-center justify-center border border-[#f3a446]/30"
+                >
+                  <i class="fas fa-gavel text-[#f3a446] text-xl"></i>
                 </div>
+              </div>
+              <div class="mr-4">
+                <p class="text-sm font-medium text-gray-600">
+                  {{ __('app.client_dashboard.stats.tenders_created') }}
+                </p>
+                <p class="text-3xl font-bold text-gray-900">
+                  {{ $stats['tenders_created'] ?? 0 }}
+                </p>
+              </div>
             </div>
+          </div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <!-- Statistics Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow duration-300">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <div
-                                    class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-gavel text-white text-lg"></i>
-                                </div>
-                            </div>
-                            <div class="mr-4">
-                                <p class="text-sm font-medium text-gray-600">المناقصات المنشأة</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ $stats['tenders_created'] ?? 0 }}</p>
-                                <p class="text-xs text-gray-500 mt-1">إجمالي المناقصات</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow duration-300">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <div
-                                    class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-file-alt text-white text-lg"></i>
-                                </div>
-                            </div>
-                            <div class="mr-4">
-                                <p class="text-sm font-medium text-gray-600">العروض المستلمة</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ $stats['proposals_received'] ?? 0 }}</p>
-                                <p class="text-xs text-gray-500 mt-1">عروض من الاستشاريين</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow duration-300">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <div
-                                    class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-check-circle text-white text-lg"></i>
-                                </div>
-                            </div>
-                            <div class="mr-4">
-                                <p class="text-sm font-medium text-gray-600">العروض المقبولة</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ $stats['accepted_proposals'] ?? 0 }}</p>
-                                <p class="text-xs text-gray-500 mt-1">عروض تم قبولها</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow duration-300">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <div
-                                    class="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-clock text-white text-lg"></i>
-                                </div>
-                            </div>
-                            <div class="mr-4">
-                                <p class="text-sm font-medium text-gray-600">المناقصات النشطة</p>
-                                <p class="text-2xl font-bold text-gray-900">{{ $stats['active_tenders'] ?? 0 }}</p>
-                                <p class="text-xs text-gray-500 mt-1">مناقصات مفتوحة</p>
-                            </div>
-                        </div>
-                    </div>
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+          >
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-[#f3a446]/20 rounded-lg flex items-center justify-center border border-[#f3a446]/30"
+                >
+                  <i class="fas fa-file-alt text-[#f3a446] text-xl"></i>
                 </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Recent Activities -->
-                    <div class="lg:col-span-2">
-                        <div class="bg-white rounded-lg shadow">
-                            <div class="px-6 py-4 border-b border-gray-200">
-                                <h3 class="text-lg font-medium text-gray-900">النشاطات الأخيرة</h3>
-                            </div>
-                            <div class="p-6">
-                                @if (count($recentActivities) > 0)
-                                    <div class="space-y-4">
-                                        @foreach ($recentActivities as $activity)
-                                            <div class="flex items-start space-x-3 space-x-reverse">
-                                                <div class="flex-shrink-0">
-                                                    <div
-                                                        class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                                                        <i class="fas fa-info text-gray-600"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-sm text-gray-900">{{ $activity['description'] }}</p>
-                                                    <p class="text-sm text-gray-500">{{ $activity['time'] }}</p>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <div class="text-center py-8">
-                                        <i class="fas fa-inbox text-4xl text-gray-300 mb-4"></i>
-                                        <p class="text-gray-500">لا توجد نشاطات حديثة</p>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="lg:col-span-1">
-                        <div class="bg-white rounded-lg shadow">
-                            <div class="px-6 py-4 border-b border-gray-200">
-                                <h3 class="text-lg font-medium text-gray-900">إجراءات سريعة</h3>
-                            </div>
-                            <div class="p-6">
-                                <div class="space-y-3">
-                                    <a href="{{ route('tenders.create') }}"
-                                        class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-plus text-teal-600 ml-3"></i>
-                                        <span class="text-sm font-medium text-gray-900">إنشاء مناقصة جديدة</span>
-                                    </a>
-
-                                    <a href="{{ route('client.my-tenders') }}"
-                                        class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-list text-blue-600 ml-3"></i>
-                                        <span class="text-sm font-medium text-gray-900">مناقصاتي</span>
-                                    </a>
-
-                                    <a href="{{ route('client.saved-designs') }}"
-                                        class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-bookmark text-purple-600 ml-3"></i>
-                                        <span class="text-sm font-medium text-gray-900">التصميمات المحفوظة</span>
-                                    </a>
-
-                                    <a href="{{ route('client.favorite-consultants') }}"
-                                        class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-heart text-red-600 ml-3"></i>
-                                        <span class="text-sm font-medium text-gray-900">الاستشاريين المفضلين</span>
-                                    </a>
-
-                                    <a href="{{ route('designs.index') }}"
-                                        class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-home text-green-600 ml-3"></i>
-                                        <span class="text-sm font-medium text-gray-900">تصفح التصاميم</span>
-                                    </a>
-
-                                    <a href="{{ route('client.profile') }}"
-                                        class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                                        <i class="fas fa-user text-gray-600 ml-3"></i>
-                                        <span class="text-sm font-medium text-gray-900">تعديل الملف الشخصي</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recommended Consultants -->
-                        <div class="bg-white rounded-lg shadow mt-6">
-                            <div class="px-6 py-4 border-b border-gray-200">
-                                <h3 class="text-lg font-medium text-gray-900">استشاريون موصى بهم</h3>
-                            </div>
-                            <div class="p-6">
-                                @if (count($recommendedConsultants) > 0)
-                                    <div class="space-y-4">
-                                        @foreach ($recommendedConsultants as $consultant)
-                                            <div class="flex items-center space-x-3 space-x-reverse">
-                                                <div class="flex-shrink-0">
-                                                    <div
-                                                        class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                                                        <i class="fas fa-user text-gray-600"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-sm font-medium text-gray-900">{{ $consultant['name'] }}
-                                                    </p>
-                                                    <p class="text-sm text-gray-500">{{ $consultant['specialization'] }}
-                                                    </p>
-                                                </div>
-                                                <button class="text-teal-600 hover:text-teal-700">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <div class="text-center py-4">
-                                        <p class="text-gray-500 text-sm">لا توجد توصيات حالياً</p>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <div class="mr-4">
+                <p class="text-sm font-medium text-gray-600">
+                  {{ __('app.client_dashboard.stats.proposals_received') }}
+                </p>
+                <p class="text-3xl font-bold text-gray-900">
+                  {{ $stats['proposals_received'] ?? 0 }}
+                </p>
+              </div>
             </div>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+          >
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-[#f3a446]/20 rounded-lg flex items-center justify-center border border-[#f3a446]/30"
+                >
+                  <i class="fas fa-check-circle text-[#f3a446] text-xl"></i>
+                </div>
+              </div>
+              <div class="mr-4">
+                <p class="text-sm font-medium text-gray-600">
+                  {{ __('app.client_dashboard.stats.accepted_proposals') }}
+                </p>
+                <p class="text-3xl font-bold text-gray-900">
+                  {{ $stats['accepted_proposals'] ?? 0 }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+          >
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-[#f3a446]/20 rounded-lg flex items-center justify-center border border-[#f3a446]/30"
+                >
+                  <i class="fas fa-clock text-[#f3a446] text-xl"></i>
+                </div>
+              </div>
+              <div class="mr-4">
+                <p class="text-sm font-medium text-gray-600">
+                  {{ __('app.client_dashboard.stats.active_tenders') }}
+                </p>
+                <p class="text-3xl font-bold text-gray-900">
+                  {{ $stats['active_tenders'] ?? 0 }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <style>
-            .btn-primary {
-                @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500;
-            }
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200">
+              <div class="px-6 py-5 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">
+                  {{ __('app.client_dashboard.recent_activities.title') }}
+                </h3>
+              </div>
+              <div class="p-6">
+                @if (count($recentActivities) > 0)
+                  <div class="space-y-5">
+                    @foreach ($recentActivities as $activity)
+                      <div class="flex items-start space-x-3 space-x-reverse">
+                        <div class="flex-shrink-0">
+                          <div
+                            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+                          >
+                            <i class="fas fa-info text-gray-500"></i>
+                          </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <p class="text-sm text-gray-800">
+                            {{ $activity['description'] }}
+                          </p>
+                          <p class="text-sm text-gray-500 mt-1">
+                            {{ $activity['time'] }}
+                          </p>
+                        </div>
+                      </div>
+                    @endforeach
+                  </div>
+                @else
+                  <div class="text-center py-10">
+                    <i class="fas fa-inbox text-5xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">
+                      {{ __('app.client_dashboard.recent_activities.empty') }}
+                    </p>
+                  </div>
+                @endif
+              </div>
+            </div>
+          </div>
 
-            .btn-secondary {
-                @apply inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500;
-            }
-        </style>
-    @endif
+          <div class="lg:col-span-1 space-y-8">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200">
+              <div class="px-6 py-5 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">
+                  {{ __('app.client_dashboard.quick_actions.title') }}
+                </h3>
+              </div>
+              <div class="p-6">
+                <div class="space-y-3">
+                  <a
+                    href="{{ route('tenders.create') }}"
+                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
+                  >
+                    <i class="fas fa-plus text-[#2f5c69] ml-3"></i>
+                    <span class="text-sm font-medium text-gray-800">{{
+                      __('app.client_dashboard.quick_actions.create_tender')
+                    }}</span>
+                  </a>
+                  <a
+                    href="{{ route('client.my-tenders') }}"
+                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
+                  >
+                    <i class="fas fa-list text-[#2f5c69] ml-3"></i>
+                    <span class="text-sm font-medium text-gray-800">{{
+                      __('app.client_dashboard.quick_actions.my_tenders')
+                    }}</span>
+                  </a>
+                  <a
+                    href="{{ route('client.saved-designs') }}"
+                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
+                  >
+                    <i class="fas fa-bookmark text-[#2f5c69] ml-3"></i>
+                    <span class="text-sm font-medium text-gray-800">{{
+                      __('app.client_dashboard.quick_actions.saved_designs')
+                    }}</span>
+                  </a>
+                  <a
+                    href="{{ route('client.favorite-consultants') }}"
+                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
+                  >
+                    <i class="fas fa-heart text-[#2f5c69] ml-3"></i>
+                    <span class="text-sm font-medium text-gray-800">{{
+                      __(
+                        'app.client_dashboard.quick_actions.favorite_consultants'
+                      )
+                    }}</span>
+                  </a>
+                  <a
+                    href="{{ route('designs.index') }}"
+                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
+                  >
+                    <i class="fas fa-home text-[#2f5c69] ml-3"></i>
+                    <span class="text-sm font-medium text-gray-800">{{
+                      __('app.client_dashboard.quick_actions.browse_designs')
+                    }}</span>
+                  </a>
+                  <a
+                    href="{{ route('client.profile') }}"
+                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
+                  >
+                    <i class="fas fa-user text-[#2f5c69] ml-3"></i>
+                    <span class="text-sm font-medium text-gray-800">{{
+                      __('app.client_dashboard.quick_actions.edit_profile')
+                    }}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200">
+              <div class="px-6 py-5 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">
+                  {{ __('app.client_dashboard.recommended.title') }}
+                </h3>
+              </div>
+              <div class="p-6">
+                @if (count($recommendedConsultants) > 0)
+                  <div class="space-y-4">
+                    @foreach ($recommendedConsultants as $consultant)
+                      <div class="flex items-center space-x-3 space-x-reverse">
+                        <div class="flex-shrink-0">
+                          <div
+                            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+                          >
+                            <i class="fas fa-user text-gray-500"></i>
+                          </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <p class="text-sm font-medium text-gray-800">
+                            {{ $consultant['name'] }}
+                          </p>
+                          <p class="text-sm text-gray-500">
+                            {{ $consultant['specialization'] }}
+                          </p>
+                        </div>
+                        <button
+                          class="text-[#2f5c69] hover:text-[#f3a446] transition-colors"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    @endforeach
+                  </div>
+                @else
+                  <div class="text-center py-4">
+                    <p class="text-gray-500 text-sm">
+                      {{ __('app.client_dashboard.recommended.empty') }}
+                    </p>
+                  </div>
+                @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @layer components {
+        .btn-primary {
+          @apply inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-bold rounded-lg text-gray-900 bg-[#f3a446] hover:bg-[#e6983c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[#f3a446] transition-all duration-300 transform hover:scale-105 shadow-lg shadow-[#f3a446]/30;
+        }
+
+        .btn-secondary {
+          @apply inline-flex items-center px-5 py-2.5 border border-gray-300 text-sm font-medium rounded-lg text-[#2f5c69] bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2f5c69]/50 transition-all duration-300;
+        }
+
+        .btn-secondary-light {
+          @apply inline-flex items-center px-5 py-2.5 border border-white/30 text-sm font-medium rounded-lg text-white bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1a262a] focus:ring-white transition-all duration-300;
+        }
+      }
+
+      .page-fade-in {
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  @endif
 @endsection

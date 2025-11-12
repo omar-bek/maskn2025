@@ -10,45 +10,44 @@
 
             <div class="text-right animate-fade-in">
                 <div class="inline-block border border-[#f3a446] px-3 py-1 rounded-md mb-4">
-                    <span class="text-gray-200 font-medium">مرحباً بك!</span>
+                    <span class="text-gray-200 font-medium"> {{ __('app.welcome') }}!</span>
                 </div>
 
                 <h1 class="text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
-                    ابدأ رحلة مشروعك
-                    <span class="text-[#f3a446]">مع انشاءات</span>
+                    {{ __('app.hero_title_line1') }}
+                    <span class="text-[#f3a446]">{{ __('app.hero_title_line2') }}</span>
                 </h1>
 
                 <p class="text-xl text-gray-300 mb-10 leading-relaxed">
-                    منصة متكاملة تجمع بين أفضل الاستشاريين والمقاولين والموردين لتحويل أحلامك المعمارية إلى واقع ملموس.
-                    من التصميم حتى التسليم النهائي.
+                    {{ __('app.hero_description') }}
                 </p>
 
                 <div class="flex flex-col sm:flex-row-reverse gap-4 justify-end">
                     <a href="{{ route('designs.index') }}"
-                       class="bg-transparent text-white border-2 border-white font-bold text-lg py-3 px-8 rounded-lg shadow-sm hover:bg-white hover:text-[#2f5c69] transition-colors flex items-center justify-center gap-2">
+                        class="bg-transparent text-white border-2 border-white font-bold text-lg py-3 px-8 rounded-lg shadow-sm hover:bg-white hover:text-[#2f5c69] transition-colors flex items-center justify-center gap-2">
                         <i class="fas fa-eye"></i>
-                        تصفح التصميمات
+                        {{ __('app.browse_designs') }}
                     </a>
 
                     @auth
                         @if (auth()->user()->isConsultant())
                             <a href="{{ route('designs.create') }}"
-                               class="bg-[#f3a446] text-white font-bold text-lg py-3 px-8 rounded-lg shadow-md hover:bg-[#e6953a] transition-colors flex items-center justify-center gap-2">
+                                class="bg-[#f3a446] text-white font-bold text-lg py-3 px-8 rounded-lg shadow-md hover:bg-[#e6953a] transition-colors flex items-center justify-center gap-2">
                                 <i class="fas fa-plus"></i>
-                                إنشاء تصميم جديد
+                                {{ __('app.create_design') }}
                             </a>
                         @else
                             <a href="{{ route('tenders.create') }}"
-                               class="bg-[#f3a446] text-white font-bold text-lg py-3 px-8 rounded-lg shadow-md hover:bg-[#e6953a] transition-colors flex items-center justify-center gap-2">
+                                class="bg-[#f3a446] text-white font-bold text-lg py-3 px-8 rounded-lg shadow-md hover:bg-[#e6953a] transition-colors flex items-center justify-center gap-2">
                                 <i class="fas fa-file-contract"></i>
-                                إنشاء مناقصة
+                                {{ __('app.create_tender') }}
                             </a>
                         @endif
                     @else
                         <a href="{{ route('register') }}"
-                           class="bg-[#f3a446] text-white font-bold text-lg py-3 px-8 rounded-lg shadow-md hover:bg-[#e6953a] transition-colors flex items-center justify-center gap-2">
+                            class="bg-[#f3a446] text-white font-bold text-lg py-3 px-8 rounded-lg shadow-md hover:bg-[#e6953a] transition-colors flex items-center justify-center gap-2">
                             <i class="fas fa-user-plus"></i>
-                            انضم إلينا الآن
+                            {{ __('app.join_now') }}
                         </a>
                     @endauth
                     
@@ -61,52 +60,52 @@
             <div class="relative animate-slide-in flex items-center justify-center min-h-[400px] lg:min-h-[500px]">
 
                 <img src="{{ asset('images/home3.png') }}"
-                     alt="مباني حديثة"
-                     class="relative z-10 w-[350px] h-[350px] object-cover rounded-full shadow-2xl transition-transform duration-500 hover:rotate-3">
+                        alt="{{ __('app.hero_image_alt') }}"
+                        class="relative z-10 w-[350px] h-[350px] object-cover rounded-full shadow-2xl transition-transform duration-500 hover:rotate-3">
 
                 <div class="absolute w-[420px] h-[420px] border-2 border-[#f3a446]/60 rounded-full animate-pulse">
 
                     <div class="absolute -top-4 right-16 group">
                         <div class="w-14 h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-xl shadow-lg 
-                                     transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-400/50">
+                                    transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-400/50">
                             <i class="fas fa-user-tie"></i>
                         </div>
                         <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                     font-semibold text-xs px-3 py-1 rounded-md bottom-[70px] right-1/2 translate-x-1/2 shadow-md">
-                            استشاريون معتمدون
+                                    font-semibold text-xs px-3 py-1 rounded-md bottom-[70px] right-1/2 translate-x-1/2 shadow-md">
+                            {{ __('app.certified_consultants') }}
                         </span>
                     </div>
 
                     <div class="absolute -bottom-4 left-16 group">
                         <div class="w-14 h-14 bg-[#f1f7ff] border border-gray-200 text-[#2f5c69] rounded-full flex items-center justify-center text-xl shadow-lg 
-                                     transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-300/60">
+                                    transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-300/60">
                             <i class="fas fa-tools"></i>
                         </div>
                         <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                     font-semibold text-xs px-3 py-1 rounded-md top-[70px] left-1/2 -translate-x-1/2 shadow-md">
-                            مقاولون موثوقون
+                                    font-semibold text-xs px-3 py-1 rounded-md top-[70px] left-1/2 -translate-x-1/2 shadow-md">
+                            {{ __('app.trusted_contractors') }}
                         </span>
                     </div>
 
                     <div class="absolute top-1/2 -left-8 transform -translate-y-1/2 group">
                         <div class="w-14 h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-xl shadow-lg 
-                                     transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-400/50">
+                                    transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-400/50">
                             <i class="fas fa-handshake"></i>
                         </div>
                         <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                     font-semibold text-xs px-3 py-1 rounded-md left-[-100px] top-1/2 -translate-y-1/2 shadow-md">
-                            اطلب خدمة
+                                    font-semibold text-xs px-3 py-1 rounded-md left-[-100px] top-1/2 -translate-y-1/2 shadow-md">
+                            {{ __('app.request_service') }}
                         </span>
                     </div>
 
                     <div class="absolute top-1/2 -right-8 transform -translate-y-1/2 group">
                         <div class="w-14 h-14 bg-[#f1f7ff] text-[#2f5c69] rounded-full flex items-center justify-center text-xl shadow-lg 
-                                     transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-300/60">
+                                    transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-300/60">
                             <i class="fas fa-bolt"></i>
                         </div>
                         <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                     font-semibold text-xs px-3 py-1 rounded-md right-[-100px] top-1/2 -translate-y-1/2 shadow-md">
-                            سرعة الأداء
+                                    font-semibold text-xs px-3 py-1 rounded-md right-[-100px] top-1/2 -translate-y-1/2 shadow-md">
+                            {{ __('app.fast_performance') }}
                         </span>
                     </div>
                 </div>
@@ -238,41 +237,49 @@
 </style>
 
 <div class="relative" id="stats-section">
-    <div class="top-slant-strip"></div>
+  <div class="top-slant-strip"></div>
 
-    <div class="bg-[#f1f7ff] slanted-bar relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-4 py-4">
-                
-                <div class="text-center">
-                    <div class="text-3xl font-extrabold stat-number mb-0.5">
-                        {{ number_format($stats['total_consultants']) }}+
-                    </div>
-                    <div class="text-xs stat-label uppercase tracking-wider">استشاري معتمد</div>
-                </div>
-                
-                <div class="text-center">
-                    <div class="text-3xl font-extrabold stat-number mb-0.5">
-                        {{ number_format($stats['total_projects']) }}+
-                    </div>
-                    <div class="text-xs stat-label uppercase tracking-wider">مشروع مكتمل</div>
-                </div>
-                
-                <div class="text-center">
-                    <div class="text-3xl font-extrabold stat-number mb-0.5">
-                        {{ number_format($stats['total_designs']) }}+
-                    </div>
-                    <div class="text-xs stat-label uppercase tracking-wider">تصميم متاح</div>
-                </div>
-                
-                <div class="text-center">
-                    <div class="text-3xl font-extrabold stat-number mb-0.5">24/7</div>
-                    <div class="text-xs stat-label uppercase tracking-wider">دعم فني</div>
-                </div>
-
-            </div>
+  <div class="bg-[#f1f7ff] slanted-bar relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-4 py-4">
+        <div class="text-center">
+          <div class="text-3xl font-extrabold stat-number mb-0.5">
+            {{ number_format($stats['total_consultants']) }}+
+          </div>
+          <div class="text-xs stat-label uppercase tracking-wider">
+            {{ __('app.stats_section.consultants') }}
+          </div>
         </div>
+
+        <div class="text-center">
+          <div class="text-3xl font-extrabold stat-number mb-0.5">
+            {{ number_format($stats['total_projects']) }}+
+          </div>
+          <div class="text-xs stat-label uppercase tracking-wider">
+            {{ __('app.stats_section.projects') }}
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="text-3xl font-extrabold stat-number mb-0.5">
+            {{ number_format($stats['total_designs']) }}+
+          </div>
+          <div class="text-xs stat-label uppercase tracking-wider">
+            {{ __('app.stats_section.designs') }}
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="text-3xl font-extrabold stat-number mb-0.5">
+            {{ __('app.stats_section.support_stat') }}
+          </div>
+          <div class="text-xs stat-label uppercase tracking-wider">
+            {{ __('app.stats_section.support_label') }}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 
@@ -281,11 +288,11 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold text-[#2f5c69] mb-4 tracking-tight">
-        لماذا تختار منصة <span class="text-[#f3a446]">انشاءات</span>؟
+        {{ __('app.why_choose_us.title') }}
+        <span class="text-[#f3a446]">{{ __('app.why_choose_us.platform_name') }}</span>؟
       </h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        نقدم حلول متكاملة تجمع بين التكنولوجيا الحديثة والخبرة العملية لضمان
-        نجاح مشروعك
+        {{ __('app.why_choose_us.subtitle') }}
       </p>
     </div>
 
@@ -301,11 +308,10 @@
         <h3
           class="text-2xl font-bold text-gray-900 mb-4 transition-colors duration-300 group-hover:text-[#2f5c69]"
         >
-          شبكة واسعة من الخبراء
+          {{ __('app.why_choose_us.features.card_1.title') }}
         </h3>
         <p class="text-gray-600 leading-relaxed">
-          أكثر من 500 استشاري ومقاول معتمد في جميع أنحاء المنطقة، مع ضمان
-          الجودة والاحترافية
+          {{ __('app.why_choose_us.features.card_1.description') }}
         </p>
       </div>
 
@@ -321,11 +327,10 @@
         <h3
           class="text-2xl font-bold text-gray-900 mb-4 transition-colors duration-300 group-hover:text-[#2f5c69]"
         >
-          ضمان الجودة
+          {{ __('app.why_choose_us.features.card_2.title') }}
         </h3>
         <p class="text-gray-600 leading-relaxed">
-          جميع المشاريع تخضع لمراجعة دقيقة وضمان الجودة مع متابعة مستمرة حتى
-          التسليم
+          {{ __('app.why_choose_us.features.card_2.description') }}
         </p>
       </div>
 
@@ -341,11 +346,10 @@
         <h3
           class="text-2xl font-bold text-gray-900 mb-4 transition-colors duration-300 group-hover:text-[#2f5c69]"
         >
-          منصة متكاملة
+          {{ __('app.why_choose_us.features.card_3.title') }}
         </h3>
         <p class="text-gray-600 leading-relaxed">
-          إدارة مشروعك من مكان واحد: التصميم، المناقصات، المتابعة، والدفع
-          الآمن
+          {{ __('app.why_choose_us.features.card_3.description') }}
         </p>
       </div>
 
@@ -361,11 +365,10 @@
         <h3
           class="text-2xl font-bold text-gray-900 mb-4 transition-colors duration-300 group-hover:text-[#2f5c69]"
         >
-          تسليم في الوقت المحدد
+          {{ __('app.why_choose_us.features.card_4.title') }}
         </h3>
         <p class="text-gray-600 leading-relaxed">
-          التزامنا بتسليم مشروعك في الوقت المحدد مع الحفاظ على أعلى معايير
-          الجودة
+          {{ __('app.why_choose_us.features.card_4.description') }}
         </p>
       </div>
 
@@ -381,11 +384,10 @@
         <h3
           class="text-2xl font-bold text-gray-900 mb-4 transition-colors duration-300 group-hover:text-[#2f5c69]"
         >
-          دعم فني 24/7
+          {{ __('app.why_choose_us.features.card_5.title') }}
         </h3>
         <p class="text-gray-600 leading-relaxed">
-          فريق دعم فني متاح على مدار الساعة لمساعدتك في أي استفسار أو مشكلة
-          تواجهها
+          {{ __('app.why_choose_us.features.card_5.description') }}
         </p>
       </div>
     </div>
@@ -547,10 +549,10 @@
         <h2
           class="text-3xl font-extrabold text-[#f3a446] mb-2 tracking-tight"
         >
-          كيف تعمل منصة انشاءات؟
+          {{ __('app.how_it_works.title') }}
         </h2>
         <p class="text-md text-gray-200 max-w-2xl mx-auto font-normal">
-          خطوات بسيطة ومدروسة لتحويل فكرتك إلى مشروع حقيقي
+          {{ __('app.how_it_works.subtitle') }}
         </p>
       </div>
 
@@ -568,11 +570,10 @@
               <h3
                 class="text-lg font-bold text-gray-900 mb-0.5 transition-colors duration-300 group-hover:text-[#2f5c69]"
               >
-                أرفق متطلباتك
+                {{ __('app.how_it_works.steps.step_1.title') }}
               </h3>
               <p class="text-gray-700 text-sm">
-                اكتب تفاصيل مشروعك، المساحة، الموقع، والميزانية
-                المتوقعة
+                {{ __('app.how_it_works.steps.step_1.description') }}
               </p>
             </div>
           </div>
@@ -589,11 +590,10 @@
               <h3
                 class="text-lg font-bold text-gray-900 mb-0.5 transition-colors duration-300 group-hover:text-[#2f5c69]"
               >
-                احصل على عروض متنوعة
+                {{ __('app.how_it_works.steps.step_2.title') }}
               </h3>
               <p class="text-gray-700 text-sm">
-                استقبل عروض من أفضل الاستشاريين والمقاولين في
-                منطقتك
+                {{ __('app.how_it_works.steps.step_2.description') }}
               </p>
             </div>
           </div>
@@ -610,10 +610,10 @@
               <h3
                 class="text-lg font-bold text-gray-900 mb-0.5 transition-colors duration-300 group-hover:text-[#2f5c69]"
               >
-                قارن واختر الأفضل
+                {{ __('app.how_it_works.steps.step_3.title') }}
               </h3>
               <p class="text-gray-700 text-sm">
-                قارن العروض واختر الأنسب لمشروعك وميزانيتك
+                {{ __('app.how_it_works.steps.step_3.description') }}
               </p>
             </div>
           </div>
@@ -630,11 +630,10 @@
               <h3
                 class="text-lg font-bold text-gray-900 mb-0.5 transition-colors duration-300 group-hover:text-[#2f5c69]"
               >
-                ابدأ مشروعك
+                {{ __('app.how_it_works.steps.step_4.title') }}
               </h3>
               <p class="text-gray-700 text-sm">
-                تابع تقدم المشروع مع فريق الدعم حتى التسليم
-                النهائي
+                {{ __('app.how_it_works.steps.step_4.description') }}
               </p>
             </div>
           </div>
@@ -645,7 +644,7 @@
         >
           <img
             src="{{ asset('images/ensha.png') }}"
-            alt="مكتب تصميم معماري"
+            alt="{{ __('app.how_it_works.image_alt') }}"
             class="w-[70%] h-auto object-cover rounded-2xl shadow-xl transition-all duration-500 ease-in-out hover:scale-[1.02] border-2 border-[#f3a446] shadow-[#f3a446]/30"
           />
         </div>
@@ -653,7 +652,6 @@
     </div>
   </div>
 </section>
-
 
 
 
@@ -744,9 +742,9 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="text-center mb-16">
       <h2 class="text-4xl font-extrabold heading-primary mb-3">
-        ماذا يقول عملاؤنا؟
+        {{ __('app.testimonials.title') }}
       </h2>
-      <p class="text-xl sub-heading">تجارب حقيقية من عملائنا الكرام</p>
+      <p class="text-xl sub-heading">{{ __('app.testimonials.subtitle') }}</p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -763,8 +761,7 @@
         </div>
 
         <blockquote class="text-gray-700 text-lg mb-8 leading-relaxed font-medium">
-          "منصة انشاءات ساعدتني في بناء منزل أحلامي. الفريق متخصص ومحترف،
-          والتكلفة كانت معقولة جداً. أنصح الجميع بالتعامل معهم."
+          {{ __('app.testimonials.card_1.quote') }}
         </blockquote>
 
         <div class="flex items-center justify-between">
@@ -774,13 +771,17 @@
             >
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
-                alt="أحمد محمد"
+                alt="{{ __('app.testimonials.card_1.alt_text') }}"
                 class="w-full h-full object-cover"
               />
             </div>
             <div>
-              <div class="font-bold text-gray-900 text-lg">أحمد محمد</div>
-              <div class="text-gray-600 text-sm">عميل من دبي</div>
+              <div class="font-bold text-gray-900 text-lg">
+                {{ __('app.testimonials.card_1.name') }}
+              </div>
+              <div class="text-gray-600 text-sm">
+                {{ __('app.testimonials.card_1.location') }}
+              </div>
             </div>
           </div>
 
@@ -807,8 +808,7 @@
         </div>
 
         <blockquote class="text-gray-700 text-lg mb-8 leading-relaxed font-medium">
-          "خدمة ممتازة ومتابعة دقيقة للمشروع. فريق الدعم متاح دائماً للإجابة
-          على استفساراتي. مشروعي تم تسليمه في الوقت المحدد."
+          {{ __('app.testimonials.card_2.quote') }}
         </blockquote>
 
         <div class="flex items-center justify-between">
@@ -818,13 +818,17 @@
             >
               <img
                 src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
-                alt="فاطمة علي"
+                alt="{{ __('app.testimonials.card_2.alt_text') }}"
                 class="w-full h-full object-cover"
               />
             </div>
             <div>
-              <div class="font-bold text-gray-900 text-lg">فاطمة علي</div>
-              <div class="text-gray-600 text-sm">عميلة من أبوظبي</div>
+              <div class="font-bold text-gray-900 text-lg">
+                {{ __('app.testimonials.card_2.name') }}
+              </div>
+              <div class="text-gray-600 text-sm">
+                {{ __('app.testimonials.card_2.location') }}
+              </div>
             </div>
           </div>
 
@@ -892,11 +896,10 @@
       <h2
         class="text-4xl lg:text-5xl font-extrabold text-[#f3a446] mb-4 tracking-tight"
       >
-        جاهز لبدء مشروعك؟
+        {{ __('app.cta_section.title') }}
       </h2>
       <p class="text-lg lg:text-xl text-gray-200 mb-10 max-w-3xl mx-auto font-normal">
-        انضم إلى آلاف العملاء الذين اختاروا منصة انشاءات لتحويل أحلامهم
-        المعمارية إلى واقع ملموس وفخم.
+        {{ __('app.cta_section.subtitle') }}
       </p>
 
       <div class="flex flex-col sm:flex-row gap-6 justify-center">
@@ -907,7 +910,7 @@
               class="cta-button-primary flex items-center justify-center"
             >
               <i class="fas fa-plus ml-3"></i>
-              <span>إنشاء تصميم جديد</span>
+              <span>{{ __('app.cta_section.create_design') }}</span>
             </a>
           @else
             <a
@@ -915,7 +918,7 @@
               class="cta-button-primary flex items-center justify-center"
             >
               <i class="fas fa-file-contract ml-3"></i>
-              <span>إنشاء مناقصة</span>
+              <span>{{ __('app.cta_section.create_tender') }}</span>
             </a>
           @endif
         @else
@@ -924,7 +927,7 @@
             class="cta-button-primary flex items-center justify-center"
           >
             <i class="fas fa-user-plus ml-3"></i>
-            <span>انضم إلينا الآن</span>
+            <span>{{ __('app.cta_section.join_now') }}</span>
           </a>
         @endauth
 
@@ -933,7 +936,7 @@
           class="cta-button-secondary flex items-center justify-center"
         >
           <i class="fas fa-eye ml-3"></i>
-          <span>تصفح التصميمات</span>
+          <span>{{ __('app.cta_section.browse_designs') }}</span>
         </a>
       </div>
     </div>

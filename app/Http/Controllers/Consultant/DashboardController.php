@@ -13,19 +13,17 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // Get consultant statistics from database
         $stats = [
             'designs_created' => $user->designs()->count(),
             'tenders_participated' => $user->proposals()->count(),
             'accepted_proposals' => $user->proposals()->where('status', 'accepted')->count(),
-            'average_rating' => 4.5, // Will be implemented when ratings table is created
+            'average_rating' => 4.5,
             'monthly_earnings' => $user->proposals()->where('status', 'accepted')
                 ->whereMonth('created_at', now()->month)
                 ->whereYear('created_at', now()->year)
                 ->sum('proposed_price') ?? 0,
         ];
 
-        // Get recent designs from database
         $recentDesigns = $user->designs()
             ->latest()
             ->take(5)
@@ -40,7 +38,6 @@ class DashboardController extends Controller
             })
             ->toArray();
 
-        // Get recent proposals from database
         $recentProposals = $user->proposals()
             ->with('tender')
             ->latest()
@@ -56,17 +53,16 @@ class DashboardController extends Controller
             })
             ->toArray();
 
-        // Get recent earnings (simulated for now)
         $recentEarnings = [
             [
-                'tender' => $recentProposals[0]['tender_title'] ?? 'مناقصة جديدة',
+                'tender' => $recentProposals[0]['tender_title'] ?? __('app.new_tender'),
                 'amount' => '25,000',
-                'date' => 'منذ أسبوع'
+                'date' => __('app.one_week_ago')
             ],
             [
-                'tender' => $recentProposals[1]['tender_title'] ?? 'مناقصة أخرى',
+                'tender' => $recentProposals[1]['tender_title'] ?? __('app.another_tender'),
                 'amount' => '15,000',
-                'date' => 'منذ أسبوعين'
+                'date' => __('app.two_weeks_ago')
             ]
         ];
 
@@ -79,22 +75,21 @@ class DashboardController extends Controller
         return view('consultant.profile', compact('user'));
     }
 
-
     public function portfolio()
     {
-        $portfolio = []; // Will be implemented later
+        $portfolio = [];
         return view('consultant.portfolio', compact('portfolio'));
     }
 
     public function inquiries()
     {
-        $inquiries = []; // Will be implemented later
+        $inquiries = [];
         return view('consultant.inquiries', compact('inquiries'));
     }
 
     public function earnings()
     {
-        $earnings = []; // Will be implemented later
+        $earnings = [];
         return view('consultant.earnings', compact('earnings'));
     }
 }

@@ -340,7 +340,6 @@
                     </div>
                     <div class="p-6">
                         <div class="space-y-6">
-                            <!-- الاعمال التحضيرية -->
                             <div class="border rounded-lg bg-gray-50">
                                 <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
                                     <h3 class="text-lg font-semibold">الاعمال التحضيرية</h3>
@@ -423,7 +422,6 @@
                                 </div>
                             </div>
 
-                            <!-- أعمال الحفر والخرسانة أسفل منسوب الدور الأرضي -->
                             <div class="border rounded-lg bg-gray-50">
                                 <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
                                     <h3 class="text-lg font-semibold">أعمال الحفر والخرسانة أسفل منسوب الدور الأرضي</h3>

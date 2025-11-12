@@ -202,9 +202,7 @@
         position: absolute;
         top: 15px;
         right: 15px;
-        /* [تعديل] خلفية ذهبية جديدة */
         background-color: #f3a446;
-        /* [تعديل] لون خط داكن جديد */
         color: #1a262a;
         padding: 4px 12px;
         border-radius: 8px;
@@ -275,25 +273,35 @@
     /* --- Card Buttons (Re-styled & Updated) --- */
     .design-actions {
         display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+        /* flex-wrap: wrap; */
+        /* gap: 10px; */
+        width: 100%;
+        margin:auto;
+
+
+    }
+    .design-actions a{
+        text-align:center;
     }
 
     .btn-primary, .btn-secondary {
-        flex-grow: 1;
-        text-align: center;
-        padding: 10px 16px;
+        /* flex-grow: 1; */
+        /* padding: 10px 16px; */
         border-radius: 10px;
         font-weight: 700;
         font-size: 0.9rem;
         transition: all 0.3s ease;
         border: 2px solid transparent;
+        text-align: center;
+
     }
 
     .btn-primary {
         background-color: #f3a446;
         color: #1a262a;
         border-color: #f3a446;
+        text-align: center;
+
     }
     .btn-primary:hover {
         background-color: #f5b05a; 
@@ -365,113 +373,168 @@
         animation: fadeIn 0.5s ease-out;
     }
 
+    @media (max-width:768px) {
+        .designs-hero{
+            border-radius:0;
+            margin-top:0;
+            width:100%;
+        }
+        
+    }
+
+    
+    @media (max-width:700px) {
+        .hero-title{
+            margin-top:30px;
+        }
+        
+    }
+
+
+
 </style>
 
-<section class="designs-hero py-20 ">
-    <div class="floating-shapes">
-        <div class="floating-shape">
-            <i class="fas fa-home text-6xl text-teal-600"></i> </div>
-        <div class="floating-shape">
-            <i class="fas fa-building text-5xl text-amber-600"></i> </div>
-        <div class="floating-shape">
-            <i class="fas fa-drafting-compass text-4xl text-teal-500"></i> </div>
+<section class="designs-hero py-20">
+  <div class="floating-shapes">
+    <div class="floating-shape">
+      <i class="fas fa-home text-6xl text-teal-600"></i>
+    </div>
+    <div class="floating-shape">
+      <i class="fas fa-building text-5xl text-amber-600"></i>
+    </div>
+    <div class="floating-shape">
+      <i class="fas fa-drafting-compass text-4xl text-teal-500"></i>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <h1 class="hero-title text-5xl font-bold mb-6">
+        {{ __('app.designs_hero.title') }}
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        {{ __('app.designs_hero.subtitle') }}
+      </p>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 ">
-        <div class="text-center mb-16 ">
-            <h1 class="hero-title text-5xl font-bold mb-6">
-                تصاميم تلهمك
-            </h1>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                اكتشف مجموعة مذهلة من التصاميم المعمارية المبتكرة التي تجمع بين الأناقة والوظائفية.
-                من الفلل الفاخرة إلى الشقق العصرية، كل تصميم يحكي قصة فريدة من نوعها.
-            </p>
-        </div>
-
-        <div class="filter-tabs">
-            <div class="filter-tab active" onclick="filterDesigns('all')">جميع التصاميم</div>
-            <div class="filter-tab" onclick="filterDesigns('modern')">عصري</div>
-            <div class="filter-tab" onclick="filterDesigns('classic')">كلاسيكي</div>
-            <div class="filter-tab" onclick="filterDesigns('traditional')">تراثي</div>
-            <div class="filter-tab" onclick="filterDesigns('luxury')">فاخر</div>
-            <div class="filter-tab" onclick="filterDesigns('minimal')">بسيط</div>
-        </div>
+    <div class="filter-tabs">
+      <div class="filter-tab active" onclick="filterDesigns('all')">
+        {{ __('app.designs_hero.filters.all') }}
+      </div>
+      <div class="filter-tab" onclick="filterDesigns('modern')">
+        {{ __('app.designs_hero.filters.modern') }}
+      </div>
+      <div class="filter-tab" onclick="filterDesigns('classic')">
+        {{ __('app.designs_hero.filters.classic') }}
+      </div>
+      <div class="filter-tab" onclick="filterDesigns('traditional')">
+        {{ __('app.designs_hero.filters.traditional') }}
+      </div>
+      <div class="filter-tab" onclick="filterDesigns('luxury')">
+        {{ __('app.designs_hero.filters.luxury') }}
+      </div>
+      <div class="filter-tab" onclick="filterDesigns('minimal')">
+        {{ __('app.designs_hero.filters.minimal') }}
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="designs-grid" id="designsGrid">
-            @forelse($designs as $design)
-                <div class="design-card" data-category="{{ strtolower($design->style) }}">
-                    <div class="design-image">
-                        <img src="{{ $design->main_image_url }}" alt="{{ $design->title }}">
-                        <div class="design-overlay">
-                            <div class="overlay-content">
-                                <div class="overlay-title">{{ $design->title }}</div>
-                                <div class="overlay-subtitle">{{ Str::limit($design->description, 50) }}</div>
-                            </div>
-                        </div>
-                        <div class="design-badge">{{ $design->style }}</div>
-                    </div>
-                    <div class="design-content">
-                        <h3 class="design-title">{{ $design->title }}</h3>
-                        <p class="design-description">
-                            {{ Str::limit($design->description, 100) }}
-                        </p>
-                        <div class="design-meta">
-                            <div class="design-price">{{ $design->formatted_price }}</div>
-                            <div class="design-area">{{ $design->formatted_area }}</div>
-                        </div>
-                        <div class="design-features">
-                            <span class="feature-tag">{{ $design->bedrooms }} غرف نوم</span>
-                            <span class="feature-tag">{{ $design->bathrooms }} حمامات</span>
-                            <span class="feature-tag">{{ $design->floors }} طوابق</span>
-                            @if ($design->features)
-                                @php
-                                    $features = is_array($design->features)
-                                        ? $design->features
-                                        : json_decode($design->features, true);
-                                    $features = $features ? array_slice($features, 0, 2) : [];
-                                @endphp
-                                @foreach ($features as $feature)
-                                    <span class="feature-tag">{{ $feature }}</span>
-                                @endforeach
-                            @endif
-                        </div>
-                        <div class="design-actions">
-                            <a href="{{ route('designs.show-with-pricing', $design->id) }}" class="btn-primary">عرض مع
-                                التسعير</a>
-                            <a href="{{ route('designs.show', $design->id) }}" class="btn-secondary">عرض التفاصيل</a>
-
-                            @auth
-                                @if (auth()->user()->isConsultant() && auth()->id() == $design->consultant_id)
-                                    <a href="{{ route('designs.edit', $design->id) }}"
-                                        class="btn-primary bg-blue-600 hover:bg-blue-700">تعديل</a>
-                                    <button onclick="deleteDesign({{ $design->id }})"
-                                        class="btn-secondary bg-red-600 hover:bg-red-700 text-white">حذف</button>
-                                @endif
-                            @endauth
-                        </div>
-                    </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="designs-grid" id="designsGrid">
+      @forelse($designs as $design)
+        <div class="design-card" data-category="{{ strtolower($design->style) }}">
+          <div class="design-image">
+            <img src="{{ $design->main_image_url }}" alt="{{ $design->title }}" />
+            <div class="design-overlay">
+              <div class="overlay-content">
+                <div class="overlay-title">{{ $design->title }}</div>
+                <div class="overlay-subtitle">
+                  {{ Str::limit($design->description, 50) }}
                 </div>
-            @empty
-                <div class="col-span-full text-center py-12">
-                    <div class="text-gray-500 text-lg">
-                        <i class="fas fa-home text-4xl mb-4 text-gray-400"></i>
-                        <p class="font-bold">لا توجد تصاميم متاحة حالياً</p>
-                        <p class="text-sm mt-2">كن أول من يضيف تصميم جديد</p>
-                    </div>
-                </div>
-            @endforelse
+              </div>
+            </div>
+            <div class="design-badge">{{ $design->style }}</div>
+          </div>
+          <div class="design-content">
+            <h3 class="design-title">{{ $design->title }}</h3>
+            <p class="design-description">
+              {{ Str::limit($design->description, 100) }}
+            </p>
+            <div class="design-meta">
+              <div class="design-price">{{ $design->formatted_price }}</div>
+              <div class="design-area">{{ $design->formatted_area }}</div>
+            </div>
+            <div class="design-features">
+              <span class="feature-tag"
+                >{{ $design->bedrooms }} {{ __('app.designs_grid.bedrooms') }}</span
+              >
+              <span class="feature-tag"
+                >{{ $design->bathrooms }}
+                {{ __('app.designs_grid.bathrooms') }}</span
+              >
+              <span class="feature-tag"
+                >{{ $design->floors }} {{ __('app.designs_grid.floors') }}</span
+              >
+              @if ($design->features)
+                @php
+                  $features = is_array($design->features)
+                    ? $design->features
+                    : json_decode($design->features, true);
+                  $features = $features ? array_slice($features, 0, 2) : [];
+                @endphp
+                @foreach ($features as $feature)
+                  <span class="feature-tag">{{ $feature }}</span>
+                @endforeach
+              @endif
+            </div>
+            <div class="design-actions">
+              <a
+                href="{{ route('designs.show-with-pricing', $design->id) }}"
+                class="btn-primary  text-center"
+                >{{ __('app.designs_grid.view_with_pricing') }}</a
+              >
 
+              @auth
+                @if (auth()->user()->isConsultant() && auth()->id() == $design->consultant_id)
+                  <a
+                    href="{{ route('designs.edit', $design->id) }}"
+                    class="btn-primary bg-blue-600 hover:bg-blue-700"
+                    >{{ __('app.designs_grid.edit') }}</a
+                  >
+                  <button
+                    onclick="deleteDesign({{ $design->id }})"
+                    class="btn-secondary bg-red-600 hover:bg-red-700 text-white"
+                  >
+                    {{ __('app.designs_grid.delete') }}
+                  </button>
+                @endif
+              @endauth
+            </div>
+          </div>
         </div>
-
-        @if ($designs->hasPages())
-            <div class="mt-12">
-                {{ $designs->links('pagination::tailwind') }} </div>
-        @endif
+      @empty
+        <div class="col-span-full text-center py-12">
+          <div class="text-gray-500 text-lg">
+            <i class="fas fa-home text-4xl mb-4 text-gray-400"></i>
+            <p class="font-bold">
+              {{ __('app.designs_grid.no_designs_title') }}
+            </p>
+            <p class="text-sm mt-2">
+              {{ __('app.designs_grid.no_designs_subtitle') }}
+            </p>
+          </div>
+        </div>
+      @endforelse
     </div>
+
+    @if ($designs->hasPages())
+      <div class="mt-12">
+        {{ $designs->links('pagination::tailwind') }}
+      </div>
+    @endif
+  </div>
 </section>
 
 <script>
@@ -685,64 +748,73 @@
 </style>
 
 <section class="inspiration-section" id="inspiration-section">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-extrabold text-[#1a2a1a] mb-4">لماذا تختار تصاميمنا؟</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                نقدم تجربة تصميم فريدة تجمع بين الإبداع والوظائفية
-            </p>
-        </div>
-
-        <div class="inspiration-grid">
-            <div class="inspiration-card">
-                <div class="inspiration-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3 class="inspiration-title">تصاميم مبتكرة</h3>
-                <p class="inspiration-description">
-                    نبتكر تصاميم فريدة تجمع بين الجمال والوظائفية، مع مراعاة احتياجاتك الشخصية.
-                </p>
-            </div>
-
-            <div class="inspiration-card">
-                <div class="inspiration-icon">
-                    <i class="fas fa-award"></i>
-                </div>
-                <h3 class="inspiration-title">جودة عالية</h3>
-                <p class="inspiration-description">
-                    نستخدم أفضل المواد والتقنيات لضمان جودة عالية وديمومة طويلة الأمد.
-                </p>
-            </div>
-
-            <div class="inspiration-card">
-                <div class="inspiration-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h3 class="inspiration-title">تسليم سريع</h3>
-                <p class="inspiration-description">
-                    نلتزم بمواعيد دقيقة وتسليم المشاريع في الوقت المحدد مع الحفاظ على الجودة.
-                </p>
-            </div>
-        </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-extrabold text-[#1a2a1a] mb-4">
+        {{ __('app.inspiration_section.title') }}
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        {{ __('app.inspiration_section.subtitle') }}
+      </p>
     </div>
+
+    <div class="inspiration-grid">
+      <div class="inspiration-card">
+        <div class="inspiration-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3 class="inspiration-title">
+          {{ __('app.inspiration_section.cards.card_1.title') }}
+        </h3>
+        <p class="inspiration-description">
+          {{ __('app.inspiration_section.cards.card_1.description') }}
+        </p>
+      </div>
+
+      <div class="inspiration-card">
+        <div class="inspiration-icon">
+          <i class="fas fa-award"></i>
+        </div>
+        <h3 class="inspiration-title">
+          {{ __('app.inspiration_section.cards.card_2.title') }}
+        </h3>
+        <p class="inspiration-description">
+          {{ __('app.inspiration_section.cards.card_2.description') }}
+        </p>
+      </div>
+
+      <div class="inspiration-card">
+        <div class="inspiration-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3 class="inspiration-title">
+          {{ __('app.inspiration_section.cards.card_3.title') }}
+        </h3>
+        <p class="inspiration-description">
+          {{ __('app.inspiration_section.cards.card_3.description') }}
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="cta-section">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="cta-frame-dark">
-            <h2 class="cta-title">ابدأ رحلة تصميم منزلك اليوم</h2>
-            <p class="cta-description">
-                دع خبراءنا يساعدونك في تحويل رؤيتك إلى واقع ملموس.
-                احصل على تصميم فريد يناسب احتياجاتك وميزانيتك.
-            </p>
-            <div class="cta-buttons">
-                <a href="{{ route('designs.create') }}" class="cta-btn">
-                    <i class="fas fa-plus"></i>
-                    <span>أضف تصميمك</span>
-                </a>
-            </div>
-        </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="cta-frame-dark">
+      <h2 class="cta-title">
+        {{ __("app.cta_section_designs.title") }}
+      </h2>
+      <p class="cta-description">
+        {{ __("app.cta_section_designs.description") }}
+      </p>
+      <div class="cta-buttons">
+        <a href="{{ route('designs.create') }}" class="cta-btn">
+          <i class="fas fa-plus"></i>
+          <span>{{ __("app.cta_section_designs.button") }}</span>
+        </a>
+      </div>
     </div>
+  </div>
 </section>
 
 <script>

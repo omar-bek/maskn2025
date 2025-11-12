@@ -3,331 +3,315 @@
 @section('title', 'عروضي المقدمة - انشاءات')
 
 @section('content')
-    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-        <!-- Enhanced Hero Section -->
-        <div class="relative bg-gradient-to-br from-green-600 via-teal-700 to-emerald-800 text-white overflow-hidden">
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 opacity-10">
-                <div class="absolute inset-0"
-                    style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"grid\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\"><path d=\"M 10 0 L 0 0 0 10\" fill=\"none\" stroke=\"white\" stroke-width=\"0.5\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23grid)\"/></svg>');">
-                </div>
-            </div>
-
-            <!-- Floating Elements -->
-            <div class="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
-            <div class="absolute top-32 right-20 w-16 h-16 bg-white/5 rounded-full animate-bounce"></div>
-            <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-white/10 rounded-full animate-pulse"
-                style="animation-delay: 1s;"></div>
-
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-                <div class="text-center">
-                    <div
-                        class="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-white/30">
-                        <i class="fas fa-file-alt text-2xl ml-3"></i>
-                        <span class="text-lg font-semibold">إدارة العروض المقدمة</span>
-                    </div>
-
-                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                        <span class="bg-gradient-to-r from-white to-green-100 bg-clip-text text-transparent">
-                            عروضي المقدمة
-                        </span>
-                    </h1>
-
-                    <p class="text-xl md:text-2xl text-green-100 mb-10 max-w-3xl mx-auto leading-relaxed">
-                        تتبع جميع العروض التي قدمتها على المناقصات وادارتها بسهولة
-                    </p>
-
-                    <!-- Quick Stats -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-                        <div
-                            class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-                            <div class="text-3xl font-bold mb-2">{{ $proposals->total() ?? 0 }}</div>
-                            <div class="text-sm text-green-100">عرض مقدم</div>
-                        </div>
-                        <div
-                            class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-                            <div class="text-3xl font-bold mb-2">{{ $proposals->where('status', 'accepted')->count() }}
-                            </div>
-                            <div class="text-sm text-green-100">عرض مقبول</div>
-                        </div>
-                        <div
-                            class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-                            <div class="text-3xl font-bold mb-2">{{ $proposals->where('status', 'pending')->count() }}</div>
-                            <div class="text-sm text-green-100">في الانتظار</div>
-                        </div>
-                        <div
-                            class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-                            <div class="text-3xl font-bold mb-2">100%</div>
-                            <div class="text-sm text-green-100">متابعة</div>
-                        </div>
-                    </div>
-
-                    <a href="{{ route('tenders.index') }}"
-                        class="inline-flex items-center bg-white text-green-600 px-10 py-5 rounded-2xl font-bold text-xl hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-white/20 group">
-                        <i class="fas fa-search ml-4 text-2xl group-hover:scale-110 transition-transform duration-300"></i>
-                        تصفح المناقصات الجديدة
-                    </a>
-                </div>
+<div class="min-h-screen bg-gray-100 antialiased">
+    <div class="relative bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0"
+                style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"grid\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\"><path d=\"M 10 0 L 0 0 0 10\" fill=\"none\" stroke=\"#f3a446\" stroke-width=\"0.3\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23grid)\"/></svg>');">
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+        <div class="absolute top-10 left-10 w-20 h-20 bg-[#f3a446]/10 rounded-full animate-pulse"></div>
+        <div class="absolute top-32 right-20 w-16 h-16 bg-[#f3a446]/5 rounded-full animate-bounce" style="animation-duration: 4s;"></div>
+        <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-[#f3a446]/10 rounded-full animate-pulse"
+            style="animation-delay: 1s;"></div>
 
-            <!-- Enhanced Advanced Filters -->
-            <div
-                class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-10 border border-gray-200/50 relative overflow-hidden">
-                <!-- Background Pattern -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+            <div class="text-center">
                 <div
-                    class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-green-100/50 to-transparent rounded-full opacity-50">
+                    class="inline-flex items-center bg-[#f3a446]/20 backdrop-blur-sm rounded-full px-5 py-2 mb-5 border border-[#f3a446]/30 mt-10">
+                    <i class="fas fa-file-alt text-[#f3a446] text-xl ml-2"></i>
+                    <span class="text-base font-semibold text-white">{{ __('app.proposals_index.hero.badge') }}</span>
                 </div>
-                <div
-                    class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-teal-100/50 to-transparent rounded-full opacity-50">
-                </div>
 
-                <div class="relative z-10">
-                    <div class="flex items-center mb-8">
-                        <div
-                            class="w-16 h-16 bg-gradient-to-br from-green-600 to-teal-700 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
-                            <i class="fas fa-filter text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">البحث والتصفية المتقدمة</h3>
-                            <p class="text-gray-600">ابحث في عروضك وفلترها حسب الحالة بسهولة وسرعة</p>
-                        </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-5 leading-tight">
+                    <span class="bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
+                        {{ __('app.proposals_index.hero.title') }}
+                    </span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    {{ __('app.proposals_index.hero.subtitle') }}
+                </p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">
+                    <div
+                        class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-5 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+                        <div class="text-2xl font-bold mb-1">{{ $proposals->total() ?? 0 }}</div>
+                        <div class="text-sm text-yellow-100">{{ __('app.proposals_index.hero.stat_total') }}</div>
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="space-y-3">
-                            <label class=" text-sm font-bold text-gray-800 flex items-center">
-                                <i class="fas fa-search text-green-600 ml-2"></i>
-                                البحث في العروض
-                            </label>
-                            <div class="relative group">
-                                <input type="text" id="searchInput" placeholder="ابحث بالعنوان أو الوصف..."
-                                    class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 pr-14 focus:ring-4 focus:ring-green-500/20 focus:border-green-500 transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg">
-                                <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
-                                    <i
-                                        class="fas fa-search text-gray-400 group-hover:text-green-600 transition-colors duration-300"></i>
-                                </div>
-                            </div>
+                    <div
+                        class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-5 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+                        <div class="text-2xl font-bold mb-1">{{ $proposals->where('status', 'accepted')->count() }}
                         </div>
-
-                        <div class="space-y-3">
-                            <label class=" text-sm font-bold text-gray-800 flex items-center">
-                                <i class="fas fa-flag text-teal-600 ml-2"></i>
-                                حالة العرض
-                            </label>
-                            <div class="relative group">
-                                <select id="statusFilter"
-                                    class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-teal-500/20 focus:border-teal-500 transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg appearance-none cursor-pointer">
-                                    <option value="">جميع الحالات</option>
-                                    <option value="pending">في الانتظار</option>
-                                    <option value="accepted">مقبول</option>
-                                    <option value="rejected">مرفوض</option>
-                                </select>
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <i class="fas fa-chevron-down text-gray-400"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-end">
-                            <button onclick="applyFilters()"
-                                class="w-full bg-gradient-to-r from-green-800 to-teal-800 hover:from-green-900 hover:to-teal-900 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-white/20 group">
-                                <i
-                                    class="fas fa-search ml-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
-                                تطبيق البحث
-                            </button>
-                        </div>
+                        <div class="text-sm text-yellow-100">{{ __('app.proposals_index.hero.stat_accepted') }}</div>
                     </div>
-
-                    <!-- Quick Filter Tags -->
-                    <div class="mt-6 pt-6 border-t border-gray-200">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-tags text-gray-600 ml-2"></i>
-                            <span class="text-sm font-semibold text-gray-700">فلتر سريع:</span>
-                        </div>
-                        <div class="flex flex-wrap gap-3">
-                            <button onclick="setQuickFilter('pending')"
-                                class="quick-filter-btn bg-yellow-200 text-yellow-900 hover:bg-yellow-300 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
-                                <i class="fas fa-clock ml-2 text-xs"></i>
-                                في الانتظار
-                            </button>
-                            <button onclick="setQuickFilter('accepted')"
-                                class="quick-filter-btn bg-green-200 text-green-900 hover:bg-green-300 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
-                                <i class="fas fa-check-circle ml-2 text-xs"></i>
-                                مقبول
-                            </button>
-                            <button onclick="setQuickFilter('rejected')"
-                                class="quick-filter-btn bg-red-200 text-red-900 hover:bg-red-300 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
-                                <i class="fas fa-times-circle ml-2 text-xs"></i>
-                                مرفوض
-                            </button>
-                            <button onclick="clearFilters()"
-                                class="quick-filter-btn bg-gray-200 text-gray-900 hover:bg-gray-300 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
-                                <i class="fas fa-times ml-2 text-xs"></i>
-                                مسح الكل
-                            </button>
-                        </div>
+                    <div
+                        class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-5 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+                        <div class="text-2xl font-bold mb-1">{{ $proposals->where('status', 'pending')->count() }}</div>
+                        <div class="text-sm text-yellow-100">{{ __('app.proposals_index.hero.stat_pending') }}</div>
+                    </div>
+                    <div
+                        class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-5 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+                        <div class="text-2xl font-bold mb-1">100%</div>
+                        <div class="text-sm text-yellow-100">{{ __('app.proposals_index.hero.stat_follow_up') }}</div>
                     </div>
                 </div>
+
+                <a href="{{ route('tenders.index') }}"
+                    class="inline-flex items-center bg-[#f3a446] text-[#1a262a] px-8 py-4 rounded-2xl font-bold text-lg hover:bg-yellow-400 transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-white/20 group">
+                    <i class="fas fa-search ml-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                    {{ __('app.proposals_index.hero.browse_tenders_button') }}
+                </a>
             </div>
-
-            <!-- Proposals Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8" id="proposalsGrid">
-                @forelse($proposals as $proposal)
-                    <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl overflow-hidden proposal-card transform hover:scale-[1.02] transition-all duration-500 border border-gray-200 group"
-                        data-title="{{ $proposal->tender->title }}" data-status="{{ $proposal->status }}">
-                        <!-- Tender Image -->
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="{{ $proposal->tender->design->main_image_url }}" alt="{{ $proposal->tender->title }}"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-
-                            <!-- Status Badge -->
-                            <div class="absolute top-5 left-5">
-                                @if ($proposal->status === 'pending')
-                                    <span
-                                        class="status-badge bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm">
-                                        <i class="fas fa-clock ml-2 text-xs"></i>
-                                        في الانتظار
-                                    </span>
-                                @elseif($proposal->status === 'accepted')
-                                    <span
-                                        class="status-badge bg-gradient-to-r from-green-500 to-emerald-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm">
-                                        <i class="fas fa-check-circle ml-2 text-xs"></i>
-                                        مقبول
-                                    </span>
-                                @elseif($proposal->status === 'rejected')
-                                    <span
-                                        class="status-badge bg-gradient-to-r from-red-500 to-pink-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm">
-                                        <i class="fas fa-times-circle ml-2 text-xs"></i>
-                                        مرفوض
-                                    </span>
-                                @endif
-                            </div>
-
-                            <!-- Date -->
-                            <div class="absolute top-5 right-5">
-                                <div
-                                    class="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50">
-                                    <i class="fas fa-calendar ml-2 text-green-600"></i>
-                                    {{ $proposal->created_at->format('Y-m-d') }}
-                                </div>
-                            </div>
-
-                            <!-- Price -->
-                            <div class="absolute bottom-5 left-5">
-                                <div
-                                    class="bg-gradient-to-r from-green-500 to-teal-600 text-white px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border-2 border-white/20 backdrop-blur-sm">
-                                    <i class="fas fa-money-bill-wave ml-2 text-xs"></i>
-                                    {{ $proposal->formatted_price }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Proposal Content -->
-                        <div class="p-7">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-4 line-clamp-1 leading-tight">
-                                {{ $proposal->tender->title }}</h3>
-                            <p class="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed">
-                                {{ Str::limit($proposal->proposal_text, 150) }}</p>
-
-                            <!-- Proposal Details -->
-                            <div class="space-y-3 mb-7">
-                                <div
-                                    class="flex items-center justify-between py-3 px-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:from-teal-50 hover:to-blue-50 transition-colors duration-300">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-user text-teal-600 ml-3 text-lg"></i>
-                                        <span class="text-sm font-semibold text-gray-700">العميل</span>
-                                    </div>
-                                    <span
-                                        class="text-sm font-bold text-gray-900">{{ $proposal->tender->client->name }}</span>
-                                </div>
-
-                                <div
-                                    class="flex items-center justify-between py-3 px-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:from-blue-50 hover:to-indigo-50 transition-colors duration-300">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-map-marker-alt text-blue-600 ml-3 text-lg"></i>
-                                        <span class="text-sm font-semibold text-gray-700">الموقع</span>
-                                    </div>
-                                    <span class="text-sm font-bold text-gray-900">{{ $proposal->tender->location }}</span>
-                                </div>
-
-                                @if ($proposal->duration_months)
-                                    <div
-                                        class="flex items-center justify-between py-3 px-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:from-purple-50 hover:to-pink-50 transition-colors duration-300">
-                                        <div class="flex items-center">
-                                            <i class="fas fa-calendar-alt text-purple-600 ml-3 text-lg"></i>
-                                            <span class="text-sm font-semibold text-gray-700">مدة التنفيذ</span>
-                                        </div>
-                                        <span
-                                            class="text-sm font-bold text-gray-900">{{ $proposal->formatted_duration }}</span>
-                                    </div>
-                                @endif
-                            </div>
-
-                            <!-- Actions -->
-                            <div class="flex gap-4">
-                                <a href="{{ route('proposals.show', $proposal->id) }}"
-                                    class="flex-1 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-white/20 group">
-                                    <i
-                                        class="fas fa-eye ml-2 text-base group-hover:scale-110 transition-transform duration-300"></i>
-                                    عرض التفاصيل
-                                </a>
-                                @if ($proposal->tender->isOpen())
-                                    <a href="{{ route('proposals.edit', $proposal->id) }}"
-                                        class="flex-1 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-white/20 group">
-                                        <i
-                                            class="fas fa-edit ml-2 text-base group-hover:scale-110 transition-transform duration-300"></i>
-                                        تعديل العرض
-                                    </a>
-                                @else
-                                    <div
-                                        class="flex-1 bg-gradient-to-r from-gray-400 to-gray-500 text-white text-center py-4 px-5 rounded-2xl font-bold text-sm cursor-not-allowed opacity-75 shadow-lg border-2 border-white/20">
-                                        <i class="fas fa-lock ml-2 text-base"></i>
-                                        منتهي الصلاحية
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-span-full">
-                        <div class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-100">
-                            <div
-                                class="w-24 h-24 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <i class="fas fa-file-alt text-4xl text-gray-400"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-4">لم تقدم أي عروض بعد</h3>
-                            <p class="text-gray-600 text-lg mb-8">ابدأ رحلتك في تقديم العروض على المناقصات المتاحة</p>
-                            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                                <button onclick="clearFilters()"
-                                    class="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                                    <i class="fas fa-refresh ml-2"></i>
-                                    مسح الفلاتر
-                                </button>
-                                <a href="{{ route('tenders.index') }}"
-                                    class="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                                    <i class="fas fa-search ml-2"></i>
-                                    تصفح المناقصات
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-
-            <!-- Pagination -->
-            @if ($proposals->hasPages())
-                <div class="mt-12 flex justify-center">
-                    <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
-                        {{ $proposals->links() }}
-                    </div>
-                </div>
-            @endif
         </div>
     </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+
+        <div
+            class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-10 border border-gray-200/50 relative overflow-hidden">
+            <div
+                class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#2f5c69]/10 to-transparent rounded-full opacity-50">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#f3a446]/10 to-transparent rounded-full opacity-50">
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex items-center mb-6">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-[#2f5c69] to-[#1a262a] rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                        <i class="fas fa-filter text-[#f3a446] text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">{{ __('app.proposals_index.filters.title') }}</h3>
+                        <p class="text-sm text-gray-600">{{ __('app.proposals_index.filters.subtitle') }}</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-3">
+                        <label class=" text-sm font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-search text-[#2f5c69] ml-2"></i>
+                            {{ __('app.proposals_index.filters.search_label') }}
+                        </label>
+                        <div class="relative group">
+                            <input type="text" id="searchInput" placeholder="{{ __('app.proposals_index.filters.search_placeholder') }}"
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 pr-12 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg text-sm">
+                            <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+                                <i
+                                    class="fas fa-search text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300 text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class=" text-sm font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-flag text-[#2f5c69] ml-2"></i>
+                            {{ __('app.proposals_index.filters.status_label') }}
+                        </label>
+                        <div class="relative group">
+                            <select id="statusFilter"
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg appearance-none cursor-pointer text-sm">
+                                <option value="">{{ __('app.global.statuses.all') }}</option>
+                                <option value="pending">{{ __('app.global.statuses.pending') }}</option>
+                                <option value="accepted">{{ __('app.global.statuses.accepted') }}</option>
+                                <option value="rejected">{{ __('app.global.statuses.rejected') }}</option>
+                            </select>
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-chevron-down text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-end">
+                        <button onclick="applyFilters()"
+                            class="w-full bg-gradient-to-r from-[#2f5c69] to-[#1a262a] hover:from-[#2a4f5a] hover:to-[#223035] text-white px-8 py-3 rounded-xl font-bold text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-white/20 group">
+                            <i
+                                class="fas fa-search ml-2 text-base group-hover:scale-110 transition-transform duration-300"></i>
+                            {{ __('app.global.buttons.apply_search') }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-tags text-gray-600 ml-2"></i>
+                        <span class="text-sm font-semibold text-gray-700">{{ __('app.proposals_index.filters.quick_filter_label') }}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="setQuickFilter('pending')"
+                            class="quick-filter-btn bg-yellow-200 text-yellow-900 hover:bg-yellow-300 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-clock ml-2 text-xs"></i>
+                            {{ __('app.global.statuses.pending') }}
+                        </button>
+                        <button onclick="setQuickFilter('accepted')"
+                            class="quick-filter-btn bg-green-200 text-green-900 hover:bg-green-300 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-check-circle ml-2 text-xs"></i>
+                            {{ __('app.global.statuses.accepted') }}
+                        </button>
+                        <button onclick="setQuickFilter('rejected')"
+                            class="quick-filter-btn bg-red-200 text-red-900 hover:bg-red-300 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-times-circle ml-2 text-xs"></i>
+                            {{ __('app.global.statuses.rejected') }}
+                        </button>
+                        <button onclick="clearFilters()"
+                            class="quick-filter-btn bg-gray-200 text-gray-900 hover:bg-gray-300 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-times ml-2 text-xs"></i>
+                            {{ __('app.global.buttons.clear_all') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8" id="proposalsGrid">
+            @forelse($proposals as $proposal)
+                <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl overflow-hidden proposal-card transform hover:scale-[1.02] transition-all duration-500 border border-gray-200 group"
+                    data-title="{{ $proposal->tender->title }}" data-status="{{ $proposal->status }}">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="{{ $proposal->tender->design->main_image_url }}" alt="{{ $proposal->tender->title }}"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+
+                        <div class="absolute top-5 left-5">
+                            @if ($proposal->status === 'pending')
+                                <span
+                                    class="status-badge bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm">
+                                    <i class="fas fa-clock ml-2 text-xs"></i>
+                                    {{ __('app.global.statuses.pending') }}
+                                </span>
+                            @elseif($proposal->status === 'accepted')
+                                <span
+                                    class="status-badge bg-gradient-to-r from-green-500 to-emerald-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm">
+                                    <i class="fas fa-check-circle ml-2 text-xs"></i>
+                                    {{ __('app.global.statuses.accepted') }}
+                                </span>
+                            @elseif($proposal->status === 'rejected')
+                                <span
+                                    class="status-badge bg-gradient-to-r from-red-500 to-pink-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm">
+                                    <i class="fas fa-times-circle ml-2 text-xs"></i>
+                                    {{ __('app.global.statuses.rejected') }}
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="absolute top-5 right-5">
+                            <div
+                                class="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50">
+                                <i class="fas fa-calendar ml-2 text-[#2f5c69]"></i>
+                                {{ $proposal->created_at->format('Y-m-d') }}
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-5 left-5">
+                            <div
+                                class="bg-[#f3a446] text-[#1a262a] px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border-2 border-white/20 backdrop-blur-sm">
+                                <i class="fas fa-money-bill-wave ml-2 text-xs"></i>
+                                {{ $proposal->formatted_price }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-7">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-1 leading-tight">
+                            {{ $proposal->tender->title }}</h3>
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed">
+                            {{ Str::limit($proposal->proposal_text, 150) }}</p>
+
+                        <div class="space-y-3 mb-7">
+                            <div
+                                class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-xl border border-gray-200 hover:shadow-md hover:border-[#f3a446] transition-all duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user text-[#2f5c69] ml-3 text-lg"></i>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('app.proposals_index.card.client') }}</span>
+                                </div>
+                                <span
+                                    class="text-sm font-bold text-gray-900">{{ $proposal->tender->client->name }}</span>
+                            </div>
+
+                            <div
+                                class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-xl border border-gray-200 hover:shadow-md hover:border-[#f3a446] transition-all duration-300">
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-[#2f5c69] ml-3 text-lg"></i>
+                                    <span class="text-sm font-semibold text-gray-700">{{ __('app.proposals_index.card.location') }}</span>
+                                </div>
+                                <span class="text-sm font-bold text-gray-900">{{ $proposal->tender->location }}</span>
+                            </div>
+
+                            @if ($proposal->duration_months)
+                                <div
+                                    class="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-xl border border-gray-200 hover:shadow-md hover:border-[#f3a446] transition-all duration-300">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-calendar-alt text-[#2f5c69] ml-3 text-lg"></i>
+                                        <span class="text-sm font-semibold text-gray-700">{{ __('app.proposals_index.card.duration') }}</span>
+                                    </div>
+                                    <span
+                                        class="text-sm font-bold text-gray-900">{{ $proposal->formatted_duration }}</span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="flex gap-4">
+                            <a href="{{ route('proposals.show', $proposal->id) }}"
+                                class="flex-1 bg-gradient-to-r from-[#2f5c69] to-[#1a262a] hover:from-[#2a4f5a] hover:to-[#223035] text-white text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-white/20 group">
+                                <i
+                                    class="fas fa-eye ml-2 text-base group-hover:scale-110 transition-transform duration-300"></i>
+                                {{ __('app.global.buttons.view_details') }}
+                            </a>
+                            @if ($proposal->tender->isOpen())
+                                <a href="{{ route('proposals.edit', $proposal->id) }}"
+                                    class="flex-1 bg-gradient-to-r from-[#f3a446] to-yellow-500 hover:from-yellow-400 hover:to-yellow-600 text-[#1a262a] text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 border-white/20 group">
+                                    <i
+                                        class="fas fa-edit ml-2 text-base group-hover:scale-110 transition-transform duration-300"></i>
+                                    {{ __('app.global.buttons.edit_proposal') }}
+                                </a>
+                            @else
+                                <div
+                                    class="flex-1 bg-gradient-to-r from-gray-400 to-gray-500 text-white text-center py-4 px-5 rounded-2xl font-bold text-sm cursor-not-allowed opacity-75 shadow-lg border-2 border-white/20">
+                                    <i class="fas fa-lock ml-2 text-base"></i>
+                                    {{ __('app.proposals_index.card.expired_button') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-span-full">
+                    <div class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-100">
+                        <div
+                            class="w-24 h-24 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-file-alt text-4xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">{{ __('app.proposals_index.empty.title') }}</h3>
+                        <p class="text-gray-600 text-base mb-6">{{ __('app.proposals_index.empty.subtitle') }}</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="clearFilters()"
+                                class="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                <i class="fas fa-refresh ml-2"></i>
+                                {{ __('app.global.buttons.clear_filters') }}
+                            </button>
+                            <a href="{{ route('tenders.index') }}"
+                                class="bg-gradient-to-r from-[#f3a446] to-yellow-500 hover:from-yellow-400 hover:to-yellow-600 text-[#1a262a] px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                <i class="fas fa-search ml-2"></i>
+                                {{ __('app.proposals_index.empty.browse_tenders_button') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforelse
+        </div>
+
+        @if ($proposals->hasPages())
+            <div class="mt-12 flex justify-center">
+                <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+                    {{ $proposals->links() }}
+                </div>
+            </div>
+        @endif
+    </div>
+</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

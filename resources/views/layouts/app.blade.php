@@ -247,11 +247,11 @@
         /* Optimized header scroll effect */
 
 
-        @media (max-width: 768px) {
+        /* @media (max-width: 768px) {
             .header-content {
                 min-height: 4.5rem;
             }
-        }
+        } */
 
         /* Mobile optimizations */
         @media (max-width: 768px) {
@@ -279,271 +279,423 @@
 <body>
     <!-- Header -->
 
-    <header class="fixed top-0 w-full z-50 mt-5 transition-all duration-300">
+<header class="fixed top-0 w-full z-50 mt-5 transition-all duration-300">
+  <div
+    class="header-content w-11/12 mx-auto px-4 py-3 transition-all duration-300 bg-[#2f5c69] border-2 border-[#f3a446] rounded-full backdrop-blur-lg flex items-center justify-between relative z-50"
+  >
+    <div class="flex items-center gap-6">
+      <a
+        href="{{ route('home') }}"
+        class="logo flex items-center gap-3"
+        aria-label="{{ __('app.header.home') }}"
+      >
+        @if (\App\Models\SiteSetting::get('site_logo'))
+          <div class="logo-icon w-10 h-10">
+            <img
+              src="{{ \App\Models\SiteSetting::get('site_logo') }}"
+              alt="{{ __('app.header.logo_alt') }}"
+              class="w-full h-full object-contain"
+            />
+          </div>
+        @else
+          <div
+            class="logo-icon w-10 h-10 bg-[#f3a446]/20 rounded-full"
+          ></div>
+        @endif
+        <div class="logo-text">
+          <div class="logo-title text-white font-bold text-lg leading-tight">
+            {{ __('app.header.logo_name') }}
+          </div>
+          <div class="logo-subtitle text-[#f3a446] text-sm">
+            {{ __('app.header.logo_subtitle') }}
+          </div>
+        </div>
+      </a>
+
+      <nav
+        class="hidden md:block"
+        role="navigation"
+        aria-label="{{ __('app.header.main_menu') }}"
+      >
+        <div class="nav-links flex items-center gap-2">
+          <a
+            href="{{ route('home') }}"
+            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('home') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+            aria-label="{{ __('app.header.home') }}"
+            >{{ __('app.header.home') }}</a
+          >
+          <a
+            href="{{ route('designs.index') }}"
+            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('designs.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+            aria-label="{{ __('app.header.designs') }}"
+            >{{ __('app.header.designs') }}</a
+          >
+          <a
+            href="{{ route('tenders.index') }}"
+            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+            aria-label="{{ __('app.header.tenders') }}"
+            >{{ __('app.header.tenders') }}</a
+          >
+          <a
+            href="{{ route('lands.create') }}"
+            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('lands.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+            aria-label="{{ __('app.header.sell_exchange_lands') }}"
+            >{{ __('app.header.sell_exchange_lands') }}</a
+          >
+
+          @auth
+            @if (auth()->user()->isConsultant())
+              <a
+                href="{{ route('designs.create') }}"
+                class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('designs.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+                aria-label="{{ __('app.header.add_design') }}"
+                >{{ __('app.header.add_design') }}</a
+              >
+              <a
+                href="{{ route('proposals.index') }}"
+                class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('proposals.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+                aria-label="{{ __('app.header.my_proposals') }}"
+                >{{ __('app.header.my_proposals') }}</a
+              >
+            @elseif(auth()->user()->isClient())
+              <a
+                href="{{ route('tenders.create') }}"
+                class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+                aria-label="{{ __('app.header.create_tender') }}"
+                >{{ __('app.header.create_tender') }}</a
+              >
+            @endif
+          @endauth
+        </div>
+      </nav>
+    </div>
+
+    <div class="nav-actions hidden md:flex items-center gap-4">
+      <div class="relative language-dropdown">
+        <button
+          type="button"
+          id="desktopLanguageToggle"
+          class="nav-action-btn language-btn flex items-center gap-2 text-white hover:text-[#f3a446] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f3a446] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b3b45]"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="fas fa-globe"></i>
+          <span
+            >{{ $currentLocale === 'ar' ? __('app.header.language_arabic') :
+            __('app.header.language_english') }}</span
+          >
+          <i
+            class="fas fa-chevron-down text-xs transition-transform duration-200"
+            data-chevron
+          ></i>
+        </button>
+
         <div
-            class="header-content w-11/12  mx-auto px-4 py-3 transition-all duration-300 bg-[#2f5c69] border-2 border-[#f3a446] rounded-full backdrop-blur-lg flex items-center justify-between relative z-50">
+          id="desktopLanguageMenu"
+          class="language-menu hidden absolute mt-2 min-w-[140px] rounded-lg shadow-xl border border-white/10 backdrop-blur-md bg-[#1b3b45]/90 text-white py-2 {{ $isRtl ? 'left-0 origin-top-left' : 'right-0 origin-top-right' }}"
+          role="menu"
+          aria-labelledby="desktopLanguageToggle"
+        >
+          <a
+            href="{{ route('language.switch', 'ar') }}"
+            class="flex items-center gap-2 px-4 py-2 hover:bg-white/10 transition {{ $currentLocale === 'ar' ? 'text-[#f3a446] font-semibold' : '' }}"
+            role="menuitem"
+          >
+            <span>{{ __('app.header.language_arabic') }}</span>
+            @if ($currentLocale === 'ar')
+              <i class="fas fa-check text-xs ms-auto"></i>
+            @endif
+          </a>
+          <a
+            href="{{ route('language.switch', 'en') }}"
+            class="flex items-center gap-2 px-4 py-2 hover:bg-white/10 transition {{ $currentLocale === 'en' ? 'text-[#f3a446] font-semibold' : '' }}"
+            role="menuitem"
+          >
+            <span>{{ __('app.header.language_english') }}</span>
+            @if ($currentLocale === 'en')
+              <i class="fas fa-check text-xs ms-auto"></i>
+            @endif
+          </a>
+        </div>
+      </div>
 
-            <div class="flex items-center gap-6">
-                <a href="{{ route('home') }}" class="logo flex items-center gap-3" aria-label="الرئيسية">
-                    @if (\App\Models\SiteSetting::get('site_logo'))
-                        <div class="logo-icon w-10 h-10">
-                            <img src="{{ \App\Models\SiteSetting::get('site_logo') }}" alt="لوجو انشاءات"
-                                class="w-full h-full object-contain">
-                        </div>
-                    @else
-                        <div class="logo-icon w-10 h-10 bg-[#f3a446]/20 rounded-full"></div>
-                    @endif
-                    <div class="logo-text">
-                        <div class="logo-title text-white font-bold text-lg leading-tight">insha'at</div>
-                        <div class="logo-subtitle text-[#f3a446] text-sm">Your Partners for Your Home of Dreams</div>
-                    </div>
-                </a>
-
-                <nav class="hidden md:block" role="navigation" aria-label="القائمة الرئيسية">
-                    <div class="nav-links flex items-center gap-2">
-                        <a href="{{ route('home') }}"
-                            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('home') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
-                            aria-label="الرئيسية">الرئيسية</a>
-                        <a href="{{ route('designs.index') }}"
-                            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('designs.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
-                            aria-label="التصاميم">التصاميم</a>
-                        <a href="{{ route('tenders.index') }}"
-                            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
-                            aria-label="المناقصات">المناقصات</a>
-                        <a href="{{ route('lands.create') }}"
-                            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('lands.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
-                            aria-label="بيع وتبادل الأراضي">بيع وتبادل الأراضي</a>
-
-                        @auth
-                            @if (auth()->user()->isConsultant())
-                                <a href="{{ route('designs.create') }}"
-                                    class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('designs.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
-                                    aria-label="أضف تصميم">أضف تصميم</a>
-                                <a href="{{ route('proposals.index') }}"
-                                    class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('proposals.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
-                                    aria-label="عروضي">عروضي</a>
-                            @elseif(auth()->user()->isClient())
-                                <a href="{{ route('tenders.create') }}"
-                                    class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
-                                    aria-label="إنشاء مناقصة">إنشاء مناقصة</a>
-                            @endif
-                        @endauth
-                    </div>
-                </nav>
-            </div>
-
-            <div class="nav-actions hidden md:flex items-center gap-4">
-                <div class="relative language-dropdown">
-                    <button type="button" id="desktopLanguageToggle"
-                        class="nav-action-btn language-btn flex items-center gap-2 text-white hover:text-[#f3a446] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f3a446] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b3b45]"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-globe"></i>
-                        <span>{{ $currentLocale === 'ar' ? 'العربية' : 'English' }}</span>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200" data-chevron></i>
-                    </button>
-
-                    <div id="desktopLanguageMenu"
-                        class="language-menu hidden absolute mt-2 min-w-[140px] rounded-lg shadow-xl border border-white/10 backdrop-blur-md bg-[#1b3b45]/90 text-white py-2 {{ $isRtl ? 'left-0 origin-top-left' : 'right-0 origin-top-right' }}"
-                        role="menu" aria-labelledby="desktopLanguageToggle">
-                        <a href="{{ route('language.switch', 'ar') }}"
-                            class="flex items-center gap-2 px-4 py-2 hover:bg-white/10 transition {{ $currentLocale === 'ar' ? 'text-[#f3a446] font-semibold' : '' }}"
-                            role="menuitem">
-                            <span>العربية</span>
-                            @if ($currentLocale === 'ar')
-                                <i class="fas fa-check text-xs ms-auto"></i>
-                            @endif
-                        </a>
-                        <a href="{{ route('language.switch', 'en') }}"
-                            class="flex items-center gap-2 px-4 py-2 hover:bg-white/10 transition {{ $currentLocale === 'en' ? 'text-[#f3a446] font-semibold' : '' }}"
-                            role="menuitem">
-                            <span>English</span>
-                            @if ($currentLocale === 'en')
-                                <i class="fas fa-check text-xs ms-auto"></i>
-                            @endif
-                        </a>
-                    </div>
-                </div>
-
-                @auth
-                    <div class="user-menu flex items-center gap-3">
-                        <a href="{{ Auth::user()->getDashboardRoute() }}"
-                            class="nav-action-btn user-btn flex items-center gap-2 text-white hover:text-[#f3a446]">
-                            <i class="fas fa-user"></i><span>{{ Auth::user()->name }}</span>
-                        </a>
-                        <a href="{{ route(Auth::user()->userType->name . '.profile') }}"
-                            class="nav-action-btn profile-btn flex items-center gap-2 text-white hover:text-[#f3a446]">
-                            <i class="fas fa-cog"></i><span>الملف الشخصي</span>
-                        </a>
-                        <form action="{{ route('logout') }}" method="POST" class="logout-form">
-                            @csrf
-                            <button type="submit"
-                                class="nav-action-btn logout-btn flex items-center gap-2 text-[#f3a446] hover:text-white">
-                                <i class="fas fa-sign-out-alt"></i><span>تسجيل الخروج</span>
-                            </button>
-                        </form>
-                    </div>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="nav-action-btn login-btn flex items-center gap-2 text-white hover:text-[#f3a446]">
-                        <i class="fas fa-sign-in-alt"></i><span>تسجيل الدخول</span>
-                    </a>
-                    <a href="{{ route('register') }}"
-                        class="nav-action-btn register-btn flex items-center gap-2 bg-[#f3a446] text-[#2f5c69] font-semibold px-3 py-1 rounded-full hover:bg-[#e6953a]">
-                        <i class="fas fa-user-plus"></i><span>إنشاء حساب</span>
-                    </a>
-                @endauth
-            </div>
-
-
-            <button class="mobile-menu-toggle md:hidden text-[#f3a446] text-2xl" aria-label="القائمة"
-                aria-expanded="false" aria-controls="mobileMenu">
-                <i class="fas fa-bars"></i>
+      @auth
+        <div class="user-menu flex items-center gap-3">
+          <a
+            href="{{ Auth::user()->getDashboardRoute() }}"
+            class="nav-action-btn user-btn flex items-center gap-2 text-white hover:text-[#f3a446]"
+          >
+            <i class="fas fa-user"></i><span>{{ Auth::user()->name }}</span>
+          </a>
+          <a
+            href="{{ route(Auth::user()->userType->name . '.profile') }}"
+            class="nav-action-btn profile-btn flex items-center gap-2 text-white hover:text-[#f3a446]"
+          >
+            <i class="fas fa-cog"></i
+            ><span>{{ __('app.header.profile') }}</span>
+          </a>
+          <form
+            action="{{ route('logout') }}"
+            method="POST"
+            class="logout-form"
+          >
+            @csrf
+            <button
+              type="submit"
+              class="nav-action-btn logout-btn flex items-center gap-2 text-[#f3a446] hover:text-white"
+            >
+              <i class="fas fa-sign-out-alt"></i
+              ><span>{{ __('app.header.logout') }}</span>
             </button>
+          </form>
         </div>
+      @else
+        <a
+          href="{{ route('login') }}"
+          class="nav-action-btn login-btn flex items-center gap-2 text-white hover:text-[#f3a446]"
+        >
+          <i class="fas fa-sign-in-alt"></i
+          ><span>{{ __('app.header.login') }}</span>
+        </a>
+        <a
+          href="{{ route('register') }}"
+          class="nav-action-btn register-btn flex items-center gap-2 bg-[#f3a446] text-[#2f5c69] font-semibold px-3 py-1 rounded-full hover:bg-[#e6953a]"
+        >
+          <i class="fas fa-user-plus"></i
+          ><span>{{ __('app.header.register') }}</span>
+        </a>
+      @endauth
+    </div>
 
-        <div class="mobile-menu absolute top-full left-1/2 -translate-x-1/2 w-11/12 md:w-4/5 mt-2 bg-white text-gray-800 rounded-2xl shadow-2xl z-40 overflow-hidden max-h-0 opacity-0 invisible transition-all duration-500 ease-in-out"
-            id="mobileMenu" role="navigation" aria-label="القائمة الرئيسية">
+    <button
+      class="mobile-menu-toggle md:hidden text-[#f3a446] text-2xl"
+      aria-label="{{ __('app.header.menu_toggle') }}"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
 
-            <div class="mobile-menu-header flex items-center justify-between p-4 border-b border-gray-200">
-                <button class="mobile-menu-close text-2xl text-[#2f5c69]" aria-label="إغلاق القائمة">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="mobile-logo flex items-center gap-3">
-                    @if (\App\Models\SiteSetting::get('site_logo'))
-                        <div class="logo-icon w-10 h-10">
-                            <img src="{{ \App\Models\SiteSetting::get('site_logo') }}" alt="لوجو انشاءات"
-                                class="w-full h-full object-contain">
-                        </div>
-                    @else
-                        <div class="logo-icon w-10 h-10 bg-[#f3a446]/30 rounded-full"></div>
-                    @endif
+  <div
+    class="mobile-menu absolute top-full left-0 right-0 mx-auto w-11/12 md:w-4/5 mt-2 bg-white text-gray-800 rounded-2xl shadow-2xl z-40 overflow-hidden max-h-0 opacity-0 invisible transition-all duration-500 ease-in-out"
+    id="mobileMenu"
+    role="navigation"
+    aria-label="{{ __('app.header.main_menu') }}"
+  >
+    <div
+      class="mobile-menu-header flex items-center justify-between p-4 border-b border-gray-200"
+    >
+      <button
+        class="mobile-menu-close text-2xl text-[#2f5c69]"
+        aria-label="{{ __('app.header.close_menu') }}"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="mobile-logo flex items-center gap-3">
+        @if (\App\Models\SiteSetting::get('site_logo'))
+          <div class="logo-icon w-10 h-10">
+            <img
+              src="{{ \App\Models\SiteSetting::get('site_logo') }}"
+              alt="{{ __('app.header.logo_alt') }}"
+              class="w-full h-full object-contain"
+            />
+          </div>
+        @else
+          <div class="logo-icon w-10 h-10 bg-[#f3a446]/30 rounded-full"></div>
+        @endif
+      </div>
+    </div>
 
-                </div>
+    <nav class="mobile-nav p-4 space-y-6 overflow-y-auto max-h-[70vh]">
+      <div class="mobile-nav-section space-y-2">
+        <h3
+          class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2"
+        >
+          {{ __('app.header.main_menu') }}
+        </h3>
+        <a
+          href="{{ route('home') }}"
+          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('home') ? 'text-[#f3a446] font-semibold' : '' }}"
+          aria-label="{{ __('app.header.home') }}"
+        >
+          <i class="fas fa-home"></i><span>{{ __('app.header.home') }}</span>
+        </a>
+        <a
+          href="{{ route('designs.index') }}"
+          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('designs.*') ? 'text-[#f3a446] font-semibold' : '' }}"
+          aria-label="{{ __('app.header.designs') }}"
+        >
+          <i class="fas fa-paint-brush"></i
+          ><span>{{ __('app.header.designs') }}</span>
+        </a>
+        <a
+          href="{{ route('tenders.index') }}"
+          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('tenders.*') ? 'text-[#f3a446] font-semibold' : '' }}"
+          aria-label="{{ __('app.header.tenders') }}"
+        >
+          <i class="fas fa-gavel"></i
+          ><span>{{ __('app.header.tenders') }}</span>
+        </a>
+        <a
+          href="{{ route('lands.create') }}"
+          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('lands.create') ? 'text-[#f3a446] font-semibold' : '' }}"
+          aria-label="{{ __('app.header.sell_exchange_lands') }}"
+        >
+          <i class="fas fa-exchange-alt"></i
+          ><span>{{ __('app.header.sell_exchange_lands') }}</span>
+        </a>
+      </div>
+
+      @auth
+        @if (auth()->user()->isConsultant())
+          <div class="mobile-nav-section space-y-2">
+            <a
+              href="{{ route('designs.create') }}"
+              class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('designs.create') ? 'text-[#f3a446] font-semibold' : '' }}"
+              aria-label="{{ __('app.header.add_design') }}"
+            >
+              <i class="fas fa-plus-square"></i
+              ><span>{{ __('app.header.add_design') }}</span>
+            </a>
+            <a
+              href="{{ route('proposals.index') }}"
+              class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('proposals.*') ? 'text-[#f3a446] font-semibold' : '' }}"
+              aria-label="{{ __('app.header.my_proposals') }}"
+            >
+              <i class="fas fa-file-contract"></i
+              ><span>{{ __('app.header.my_proposals') }}</span>
+            </a>
+          </div>
+        @elseif(auth()->user()->isClient())
+          <div class="mobile-nav-section">
+            <a
+              href="{{ route('tenders.create') }}"
+              class="mobile-nav-button flex items-center justify-center gap-2 py-2 px-4 bg-[#f3a446] text-[#2f5c69] rounded-lg font-semibold hover:bg-[#e6953a]"
+              aria-label="{{ __('app.header.create_tender') }}"
+            >
+              <i class="fas fa-clipboard-list"></i
+              ><span>{{ __('app.header.create_tender') }}</span>
+            </a>
+          </div>
+        @endif
+      @endauth
+
+      @auth
+        <div class="mobile-nav-section space-y-2">
+          <div class="mobile-user-info flex items-center gap-3 mb-3">
+            <div
+              class="user-avatar w-10 h-10 bg-[#f3a446] text-[#2f5c69] flex items-center justify-center rounded-full"
+            >
+              <i class="fas fa-user"></i>
             </div>
+            <div class="user-details">
+              <h4 class="user-name font-bold text-gray-900">
+                {{ Auth::user()->name }}
+              </h4>
+              <p class="user-type text-sm text-[#f3a446]">
+                {{ Auth::user()->userType->display_name_ar ?? Auth::user()->userType->name }}
+              </p>
+            </div>
+          </div>
 
-            <nav class="mobile-nav p-4 space-y-6 overflow-y-auto max-h-[70vh]">
-                <div class="mobile-nav-section space-y-2">
-                    <h3 class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2">القائمة الرئيسية
-                    </h3>
-                    <a href="{{ route('home') }}"
-                        class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('home') ? 'text-[#f3a446] font-semibold' : '' }}"
-                        aria-label="الرئيسية">
-                        <i class="fas fa-home"></i><span>الرئيسية</span>
-                    </a>
-                    <a href="{{ route('designs.index') }}"
-                        class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('designs.*') ? 'text-[#f3a446] font-semibold' : '' }}"
-                        aria-label="التصاميم">
-                        <i class="fas fa-paint-brush"></i><span>التصاميم</span>
-                    </a>
-                    <a href="{{ route('tenders.index') }}"
-                        class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('tenders.*') ? 'text-[#f3a446] font-semibold' : '' }}"
-                        aria-label="المناقصات">
-                        <i class="fas fa-gavel"></i><span>المناقصات</span>
-                    </a>
-                    <a href="{{ route('lands.create') }}"
-                        class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('lands.create') ? 'text-[#f3a446] font-semibold' : '' }}"
-                        aria-label="بيع وتبادل الأراضي">
-                        <i class="fas fa-exchange-alt"></i><span>بيع وتبادل الأراضي</span>
-                    </a>
-                </div>
-
-                @auth
-                    @if (auth()->user()->isConsultant())
-                        <div class="mobile-nav-section space-y-2">
-                            <a href="{{ route('designs.create') }}"
-                                class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('designs.create') ? 'text-[#f3a446] font-semibold' : '' }}"
-                                aria-label="أضف تصميم">
-                                <i class="fas fa-plus-square"></i><span>أضف تصميم</span>
-                            </a>
-                            <a href="{{ route('proposals.index') }}"
-                                class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('proposals.*') ? 'text-[#f3a446] font-semibold' : '' }}"
-                                aria-label="عروضي">
-                                <i class="fas fa-file-contract"></i><span>عروضي</span>
-                            </a>
-                        </div>
-                    @elseif(auth()->user()->isClient())
-                        <div class="mobile-nav-section">
-                            <a href="{{ route('tenders.create') }}"
-                                class="mobile-nav-button flex items-center justify-center gap-2 py-2 px-4 bg-[#f3a446] text-[#2f5c69] rounded-lg font-semibold hover:bg-[#e6953a]"
-                                aria-label="إنشاء مناقصة">
-                                <i class="fas fa-clipboard-list"></i><span>إنشاء مناقصة</span>
-                            </a>
-                        </div>
-                    @endif
-                @endauth
-
-                @auth
-                    <div class="mobile-nav-section space-y-2">
-                        <div class="mobile-user-info flex items-center gap-3 mb-3">
-                            <div
-                                class="user-avatar w-10 h-10 bg-[#f3a446] text-[#2f5c69] flex items-center justify-center rounded-full">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="user-details">
-                                <h4 class="user-name font-bold text-gray-900">{{ Auth::user()->name }}</h4>
-                                <p class="user-type text-sm text-[#f3a446]">
-                                    {{ Auth::user()->userType->display_name_ar ?? Auth::user()->userType->name }}</p>
-                            </div>
-                        </div>
-
-                        <h3 class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2">حسابي</h3>
-                        <a href="{{ Auth::user()->getDashboardRoute() }}"
-                            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
-                            aria-label="لوحة التحكم">
-                            <i class="fas fa-tachometer-alt"></i><span>لوحة التحكم</span>
-                        </a>
-                        <a href="{{ route(Auth::user()->userType->name . '.profile') }}"
-                            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
-                            aria-label="الملف الشخصي">
-                            <i class="fas fa-user"></i><span>الملف الشخصي</span>
-                        </a>
-                        <form action="{{ route('logout') }}" method="POST" class="w-full">
-                            @csrf
-                            <button type="submit"
-                                class="mobile-nav-link logout-link flex items-center gap-3 text-red-600 hover:text-red-800"
-                                aria-label="تسجيل الخروج">
-                                <i class="fas fa-sign-out-alt"></i><span>تسجيل الخروج</span>
-                            </button>
-                        </form>
-                    </div>
-                @else
-                    <div class="mobile-nav-section space-y-2">
-                        <h3 class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2">حساب المستخدم</h3>
-                        <a href="{{ route('login') }}"
-                            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
-                            aria-label="تسجيل الدخول">
-                            <i class="fas fa-sign-in-alt"></i><span>تسجيل الدخول</span>
-                        </a>
-                        <a href="{{ route('register') }}"
-                            class="mobile-nav-button flex items-center justify-center gap-2 py-2 px-4 bg-[#f3a446] text-[#2f5c69] rounded-lg font-semibold hover:bg-[#e6953a]"
-                            aria-label="إنشاء حساب">
-                            <i class="fas fa-user-plus"></i><span>إنشاء حساب</span>
-                        </a>
-                    </div>
-                @endauth
-
-                <div class="mobile-nav-section space-y-2">
-                    <h3 class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2">اللغة</h3>
-                    <a href="{{ route('language.switch', 'ar') }}"
-                        class="mobile-nav-link flex items-center justify-between gap-3 {{ $currentLocale === 'ar' ? 'text-[#f3a446] font-semibold' : 'text-gray-700 hover:text-[#f3a446]' }}"
-                        aria-label="العربية" @if ($currentLocale === 'ar') aria-current="true" @endif>
-                        <div class="flex items-center gap-3"><i class="fas fa-globe"></i><span>العربية</span></div>
-                        @if ($currentLocale === 'ar')
-                            <i class="fas fa-check"></i>
-                        @endif
-                    </a>
-                    <a href="{{ route('language.switch', 'en') }}"
-                        class="mobile-nav-link flex items-center justify-between gap-3 {{ $currentLocale === 'en' ? 'text-[#f3a446] font-semibold' : 'text-gray-700 hover:text-[#f3a446]' }}"
-                        aria-label="English" @if ($currentLocale === 'en') aria-current="true" @endif>
-                        <div class="flex items-center gap-3"><i class="fas fa-globe"></i><span>English</span></div>
-                        @if ($currentLocale === 'en')
-                            <i class="fas fa-check"></i>
-                        @endif
-                    </a>
-                </div>
-            </nav>
+          <h3
+            class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2"
+          >
+            {{ __('app.header.my_account') }}
+          </h3>
+          <a
+            href="{{ Auth::user()->getDashboardRoute() }}"
+            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
+            aria-label="{{ __('app.header.dashboard') }}"
+          >
+            <i class="fas fa-tachometer-alt"></i
+            ><span>{{ __('app.header.dashboard') }}</span>
+          </a>
+          <a
+            href="{{ route(Auth::user()->userType->name . '.profile') }}"
+            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
+            aria-label="{{ __('app.header.profile') }}"
+          >
+            <i class="fas fa-user"></i
+            ><span>{{ __('app.header.profile') }}</span>
+          </a>
+          <form action="{{ route('logout') }}" method="POST" class="w-full">
+            @csrf
+            <button
+              type="submit"
+              class="mobile-nav-link logout-link flex items-center gap-3 text-red-600 hover:text-red-800"
+              aria-label="{{ __('app.header.logout') }}"
+            >
+              <i class="fas fa-sign-out-alt"></i
+              ><span>{{ __('app.header.logout') }}</span>
+            </button>
+          </form>
         </div>
-    </header>
+      @else
+        <div class="mobile-nav-section space-y-2">
+          <h3
+            class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2"
+          >
+            {{ __('app.header.user_account') }}
+          </h3>
+          <a
+            href="{{ route('login') }}"
+            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
+            aria-label="{{ __('app.header.login') }}"
+          >
+            <i class="fas fa-sign-in-alt"></i
+            ><span>{{ __('app.header.login') }}</span>
+          </a>
+          <a
+            href="{{ route('register') }}"
+            class="mobile-nav-button flex items-center justify-center gap-2 py-2 px-4 bg-[#f3a446] text-[#2f5c69] rounded-lg font-semibold hover:bg-[#e6953a]"
+            aria-label="{{ __('app.header.register') }}"
+          >
+            <i class="fas fa-user-plus"></i
+            ><span>{{ __('app.header.register') }}</span>
+          </a>
+        </div>
+      @endauth
+
+      <div class="mobile-nav-section space-y-2">
+        <h3
+          class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2"
+        >
+          {{ __('app.header.language') }}
+        </h3>
+        <a
+          href="{{ route('language.switch', 'ar') }}"
+          class="mobile-nav-link flex items-center justify-between gap-3 {{ $currentLocale === 'ar' ? 'text-[#f3a446] font-semibold' : 'text-gray-700 hover:text-[#f3a446]' }}"
+          aria-label="{{ __('app.header.language_arabic') }}"
+          @if ($currentLocale === 'ar') aria-current="true" @endif
+        >
+          <div class="flex items-center gap-3">
+            <i class="fas fa-globe"></i
+            ><span>{{ __('app.header.language_arabic') }}</span>
+          </div>
+          @if ($currentLocale === 'ar')
+            <i class="fas fa-check"></i>
+          @endif
+        </a>
+        <a
+          href="{{ route('language.switch', 'en') }}"
+          class="mobile-nav-link flex items-center justify-between gap-3 {{ $currentLocale === 'en' ? 'text-[#f3a446] font-semibold' : 'text-gray-700 hover:text-[#f3a446]' }}"
+          aria-label="{{ __('app.header.language_english') }}"
+          @if ($currentLocale === 'en') aria-current="true" @endif
+        >
+          <div class="flex items-center gap-3">
+            <i class="fas fa-globe"></i
+            ><span>{{ __('app.header.language_english') }}</span>
+          </div>
+          @if ($currentLocale === 'en')
+            <i class="fas fa-check"></i>
+          @endif
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
 
 
     <script>
@@ -741,195 +893,182 @@
 
     <!-- Footer -->
 
-
     <footer class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white pt-16 pb-8">
-
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
-
-                <div class="md:col-span-4">
-                    <a href="{{ route('home') }}" class="flex items-center gap-3 mb-4">
-                        <div
-                            class="w-12 h-12 rounded-2xl bg-[#f3a446]/20 flex items-center justify-center border border-[#f3a446]/30">
-                            <i class="fas fa-home text-[#f3a446] text-xl"></i>
-                        </div>
-                        <span class="text-3xl font-bold text-white">insha'at</span>
-                    </a>
-                    <p class="text-gray-300 leading-relaxed">
-                        منصة متخصصة في تصميم البيوت العصرية والإسلامية. نقدم أفضل التصاميم وأحدث التقنيات لبناء منزل
-                        أحلامك.
-                    </p>
-                    <div class="flex gap-3 mt-6">
-                        <a href="#" aria-label="فيسبوك" class="social-icon-btn">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" aria-label="تويتر" class="social-icon-btn">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" aria-label="إنستغرام" class="social-icon-btn">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" aria-label="لينكد إن" class="social-icon-btn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-6 border-b-2 border-[#f3a446]/30 pb-3 inline-block">
-                            روابط سريعة</h3>
-                        <ul class="space-y-3">
-                            <li>
-                                <a href="{{ route('home') }}" class="footer-link-item">
-                                    <i class="fas fa-chevron-left"></i>
-                                    <span>الرئيسية</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('designs.index') }}" class="footer-link-item">
-                                    <i class="fas fa-chevron-left"></i>
-                                    <span>التصاميم</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('lands.create') }}" class="footer-link-item">
-                                    <i class="fas fa-chevron-left"></i>
-                                    <span>بيع وتبادل الأراضي</span>
-                                </a>
-                            </li>
-                            @auth
-                                @if (auth()->user()->isConsultant())
-                                    <li>
-                                        <a href="{{ route('designs.create') }}" class="footer-link-item">
-                                            <i class="fas fa-chevron-left"></i>
-                                            <span>أضف تصميم</span>
-                                        </a>
-                                    </li>
-                                @endif
-                            @endauth
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-6 border-b-2 border-[#f3a446]/30 pb-3 inline-block">
-                            خدماتنا</h3>
-                        <ul class="space-y-3">
-                            <li>
-                                <a href="#" class="footer-link-item">
-                                    <i class="fas fa-hammer"></i>
-                                    <span>تصميم منازل</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link-item">
-                                    <i class="fas fa-city"></i>
-                                    <span>تصميم فيلات</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link-item">
-                                    <i class="fas fa-building"></i>
-                                    <span>تصميم شقق</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link-item">
-                                    <i class="fas fa-store"></i>
-                                    <span>تصميم تجاري</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link-item">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>استشارات معمارية</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="footer-link-item">
-                                    <i class="fas fa-tasks"></i>
-                                    <span>إدارة المشاريع</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-6 border-b-2 border-[#f3a446]/30 pb-3 inline-block">
-                            تواصل معنا</h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3 text-gray-300">
-                                <i class="fas fa-phone text-[#f3a446] text-lg mt-1"></i>
-                                <span dir="ltr">+966 50 123 4567</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-gray-300">
-                                <i class="fas fa-envelope text-[#f3a446] text-lg mt-1"></i>
-                                <span>info@inshaat.com</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-gray-300">
-                                <i class="fas fa-map-marker-alt text-[#f3a446] text-lg mt-1"></i>
-                                <span>الرياض، المملكة العربية السعودية</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-gray-300">
-                                <i class="fas fa-clock text-[#f3a446] text-lg mt-1"></i>
-                                <span>الأحد - الخميس: 8:00 ص - 6:00 م</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-white/10 pt-8 mt-12">
-                <p class="text-center text-gray-400 text-sm">
-                    &copy; 2024 insha'at. جميع الحقوق محفوظة. | تصميم وتطوير بواسطة فريق insha'at
-                </p>
-            </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+      <div class="md:col-span-4">
+        <a href="{{ route('home') }}" class="flex items-center gap-3 mb-4">
+          <div
+            class="w-12 h-12 rounded-2xl bg-[#f3a446]/20 flex items-center justify-center border border-[#f3a446]/30"
+          >
+            <i class="fas fa-home text-[#f3a446] text-xl"></i>
+          </div>
+          <span class="text-3xl font-bold text-white">{{
+            __("app.footer.logo_name")
+          }}</span>
+        </a>
+        <p class="text-gray-300 leading-relaxed">
+          {{ __("app.footer.description") }}
+        </p>
+        <div class="flex gap-3 mt-6">
+          <a
+            href="#"
+            aria-label="{{ __('app.footer.social.facebook') }}"
+            class="social-icon-btn"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            href="#"
+            aria-label="{{ __('app.footer.social.twitter') }}"
+            class="social-icon-btn"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            href="#"
+            aria-label="{{ __('app.footer.social.instagram') }}"
+            class="social-icon-btn"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="#"
+            aria-label="{{ __('app.footer.social.linkedin') }}"
+            class="social-icon-btn"
+          >
+            <i class="fab fa-linkedin-in"></i>
+          </a>
         </div>
-    </footer>
-    <!-- Optimized Navigation JavaScript -->
-    <!-- <script src="{{ asset('js/navigation.js') }}"></script> -->
+      </div>
 
-    <!-- Flash Messages JavaScript -->
-    <!-- <script>
-        // Flash Messages functionality
-        function closeFlashMessage() {
-            const flashMessage = document.getElementById('flash-message');
-            if (flashMessage) {
-                flashMessage.classList.add('hide');
-                setTimeout(() => {
-                    flashMessage.remove();
-                }, 300);
-            }
-        }
+      <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div>
+          <h3
+            class="text-xl font-bold text-white mb-6 border-b-2 border-[#f3a446]/30 pb-3 inline-block"
+          >
+            {{ __("app.footer.links.title") }}
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="{{ route('home') }}" class="footer-link-item">
+                <i class="fas fa-chevron-left"></i>
+                <span>{{ __("app.footer.links.home") }}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="{{ route('designs.index') }}"
+                class="footer-link-item"
+              >
+                <i class="fas fa-chevron-left"></i>
+                <span>{{ __("app.footer.links.designs") }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('lands.create') }}" class="footer-link-item">
+                <i class="fas fa-chevron-left"></i>
+                <span>{{ __("app.footer.links.lands") }}</span>
+              </a>
+            </li>
+            @auth
+              @if (auth()->user()->isConsultant())
+                <li>
+                  <a
+                    href="{{ route('designs.create') }}"
+                    class="footer-link-item"
+                  >
+                    <i class="fas fa-chevron-left"></i>
+                    <span>{{ __("app.footer.links.add_design") }}</span>
+                  </a>
+                </li>
+              @endif
+            @endauth
+          </ul>
+        </div>
 
-        // Auto-hide flash messages after 5 seconds
-        document.addEventListener('DOMContentLoaded', function() {
-            const flashMessage = document.getElementById('flash-message');
-            if (flashMessage) {
-                setTimeout(() => {
-                    if (flashMessage && !flashMessage.classList.contains('hide')) {
-                        closeFlashMessage();
-                    }
-                }, 5000);
-            }
-        });
+        <div>
+          <h3
+            class="text-xl font-bold text-white mb-6 border-b-2 border-[#f3a446]/30 pb-3 inline-block"
+          >
+            {{ __("app.footer.services.title") }}
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="#" class="footer-link-item">
+                <i class="fas fa-hammer"></i>
+                <span>{{ __("app.footer.services.houses") }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="footer-link-item">
+                <i class="fas fa-city"></i>
+                <span>{{ __("app.footer.services.villas") }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="footer-link-item">
+                <i class="fas fa-building"></i>
+                <span>{{ __("app.footer.services.apartments") }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="footer-link-item">
+                <i class="fas fa-store"></i>
+                <span>{{ __("app.footer.services.commercial") }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="footer-link-item">
+                <i class="fas fa-lightbulb"></i>
+                <span>{{ __("app.footer.services.consultations") }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="footer-link-item">
+                <i class="fas fa-tasks"></i>
+                <span>{{ __("app.footer.services.project_management") }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
 
-        // Close flash message on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeFlashMessage();
-            }
-        });
+        <div>
+          <h3
+            class="text-xl font-bold text-white mb-6 border-b-2 border-[#f3a446]/30 pb-3 inline-block"
+          >
+            {{ __("app.footer.contact.title") }}
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3 text-gray-300">
+              <i class="fas fa-phone text-[#f3a446] text-lg mt-1"></i>
+              <span dir="ltr">{{ __("app.footer.contact.phone") }}</span>
+            </li>
+            <li class="flex items-start gap-3 text-gray-300">
+              <i class="fas fa-envelope text-[#f3a446] text-lg mt-1"></i>
+              <span>{{ __("app.footer.contact.email") }}</span>
+            </li>
+            <li class="flex items-start gap-3 text-gray-300">
+              <i class="fas fa-map-marker-alt text-[#f3a446] text-lg mt-1"></i>
+              <span>{{ __("app.footer.contact.address") }}</span>
+            </li>
+            <li class="flex items-start gap-3 text-gray-300">
+              <i class="fas fa-clock text-[#f3a446] text-lg mt-1"></i>
+              <span>{{ __("app.footer.contact.hours") }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-        // Close flash message when clicking outside
-        document.addEventListener('click', function(e) {
-            const flashMessage = document.getElementById('flash-message');
-            if (flashMessage && !flashMessage.contains(e.target) && !e.target.closest('.flash-close')) {
-                closeFlashMessage();
-            }
-        });
-    </script> -->
+    <div class="border-t border-white/10 pt-8 mt-12">
+      <p class="text-center text-gray-400 text-sm">
+        {!! __("app.footer.copyright") !!}
+      </p>
+    </div>
+  </div>
+</footer>
+
 </body>
 
 </html>

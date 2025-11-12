@@ -13,15 +13,13 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // Ensure only clients can access this page
         if (!$user->isClient()) {
-            abort(403, 'هذه الصفحة متاحة للعملاء فقط');
+            abort(403, __('app.unauthorized_client_only'));
         }
 
-        // Get client statistics from database
         $stats = [
-            'saved_designs' => 0, // Will be implemented when designs table is created
-            'favorite_consultants' => 0, // Will be implemented when favorites table is created
+            'saved_designs' => 0,
+            'favorite_consultants' => 0,
             'tenders_created' => $user->tenders()->count(),
             'proposals_received' => $user->tenders()->withCount('proposals')->get()->sum('proposals_count'),
             'accepted_proposals' => $user->tenders()->whereHas('proposals', function ($q) {
@@ -30,7 +28,6 @@ class DashboardController extends Controller
             'active_tenders' => $user->tenders()->where('status', 'active')->count(),
         ];
 
-        // Get recent tenders from database
         $recentTenders = $user->tenders()
             ->latest()
             ->take(5)
@@ -45,7 +42,6 @@ class DashboardController extends Controller
             })
             ->toArray();
 
-        // Get recommended consultants from database
         $recommendedConsultants = User::whereHas('userType', function ($q) {
             $q->where('name', 'consultant');
         })
@@ -56,30 +52,31 @@ class DashboardController extends Controller
             ->map(function ($consultant) {
                 return [
                     'name' => $consultant->name,
-                    'specialization' => 'تصميم معماري', // Will be enhanced when profile table is created
-                    'rating' => 4.5, // Will be implemented when ratings table is created
+                    'specialization' => __('app.consultant.specialization_default'),
+                    'rating' => 4.5,
                     'designs_count' => $consultant->designs_count,
-                    'location' => 'الرياض' // Will be enhanced when profile table is created
+                    'location' => __('app.consultant.location_default')
                 ];
             })
             ->toArray();
 
-        // Get recent activities (simulated for now)
         $recentActivities = [
             [
                 'type' => 'tender_created',
-                'description' => 'تم إنشاء مناقصة جديدة: ' . ($recentTenders[0]['title'] ?? 'مناقصة جديدة'),
-                'time' => 'منذ ساعتين'
+                'description' => __('app.activity.tender_created', [
+                    'title' => ($recentTenders[0]['title'] ?? __('app.activity.new_tender'))
+                ]),
+                'time' => __('app.time.hours_ago')
             ],
             [
                 'type' => 'proposal_received',
-                'description' => 'تم استلام عرض جديد',
-                'time' => 'منذ يوم واحد'
+                'description' => __('app.activity.proposal_received'),
+                'time' => __('app.time.day_ago')
             ],
             [
                 'type' => 'design_saved',
-                'description' => 'تم حفظ تصميم جديد',
-                'time' => 'منذ 3 أيام'
+                'description' => __('app.activity.design_saved'),
+                'time' => __('app.time.days_ago')
             ]
         ];
 
@@ -90,9 +87,8 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // Ensure only clients can access this page
         if (!$user->isClient()) {
-            abort(403, 'هذه الصفحة متاحة للعملاء فقط');
+            abort(403, __('app.unauthorized_client_only'));
         }
 
         return view('client.profile', compact('user'));
@@ -100,13 +96,13 @@ class DashboardController extends Controller
 
     public function savedDesigns()
     {
-        $savedDesigns = []; // Will be implemented later
+        $savedDesigns = [];
         return view('client.saved-designs', compact('savedDesigns'));
     }
 
     public function favoriteConsultants()
     {
-        $favoriteConsultants = []; // Will be implemented later
+        $favoriteConsultants = [];
         return view('client.favorite-consultants', compact('favoriteConsultants'));
     }
 
@@ -114,9 +110,8 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // Ensure only clients can access this page
         if (!$user->isClient()) {
-            abort(403, 'هذه الصفحة متاحة للعملاء فقط');
+            abort(403, __('app.unauthorized_client_only'));
         }
 
         $tenders = $user->tenders()

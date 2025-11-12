@@ -11,344 +11,478 @@
         color: transparent;
     }
 
+     @media (min-width:768px) {
     .home {
         border-radius: 100px;
     }
+    }
+
+       @media (max-width:768px) {
+        .designs-hero{
+            border-radius:0;
+            margin-top:0;
+            width:100%;
+        }
+        .home{
+         margin-top:0;
+
+        }
+        
+    }
+
+    
+
+
 </style>
 
-<div class=" bg-gray-100 w-[80%] m-auto">
-    <div class="home relative bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white overflow-hidden mt-[100px]">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute inset-0"
-                style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"grid\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\"><path d=\"M 10 0 L 0 0 0 10\" fill=\"none\" stroke=\"white\" stroke-width=\"0.5\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23grid)\"/></svg>');">
-            </div>
-        </div>
-
-        <div class="absolute top-10 left-10 w-20 h-20 bg-[#f3a446]/10 rounded-full animate-pulse"></div>
-        <div class="absolute top-32 right-20 w-16 h-16 bg-[#f3a446]/5 rounded-full animate-bounce"></div>
-        <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-[#f3a446]/10 rounded-full animate-pulse"
-            style="animation-delay: 1s;"></div>
-
-        <div class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 ">
-            <div class="text-center">
-                <div
-                    class="inline-flex items-center bg-[#f3a446]/20 backdrop-blur-sm rounded-full px-6 py-3 mb-6 -mt-12 border border-[#f3a446]/30">
-                    <i class="fas fa-file-contract text-[#f3a446] text-2xl ml-3"></i>
-                    <span class="text-lg font-semibold text-white">منصة المناقصات المتطورة</span>
-                </div>
-
-                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                    <span class="hero-title-gradient">
-                        المناقصات المتاحة
-                    </span>
-                </h1>
-
-                <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-                    اكتشف فرص العمل المناسبة لك وقدم عروضك المتميزة في بيئة تنافسية عادلة
-                </p>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div
-                        class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-4 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300">
-                        <div class="text-2xl font-bold mb-2">{{ $tenders->total() ?? 0 }}</div>
-                        <div class="text-sm text-gray-300">مناقصة نشطة</div>
-                    </div>
-                    <div
-                        class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-4 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300">
-                        <div class="text-2xl font-bold mb-2">24/7</div>
-                        <div class="text-sm text-gray-300">متاح دائماً</div>
-                    </div>
-                    <div
-                        class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-4 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300">
-                        <div class="text-2xl font-bold mb-2">100%</div>
-                        <div class="text-sm text-gray-300">شفافية</div>
-                    </div>
-                    <div
-                        class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-4 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300">
-                        <div class="text-2xl font-bold mb-2">أمان</div>
-                        <div class="text-sm text-gray-300">مضمون</div>
-                    </div>
-                </div>
-
-                @auth
-                    @if (auth()->user()->isClient())
-                        <a href="{{ route('tenders.create') }}"
-                            class="inline-flex items-center bg-[#f3a446] text-[#1a262a] px-8 py-4 rounded-2xl font-bold text-lg hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-[#f3a446] group mt-10">
-                            <i
-                                class="fas fa-plus ml-4 text-2xl text-[#1a262a] group-hover:rotate-90 transition-transform duration-300"></i>
-                            إنشاء مناقصة جديدة
-                        </a>
-                    @endif
-                @endauth
-            </div>
-        </div>
+<div class="designs-hero bg-gray-100 w-[80%] m-auto">
+  <div
+    class="home relative bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white overflow-hidden mt-[100px]"
+  >
+    <div class="absolute inset-0 opacity-10">
+      <div
+        class="absolute inset-0"
+        style="
+          background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"grid\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\"><path d=\"M 10 0 L 0 0 0 10\" fill=\"none\" stroke=\"white\" stroke-width=\"0.5\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23grid)\"/></svg>');
+        "
+      ></div>
     </div>
-</div>
-<div class="home2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
 
     <div
-        class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-10 border border-gray-200/50 relative overflow-hidden">
+      class="absolute top-10 left-10 w-20 h-20 bg-[#f3a446]/10 rounded-full animate-pulse"
+    ></div>
+    <div
+      class="absolute top-32 right-20 w-16 h-16 bg-[#f3a446]/5 rounded-full animate-bounce"
+    ></div>
+    <div
+      class="absolute bottom-20 left-1/4 w-12 h-12 bg-[#f3a446]/10 rounded-full animate-pulse"
+      style="animation-delay: 1s"
+    ></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div class="text-center">
         <div
-            class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#2f5c69]/10 to-transparent rounded-full opacity-50">
+          class="inline-flex items-center bg-[#f3a446]/20 backdrop-blur-sm rounded-full px-6 py-3 mb-6 -mt-12 border border-[#f3a446]/30"
+        >
+          <i class="fas fa-file-contract text-[#f3a446] text-2xl ml-3"></i>
+          <span class="text-lg font-semibold text-white">{{
+            __("app.tenders_hero.badge")
+          }}</span>
         </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          <span class="hero-title-gradient">
+            {{ __("app.tenders_hero.title") }}
+          </span>
+        </h1>
+
+        <p
+          class="text-lg md:text-xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed"
+        >
+          {{ __("app.tenders_hero.subtitle") }}
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div
+            class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-4 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300"
+          >
+            <div class="text-2xl font-bold mb-2">
+              {{ $tenders->total() ?? 0 }}
+            </div>
+            <div class="text-sm text-gray-300">
+              {{ __("app.tenders_hero.stats.active_tenders") }}
+            </div>
+          </div>
+          <div
+            class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-4 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300"
+          >
+            <div class="text-2xl font-bold mb-2">24/7</div>
+            <div class="text-sm text-gray-300">
+              {{ __("app.tenders_hero.stats.always_available") }}
+            </div>
+          </div>
+          <div
+            class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-4 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300"
+          >
+            <div class="text-2xl font-bold mb-2">100%</div>
+            <div class="text-sm text-gray-300">
+              {{ __("app.tenders_hero.stats.transparency") }}
+            </div>
+          </div>
+          <div
+            class="bg-[#f3a446]/10 backdrop-blur-sm rounded-2xl p-4 border border-[#f3a446]/20 hover:bg-[#f3a446]/20 transition-all duration-300"
+          >
+            <div class="text-2xl font-bold mb-2">
+              {{ __("app.tenders_hero.stats.security_value") }}
+            </div>
+            <div class="text-sm text-gray-300">
+              {{ __("app.tenders_hero.stats.security_label") }}
+            </div>
+          </div>
+        </div>
+
+        @auth
+          @if (auth()->user()->isClient())
+            <a
+              href="{{ route('tenders.create') }}"
+              class="inline-flex items-center bg-[#f3a446] text-[#1a262a] px-8 py-4 rounded-2xl font-bold text-lg hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-[#f3a446] group mt-10"
+            >
+              <i
+                class="fas fa-plus ml-4 text-2xl text-[#1a262a] group-hover:rotate-90 transition-transform duration-300"
+              ></i>
+              {{ __("app.tenders_hero.create_button") }}
+            </a>
+          @endif
+        @endauth
+      </div>
+    </div>
+  </div>
+</div>
+<div class="home2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-8">
+  <div
+    class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-10 border border-gray-200/50 relative overflow-hidden"
+  >
+    <div
+      class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#2f5c69]/10 to-transparent rounded-full opacity-50"
+    ></div>
+    <div
+      class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#f3a446]/10 to-transparent rounded-full opacity-50"
+    ></div>
+
+    <div class="relative z-10">
+      <div class="flex items-center mb-8">
         <div
-            class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#f3a446]/10 to-transparent rounded-full opacity-50">
+          class="w-16 h-16 bg-[#2f5c69] rounded-2xl flex items-center justify-center ml-4 shadow-lg"
+        >
+          <i class="fas fa-filter text-white text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-2">
+            {{ __("app.tenders_filter.title") }}
+          </h3>
+          <p class="text-gray-600">
+            {{ __("app.tenders_filter.subtitle") }}
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="space-y-3">
+          <label class="text-sm font-bold text-gray-800 flex items-center">
+            <i class="fas fa-search text-[#2f5c69] ml-2"></i>
+            {{ __("app.tenders_filter.search_label") }}
+          </label>
+          <div class="relative group">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="{{ __('app.tenders_filter.search_placeholder') }}"
+              class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 pr-14 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg"
+            />
+            <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+              <i
+                class="fas fa-search text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300"
+              ></i>
+            </div>
+          </div>
         </div>
 
-        <div class="relative z-10">
-            <div class="flex items-center mb-8">
-                <div class="w-16 h-16 bg-[#2f5c69] rounded-2xl flex items-center justify-center ml-4 shadow-lg">
-                    <i class="fas fa-filter text-white text-xl"></i>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">البحث والتصفية المتقدمة</h3>
-                    <p class="text-gray-600">ابحث عن المناقصات المناسبة لك بسهولة وسرعة</p>
-                </div>
+        <div class="space-y-3">
+          <label class="text-sm font-bold text-gray-800 flex items-center">
+            <i class="fas fa-flag text-[#2f5c69] ml-2"></i>
+            {{ __("app.tenders_filter.status_label") }}
+          </label>
+          <div class="relative group">
+            <select
+              id="statusFilter"
+              class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg appearance-none cursor-pointer"
+            >
+              <option value="">{{ __("app.status.all") }}</option>
+              <option value="open">{{ __("app.status.open") }}</option>
+              <option value="closed">{{ __("app.status.closed") }}</option>
+              <option value="awarded">{{ __("app.status.awarded") }}</option>
+            </select>
+            <div
+              class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+            >
+              <i class="fas fa-chevron-down text-gray-400"></i>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="space-y-3">
-                    <label class=" text-sm font-bold text-gray-800 flex items-center">
-                        <i class="fas fa-search text-[#2f5c69] ml-2"></i>
-                        البحث في المناقصات
-                    </label>
-                    <div class="relative group">
-                        <input type="text" id="searchInput" placeholder="ابحث بالعنوان أو الوصف..."
-                            class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 pr-14 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg">
-                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
-                            <i
-                                class="fas fa-search text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <label class=" text-sm font-bold text-gray-800 flex items-center">
-                        <i class="fas fa-flag text-[#2f5c69] ml-2"></i>
-                        حالة المناقصة
-                    </label>
-                    <div class="relative group">
-                        <select id="statusFilter"
-                            class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg appearance-none cursor-pointer">
-                            <option value="">جميع الحالات</option>
-                            <option value="open">مفتوحة</option>
-                            <option value="closed">مغلقة</option>
-                            <option value="awarded">ممنوحة</option>
-                        </select>
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <i class="fas fa-chevron-down text-gray-400"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <label class=" text-sm font-bold text-gray-800 flex items-center">
-                        <i class="fas fa-map-marker-alt text-[#2f5c69] ml-2"></i>
-                        الموقع
-                    </label>
-                    <div class="relative group">
-                        <input type="text" id="locationFilter" placeholder="ابحث بالموقع..."
-                            class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 pr-14 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg">
-                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
-                            <i
-                                class="fas fa-map-marker-alt text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-end">
-                    <button onclick="applyFilters()"
-                        class="w-full bg-[#2f5c69] hover:bg-[#1a262a] text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl group">
-                        <i class="fas fa-search ml-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
-                        تطبيق البحث
-                    </button>
-                </div>
-            </div>
-
-            <div class="mt-6 pt-6 border-t border-gray-200">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-tags text-gray-600 ml-2"></i>
-                    <span class="text-sm font-semibold text-gray-700">فلتر سريع:</span>
-                </div>
-                <div class="flex flex-wrap gap-3">
-                    <button onclick="setQuickFilter('open')"
-                        class="quick-filter-btn bg-[#2f5c69]/10 text-[#2f5c69] hover:bg-[#2f5c69]/20 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
-                        <i class="fas fa-circle ml-2 text-xs"></i>
-                        مفتوحة
-                    </button>
-                    <button onclick="setQuickFilter('closed')"
-                        class="quick-filter-btn bg-red-100 text-red-800 hover:bg-red-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
-                        <i class="fas fa-lock ml-2 text-xs"></i>
-                        مغلقة
-                    </button>
-                    <button onclick="setQuickFilter('awarded')"
-                        class="quick-filter-btn bg-blue-100 text-blue-800 hover:bg-blue-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
-                        <i class="fas fa-trophy ml-2 text-xs"></i>
-                        ممنوحة
-                    </button>
-                    <button onclick="clearFilters()"
-                        class="quick-filter-btn bg-gray-100 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
-                        <i class="fas fa-times ml-2 text-xs"></i>
-                        مسح الكل
-                    </button>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <div class="space-y-3">
+          <label class="text-sm font-bold text-gray-800 flex items-center">
+            <i class="fas fa-map-marker-alt text-[#2f5c69] ml-2"></i>
+            {{ __("app.tenders_filter.location_label") }}
+          </label>
+          <div class="relative group">
+            <input
+              type="text"
+              id="locationFilter"
+              placeholder="{{ __('app.tenders_filter.location_placeholder') }}"
+              class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 pr-14 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg"
+            />
+            <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+              <i
+                class="fas fa-map-marker-alt text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300"
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-end">
+          <button
+            onclick="applyFilters()"
+            class="w-full bg-[#2f5c69] hover:bg-[#1a262a] text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl group"
+          >
+            <i
+              class="fas fa-search ml-3 text-xl group-hover:scale-110 transition-transform duration-300"
+            ></i>
+            {{ __("app.tenders_filter.apply_button") }}
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-6 border-t border-gray-200">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-tags text-gray-600 ml-2"></i>
+          <span class="text-sm font-semibold text-gray-700">{{
+            __("app.tenders_filter.quick_filter_label")
+          }}</span>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <button
+            onclick="setQuickFilter('open')"
+            class="quick-filter-btn bg-[#2f5c69]/10 text-[#2f5c69] hover:bg-[#2f5c69]/20 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+          >
+            <i class="fas fa-circle ml-2 text-xs"></i>
+            {{ __("app.status.open") }}
+          </button>
+          <button
+            onclick="setQuickFilter('closed')"
+            class="quick-filter-btn bg-red-100 text-red-800 hover:bg-red-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+          >
+            <i class="fas fa-lock ml-2 text-xs"></i>
+            {{ __("app.status.closed") }}
+          </button>
+          <button
+            onclick="setQuickFilter('awarded')"
+            class="quick-filter-btn bg-blue-100 text-blue-800 hover:bg-blue-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+          >
+            <i class="fas fa-trophy ml-2 text-xs"></i>
+            {{ __("app.status.awarded") }}
+          </button>
+          <button
+            onclick="clearFilters()"
+            class="quick-filter-btn bg-gray-100 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+          >
+            <i class="fas fa-times ml-2 text-xs"></i>
+            {{ __("app.tenders_filter.clear_button") }}
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="tendersGrid">
-        @forelse($tenders as $tender)
-            <div class="bg-white rounded-3xl shadow-2xl hover:shadow-3xl overflow-hidden tender-card transform hover:scale-[1.02] transition-all duration-500 border-2 border-transparent hover:border-[#f3a446] group relative"
-                data-title="{{ $tender->title }}" data-status="{{ $tender->status }}"
-                data-location="{{ $tender->location }}">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="tendersGrid">
+    @forelse($tenders as $tender)
+      <div
+        class="bg-white rounded-3xl shadow-2xl hover:shadow-3xl overflow-hidden tender-card transform hover:scale-[1.02] transition-all duration-500 border-2 border-transparent hover:border-[#f3a446] group relative"
+        data-title="{{ $tender->title }}"
+        data-status="{{ $tender->status }}"
+        data-location="{{ $tender->location }}"
+      >
+        <div
+          class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#2f5c69]/10 to-transparent rounded-full opacity-50"
+        ></div>
 
-                <div
-                    class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#2f5c69]/10 to-transparent rounded-full opacity-50">
-                </div>
+        <div class="relative h-48 overflow-hidden">
+          <img
+            src="{{ $tender->design->main_image_url }}"
+            alt="{{ $tender->title }}"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+          ></div>
 
-                <div class="relative h-48 overflow-hidden">
-                    <img src="{{ $tender->design->main_image_url }}" alt="{{ $tender->title }}"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute top-5 left-5">
+            @if ($tender->status === 'open')
+              <span
+                class="status-badge bg-[#2f5c69] text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm animate-pulse"
+              >
+                <i class="fas fa-circle ml-2 text-xs"></i>
+                {{ __("app.status.open") }}
+              </span>
+            @elseif($tender->status === 'closed')
+              <span
+                class="status-badge bg-red-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm"
+              >
+                <i class="fas fa-times-circle ml-2 text-xs"></i>
+                {{ __("app.status.closed") }}
+              </span>
+            @elseif($tender->status === 'awarded')
+              <span
+                class="status-badge bg-blue-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm"
+              >
+                <i class="fas fa-trophy ml-2 text-xs"></i>
+                {{ __("app.status.awarded") }}
+              </span>
+            @endif
+          </div>
 
-                    <div class="absolute top-5 left-5">
-                        @if ($tender->status === 'open')
-                            <span
-                                class="status-badge bg-[#2f5c69] text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm animate-pulse">
-                                <i class="fas fa-circle ml-2 text-xs"></i>
-                                مفتوحة
-                            </span>
-                        @elseif($tender->status === 'closed')
-                            <span
-                                class="status-badge bg-red-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm">
-                                <i class="fas fa-times-circle ml-2 text-xs"></i>
-                                مغلقة
-                            </span>
-                        @elseif($tender->status === 'awarded')
-                            <span
-                                class="status-badge bg-blue-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm">
-                                <i class="fas fa-trophy ml-2 text-xs"></i>
-                                ممنوحة
-                            </span>
-                        @endif
-                    </div>
-
-                    <div class="absolute top-5 right-5">
-                        <div
-                            class="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50">
-                            <i class="fas fa-file-alt ml-2 text-[#2f5c69]"></i>
-                            {{ $tender->proposals_count }} عرض
-                        </div>
-                    </div>
-
-                    @if ($tender->days_remaining !== null && $tender->status === 'open')
-                        <div class="absolute bottom-5 left-5">
-                            <div
-                                class="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50">
-                                <i
-                                    class="fas fa-clock ml-2 text-{{ $tender->days_remaining > 7 ? 'green' : ($tender->days_remaining > 3 ? 'yellow' : 'red') }}-600"></i>
-                                {{ $tender->days_remaining }} يوم متبقي
-                            </div>
-                        </div>
-                    @endif
-
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-[#f3a446]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    </div>
-                </div>
-
-                <div class="p-6 relative z-10">
-                    <h3
-                        class="text-2xl font-bold text-gray-900 mb-4 line-clamp-1 leading-tight group-hover:text-[#f3a446] transition-colors duration-300">
-                        {{ $tender->title }}
-                    </h3>
-                    <p class="text-gray-600 text-sm mb-5 line-clamp-2 leading-relaxed">
-                        {{ Str::limit($tender->description, 120) }}
-                    </p>
-
-                    <div class="grid grid-cols-2 gap-x-4 gap-y-3 mb-5">
-                        <div class="flex items-center">
-                            <i class="fas fa-user text-[#2f5c69] ml-3 text-lg w-5 text-center"></i>
-                            <span class="text-sm font-bold text-gray-900 truncate">{{ $tender->client->name }}</span>
-                        </div>
-
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-[#2f5c69] ml-3 text-lg w-5 text-center"></i>
-                            <span class="text-sm font-bold text-gray-900 truncate">{{ $tender->location }}</span>
-                        </div>
-
-                        @if ($tender->budget)
-                            <div class="flex items-center">
-                                <i class="fas fa-money-bill-wave text-green-600 ml-3 text-lg w-5 text-center"></i>
-                                <span
-                                    class="text-sm font-bold text-green-600 truncate">{{ $tender->formatted_budget }}</span>
-                            </div>
-                        @endif
-
-                        <div class="flex items-center">
-                            <i class="fas fa-calendar-alt text-purple-600 ml-3 text-lg w-5 text-center"></i>
-                            <span
-                                class="text-sm font-bold text-gray-900 truncate">{{ $tender->formatted_deadline }}</span>
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="{{ route('tenders.show', $tender->id) }}"
-                            class="flex-1 bg-[#f3a446] text-[#1a262a] text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl hover:bg-[#f5b05a] group">
-                            <i
-                                class="fas fa-eye ml-2 text-base group-hover:scale-110 transition-transform duration-300"></i>
-                            عرض التفاصيل
-                        </a>
-                        @auth
-                            @if (auth()->user()->isConsultant() && $tender->status === 'open')
-                                <a href="{{ route('proposals.create', $tender->id) }}"
-                                    class="flex-1 bg-transparent text-[#2f5c69] border-2 border-[#2f5c69] hover:bg-[#2f5c69] hover:text-white text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl group">
-                                    <i
-                                        class="fas fa-paper-plane ml-2 text-base group-hover:scale-110 transition-transform duration-300"></i>
-                                    قدم عرض
-                                </a>
-                            @endif
-                        @endauth
-                    </div>
-                </div>
+          <div class="absolute top-5 right-5">
+            <div
+              class="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50"
+            >
+              <i class="fas fa-file-alt ml-2 text-[#2f5c69]"></i>
+              {{ $tender->proposals_count }}
+              {{ __("app.tenders_list.proposal_unit") }}
             </div>
-        @empty
-            <div class="col-span-full">
-                <div class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-100">
-                    <div
-                        class="w-24 h-24 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-inbox text-4xl text-gray-400"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">لا توجد مناقصات متاحة</h3>
-                    <p class="text-gray-600 text-lg mb-8">لم يتم العثور على مناقصات تطابق معايير البحث المحددة
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button onclick="clearFilters()"
-                            class="bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                            <i class="fas fa-refresh ml-2"></i>
-                            مسح الفلاتر
-                        </button>
-                        @auth
-                            @if (auth()->user()->isClient())
-                                <a href="{{ route('tenders.create') }}"
-                                    class="bg-[#2f5c69] hover:bg-[#1a262a] text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                                    <i class="fas fa-plus ml-2"></i>
-                                    إنشاء مناقصة جديدة
-                                </a>
-                            @endif
-                        @endauth
-                    </div>
-                </div>
-            </div>
-        @endforelse
-    </div>
+          </div>
 
-    @if ($tenders->hasPages())
-        <div class="mt-12 flex justify-center">
-            <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
-                {{ $tenders->links() }}
+          @if ($tender->days_remaining !== null && $tender->status === 'open')
+            <div class="absolute bottom-5 left-5">
+              <div
+                class="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50"
+              >
+                <i
+                  class="fas fa-clock ml-2 text-{{ $tender->days_remaining > 7 ? 'green' : ($tender->days_remaining > 3 ? 'yellow' : 'red') }}-600"
+                ></i>
+                {{ $tender->days_remaining }}
+                {{ __("app.tenders_list.days_remaining") }}
+              </div>
             </div>
+          @endif
+
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-[#f3a446]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          ></div>
         </div>
-    @endif
+
+        <div class="p-6 relative z-10">
+          <h3
+            class="text-2xl font-bold text-gray-900 mb-4 line-clamp-1 leading-tight group-hover:text-[#f3a446] transition-colors duration-300"
+          >
+            {{ $tender->title }}
+          </h3>
+          <p class="text-gray-600 text-sm mb-5 line-clamp-2 leading-relaxed">
+            {{ Str::limit($tender->description, 120) }}
+          </p>
+
+          <div class="grid grid-cols-2 gap-x-4 gap-y-3 mb-5">
+            <div class="flex items-center">
+              <i
+                class="fas fa-user text-[#2f5c69] ml-3 text-lg w-5 text-center"
+              ></i>
+              <span class="text-sm font-bold text-gray-900 truncate">{{
+                $tender->client->name
+              }}</span>
+            </div>
+
+            <div class="flex items-center">
+              <i
+                class="fas fa-map-marker-alt text-[#2f5c69] ml-3 text-lg w-5 text-center"
+              ></i>
+              <span class="text-sm font-bold text-gray-900 truncate">{{
+                $tender->location
+              }}</span>
+            </div>
+
+            @if ($tender->budget)
+              <div class="flex items-center">
+                <i
+                  class="fas fa-money-bill-wave text-green-600 ml-3 text-lg w-5 text-center"
+                ></i>
+                <span class="text-sm font-bold text-green-600 truncate">{{
+                  $tender->formatted_budget
+                }}</span>
+              </div>
+            @endif
+
+            <div class="flex items-center">
+              <i
+                class="fas fa-calendar-alt text-purple-600 ml-3 text-lg w-5 text-center"
+              ></i>
+              <span class="text-sm font-bold text-gray-900 truncate">{{
+                $tender->formatted_deadline
+              }}</span>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <a
+              href="{{ route('tenders.show', $tender->id) }}"
+              class="flex-1 bg-[#f3a446] text-[#1a262a] text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl hover:bg-[#f5b05a] group"
+            >
+              <i
+                class="fas fa-eye ml-2 text-base group-hover:scale-110 transition-transform duration-300"
+              ></i>
+              {{ __("app.tenders_list.view_details_button") }}
+            </a>
+            @auth
+              @if (auth()->user()->isConsultant() && $tender->status === 'open')
+                <a
+                  href="{{ route('proposals.create', $tender->id) }}"
+                  class="flex-1 bg-transparent text-[#2f5c69] border-2 border-[#2f5c69] hover:bg-[#2f5c69] hover:text-white text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl group"
+                >
+                  <i
+                    class="fas fa-paper-plane ml-2 text-base group-hover:scale-110 transition-transform duration-300"
+                  ></i>
+                  {{ __("app.tenders_list.submit_proposal_button") }}
+                </a>
+              @endif
+            @endauth
+          </div>
+        </div>
+      </div>
+    @empty
+      <div class="col-span-full">
+        <div
+          class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-100"
+        >
+          <div
+            class="w-24 h-24 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <i class="fas fa-inbox text-4xl text-gray-400"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">
+            {{ __("app.tenders_empty.title") }}
+          </h3>
+          <p class="text-gray-600 text-lg mb-8">
+            {{ __("app.tenders_empty.subtitle") }}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onclick="clearFilters()"
+              class="bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              <i class="fas fa-refresh ml-2"></i>
+              {{ __("app.tenders_empty.clear_filters_button") }}
+            </button>
+            @auth
+              @if (auth()->user()->isClient())
+                <a
+                  href="{{ route('tenders.create') }}"
+                  class="bg-[#2f5c69] hover:bg-[#1a262a] text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                  <i class="fas fa-plus ml-2"></i>
+                  {{ __("app.tenders_empty.create_tender_button") }}
+                </a>
+              @endif
+            @endauth
+          </div>
+        </div>
+      </div>
+    @endforelse
+  </div>
+
+  @if ($tenders->hasPages())
+    <div class="mt-12 flex justify-center">
+      <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+        {{ $tenders->links() }}
+      </div>
+    </div>
+  @endif
 </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
