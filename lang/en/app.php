@@ -357,7 +357,7 @@ return [
 
     'why_choose_us' => [
         'title' => 'Why choose the',
-        'platform_name' => 'Insha\'at',
+        'platform_name' => 'Insha\'at?',
         'subtitle' => 'We provide integrated solutions that combine modern technology and practical experience to ensure your project\'s success',
         'features' => [
             'card_1' => [

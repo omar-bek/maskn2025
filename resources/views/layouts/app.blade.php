@@ -4,7 +4,8 @@
     $isRtl = $currentLocale === 'ar';
     $switchLocale = $isRtl ? 'en' : 'ar';
 @endphp
-<html lang="{{ str_replace('_', '-', $currentLocale) }}" dir="{{ $isRtl ? 'rtl' : 'ltr' }}">
+
+<html lang="{{ str_replace('_', '-', $currentLocale) }}" dir="{{ $isRtl ? 'rtl' : 'ltr' }}" class="{{ $isRtl ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="UTF-8">
@@ -62,7 +63,6 @@
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--bg-light);
-            direction: rtl;
             min-height: 100vh;
             margin: 0;
             padding: 0;
@@ -70,6 +70,16 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
+        html.rtl body {
+    direction: rtl;
+    text-align: right;
+}
+
+html.ltr body {
+    direction: ltr;
+    text-align: left;
+}
 
         /* Responsive container */
         .container {
@@ -279,9 +289,9 @@
 <body>
     <!-- Header -->
 
-<header class="fixed top-0 w-full z-50 mt-5 transition-all duration-300">
+<header class="fixed top-0 w-full z-50 transition-all duration-300">
   <div
-    class="header-content w-11/12 mx-auto px-4 py-3 transition-all duration-300 bg-[#2f5c69] border-2 border-[#f3a446] rounded-full backdrop-blur-lg flex items-center justify-between relative z-50"
+    class="header-content w-full px-4 py-3 transition-all duration-300 bg-white/95 border-b-2 border-[#f3a446] backdrop-blur-md shadow-lg flex items-center justify-between relative z-50"
   >
     <div class="flex items-center gap-6">
       <a
@@ -302,14 +312,6 @@
             class="logo-icon w-10 h-10 bg-[#f3a446]/20 rounded-full"
           ></div>
         @endif
-        <div class="logo-text">
-          <div class="logo-title text-white font-bold text-lg leading-tight">
-            {{ __('app.header.logo_name') }}
-          </div>
-          <div class="logo-subtitle text-[#f3a446] text-sm">
-            {{ __('app.header.logo_subtitle') }}
-          </div>
-        </div>
       </a>
 
       <nav
@@ -320,25 +322,25 @@
         <div class="nav-links flex items-center gap-2">
           <a
             href="{{ route('home') }}"
-            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('home') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+            class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('home') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
             aria-label="{{ __('app.header.home') }}"
             >{{ __('app.header.home') }}</a
           >
           <a
             href="{{ route('designs.index') }}"
-            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('designs.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+            class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('designs.*') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
             aria-label="{{ __('app.header.designs') }}"
             >{{ __('app.header.designs') }}</a
           >
           <a
             href="{{ route('tenders.index') }}"
-            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+            class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.*') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
             aria-label="{{ __('app.header.tenders') }}"
             >{{ __('app.header.tenders') }}</a
           >
           <a
             href="{{ route('lands.create') }}"
-            class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('lands.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+            class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('lands.create') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
             aria-label="{{ __('app.header.sell_exchange_lands') }}"
             >{{ __('app.header.sell_exchange_lands') }}</a
           >
@@ -347,20 +349,20 @@
             @if (auth()->user()->isConsultant())
               <a
                 href="{{ route('designs.create') }}"
-                class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('designs.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+                class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('designs.create') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
                 aria-label="{{ __('app.header.add_design') }}"
                 >{{ __('app.header.add_design') }}</a
               >
               <a
                 href="{{ route('proposals.index') }}"
-                class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('proposals.*') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+                class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('proposals.*') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
                 aria-label="{{ __('app.header.my_proposals') }}"
                 >{{ __('app.header.my_proposals') }}</a
               >
             @elseif(auth()->user()->isClient())
               <a
                 href="{{ route('tenders.create') }}"
-                class="nav-link text-white hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.create') ? 'bg-black/25 text-[#f3a446] font-semibold' : '' }}"
+                class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.create') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
                 aria-label="{{ __('app.header.create_tender') }}"
                 >{{ __('app.header.create_tender') }}</a
               >
@@ -375,7 +377,7 @@
         <button
           type="button"
           id="desktopLanguageToggle"
-          class="nav-action-btn language-btn flex items-center gap-2 text-white hover:text-[#f3a446] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f3a446] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b3b45]"
+          class="nav-action-btn language-btn flex items-center gap-2 text-gray-700 hover:text-[#f3a446] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f3a446] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
           aria-haspopup="true"
           aria-expanded="false"
         >
@@ -392,13 +394,13 @@
 
         <div
           id="desktopLanguageMenu"
-          class="language-menu hidden absolute mt-2 min-w-[140px] rounded-lg shadow-xl border border-white/10 backdrop-blur-md bg-[#1b3b45]/90 text-white py-2 {{ $isRtl ? 'left-0 origin-top-left' : 'right-0 origin-top-right' }}"
+          class="language-menu hidden absolute mt-2 min-w-[140px] rounded-lg shadow-xl border border-gray-200 backdrop-blur-md bg-white/95 text-gray-800 py-2 {{ $isRtl ? 'left-0 origin-top-left' : 'right-0 origin-top-right' }}"
           role="menu"
           aria-labelledby="desktopLanguageToggle"
         >
           <a
             href="{{ route('language.switch', 'ar') }}"
-            class="flex items-center gap-2 px-4 py-2 hover:bg-white/10 transition {{ $currentLocale === 'ar' ? 'text-[#f3a446] font-semibold' : '' }}"
+            class="flex items-center gap-2 px-4 py-2 hover:bg-[#f3a446]/10 transition {{ $currentLocale === 'ar' ? 'text-[#f3a446] font-semibold' : '' }}"
             role="menuitem"
           >
             <span>{{ __('app.header.language_arabic') }}</span>
@@ -408,7 +410,7 @@
           </a>
           <a
             href="{{ route('language.switch', 'en') }}"
-            class="flex items-center gap-2 px-4 py-2 hover:bg-white/10 transition {{ $currentLocale === 'en' ? 'text-[#f3a446] font-semibold' : '' }}"
+            class="flex items-center gap-2 px-4 py-2 hover:bg-[#f3a446]/10 transition {{ $currentLocale === 'en' ? 'text-[#f3a446] font-semibold' : '' }}"
             role="menuitem"
           >
             <span>{{ __('app.header.language_english') }}</span>
@@ -423,13 +425,13 @@
         <div class="user-menu flex items-center gap-3">
           <a
             href="{{ Auth::user()->getDashboardRoute() }}"
-            class="nav-action-btn user-btn flex items-center gap-2 text-white hover:text-[#f3a446]"
+            class="nav-action-btn user-btn flex items-center gap-2 text-gray-700 hover:text-[#f3a446]"
           >
             <i class="fas fa-user"></i><span>{{ Auth::user()->name }}</span>
           </a>
           <a
             href="{{ route(Auth::user()->userType->name . '.profile') }}"
-            class="nav-action-btn profile-btn flex items-center gap-2 text-white hover:text-[#f3a446]"
+            class="nav-action-btn profile-btn flex items-center gap-2 text-gray-700 hover:text-[#f3a446]"
           >
             <i class="fas fa-cog"></i
             ><span>{{ __('app.header.profile') }}</span>
@@ -442,7 +444,7 @@
             @csrf
             <button
               type="submit"
-              class="nav-action-btn logout-btn flex items-center gap-2 text-[#f3a446] hover:text-white"
+              class="nav-action-btn logout-btn flex items-center gap-2 text-red-600 hover:text-red-800"
             >
               <i class="fas fa-sign-out-alt"></i
               ><span>{{ __('app.header.logout') }}</span>
@@ -452,14 +454,14 @@
       @else
         <a
           href="{{ route('login') }}"
-          class="nav-action-btn login-btn flex items-center gap-2 text-white hover:text-[#f3a446]"
+          class="nav-action-btn login-btn flex items-center gap-2 text-gray-700 hover:text-[#f3a446]"
         >
           <i class="fas fa-sign-in-alt"></i
           ><span>{{ __('app.header.login') }}</span>
         </a>
         <a
           href="{{ route('register') }}"
-          class="nav-action-btn register-btn flex items-center gap-2 bg-[#f3a446] text-[#2f5c69] font-semibold px-3 py-1 rounded-full hover:bg-[#e6953a]"
+          class="nav-action-btn register-btn flex items-center gap-2 bg-[#f3a446] text-[#2f5c69] font-semibold px-3 py-1 rounded-full hover:bg-[#e6953a] transition-colors"
         >
           <i class="fas fa-user-plus"></i
           ><span>{{ __('app.header.register') }}</span>
@@ -467,18 +469,68 @@
       @endauth
     </div>
 
-    <button
-      class="mobile-menu-toggle md:hidden text-[#f3a446] text-2xl"
-      aria-label="{{ __('app.header.menu_toggle') }}"
-      aria-expanded="false"
-      aria-controls="mobileMenu"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
+    <div class="flex items-center gap-4 md:hidden">
+      <div class="relative language-dropdown">
+        <button
+          type="button"
+          id="mobileLanguageToggle"
+          class="nav-action-btn language-btn flex items-center gap-2 text-gray-700 hover:text-[#f3a446] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f3a446] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="fas fa-globe"></i>
+          <span
+            >{{ $currentLocale === 'ar' ? __('app.header.language_arabic') :
+            __('app.header.language_english') }}</span
+          >
+          <i
+            class="fas fa-chevron-down text-xs transition-transform duration-200"
+            data-chevron
+          ></i>
+        </button>
+
+        <div
+          id="mobileLanguageMenu"
+          class="language-menu hidden absolute mt-2 min-w-[140px] rounded-lg shadow-xl border border-gray-200 backdrop-blur-md bg-white/95 text-gray-800 py-2 {{ $isRtl ? 'left-0 origin-top-left' : 'right-0 origin-top-right' }}"
+          role="menu"
+          aria-labelledby="mobileLanguageToggle"
+        >
+          <a
+            href="{{ route('language.switch', 'ar') }}"
+            class="flex items-center gap-2 px-4 py-2 hover:bg-[#f3a446]/10 transition {{ $currentLocale === 'ar' ? 'text-[#f3a446] font-semibold' : '' }}"
+            role="menuitem"
+          >
+            <span>{{ __('app.header.language_arabic') }}</span>
+            @if ($currentLocale === 'ar')
+              <i class="fas fa-check text-xs ms-auto"></i>
+            @endif
+          </a>
+          <a
+            href="{{ route('language.switch', 'en') }}"
+            class="flex items-center gap-2 px-4 py-2 hover:bg-[#f3a446]/10 transition {{ $currentLocale === 'en' ? 'text-[#f3a446] font-semibold' : '' }}"
+            role="menuitem"
+          >
+            <span>{{ __('app.header.language_english') }}</span>
+            @if ($currentLocale === 'en')
+              <i class="fas fa-check text-xs ms-auto"></i>
+            @endif
+          </a>
+        </div>
+      </div>
+
+      <button
+        class="mobile-menu-toggle text-[#f3a446] text-2xl"
+        aria-label="{{ __('app.header.menu_toggle') }}"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
   </div>
 
   <div
-    class="mobile-menu absolute top-full left-0 right-0 mx-auto w-11/12 md:w-4/5 mt-2 bg-white text-gray-800 rounded-2xl shadow-2xl z-40 overflow-hidden max-h-0 opacity-0 invisible transition-all duration-500 ease-in-out"
+    class="mobile-menu absolute top-full left-0 right-0 w-full bg-white text-gray-800 shadow-2xl z-40 overflow-hidden max-h-0 opacity-0 invisible transition-all duration-500 ease-in-out"
     id="mobileMenu"
     role="navigation"
     aria-label="{{ __('app.header.main_menu') }}"
@@ -487,7 +539,7 @@
       class="mobile-menu-header flex items-center justify-between p-4 border-b border-gray-200"
     >
       <button
-        class="mobile-menu-close text-2xl text-[#2f5c69]"
+        class="mobile-menu-close text-2xl text-gray-600 hover:text-gray-900"
         aria-label="{{ __('app.header.close_menu') }}"
       >
         <i class="fas fa-times"></i>
@@ -510,39 +562,40 @@
     <nav class="mobile-nav p-4 space-y-6 overflow-y-auto max-h-[70vh]">
       <div class="mobile-nav-section space-y-2">
         <h3
-          class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2"
+          class="mobile-nav-section-title text-gray-500 uppercase text-xs font-semibold tracking-wider mb-3"
         >
           {{ __('app.header.main_menu') }}
         </h3>
         <a
           href="{{ route('home') }}"
-          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('home') ? 'text-[#f3a446] font-semibold' : '' }}"
+          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg {{ request()->routeIs('home') ? 'text-white font-semibold bg-[#2f5c69]' : '' }}"
           aria-label="{{ __('app.header.home') }}"
         >
-          <i class="fas fa-home"></i><span>{{ __('app.header.home') }}</span>
+          <i class="fas fa-home w-5 text-center"></i
+          ><span>{{ __('app.header.home') }}</span>
         </a>
         <a
           href="{{ route('designs.index') }}"
-          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('designs.*') ? 'text-[#f3a446] font-semibold' : '' }}"
+          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg {{ request()->routeIs('designs.*') ? 'text-white font-semibold bg-[#2f5c69]' : '' }}"
           aria-label="{{ __('app.header.designs') }}"
         >
-          <i class="fas fa-paint-brush"></i
+          <i class="fas fa-paint-brush w-5 text-center"></i
           ><span>{{ __('app.header.designs') }}</span>
         </a>
         <a
           href="{{ route('tenders.index') }}"
-          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('tenders.*') ? 'text-[#f3a446] font-semibold' : '' }}"
+          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg {{ request()->routeIs('tenders.*') ? 'text-white font-semibold bg-[#2f5c69]' : '' }}"
           aria-label="{{ __('app.header.tenders') }}"
         >
-          <i class="fas fa-gavel"></i
+          <i class="fas fa-gavel w-5 text-center"></i
           ><span>{{ __('app.header.tenders') }}</span>
         </a>
         <a
           href="{{ route('lands.create') }}"
-          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('lands.create') ? 'text-[#f3a446] font-semibold' : '' }}"
+          class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg {{ request()->routeIs('lands.create') ? 'text-white font-semibold bg-[#2f5c69]' : '' }}"
           aria-label="{{ __('app.header.sell_exchange_lands') }}"
         >
-          <i class="fas fa-exchange-alt"></i
+          <i class="fas fa-exchange-alt w-5 text-center"></i
           ><span>{{ __('app.header.sell_exchange_lands') }}</span>
         </a>
       </div>
@@ -552,18 +605,18 @@
           <div class="mobile-nav-section space-y-2">
             <a
               href="{{ route('designs.create') }}"
-              class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('designs.create') ? 'text-[#f3a446] font-semibold' : '' }}"
+              class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg {{ request()->routeIs('designs.create') ? 'text-white font-semibold bg-[#2f5c69]' : '' }}"
               aria-label="{{ __('app.header.add_design') }}"
             >
-              <i class="fas fa-plus-square"></i
+              <i class="fas fa-plus-square w-5 text-center"></i
               ><span>{{ __('app.header.add_design') }}</span>
             </a>
             <a
               href="{{ route('proposals.index') }}"
-              class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] {{ request()->routeIs('proposals.*') ? 'text-[#f3a446] font-semibold' : '' }}"
+              class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg {{ request()->routeIs('proposals.*') ? 'text-white font-semibold bg-[#2f5c69]' : '' }}"
               aria-label="{{ __('app.header.my_proposals') }}"
             >
-              <i class="fas fa-file-contract"></i
+              <i class="fas fa-file-contract w-5 text-center"></i
               ><span>{{ __('app.header.my_proposals') }}</span>
             </a>
           </div>
@@ -571,7 +624,7 @@
           <div class="mobile-nav-section">
             <a
               href="{{ route('tenders.create') }}"
-              class="mobile-nav-button flex items-center justify-center gap-2 py-2 px-4 bg-[#f3a446] text-[#2f5c69] rounded-lg font-semibold hover:bg-[#e6953a]"
+              class="mobile-nav-button flex items-center justify-center gap-2 py-2 px-4 bg-[#f3a446] text-[#2f5c69] rounded-lg font-semibold hover:bg-[#e6953a] transition-colors"
               aria-label="{{ __('app.header.create_tender') }}"
             >
               <i class="fas fa-clipboard-list"></i
@@ -583,7 +636,7 @@
 
       @auth
         <div class="mobile-nav-section space-y-2">
-          <div class="mobile-user-info flex items-center gap-3 mb-3">
+          <div class="mobile-user-info flex items-center gap-3 mb-3 p-2">
             <div
               class="user-avatar w-10 h-10 bg-[#f3a446] text-[#2f5c69] flex items-center justify-center rounded-full"
             >
@@ -593,41 +646,41 @@
               <h4 class="user-name font-bold text-gray-900">
                 {{ Auth::user()->name }}
               </h4>
-              <p class="user-type text-sm text-[#f3a446]">
+              <p class="user-type text-sm text-[#f3a446] font-medium">
                 {{ Auth::user()->userType->display_name_ar ?? Auth::user()->userType->name }}
               </p>
             </div>
           </div>
 
           <h3
-            class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2"
+            class="mobile-nav-section-title text-gray-500 uppercase text-xs font-semibold tracking-wider mb-3"
           >
             {{ __('app.header.my_account') }}
           </h3>
           <a
             href="{{ Auth::user()->getDashboardRoute() }}"
-            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
+            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg"
             aria-label="{{ __('app.header.dashboard') }}"
           >
-            <i class="fas fa-tachometer-alt"></i
+            <i class="fas fa-tachometer-alt w-5 text-center"></i
             ><span>{{ __('app.header.dashboard') }}</span>
           </a>
           <a
             href="{{ route(Auth::user()->userType->name . '.profile') }}"
-            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
+            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg"
             aria-label="{{ __('app.header.profile') }}"
           >
-            <i class="fas fa-user"></i
+            <i class="fas fa-user w-5 text-center"></i
             ><span>{{ __('app.header.profile') }}</span>
           </a>
           <form action="{{ route('logout') }}" method="POST" class="w-full">
             @csrf
             <button
               type="submit"
-              class="mobile-nav-link logout-link flex items-center gap-3 text-red-600 hover:text-red-800"
+              class="mobile-nav-link logout-link flex items-center gap-3 text-red-600 hover:text-red-800 w-full p-2 rounded-lg"
               aria-label="{{ __('app.header.logout') }}"
             >
-              <i class="fas fa-sign-out-alt"></i
+              <i class="fas fa-sign-out-alt w-5 text-center"></i
               ><span>{{ __('app.header.logout') }}</span>
             </button>
           </form>
@@ -635,21 +688,21 @@
       @else
         <div class="mobile-nav-section space-y-2">
           <h3
-            class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2"
+            class="mobile-nav-section-title text-gray-500 uppercase text-xs font-semibold tracking-wider mb-3"
           >
             {{ __('app.header.user_account') }}
           </h3>
           <a
             href="{{ route('login') }}"
-            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446]"
+            class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg"
             aria-label="{{ __('app.header.login') }}"
           >
-            <i class="fas fa-sign-in-alt"></i
+            <i class="fas fa-sign-in-alt w-5 text-center"></i
             ><span>{{ __('app.header.login') }}</span>
           </a>
           <a
             href="{{ route('register') }}"
-            class="mobile-nav-button flex items-center justify-center gap-2 py-2 px-4 bg-[#f3a446] text-[#2f5c69] rounded-lg font-semibold hover:bg-[#e6953a]"
+            class="mobile-nav-button flex items-center justify-center gap-2 py-2 px-4 bg-[#f3a446] text-[#2f5c69] rounded-lg font-semibold hover:bg-[#e6953a] transition-colors"
             aria-label="{{ __('app.header.register') }}"
           >
             <i class="fas fa-user-plus"></i
@@ -657,163 +710,118 @@
           </a>
         </div>
       @endauth
-
-      <div class="mobile-nav-section space-y-2">
-        <h3
-          class="mobile-nav-section-title text-[#2f5c69] font-semibold text-sm mb-2"
-        >
-          {{ __('app.header.language') }}
-        </h3>
-        <a
-          href="{{ route('language.switch', 'ar') }}"
-          class="mobile-nav-link flex items-center justify-between gap-3 {{ $currentLocale === 'ar' ? 'text-[#f3a446] font-semibold' : 'text-gray-700 hover:text-[#f3a446]' }}"
-          aria-label="{{ __('app.header.language_arabic') }}"
-          @if ($currentLocale === 'ar') aria-current="true" @endif
-        >
-          <div class="flex items-center gap-3">
-            <i class="fas fa-globe"></i
-            ><span>{{ __('app.header.language_arabic') }}</span>
-          </div>
-          @if ($currentLocale === 'ar')
-            <i class="fas fa-check"></i>
-          @endif
-        </a>
-        <a
-          href="{{ route('language.switch', 'en') }}"
-          class="mobile-nav-link flex items-center justify-between gap-3 {{ $currentLocale === 'en' ? 'text-[#f3a446] font-semibold' : 'text-gray-700 hover:text-[#f3a446]' }}"
-          aria-label="{{ __('app.header.language_english') }}"
-          @if ($currentLocale === 'en') aria-current="true" @endif
-        >
-          <div class="flex items-center gap-3">
-            <i class="fas fa-globe"></i
-            ><span>{{ __('app.header.language_english') }}</span>
-          </div>
-          @if ($currentLocale === 'en')
-            <i class="fas fa-check"></i>
-          @endif
-        </a>
-      </div>
     </nav>
   </div>
 </header>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const menuClose = document.querySelector('.mobile-menu-close');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileMenuOverlay');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const menuClose = document.querySelector('.mobile-menu-close');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('mobileMenuOverlay');
-            const languageToggle = document.getElementById('desktopLanguageToggle');
-            const languageMenu = document.getElementById('desktopLanguageMenu');
-            const languageChevron = languageToggle ? languageToggle.querySelector('[data-chevron]') : null;
+    const toggleIcon = menuToggle ? menuToggle.querySelector('i') : null;
 
-            const toggleIcon = menuToggle ? menuToggle.querySelector('i') : null;
+    const openMenu = () => {
+      if (mobileMenu) {
+        mobileMenu.classList.remove('max-h-0', 'opacity-0', 'invisible');
+        mobileMenu.classList.add('max-h-screen', 'opacity-100', 'visible');
+      }
+      if (overlay) {
+        overlay.classList.remove('hidden');
+      }
+      if (toggleIcon) {
+        toggleIcon.classList.remove('fa-bars');
+        toggleIcon.classList.add('fa-times');
+      }
+      if (menuToggle) {
+        menuToggle.setAttribute('aria-expanded', 'true');
+      }
+    };
 
-            const openMenu = () => {
-                if (mobileMenu) {
-                    mobileMenu.classList.remove('max-h-0', 'opacity-0', 'invisible');
+    const closeMenu = () => {
+      if (mobileMenu) {
+        mobileMenu.classList.add('max-h-0', 'opacity-0', 'invisible');
+        mobileMenu.classList.remove('max-h-screen', 'opacity-100', 'visible');
+      }
+      if (overlay) {
+        overlay.classList.add('hidden');
+      }
+      if (toggleIcon) {
+        toggleIcon.classList.remove('fa-times');
+        toggleIcon.classList.add('fa-bars');
+      }
+      if (menuToggle) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    };
 
-                    mobileMenu.classList.add('max-h-screen', 'opacity-100', 'visible');
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+    }
 
-                }
-                if (overlay) {
-                    overlay.classList.remove('hidden');
-                }
-                if (toggleIcon) {
-                    toggleIcon.classList.remove('fa-bars');
-                    toggleIcon.classList.add('fa-times');
-                }
-                if (menuToggle) {
-                    menuToggle.setAttribute('aria-expanded', 'true');
-                }
-            };
+    if (menuClose) {
+      menuClose.addEventListener('click', closeMenu);
+    }
 
-            const closeMenu = () => {
-                if (mobileMenu) {
-                    mobileMenu.classList.add('max-h-0', 'opacity-0', 'invisible');
-                    mobileMenu.classList.remove('max-h-screen', 'opacity-100', 'visible');
-                }
-                if (overlay) {
-                    overlay.classList.add('hidden');
-                }
-                if (toggleIcon) {
-                    toggleIcon.classList.remove('fa-times');
-                    toggleIcon.classList.add('fa-bars');
-                }
-                if (menuToggle) {
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                }
-            };
+    if (overlay) {
+      overlay.addEventListener('click', closeMenu);
+    }
 
-            if (menuToggle) {
-                menuToggle.addEventListener('click', () => {
-                    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-                    if (isExpanded) {
-                        closeMenu();
-                    } else {
-                        openMenu();
-                    }
-                });
-            }
+    const setupDropdown = (toggleId, menuId) => {
+      const toggle = document.getElementById(toggleId);
+      const menu = document.getElementById(menuId);
+      const chevron = toggle ? toggle.querySelector('[data-chevron]') : null;
 
-            if (menuClose) {
-                menuClose.addEventListener('click', closeMenu);
-            }
+      if (!toggle || !menu) return;
 
-            if (overlay) {
-                overlay.addEventListener('click', closeMenu);
-            }
+      const openLanguageMenu = () => {
+        menu.classList.remove('hidden');
+        toggle.setAttribute('aria-expanded', 'true');
+        if (chevron) chevron.classList.add('rotate-180');
+      };
 
-            const openLanguageMenu = () => {
-                if (languageMenu) {
-                    languageMenu.classList.remove('hidden');
-                }
-                if (languageToggle) {
-                    languageToggle.setAttribute('aria-expanded', 'true');
-                }
-                if (languageChevron) {
-                    languageChevron.classList.add('rotate-180');
-                }
-            };
+      const closeLanguageMenu = () => {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        if (chevron) chevron.classList.remove('rotate-180');
+      };
 
-            const closeLanguageMenu = () => {
-                if (languageMenu) {
-                    languageMenu.classList.add('hidden');
-                }
-                if (languageToggle) {
-                    languageToggle.setAttribute('aria-expanded', 'false');
-                }
-                if (languageChevron) {
-                    languageChevron.classList.remove('rotate-180');
-                }
-            };
+      toggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          closeLanguageMenu();
+        } else {
+          openLanguageMenu();
+        }
+      });
 
-            if (languageToggle && languageMenu) {
-                languageToggle.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    const isExpanded = languageToggle.getAttribute('aria-expanded') === 'true';
-                    if (isExpanded) {
-                        closeLanguageMenu();
-                    } else {
-                        openLanguageMenu();
-                    }
-                });
+      document.addEventListener('click', (event) => {
+        if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+          closeLanguageMenu();
+        }
+      });
 
-                document.addEventListener('click', (event) => {
-                    if (!languageMenu.contains(event.target) && !languageToggle.contains(event.target)) {
-                        closeLanguageMenu();
-                    }
-                });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeLanguageMenu();
+        }
+      });
+    };
 
-                document.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape') {
-                        closeLanguageMenu();
-                    }
-                });
-            }
-        });
-    </script>
+    setupDropdown('desktopLanguageToggle', 'desktopLanguageMenu');
+    setupDropdown('mobileLanguageToggle', 'mobileLanguageMenu');
+  });
+</script>
 
 
     <!-- Main Content -->

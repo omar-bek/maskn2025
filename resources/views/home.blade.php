@@ -3,12 +3,10 @@
 @section('content')
 
 
-
 <section class="hero-section bg-[#2f5c69] text-white relative pt-20 pb-12 lg:rounded-b-[50px] border-b-8 border-b-[#f3a446]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-            <div class="text-right animate-fade-in">
+            <div class=" animate-fade-in">
                 <div class="inline-block border border-[#f3a446] px-3 py-1 rounded-md mb-4">
                     <span class="text-gray-200 font-medium"> {{ __('app.welcome') }}!</span>
                 </div>
@@ -57,54 +55,54 @@
                 </div>
             </div>
 
-            <div class="relative animate-slide-in flex items-center justify-center min-h-[400px] lg:min-h-[500px]">
+            <div class="relative animate-slide-in flex items-center justify-center min-h-[350px] lg:min-h-[500px]">
 
                 <img src="{{ asset('images/home3.png') }}"
                         alt="{{ __('app.hero_image_alt') }}"
-                        class="relative z-10 w-[350px] h-[350px] object-cover rounded-full shadow-2xl transition-transform duration-500 hover:rotate-3">
+                        class="relative z-10 w-[260px] h-[260px] lg:w-[350px] lg:h-[350px] object-cover rounded-full shadow-2xl transition-transform duration-500 hover:rotate-3">
 
-                <div class="absolute w-[420px] h-[420px] border-2 border-[#f3a446]/60 rounded-full animate-pulse">
+                <div class="absolute w-[310px] h-[310px] lg:w-[420px] lg:h-[420px] border-2 border-[#f3a446]/60 rounded-full animate-pulse">
 
-                    <div class="absolute -top-4 right-16 group">
-                        <div class="w-14 h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-xl shadow-lg 
+                    <div class="absolute -top-4 right-10 lg:right-16 group">
+                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-lg lg:text-xl shadow-lg 
                                     transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-400/50">
                             <i class="fas fa-user-tie"></i>
                         </div>
                         <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                    font-semibold text-xs px-3 py-1 rounded-md bottom-[70px] right-1/2 translate-x-1/2 shadow-md">
+                                    font-semibold text-xs px-3 py-1 rounded-md bottom-[65px] lg:bottom-[70px] right-1/2 translate-x-1/2 shadow-md whitespace-nowrap">
                             {{ __('app.certified_consultants') }}
                         </span>
                     </div>
 
-                    <div class="absolute -bottom-4 left-16 group">
-                        <div class="w-14 h-14 bg-[#f1f7ff] border border-gray-200 text-[#2f5c69] rounded-full flex items-center justify-center text-xl shadow-lg 
+                    <div class="absolute -bottom-4 left-10 lg:left-16 group">
+                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-[#f1f7ff] border border-gray-200 text-[#2f5c69] rounded-full flex items-center justify-center text-lg lg:text-xl shadow-lg 
                                     transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-300/60">
                             <i class="fas fa-tools"></i>
                         </div>
                         <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                    font-semibold text-xs px-3 py-1 rounded-md top-[70px] left-1/2 -translate-x-1/2 shadow-md">
+                                    font-semibold text-xs px-3 py-1 rounded-md top-[65px] lg:top-[70px] left-1/2 -translate-x-1/2 shadow-md whitespace-nowrap">
                             {{ __('app.trusted_contractors') }}
                         </span>
                     </div>
 
-                    <div class="absolute top-1/2 -left-8 transform -translate-y-1/2 group">
-                        <div class="w-14 h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-xl shadow-lg 
+                    <div class="absolute top-1/2 -left-6 lg:-left-8 transform -translate-y-1/2 group">
+                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-lg lg:text-xl shadow-lg 
                                     transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-400/50">
                             <i class="fas fa-handshake"></i>
                         </div>
                         <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                    font-semibold text-xs px-3 py-1 rounded-md left-[-100px] top-1/2 -translate-y-1/2 shadow-md">
+                                    font-semibold text-xs px-3 py-1 rounded-md left-[-30px] top-1/2 -translate-y-1/2 shadow-md whitespace-nowrap">
                             {{ __('app.request_service') }}
                         </span>
                     </div>
 
-                    <div class="absolute top-1/2 -right-8 transform -translate-y-1/2 group">
-                        <div class="w-14 h-14 bg-[#f1f7ff] text-[#2f5c69] rounded-full flex items-center justify-center text-xl shadow-lg 
+                    <div class="absolute top-1/2 -right-6 lg:-right-8 transform -translate-y-1/2 group">
+                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-[#f1f7ff] text-[#2f5c69] rounded-full flex items-center justify-center text-lg lg:text-xl shadow-lg 
                                     transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-300/60">
                             <i class="fas fa-bolt"></i>
                         </div>
                         <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                    font-semibold text-xs px-3 py-1 rounded-md right-[-100px] top-1/2 -translate-y-1/2 shadow-md">
+                                    font-semibold text-xs px-3 py-1 rounded-md right-[-30px] top-1/2 -translate-y-1/2 shadow-md whitespace-nowrap">
                             {{ __('app.fast_performance') }}
                         </span>
                     </div>
@@ -127,7 +125,6 @@
 
     .top-slant-strip {
         height: 6px;
-        /* background-color: #f3a446; */
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
         position: absolute;
         top: 0;
@@ -289,7 +286,7 @@
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold text-[#2f5c69] mb-4 tracking-tight">
         {{ __('app.why_choose_us.title') }}
-        <span class="text-[#f3a446]">{{ __('app.why_choose_us.platform_name') }}</span>؟
+        <span class="text-[#f3a446]">{{ __('app.why_choose_us.platform_name') }}</span>
       </h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
         {{ __('app.why_choose_us.subtitle') }}
