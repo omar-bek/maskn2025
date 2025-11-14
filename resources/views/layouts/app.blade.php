@@ -22,7 +22,10 @@
     <meta name="apple-mobile-web-app-title" content="انشاءات">
     <meta name="msapplication-TileColor" content="#0f766e">
     <meta name="msapplication-config" content="/browserconfig.xml">
-
+    <meta property="og:title" content="@yield('title', 'انشاءات - منصة تصميم البيوت الرائدة')">
+    <meta property="og:description" content="@yield('description', 'منصة انشاءات لتصميم البيوت العصرية والإسلامية')">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
     <!-- Preload critical resources -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         as="style">
