@@ -7,9 +7,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div class=" animate-fade-in">
-                <div class="inline-block border border-[#f3a446] px-3 py-1 rounded-md mb-4">
-                    <span class="text-gray-200 font-medium"> {{ __('app.welcome') }}!</span>
-                </div>
+                
 
                 <h1 class="text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
                     {{ __('app.hero_title_line1') }}

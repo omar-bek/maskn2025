@@ -453,6 +453,7 @@ return [
             'linkedin' => 'LinkedIn',
         ],
         'links' => [
+            'icon' => '>',
             'title' => 'Quick Links',
             'home' => 'Home',
             'designs' => 'Designs',

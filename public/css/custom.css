@@ -181,8 +181,7 @@ h1, h2, h3, h4, h5, h6 {
     .mobile-nav-link {
         min-height: 44px;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        
     }
 
     .btn,

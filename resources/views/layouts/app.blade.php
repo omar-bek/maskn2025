@@ -472,7 +472,11 @@ html.ltr body {
       @endauth
     </div>
 
-    <div class="flex items-center gap-4 md:hidden">
+    <div class="user-avatar absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden w-10 h-10 bg-[#f3a446] text-[#2f5c69] flex items-center justify-center rounded-full shadow-sm z-10">
+      <i class="fas fa-user"></i>
+    </div>
+
+    <div class="flex items-center md:hidden">
       <div class="relative language-dropdown">
         <button
           type="button"
@@ -522,7 +526,7 @@ html.ltr body {
       </div>
 
       <button
-        class="mobile-menu-toggle text-[#f3a446] text-2xl"
+        class="mobile-menu-toggle text-[#f3a446] text-2xl ml-4 rtl:ml-0 rtl:mr-4"
         aria-label="{{ __('app.header.menu_toggle') }}"
         aria-expanded="false"
         aria-controls="mobileMenu"
@@ -538,30 +542,6 @@ html.ltr body {
     role="navigation"
     aria-label="{{ __('app.header.main_menu') }}"
   >
-    <div
-      class="mobile-menu-header flex items-center justify-between p-4 border-b border-gray-200"
-    >
-      <button
-        class="mobile-menu-close text-2xl text-gray-600 hover:text-gray-900"
-        aria-label="{{ __('app.header.close_menu') }}"
-      >
-        <i class="fas fa-times"></i>
-      </button>
-      <div class="mobile-logo flex items-center gap-3">
-        @if (\App\Models\SiteSetting::get('site_logo'))
-          <div class="logo-icon w-10 h-10">
-            <img
-              src="{{ \App\Models\SiteSetting::get('site_logo') }}"
-              alt="{{ __('app.header.logo_alt') }}"
-              class="w-full h-full object-contain"
-            />
-          </div>
-        @else
-          <div class="logo-icon w-10 h-10 bg-[#f3a446]/30 rounded-full"></div>
-        @endif
-      </div>
-    </div>
-
     <nav class="mobile-nav p-4 space-y-6 overflow-y-auto max-h-[70vh]">
       <div class="mobile-nav-section space-y-2">
         <h3
@@ -640,11 +620,6 @@ html.ltr body {
       @auth
         <div class="mobile-nav-section space-y-2">
           <div class="mobile-user-info flex items-center gap-3 mb-3 p-2">
-            <div
-              class="user-avatar w-10 h-10 bg-[#f3a446] text-[#2f5c69] flex items-center justify-center rounded-full"
-            >
-              <i class="fas fa-user"></i>
-            </div>
             <div class="user-details">
               <h4 class="user-name font-bold text-gray-900">
                 {{ Auth::user()->name }}
@@ -829,77 +804,93 @@ html.ltr body {
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="">
-            <!-- Flash Messages -->
-            @if (session('success'))
-                <div class="flash-message flash-success" id="flash-message">
-                    <div class="flash-content">
-                        <i class="fas fa-check-circle"></i>
-                        <span>{{ session('success') }}</span>
-                    </div>
-                    <button class="flash-close" onclick="closeFlashMessage()">
-                        <i class="fas fa-times"></i>
-                    </button>
+        <div class="relative min-h-screen bg-gray-50">
+    <div class="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-lg px-4 space-y-3">
+        @if (session('success'))
+            <div class="flex items-center justify-between p-4 text-green-700 bg-green-100 border border-green-400 rounded-lg shadow-md" role="alert">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-check-circle text-xl"></i>
+                    <span class="font-medium">{{ session('success') }}</span>
                 </div>
-            @endif
+                <button onclick="this.parentElement.remove()" class="text-green-700 hover:text-green-900 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        @endif
 
-            @if (session('error'))
-                <div class="flash-message flash-error" id="flash-message">
-                    <div class="flash-content">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span>{{ session('error') }}</span>
-                    </div>
-                    <button class="flash-close" onclick="closeFlashMessage()">
-                        <i class="fas fa-times"></i>
-                    </button>
+        @if (session('error'))
+            <div class="flex items-center justify-between p-4 text-red-700 bg-red-100 border border-red-400 rounded-lg shadow-md" role="alert">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-exclamation-circle text-xl"></i>
+                    <span class="font-medium">{{ session('error') }}</span>
                 </div>
-            @endif
+                <button onclick="this.parentElement.remove()" class="text-red-700 hover:text-red-900 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        @endif
 
-            @if (session('warning'))
-                <div class="flash-message flash-warning" id="flash-message">
-                    <div class="flash-content">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>{{ session('warning') }}</span>
-                    </div>
-                    <button class="flash-close" onclick="closeFlashMessage()">
-                        <i class="fas fa-times"></i>
-                    </button>
+        @if (session('warning'))
+            <div class="flex items-center justify-between p-4 text-yellow-700 bg-yellow-100 border border-yellow-400 rounded-lg shadow-md" role="alert">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-xl"></i>
+                    <span class="font-medium">{{ session('warning') }}</span>
                 </div>
-            @endif
+                <button onclick="this.parentElement.remove()" class="text-yellow-700 hover:text-yellow-900 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        @endif
 
-            @if (session('info'))
-                <div class="flash-message flash-info" id="flash-message">
-                    <div class="flash-content">
-                        <i class="fas fa-info-circle"></i>
-                        <span>{{ session('info') }}</span>
-                    </div>
-                    <button class="flash-close" onclick="closeFlashMessage()">
-                        <i class="fas fa-times"></i>
-                    </button>
+        @if (session('info'))
+            <div class="flex items-center justify-between p-4 text-blue-700 bg-blue-100 border border-blue-400 rounded-lg shadow-md" role="alert">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-info-circle text-xl"></i>
+                    <span class="font-medium">{{ session('info') }}</span>
                 </div>
-            @endif
+                <button onclick="this.parentElement.remove()" class="text-blue-700 hover:text-blue-900 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        @endif
 
-            @if ($errors->any())
-                <div class="flash-message flash-error" id="flash-message">
-                    <div class="flash-content">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <div>
-                            <strong>يرجى تصحيح الأخطاء التالية:</strong>
-                            <ul class="mt-2 list-disc list-inside">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+        @if ($errors->any())
+            <div class="flex items-start justify-between p-4 text-red-700 bg-red-100 border border-red-400 rounded-lg shadow-md" role="alert">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-exclamation-circle text-xl mt-1"></i>
+                    <div>
+                        <strong class="font-bold block mb-1">يرجى تصحيح الأخطاء التالية:</strong>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                    <button class="flash-close" onclick="closeFlashMessage()">
-                        <i class="fas fa-times"></i>
-                    </button>
                 </div>
-            @endif
+                <button onclick="this.parentElement.remove()" class="text-red-700 hover:text-red-900 focus:outline-none mt-1">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        @endif
+    </div>
 
-            @yield('content')
-        </div>
+    <div class="container mx-auto px-4 py-6">
+        @yield('content')
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('[role="alert"]');
+            alerts.forEach(function(alert) {
+                alert.style.transition = "opacity 0.5s ease";
+                alert.style.opacity = "0";
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 5000);
+    });
+</script>
     </main>
 
     <!-- Footer -->
@@ -963,7 +954,7 @@ html.ltr body {
           <ul class="space-y-3">
             <li>
               <a href="{{ route('home') }}" class="footer-link-item">
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas">{{ __("app.footer.links.icon") }}</i>
                 <span>{{ __("app.footer.links.home") }}</span>
               </a>
             </li>
@@ -972,13 +963,13 @@ html.ltr body {
                 href="{{ route('designs.index') }}"
                 class="footer-link-item"
               >
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas">{{ __("app.footer.links.icon") }}</i>
                 <span>{{ __("app.footer.links.designs") }}</span>
               </a>
             </li>
             <li>
               <a href="{{ route('lands.create') }}" class="footer-link-item">
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas">{{ __("app.footer.links.icon") }}</i>
                 <span>{{ __("app.footer.links.lands") }}</span>
               </a>
             </li>
