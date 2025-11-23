@@ -5,7 +5,7 @@
 @section('content')
     @php
         $designFeatures =
-            is_array($design->features) ? $design->features : json_decode($design->features ?? '[]', true) ?: [];
+            is_array($design->features) ? $design->features : (json_decode($design->features ?? '[]', true) ?: []);
     @endphp
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
@@ -92,7 +92,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">سعر التصميم (ريال) *</td>
+                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">سعر التصميم (درهم) *</td>
                                     <td class="py-3">
                                         <input type="number" name="price" required
                                             class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -360,10 +360,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -442,10 +442,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -525,10 +525,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -608,10 +608,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -691,10 +691,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -774,10 +774,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -857,10 +857,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -940,10 +940,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -1023,10 +1023,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -1106,10 +1106,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -1189,10 +1189,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -1272,10 +1272,10 @@
                                                         الوحدة</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (ريال)</th>
+                                                        سعر الوحدة (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (ريال)</th>
+                                                        المجموع (درهم)</th>
                                                     <th
                                                         class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
                                                         العمليات</th>
@@ -1345,7 +1345,7 @@
                                         </td>
                                         <td class="py-2">
                                             <span class="text-2xl font-bold text-blue-600" id="total-cost">0.00</span>
-                                            <span class="text-sm text-blue-700 mr-2">ريال</span>
+                                            <span class="text-sm text-blue-700 mr-2">درهم</span>
                                         </td>
                                         <td class="py-2 text-right text-sm font-medium text-green-700 w-1/4">عدد البنود:
                                         </td>
@@ -1365,7 +1365,7 @@
                                             التكلفة:</td>
                                         <td class="py-2">
                                             <span class="text-xl font-bold text-orange-600" id="avg-cost">0.00</span>
-                                            <span class="text-sm text-orange-700 mr-2">ريال/بند</span>
+                                            <span class="text-sm text-orange-700 mr-2">درهم/بند</span>
                                         </td>
                                     </tr>
                                 </tbody>

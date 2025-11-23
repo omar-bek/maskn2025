@@ -50,8 +50,7 @@
                                 $features =
                                     is_array($design->features)
                                         ? $design->features
-                                        : json_decode($design->features ?? '[]', true) ?:
-                                    [];
+                                        : (json_decode($design->features ?? '[]', true) ?: []);
                             @endphp
                             @foreach ($features as $feature)
                                 <div class="flex items-center">
@@ -90,7 +89,7 @@
                     <!-- Price Card -->
                     <div class="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-4">
                         <div class="text-center mb-6">
-                            <div class="text-3xl font-bold text-green-600 mb-2">{{ $design['price'] }} ريال</div>
+                            <div class="text-3xl font-bold text-green-600 mb-2">{{ $design['price'] }} درهم</div>
                             <div class="text-gray-600">سعر التصميم</div>
                         </div>
 
@@ -187,7 +186,7 @@
                                 </div>
                                 <div class="flex-1">
                                     <div class="font-semibold text-sm">فيلا عصرية</div>
-                                    <div class="text-green-600 text-sm">400,000 ريال</div>
+                                    <div class="text-green-600 text-sm">400,000 درهم</div>
                                 </div>
                             </div>
                             <div class="flex items-center">
@@ -196,7 +195,7 @@
                                 </div>
                                 <div class="flex-1">
                                     <div class="font-semibold text-sm">بيت إسلامي</div>
-                                    <div class="text-green-600 text-sm">300,000 ريال</div>
+                                    <div class="text-green-600 text-sm">300,000 درهم</div>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +234,7 @@
                     </div>
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <div class="text-center">
-                            <div class="text-2xl font-bold text-green-600">1,200,000 ريال</div>
+                            <div class="text-2xl font-bold text-green-600">1,200,000 درهم</div>
                             <div class="text-gray-600">التكلفة التقديرية</div>
                         </div>
                     </div>

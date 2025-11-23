@@ -66,7 +66,7 @@
                     </div>
                     <div class="mr-4">
                         <p class="text-sm font-medium text-gray-600">الأرباح الشهرية</p>
-                        <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['monthly_earnings'] ?? 0) }} ريال</p>
+                        <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['monthly_earnings'] ?? 0) }} درهم</p>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                                                 @elseif($project['status'] === 'completed') مكتمل
                                                 @else معلق @endif
                                             </span>
-                                            <span class="text-sm font-medium text-teal-600">{{ $project['budget'] }} ريال</span>
+                                            <span class="text-sm font-medium text-teal-600">{{ $project['budget'] }} درهم</span>
                                         </div>
                                     </div>
                                 @endforeach

@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="flex items-center justify-between">
-                                <span class="text-lg font-semibold text-teal-600">{{ $consultant['hourly_rate'] }} ريال/ساعة</span>
+                                <span class="text-lg font-semibold text-teal-600">{{ $consultant['hourly_rate'] }} درهم/ساعة</span>
                                 <div class="flex space-x-2 space-x-reverse">
                                     <button class="text-teal-600 hover:text-teal-700">
                                         <i class="fas fa-eye"></i>

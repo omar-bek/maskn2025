@@ -28,7 +28,7 @@
                             </div>
 
                             <div class="flex items-center justify-between">
-                                <span class="text-lg font-semibold text-teal-600">{{ $design['price'] }} ريال</span>
+                                <span class="text-lg font-semibold text-teal-600">{{ $design['price'] }} درهم</span>
                                 <div class="flex space-x-2 space-x-reverse">
                                     <button class="text-teal-600 hover:text-teal-700">
                                         <i class="fas fa-eye"></i>

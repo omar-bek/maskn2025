@@ -74,7 +74,7 @@
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">السعر (ريال) *</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">السعر (درهم) *</label>
                             <input type="number" name="price" value="{{ $land['price'] }}" required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
                         </div>

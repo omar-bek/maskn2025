@@ -77,7 +77,7 @@ class LandOffer extends Model
         if ($this->offer_type === 'exchange') {
             return $this->offer_price ?: 'مقابل أرض أخرى';
         }
-        return number_format($this->offer_price) . ' ريال';
+        return number_format($this->offer_price) . ' درهم';
     }
 }
 

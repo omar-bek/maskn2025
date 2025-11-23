@@ -59,7 +59,7 @@ class LandController extends Controller
             'district' => 'required|string|max:255',
             'address' => 'nullable|string|max:500',
             'transaction_type' => 'required|in:sale,exchange,both',
-            'description' => 'required|string|min:10',
+            'description' => 'nullable|string|min:10|max:5000',
             'features' => 'nullable|array',
             'features.*' => 'string|in:services,paved,flat,corner,view,security',
             'contact_name' => 'required|string|max:255',
@@ -114,17 +114,18 @@ class LandController extends Controller
                 'price' => $request->price,
                 'city' => $request->city,
                 'district' => $request->district,
-                'address' => $request->address,
+                'address' => $request->address ?? null,
                 'transaction_type' => $request->transaction_type,
-                'description' => $request->description,
-                'features' => $request->features,
+                'description' => $request->description ?? null,
+                'features' => $request->features ?? [],
                 'contact_name' => $request->contact_name,
                 'contact_phone' => $request->contact_phone,
-                'contact_whatsapp' => $request->contact_whatsapp,
-                'contact_email' => $request->contact_email,
+                'contact_whatsapp' => $request->contact_whatsapp ?? null,
+                'contact_email' => $request->contact_email ?? null,
                 'desired_locations' => $desiredLocations,
                 'images' => $images,
-                'status' => 'active'
+                'status' => 'active',
+                'views' => 0
             ]);
 
             DB::commit();
@@ -134,7 +135,11 @@ class LandController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->withInput()->with('error', 'حدث خطأ أثناء حفظ الأرض. يرجى المحاولة مرة أخرى.');
+            \Log::error('Error saving land: ' . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            return back()->withInput()->with('error', 'حدث خطأ أثناء حفظ الأرض: ' . $e->getMessage());
         }
     }
 
@@ -188,7 +193,7 @@ class LandController extends Controller
             'district' => 'required|string|max:255',
             'address' => 'nullable|string|max:500',
             'transaction_type' => 'required|in:sale,exchange,both',
-            'description' => 'required|string|min:10',
+            'description' => 'nullable|string|min:10|max:5000',
             'features' => 'nullable|array',
             'features.*' => 'string|in:services,paved,flat,corner,view,security',
             'contact_name' => 'required|string|max:255',
@@ -261,7 +266,11 @@ class LandController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->withInput()->with('error', 'حدث خطأ أثناء تحديث الأرض. يرجى المحاولة مرة أخرى.');
+            \Log::error('Error updating land: ' . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            return back()->withInput()->with('error', 'حدث خطأ أثناء تحديث الأرض: ' . $e->getMessage());
         }
     }
 

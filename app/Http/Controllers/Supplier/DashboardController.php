@@ -81,14 +81,14 @@ class DashboardController extends Controller
                 'title' => 'مشروع بناء فيلا',
                 'client' => 'أحمد محمد',
                 'location' => 'الرياض',
-                'budget' => '500,000 ريال',
+                'budget' => '500,000 درهم',
                 'date' => 'منذ يومين'
             ],
             [
                 'title' => 'تطوير مجمع سكني',
                 'client' => 'سارة أحمد',
                 'location' => 'جدة',
-                'budget' => '1,200,000 ريال',
+                'budget' => '1,200,000 درهم',
                 'date' => 'منذ أسبوع'
             ]
         ];

@@ -75,7 +75,7 @@ class Land extends Model
     // Accessors
     public function getFormattedPriceAttribute()
     {
-        return number_format($this->price) . ' ريال';
+        return number_format($this->price) . ' درهم';
     }
 
     public function getFormattedAreaAttribute()

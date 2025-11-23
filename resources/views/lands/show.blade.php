@@ -275,7 +275,7 @@
                             <div class="flex-1">
                                 <h4 class="font-semibold text-gray-900 text-sm">أرض سكنية في جدة</h4>
                                 <p class="text-gray-600 text-sm">600 متر مربع</p>
-                                <p class="text-teal-600 font-semibold text-sm">750,000 ريال</p>
+                                <p class="text-teal-600 font-semibold text-sm">750,000 درهم</p>
                             </div>
                         </div>
 
@@ -286,7 +286,7 @@
                             <div class="flex-1">
                                 <h4 class="font-semibold text-gray-900 text-sm">أرض تجارية في الدمام</h4>
                                 <p class="text-gray-600 text-sm">800 متر مربع</p>
-                                <p class="text-teal-600 font-semibold text-sm">1,200,000 ريال</p>
+                                <p class="text-teal-600 font-semibold text-sm">1,200,000 درهم</p>
                             </div>
                         </div>
 
@@ -297,7 +297,7 @@
                             <div class="flex-1">
                                 <h4 class="font-semibold text-gray-900 text-sm">أرض زراعية في القصيم</h4>
                                 <p class="text-gray-600 text-sm">1500 متر مربع</p>
-                                <p class="text-teal-600 font-semibold text-sm">450,000 ريال</p>
+                                <p class="text-teal-600 font-semibold text-sm">450,000 درهم</p>
                             </div>
                         </div>
                     </div>

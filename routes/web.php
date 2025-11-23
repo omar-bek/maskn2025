@@ -118,16 +118,22 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/proposals/{id}/reject', [ProposalController::class, 'reject'])->name('proposals.reject');
 });
 
-// Lands Routes
+// Lands Routes - Public
 Route::get('/lands', [LandController::class, 'index'])->name('lands.index');
-Route::get('/lands/create', [LandController::class, 'create'])->name('lands.create');
-Route::post('/lands', [LandController::class, 'store'])->name('lands.store');
+
+// Lands Routes - Authenticated (specific routes first to avoid conflicts)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/lands/create', [LandController::class, 'create'])->name('lands.create');
+    Route::post('/lands', [LandController::class, 'store'])->name('lands.store');
+    Route::get('/lands/my/ads', [LandController::class, 'myAds'])->name('lands.my-ads');
+    Route::get('/lands/my/offers', [LandController::class, 'myOffers'])->name('lands.my-offers');
+    Route::get('/lands/{id}/edit', [LandController::class, 'edit'])->name('lands.edit');
+    Route::put('/lands/{id}', [LandController::class, 'update'])->name('lands.update');
+    Route::delete('/lands/{id}', [LandController::class, 'destroy'])->name('lands.destroy');
+});
+
+// Lands Routes - Public (parameterized routes after specific ones)
 Route::get('/lands/{id}', [LandController::class, 'show'])->name('lands.show');
-Route::get('/lands/{id}/edit', [LandController::class, 'edit'])->name('lands.edit');
-Route::put('/lands/{id}', [LandController::class, 'update'])->name('lands.update');
-Route::delete('/lands/{id}', [LandController::class, 'destroy'])->name('lands.destroy');
-Route::get('/lands/my/ads', [LandController::class, 'myAds'])->name('lands.my-ads');
-Route::get('/lands/my/offers', [LandController::class, 'myOffers'])->name('lands.my-offers');
 
 // Land Offers Routes
 Route::get('/lands/{land}/submit-offer', [LandController::class, 'showSubmitOffer'])->name('lands.submit-offer');

@@ -103,7 +103,7 @@
                         <i class="fas fa-dollar-sign text-teal-600 ml-3"></i>سعر العرض
                     </h3>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">السعر المقدم (ريال)</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">السعر المقدم (درهم)</label>
                         <input type="number" name="offer_price" 
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                             placeholder="أدخل السعر المقدم">

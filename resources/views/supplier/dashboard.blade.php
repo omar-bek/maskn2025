@@ -66,7 +66,7 @@
                     </div>
                     <div class="mr-4">
                         <p class="text-sm font-medium text-gray-600">الإيرادات الشهرية</p>
-                        <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['monthly_revenue'] ?? 0) }} ريال</p>
+                        <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['monthly_revenue'] ?? 0) }} درهم</p>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                                                 @elseif($order['status'] === 'shipped') تم الشحن
                                                 @else مكتمل @endif
                                             </span>
-                                            <span class="text-sm font-medium text-teal-600">{{ $order['total'] }} ريال</span>
+                                            <span class="text-sm font-medium text-teal-600">{{ $order['total'] }} درهم</span>
                                         </div>
                                     </div>
                                 @endforeach

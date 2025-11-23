@@ -218,7 +218,7 @@
                     <div class="bg-green-50 border border-green-200 rounded-lg p-4">
                         <div class="flex justify-between items-center">
                             <span class="text-lg font-medium text-green-800">إجمالي التكلفة:</span>
-                            <span class="text-2xl font-bold text-green-600" id="grand-total">0.00 ريال</span>
+                            <span class="text-2xl font-bold text-green-600" id="grand-total">0.00 درهم</span>
                         </div>
                         <div class="mt-2 text-sm text-green-700">
                             <span id="items-count">0</span> بند

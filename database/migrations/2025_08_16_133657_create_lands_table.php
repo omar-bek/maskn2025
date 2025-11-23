@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('land_type', ['residential', 'commercial', 'agricultural', 'industrial']);
             $table->decimal('area', 10, 2);
             $table->decimal('price', 15, 2);
-            $table->enum('city', ['riyadh', 'jeddah', 'dammam', 'makkah', 'medina', 'taif', 'abha', 'jubail', 'yanbu', 'other']);
+            $table->enum('city', ['abu_dhabi', 'dubai', 'sharjah', 'ajman', 'ras_al_khaimah', 'fujairah', 'umm_al_quwain', 'other']);
             $table->string('district');
             $table->text('address')->nullable();
             $table->enum('transaction_type', ['sale', 'exchange', 'both']);
