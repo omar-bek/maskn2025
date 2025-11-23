@@ -264,9 +264,20 @@
                 <div class="space-y-4">
                     <div class="flex justify-between items-center py-3 border-b border-gray-200">
                         <span class="text-gray-600">مساحة القرص المتاحة</span>
-                        <span
-                            class="font-semibold text-gray-900">{{ number_format(disk_free_space('/') / 1024 / 1024 / 1024, 2) }}
-                            GB</span>
+                        <span class="font-semibold text-gray-900">
+                            @php
+                                try {
+                                    $freeSpace = disk_free_space(storage_path());
+                                    if ($freeSpace !== false) {
+                                        echo number_format($freeSpace / 1024 / 1024 / 1024, 2) . ' GB';
+                                    } else {
+                                        echo 'غير متاح';
+                                    }
+                                } catch (\Exception $e) {
+                                    echo 'غير متاح';
+                                }
+                            @endphp
+                        </span>
                     </div>
 
                     <div class="flex justify-between items-center py-3 border-b border-gray-200">
