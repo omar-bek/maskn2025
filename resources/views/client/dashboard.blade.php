@@ -57,7 +57,7 @@
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <div
-                  class="w-12 h-12 bg-[#f3a446]/20 rounded-lg flex items-center justify-center border border-[#f3a446]/30"
+                  class="w-12 h-12 bg-[#f3a446]/20 rounded-lg flex items-center justify-center border border-[#f3a446]/30 "
                 >
                   <i class="fas fa-gavel text-[#f3a446] text-xl"></i>
                 </div>

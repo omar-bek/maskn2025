@@ -33,7 +33,7 @@
                                 {{ __('app.cta_section.create_design') }}
                             </a>
                         @else
-                            <a href="{{ route('tenders.create') }}"
+                            <a href="{{ route('tenders.index') }}"
                                 class="bg-[#f3a446] text-white font-bold text-lg py-3 px-8 rounded-lg shadow-md hover:bg-[#e6953a] transition-colors flex items-center justify-center gap-2">
                                 <i class="fas fa-file-contract"></i>
                                 {{ __('app.create_tender') }}

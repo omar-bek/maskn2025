@@ -98,11 +98,11 @@ html.ltr body {
             }
         }
 
-        @media (min-width: 1024px) {
+        /* @media (min-width: 1024px) {
             .container {
                 padding: 0 2rem;
             }
-        }
+        } */
 
 
         /* Flash Messages Styles */
@@ -282,8 +282,28 @@ html.ltr body {
             input,
             select,
             textarea {
-                min-height: 44px;
-                min-width: 44px;
+                min-height: 20px;
+                min-width: 20px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+
+            /* Prevent zoom on input focus */
+            input,
+            select,
+            textarea {
+                font-size: 16px !important;
+            }
+
+            /* Better touch targets */
+            button,
+            a,
+            input,
+            select,
+            textarea {
+                min-height: 30px;
+                min-width: 30px;
             }
         }
     </style>
@@ -874,7 +894,7 @@ html.ltr body {
         @endif
     </div>
 
-    <div class="container mx-auto px-4 py-6">
+    <div class="">
         @yield('content')
     </div>
 </div>
@@ -954,7 +974,7 @@ html.ltr body {
           <ul class="space-y-3">
             <li>
               <a href="{{ route('home') }}" class="footer-link-item">
-                <i class="fas">{{ __("app.footer.links.icon") }}</i>
+                <!-- <i class="fas">{{ __("app.footer.links.icon") }}</i> -->
                 <span>{{ __("app.footer.links.home") }}</span>
               </a>
             </li>
@@ -963,13 +983,13 @@ html.ltr body {
                 href="{{ route('designs.index') }}"
                 class="footer-link-item"
               >
-                <i class="fas">{{ __("app.footer.links.icon") }}</i>
+                <!-- <i class="fas">{{ __("app.footer.links.icon") }}</i> -->
                 <span>{{ __("app.footer.links.designs") }}</span>
               </a>
             </li>
             <li>
               <a href="{{ route('lands.create') }}" class="footer-link-item">
-                <i class="fas">{{ __("app.footer.links.icon") }}</i>
+                <!-- <i class="fas">{{ __("app.footer.links.icon") }}</i> -->
                 <span>{{ __("app.footer.links.lands") }}</span>
               </a>
             </li>
@@ -980,7 +1000,7 @@ html.ltr body {
                     href="{{ route('designs.create') }}"
                     class="footer-link-item"
                   >
-                    <i class="fas fa-chevron-left"></i>
+                    <!-- <i class="fas fa-chevron-left"></i> -->
                     <span>{{ __("app.footer.links.add_design") }}</span>
                   </a>
                 </li>

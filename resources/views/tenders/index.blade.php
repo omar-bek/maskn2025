@@ -59,12 +59,12 @@
       style="animation-delay: 1s"
     ></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+    <div class="max-w-7xl mt-20 lg:mt-0 mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
       <div class="text-center">
         <div
           class="inline-flex items-center bg-[#f3a446]/20 backdrop-blur-sm rounded-full px-6 py-3 mb-6 -mt-12 border border-[#f3a446]/30"
         >
-          <i class="fas fa-file-contract text-[#f3a446] text-2xl ml-3"></i>
+          <i class="fas fa-file-contract text-[#f3a446] text-2xl ml-3 "></i>
           <span class="text-lg font-semibold text-white">{{
             __("app.tenders_hero.badge")
           }}</span>
@@ -150,141 +150,141 @@
     ></div>
 
     <div class="relative z-10">
-      <div class="flex items-center mb-8">
-        <div
-          class="w-16 h-16 bg-[#2f5c69] rounded-2xl flex items-center justify-center ml-4 shadow-lg"
-        >
-          <i class="fas fa-filter text-white text-xl"></i>
-        </div>
-        <div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-2">
-            {{ __("app.tenders_filter.title") }}
-          </h3>
-          <p class="text-gray-600">
-            {{ __("app.tenders_filter.subtitle") }}
-          </p>
-        </div>
+    <div class="flex items-center mb-8">
+      <div
+        class="w-16 h-16 bg-[#2f5c69] rounded-2xl flex items-center justify-center me-4 shadow-lg"
+      >
+        <i class="fas fa-filter text-white text-xl"></i>
       </div>
+      <div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">
+          {{ __("app.tenders_filter.title") }}
+        </h3>
+        <p class="text-gray-600">
+          {{ __("app.tenders_filter.subtitle") }}
+        </p>
+      </div>
+    </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="space-y-3">
-          <label class="text-sm font-bold text-gray-800 flex items-center">
-            <i class="fas fa-search text-[#2f5c69] ml-2"></i>
-            {{ __("app.tenders_filter.search_label") }}
-          </label>
-          <div class="relative group">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="{{ __('app.tenders_filter.search_placeholder') }}"
-              class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 pr-14 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg"
-            />
-            <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
-              <i
-                class="fas fa-search text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300"
-              ></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          <label class="text-sm font-bold text-gray-800 flex items-center">
-            <i class="fas fa-flag text-[#2f5c69] ml-2"></i>
-            {{ __("app.tenders_filter.status_label") }}
-          </label>
-          <div class="relative group">
-            <select
-              id="statusFilter"
-              class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg appearance-none cursor-pointer"
-            >
-              <option value="">{{ __("app.status.all") }}</option>
-              <option value="open">{{ __("app.status.open") }}</option>
-              <option value="closed">{{ __("app.status.closed") }}</option>
-              <option value="awarded">{{ __("app.status.awarded") }}</option>
-            </select>
-            <div
-              class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-            >
-              <i class="fas fa-chevron-down text-gray-400"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          <label class="text-sm font-bold text-gray-800 flex items-center">
-            <i class="fas fa-map-marker-alt text-[#2f5c69] ml-2"></i>
-            {{ __("app.tenders_filter.location_label") }}
-          </label>
-          <div class="relative group">
-            <input
-              type="text"
-              id="locationFilter"
-              placeholder="{{ __('app.tenders_filter.location_placeholder') }}"
-              class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 pr-14 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg"
-            />
-            <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
-              <i
-                class="fas fa-map-marker-alt text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300"
-              ></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-end">
-          <button
-            onclick="applyFilters()"
-            class="w-full bg-[#2f5c69] hover:bg-[#1a262a] text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl group"
-          >
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="space-y-3">
+        <label class="text-sm font-bold text-gray-800 flex items-center">
+          <i class="fas fa-search text-[#2f5c69] me-2"></i>
+          {{ __("app.tenders_filter.search_label") }}
+        </label>
+        <div class="relative group">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="{{ __('app.tenders_filter.search_placeholder') }}"
+            class="w-full border-2 border-gray-200 rounded-2xl ps-10 pe-5 py-4 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg"
+          />
+          <div class="absolute inset-y-0 start-0 ps-4 flex items-center">
             <i
-              class="fas fa-search ml-3 text-xl group-hover:scale-110 transition-transform duration-300"
+              class="fas fa-search text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300"
             ></i>
-            {{ __("app.tenders_filter.apply_button") }}
-          </button>
+          </div>
         </div>
       </div>
 
-      <div class="mt-6 pt-6 border-t border-gray-200">
-        <div class="flex items-center mb-4">
-          <i class="fas fa-tags text-gray-600 ml-2"></i>
-          <span class="text-sm font-semibold text-gray-700">{{
-            __("app.tenders_filter.quick_filter_label")
-          }}</span>
-        </div>
-        <div class="flex flex-wrap gap-3">
-          <button
-            onclick="setQuickFilter('open')"
-            class="quick-filter-btn bg-[#2f5c69]/10 text-[#2f5c69] hover:bg-[#2f5c69]/20 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
-          >
-            <i class="fas fa-circle ml-2 text-xs"></i>
-            {{ __("app.status.open") }}
-          </button>
-          <button
-            onclick="setQuickFilter('closed')"
-            class="quick-filter-btn bg-red-100 text-red-800 hover:bg-red-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
-          >
-            <i class="fas fa-lock ml-2 text-xs"></i>
-            {{ __("app.status.closed") }}
-          </button>
-          <button
-            onclick="setQuickFilter('awarded')"
-            class="quick-filter-btn bg-blue-100 text-blue-800 hover:bg-blue-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
-          >
-            <i class="fas fa-trophy ml-2 text-xs"></i>
-            {{ __("app.status.awarded") }}
-          </button>
-          <button
-            onclick="clearFilters()"
-            class="quick-filter-btn bg-gray-100 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
-          >
-            <i class="fas fa-times ml-2 text-xs"></i>
-            {{ __("app.tenders_filter.clear_button") }}
-          </button>
-        </div>
+      <div class="space-y-3">
+    <label class="text-sm font-bold text-gray-800 flex items-center">
+      <i class="fas fa-flag text-[#2f5c69] me-2"></i>
+      {{ __("app.tenders_filter.status_label") }}
+    </label>
+    <div class="relative group">
+      <select
+        id="statusFilter"
+        class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg appearance-none cursor-pointer"
+      >
+        <option value="">{{ __("app.status.all") }}</option>
+        <option value="open">{{ __("app.status.open") }}</option>
+        <option value="closed">{{ __("app.status.closed") }}</option>
+        <option value="awarded">{{ __("app.status.awarded") }}</option>
+      </select>
+      <div
+        class="absolute inset-y-0 end-0 pe-4 flex items-center pointer-events-none"
+      >
+        <i class="fas fa-chevron-down text-gray-400"></i>
       </div>
     </div>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="tendersGrid">
+      <div class="space-y-3">
+        <label class="text-sm font-bold text-gray-800 flex items-center">
+          <i class="fas fa-map-marker-alt text-[#2f5c69] me-2"></i>
+          {{ __("app.tenders_filter.location_label") }}
+        </label>
+        <div class="relative group">
+          <input
+            type="text"
+            id="locationFilter"
+            placeholder="{{ __('app.tenders_filter.location_placeholder') }}"
+            class="w-full border-2 border-gray-200 rounded-2xl ps-10 pe-5 py-4 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg"
+          />
+          <div class="absolute inset-y-0 start-0 ps-4 flex items-center">
+            <i
+              class="fas fa-map-marker-alt text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300"
+            ></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-end">
+        <button
+          onclick="applyFilters()"
+          class="w-full bg-[#2f5c69] hover:bg-[#1a262a] text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl group"
+        >
+          <i
+            class="fas fa-search me-3 text-xl group-hover:scale-110 transition-transform duration-300"
+          ></i>
+          {{ __("app.tenders_filter.apply_button") }}
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-6 pt-6 border-t border-gray-200">
+      <div class="flex items-center mb-4">
+        <i class="fas fa-tags text-gray-600 me-2"></i>
+        <span class="text-sm font-semibold text-gray-700">{{
+          __("app.tenders_filter.quick_filter_label")
+        }}</span>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <button
+          onclick="setQuickFilter('open')"
+          class="quick-filter-btn bg-[#2f5c69]/10 text-[#2f5c69] hover:bg-[#2f5c69]/20 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+        >
+          <i class="fas fa-circle text-xs me-2"></i>
+          {{ __("app.status.open") }}
+        </button>
+        <button
+          onclick="setQuickFilter('closed')"
+          class="quick-filter-btn bg-red-100 text-red-800 hover:bg-red-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+        >
+          <i class="fas fa-lock text-xs me-2"></i>
+          {{ __("app.status.closed") }}
+        </button>
+        <button
+          onclick="setQuickFilter('awarded')"
+          class="quick-filter-btn bg-blue-100 text-blue-800 hover:bg-blue-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+        >
+          <i class="fas fa-trophy text-xs me-2"></i>
+          {{ __("app.status.awarded") }}
+        </button>
+        <button
+          onclick="clearFilters()"
+          class="quick-filter-btn bg-gray-100 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+        >
+          <i class="fas fa-times text-xs me-2"></i>
+          {{ __("app.tenders_filter.clear_button") }}
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="tendersGrid">
     @forelse($tenders as $tender)
       <div
         class="bg-white rounded-3xl shadow-2xl hover:shadow-3xl overflow-hidden tender-card transform hover:scale-[1.02] transition-all duration-500 border-2 border-transparent hover:border-[#f3a446] group relative"
@@ -309,23 +309,23 @@
           <div class="absolute top-5 left-5">
             @if ($tender->status === 'open')
               <span
-                class="status-badge bg-[#2f5c69] text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm animate-pulse"
+                class="status-badge bg-[#2f5c69] text-white w-28 h-10 flex items-center justify-center rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm animate-pulse"
               >
-                <i class="fas fa-circle ml-2 text-xs"></i>
+                <i class="fas fa-circle text-xs pr-1 pl-1"></i>
                 {{ __("app.status.open") }}
               </span>
             @elseif($tender->status === 'closed')
               <span
-                class="status-badge bg-red-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm"
+                class="status-badge bg-red-600 text-white w-28 h-10 flex items-center justify-center rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm"
               >
-                <i class="fas fa-times-circle ml-2 text-xs"></i>
+                <i class="fas fa-times-circle text-xs pr-1 pl-1"></i>
                 {{ __("app.status.closed") }}
               </span>
             @elseif($tender->status === 'awarded')
               <span
-                class="status-badge bg-blue-600 text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm"
+                class="status-badge bg-blue-600 text-white w-28 h-10 flex items-center justify-center rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm"
               >
-                <i class="fas fa-trophy ml-2 text-xs"></i>
+                <i class="fas fa-trophy text-xs pr-1 pl-1"></i>
                 {{ __("app.status.awarded") }}
               </span>
             @endif
@@ -333,9 +333,9 @@
 
           <div class="absolute top-5 right-5">
             <div
-              class="bg-white/95 backdrop-blur-md text-gray-800 px-4 py-2.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50"
+              class="bg-white/95 backdrop-blur-md text-gray-800 w-28 h-10 flex items-center justify-center rounded-2xl text-sm font-bold shadow-xl border border-white/50"
             >
-              <i class="fas fa-file-alt ml-2 text-[#2f5c69]"></i>
+              <i class="fas fa-file-alt text-[#2f5c69] pr-1 pl-1"></i>
               {{ $tender->proposals_count }}
               {{ __("app.tenders_list.proposal_unit") }}
             </div>
@@ -394,7 +394,7 @@
                 <i
                   class="fas fa-money-bill-wave text-green-600 ml-3 text-lg w-5 text-center"
                 ></i>
-                <span class="text-sm font-bold text-green-600 truncate">{{
+                <span class="text-sm font-bold text-green-600 truncate pl-2">{{
                   $tender->formatted_budget
                 }}</span>
               </div>
@@ -475,7 +475,6 @@
       </div>
     @endforelse
   </div>
-
   @if ($tenders->hasPages())
     <div class="mt-12 flex justify-center">
       <div class="bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
@@ -561,24 +560,6 @@
                 applyFilters();
             };
 
-            // Update results counter
-            function updateResultsCounter(count) {
-                let counter = document.getElementById('resultsCounter');
-                if (!counter) {
-                    counter = document.createElement('div');
-                    counter.id = 'resultsCounter';
-                    counter.className =
-                        'fixed top-20 right-4 bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg z-50';
-                    document.body.appendChild(counter);
-                }
-
-                counter.textContent = `${count} نتيجة`;
-                counter.style.animation = 'bounceIn 0.5s ease-out';
-
-                setTimeout(() => {
-                    counter.style.animation = '';
-                }, 500);
-            }
 
             // Real-time search with debounce
             let searchTimeout;

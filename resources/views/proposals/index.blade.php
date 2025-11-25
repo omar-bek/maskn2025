@@ -81,7 +81,7 @@
             <div class="relative z-10">
                 <div class="flex items-center mb-6">
                     <div
-                        class="w-14 h-14 bg-gradient-to-br from-[#2f5c69] to-[#1a262a] rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                        class="w-14 h-14 bg-gradient-to-br from-[#2f5c69] to-[#1a262a] rounded-2xl flex items-center justify-center ml-4 shadow-lg mr-2">
                         <i class="fas fa-filter text-[#f3a446] text-lg"></i>
                     </div>
                     <div>
@@ -93,13 +93,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="space-y-3">
                         <label class=" text-sm font-bold text-gray-800 flex items-center">
-                            <i class="fas fa-search text-[#2f5c69] ml-2"></i>
+                            <i class="fas fa-search text-[#2f5c69] ml-2 pr-2"></i>
                             {{ __('app.proposals_index.filters.search_label') }}
                         </label>
                         <div class="relative group">
                             <input type="text" id="searchInput" placeholder="{{ __('app.proposals_index.filters.search_placeholder') }}"
-                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 pr-12 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg text-sm">
-                            <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 pr-12 pl-10 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg text-sm">
+                            <div class="absolute inset-y-0 start-0 pr-4 pl-4 flex items-center">
                                 <i
                                     class="fas fa-search text-gray-400 group-hover:text-[#f3a446] transition-colors duration-300 text-sm"></i>
                             </div>
@@ -108,7 +108,7 @@
 
                     <div class="space-y-3">
                         <label class=" text-sm font-bold text-gray-800 flex items-center">
-                            <i class="fas fa-flag text-[#2f5c69] ml-2"></i>
+                            <i class="fas fa-flag text-[#2f5c69] ml-2 pr-2"></i>
                             {{ __('app.proposals_index.filters.status_label') }}
                         </label>
                         <div class="relative group">
@@ -119,7 +119,7 @@
                                 <option value="accepted">{{ __('app.global.statuses.accepted') }}</option>
                                 <option value="rejected">{{ __('app.global.statuses.rejected') }}</option>
                             </select>
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <div class="absolute inset-y-0 end-0 pl-4 pr-4 flex items-center pointer-events-none">
                                 <i class="fas fa-chevron-down text-gray-400"></i>
                             </div>
                         </div>
@@ -387,23 +387,7 @@
             };
 
             // Update results counter
-            function updateResultsCounter(count) {
-                let counter = document.getElementById('resultsCounter');
-                if (!counter) {
-                    counter = document.createElement('div');
-                    counter.id = 'resultsCounter';
-                    counter.className =
-                        'fixed top-20 right-4 bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg z-50';
-                    document.body.appendChild(counter);
-                }
-
-                counter.textContent = `${count} نتيجة`;
-                counter.style.animation = 'bounceIn 0.5s ease-out';
-
-                setTimeout(() => {
-                    counter.style.animation = '';
-                }, 500);
-            }
+            //
 
             // Real-time search with debounce
             let searchTimeout;

@@ -4,166 +4,159 @@
 
 @section('content')
    
-<section
-    class="hero-section text-white relative bg-gradient-to-br from-[#2f5c69] to-[#1a262a] pt-28 pb-24 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-            <div class="flex-1 animate-fade-in">
-                <h1
-                    class="text-4xl lg:text-5xl font-bold mb-8 leading-tight bg-gradient-to-r from-[#f3a446] to-white bg-clip-text text-transparent filter drop-shadow(0 2px 3px rgba(0,0,0,0.5))">
-                    {{ $tender->title }}
-                </h1>
+<section class="hero-section text-white relative bg-gradient-to-br from-[#2f5c69] to-[#1a262a] pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"> <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
+<div class="flex-1 w-full animate-fade-in order-2 md:order-1">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 leading-tight bg-gradient-to-r from-[#f3a446] to-white bg-clip-text text-transparent filter drop-shadow-lg pb-2">
+                {{ $tender->title }}
+            </h1>
 
-                <div class="space-y-4 mb-8">
-                    <div class="flex items-center text-white/90 group">
-                        <div
-                            class="w-12 h-12 bg-[#f3a446]/10 rounded-xl flex items-center justify-center ml-4 group-hover:bg-[#f3a446]/20 transition-all duration-300 border border-[#f3a446]/20">
-                            <i class="fas fa-map-marker-alt text-xl text-[#f3a446]"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-white/70">{{ __('app.tender.location') }}</p>
-                            <p class="text-xl font-semibold">{{ $tender->location }}</p>
-                        </div>
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8">
+                <div class="flex items-center text-white/90 group bg-white/5 rounded-xl p-2 pr-4 border border-white/5 hover:bg-white/10 transition-colors">
+                    <div class="w-10 h-10 bg-[#f3a446]/10 rounded-lg flex items-center justify-center ml-3 border border-[#f3a446]/20 mr-2">
+                        <i class="fas fa-map-marker-alt text-lg text-[#f3a446]"></i>
                     </div>
-
-                    <div class="flex items-center text-white/90 group">
-                        <div
-                            class="w-12 h-12 bg-[#f3a446]/10 rounded-xl flex items-center justify-center ml-4 group-hover:bg-[#f3a446]/20 transition-all duration-300 border border-[#f3a446]/20">
-                            <i class="fas fa-user text-xl text-[#f3a446]"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-white/70">{{ __('app.tender.client') }}</p>
-                            <p class="text-xl font-semibold">{{ $tender->client->name }}</p>
-                        </div>
+                    <div>
+                        <p class="text-xs text-white/60">{{ __('app.tender.location') }}</p>
+                        <p class="text-base font-semibold">{{ $tender->location }}</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div
-                        class="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <i class="fas fa-calendar-alt text-2xl mb-2 text-[#f3a446] opacity-80"></i>
-                        <p class="text-sm text-white/70">{{ __('app.tender.deadline') }}</p>
-                        <p class="font-semibold">{{ $tender->formatted_deadline }}</p>
+                <div class="flex items-center text-white/90 group bg-white/5 rounded-xl p-2 pr-4 border border-white/5 hover:bg-white/10 transition-colors">
+                    <div class="w-10 h-10 bg-[#f3a446]/10 rounded-lg flex items-center justify-center ml-3 border border-[#f3a446]/20 mr-2">
+                        <i class="fas fa-user text-lg text-[#f3a446]"></i>
                     </div>
-
-                    <div
-                        class="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
-                        <i class="fas fa-file-alt text-2xl mb-2 text-[#f3a446] opacity-80"></i>
-                        <p class="text-sm text-white/70">{{ __('app.tender.proposals_count') }}</p>
-                        <p class="font-semibold">{{ $tender->proposals_count }}</p>
+                    <div>
+                        <p class="text-xs text-white/60">{{ __('app.tender.client') }}</p>
+                        <p class="text-base font-semibold">{{ $tender->client->name }}</p>
                     </div>
-
-                    @if ($tender->budget)
-                        <div
-                            class="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
-                            <i class="fas fa-money-bill-wave text-2xl mb-2 text-[#f3a446] opacity-80"></i>
-                            <p class="text-sm text-white/70">{{ __('app.tender.budget') }}</p>
-                            <p class="font-semibold">{{ $tender->formatted_budget }}</p>
-                        </div>
-                    @endif
-
-                    @if ($tender->days_remaining !== null)
-                        <div
-                            class="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
-                            <i class="fas fa-clock text-2xl mb-2 text-[#f3a446] opacity-80"></i>
-                            <p class="text-sm text-white/70">{{ __('app.tender.days_remaining') }}</p>
-                            <p class="font-semibold">{{ $tender->days_remaining }} {{ __('app.tender.day_unit') }}</p>
-                        </div>
-                    @endif
                 </div>
             </div>
 
-            <div
-                class="flex flex-col items-stretch md:items-end gap-6 animate-slide-in w-full md:max-w-sm flex-shrink-0">
-                
-                @if ($tender->status === 'open')
-                    <div class="status-badge bg-[#f3a446]/10 text-[#f3a446] border border-[#f3a446]/30 animate-bounce-in w-full">
-                        <div class="w-3 h-3 bg-[#f3a446] rounded-full ml-3 animate-pulse"></div>
-                        <span class="text-lg font-bold">{{ __('app.tender.status_open') }}</span>
-                    </div>
-                @elseif($tender->status === 'closed')
-                    <div class="status-badge bg-gray-500/10 text-gray-300 border border-gray-500/30 animate-bounce-in w-full">
-                        <i class="fas fa-lock ml-3 text-lg"></i>
-                        <span class="text-lg font-bold">{{ __('app.tender.status_closed') }}</span>
-                    </div>
-                @elseif($tender->status === 'awarded')
-                    <div class="status-badge bg-[#f3a446] text-[#1a262a] border border-[#f3a446] animate-bounce-in w-full">
-                        <i class="fas fa-trophy ml-3 text-lg"></i>
-                        <span class="text-lg font-bold">{{ __('app.tender.status_awarded') }}</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 md:p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
+                    <i class="fas fa-calendar-alt text-xl md:text-2xl mb-2 text-[#f3a446] opacity-80"></i>
+                    <p class="text-xs text-white/60">{{ __('app.tender.deadline') }}</p>
+                    <p class="font-semibold text-sm md:text-base">{{ $tender->formatted_deadline }}</p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 md:p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
+                    <i class="fas fa-file-alt text-xl md:text-2xl mb-2 text-[#f3a446] opacity-80"></i>
+                    <p class="text-xs text-white/60">{{ __('app.tender.proposals_count') }}</p>
+                    <p class="font-semibold text-sm md:text-base">{{ $tender->proposals_count }}</p>
+                </div>
+
+                @if ($tender->budget)
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 md:p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fas fa-money-bill-wave text-xl md:text-2xl mb-2 text-[#f3a446] opacity-80"></i>
+                        <p class="text-xs text-white/60">{{ __('app.tender.budget') }}</p>
+                        <p class="font-semibold text-sm md:text-base">{{ $tender->formatted_budget }}</p>
                     </div>
                 @endif
 
-                <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 w-full max-w-sm">
-                    <div class="flex items-center mb-4">
-                        <div
-                            class="w-16 h-16 bg-gradient-to-br from-[#f3a446] to-[#d18a3a] rounded-2xl flex items-center justify-center ml-4 shadow-lg">
-                            <i class="fas fa-user text-white text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-white/80 font-medium">{{ __('app.client.info') }}</p>
-                            <p class="text-lg font-bold text-white">{{ $tender->client->name }}</p>
-                        </div>
+                @if ($tender->days_remaining !== null)
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 md:p-4 text-center border border-white/10 hover:border-[#f3a446]/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fas fa-clock text-xl md:text-2xl mb-2 text-[#f3a446] opacity-80"></i>
+                        <p class="text-xs text-white/60">{{ __('app.tender.days_remaining') }}</p>
+                        <p class="font-semibold text-sm md:text-base">{{ $tender->days_remaining }} {{ __('app.tender.day_unit') }}</p>
                     </div>
+                @endif
+            </div>
+        </div>
 
+        <div class="flex flex-col gap-4 md:gap-6 animate-slide-in w-full md:w-auto md:max-w-sm flex-shrink-0 order-1 md:order-2">
+            
+            @if ($tender->status === 'open')
+                <div class="relative overflow-hidden bg-gradient-to-r from-[#f3a446]/20 to-[#f3a446]/10 backdrop-blur-md border border-[#f3a446]/30 rounded-2xl p-4 flex items-center justify-between shadow-[0_0_15px_rgba(243,164,70,0.15)] group">
+                    <div class="flex items-center gap-3">
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f3a446] opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-[#f3a446]"></span>
+                        </span>
+                        <span class="text-lg font-bold text-[#f3a446] tracking-wide">{{ __('app.tender.status_open') }}</span>
+                    </div>
+                    <i class="fas fa-door-open text-[#f3a446]/40 text-2xl group-hover:scale-110 transition-transform"></i>
+                </div>
+            @elseif($tender->status === 'closed')
+                <div class="relative overflow-hidden bg-gray-600/20 backdrop-blur-md border border-gray-500/30 rounded-2xl p-4 flex items-center justify-between shadow-lg">
+                     <div class="flex items-center gap-3">
+                        <span class="h-3 w-3 rounded-full bg-gray-400"></span>
+                        <span class="text-lg font-bold text-gray-300 tracking-wide">{{ __('app.tender.status_closed') }}</span>
+                    </div>
+                    <i class="fas fa-lock text-gray-400/40 text-2xl"></i>
+                </div>
+            @elseif($tender->status === 'awarded')
+                <div class="relative overflow-hidden bg-gradient-to-r from-yellow-500/20 to-yellow-600/10 backdrop-blur-md border border-yellow-500/30 rounded-2xl p-4 flex items-center justify-between shadow-[0_0_15px_rgba(234,179,8,0.15)]">
+                    <div class="flex items-center gap-3">
+                        <span class="h-3 w-3 rounded-full bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]"></span>
+                        <span class="text-lg font-bold text-yellow-400 tracking-wide">{{ __('app.tender.status_awarded') }}</span>
+                    </div>
+                    <i class="fas fa-trophy text-yellow-400/40 text-2xl animate-pulse"></i>
+                </div>
+            @endif
+
+            <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-5 md:p-6 w-full shadow-2xl">
+                <div class="flex items-center gap-4 mb-5 border-b border-white/10 pb-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-[#f3a446] to-[#d18a3a] rounded-xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                        <i class="fas fa-user-tie text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-white/60 font-medium uppercase tracking-wider mb-1">{{ __('app.client.info') }}</p>
+                        <p class="text-lg font-bold text-white leading-tight">{{ $tender->client->name }}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-sm">
                     @if ($tender->client->phone)
-                        <div class="flex items-center text-white/80 mb-2">
-                            <i class="fas fa-phone ml-3"></i>
-                            <span>{{ $tender->client->phone }}</span>
+                        <div class="flex items-center text-white/80 bg-black/20 rounded-lg p-3 hover:bg-black/30 transition-colors">
+                            <i class="fas fa-phone ml-3 text-[#f3a446]"></i>
+                            <span dir="ltr">{{ $tender->client->phone }}</span>
                         </div>
                     @endif
 
                     @if ($tender->client->city)
-                        <div class="flex items-center text-white/80">
-                            <i class="fas fa-map-marker-alt ml-3"></i>
+                        <div class="flex items-center text-white/80 bg-black/20 rounded-lg p-3 hover:bg-black/30 transition-colors">
+                            <i class="fas fa-map-marker-alt ml-3 text-[#f3a446]"></i>
                             <span>{{ $tender->client->city }}</span>
                         </div>
                     @endif
                 </div>
-
-                @auth
-                    @if (auth()->user()->isConsultant() && $tender->status === 'open')
-                        @if ($userProposal)
-                            <a href="{{ route('proposals.edit', $userProposal->id) }}"
-                                class="btn-primary w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-lg">
-                                <i class="fas fa-edit"></i>
-                                {{ __('app.action.edit_proposal') }}
-                            </a>
-                        @else
-                            <a href="{{ route('proposals.create', $tender->id) }}"
-                                class="btn-primary w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-lg">
-                                <i class="fas fa-paper-plane"></i>
-                                {{ __('app.action.submit_proposal') }}
-                            </a>
-                        @endif
-                    @endif
-                @else
-                    <a href="{{ route('login') }}"
-                        class="btn-primary w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        <i class="fas fa-sign-in-alt"></i>
-                        {{ __('app.action.login_to_participate') }}
-                    </a>
-                @endauth
             </div>
+
+            @auth
+                @if (auth()->user()->isConsultant() && $tender->status === 'open')
+                    @if ($userProposal)
+                        <a href="{{ route('proposals.edit', $userProposal->id) }}"
+                            class="w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#ffb459] hover:shadow-[0_0_20px_rgba(243,164,70,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fas fa-edit"></i>
+                            {{ __('app.action.edit_proposal') }}
+                        </a>
+                    @else
+                        <a href="{{ route('proposals.create', $tender->id) }}"
+                            class="w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#ffb459] hover:shadow-[0_0_20px_rgba(243,164,70,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fas fa-paper-plane"></i>
+                            {{ __('app.action.submit_proposal') }}
+                        </a>
+                    @endif
+                @endif
+            @else
+                <a href="{{ route('login') }}"
+                    class="w-full justify-center text-lg py-4 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold flex items-center gap-3 hover:bg-[#ffb459] hover:shadow-[0_0_20px_rgba(243,164,70,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                    <i class="fas fa-sign-in-alt"></i>
+                    {{ __('app.action.login_to_participate') }}
+                </a>
+            @endauth
         </div>
-
     </div>
+</div>
 
-    <div class="absolute bottom-0 left-0 w-full h-20 bg-white z-[1]"></div>
-
-    <div class="absolute bottom-0 left-0 w-full h-20 overflow-hidden" style="line-height: 0; z-index:2;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"
-    class="absolute block w-full h-full">
-    <defs>
-        <linearGradient id="heroWave" gradientTransform="rotate(45)">
-            <stop offset="0%" stop-color="#2f5c69" />
-            <stop offset="100%" stop-color="#1a262a" />
-        </linearGradient>
-    </defs>
-    <path fill="url(#heroWave)"
-        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z">
-    </path>
-</svg>
-    </div>
+<div class="absolute bottom-0 left-0 w-full h-16 md:h-24 overflow-hidden" style="line-height: 0; z-index:2;">
+    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" viewBox="0 0 1200 120" preserveAspectRatio="none"
+        class="absolute block w-full h-full rotate-180">
+        <path fill="#ffffff"
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z">
+        </path>
+    </svg>
+</div>
 </section>
 
 
@@ -204,7 +197,7 @@
             class="bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 mb-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
             <div class="flex items-center mb-6">
                 <div
-                    class="w-16 h-16 bg-[#2f5c69]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                    class="w-16 h-16 bg-[#2f5c69]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg mr-2">
                     <i class="fas fa-file-alt text-[#2f5c69] text-2xl"></i>
                 </div>
                 <div>
@@ -222,7 +215,7 @@
                 class="bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 mb-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                 <div class="flex items-center mb-6">
                     <div
-                        class="w-16 h-16 bg-[#2f5c69]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                        class="w-16 h-16 bg-[#2f5c69]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg mr-2">
                         <i class="fas fa-clipboard-check text-[#2f5c69] text-2xl"></i>
                     </div>
                     <div>
@@ -240,9 +233,9 @@
         @if ($tender->client_notes)
             <div
                 class="bg-white shadow-xl border-2 border-[#f3a446]/30 rounded-2xl p-8 mb-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
-                <div class="flex items-center mb-6">
+                <div class="flex ittender_detailsems-center mb-6">
                     <div
-                        class="w-16 h-16 bg-[#f3a446]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg">
+                        class="w-16 h-16 bg-[#f3a446]/10 rounded-2xl flex items-center justify-center ml-4 shadow-lg mr-2">
                         <i class="fas fa-sticky-note text-[#f3a446] text-2xl"></i>
                     </div>
                     <div>
@@ -717,7 +710,7 @@
         class="sidebar-card bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
         <div class="flex items-center mb-6">
             <div
-                class="w-12 h-12 bg-[#2f5c69]/10 rounded-xl flex items-center justify-center ml-4">
+                class="w-12 h-12 bg-[#2f5c69]/10 rounded-xl flex items-center justify-center ml-4 mr-2">
                 <i class="fas fa-info-circle text-[#2f5c69] text-xl"></i>
             </div>
             <h2 class="text-2xl font-bold text-gray-800">{{ __('app.tender_details') }}</h2>
@@ -727,7 +720,7 @@
             <div
                 class="info-item bg-gray-50/50 border-gray-200/60 rounded-xl p-4 flex items-center">
                 <div
-                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#2f5c69] text-white ml-3">
+                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#2f5c69] text-white ml-3 mr-2">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
                 <div class="flex-1">
@@ -740,7 +733,7 @@
                 <div
                     class="info-item bg-green-50 border-green-100 rounded-xl p-4 flex items-center">
                     <div
-                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-green-500 text-white ml-3">
+                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-green-500 text-white ml-3 mr-2">
                         <i class="fas fa-money-bill-wave"></i>
                     </div>
                     <div class="flex-1">
@@ -754,7 +747,7 @@
             <div
                 class="info-item bg-[#f3a446]/5 border-[#f3a446]/20 rounded-xl p-4 flex items-center">
                 <div
-                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#f3a446] text-white ml-3">
+                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#f3a446] text-white ml-3 mr-2">
                     <i class="fas fa-file-alt"></i>
                 </div>
                 <div class="flex-1">
@@ -767,7 +760,7 @@
             @if ($tender->days_remaining !== null)
                 <div class="info-item bg-red-50 border-red-100 rounded-xl p-4 flex items-center">
                     <div
-                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-red-500 text-white ml-3">
+                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-red-500 text-white ml-3 mr-2">
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="flex-1">
@@ -794,7 +787,7 @@
             <div
                 class="info-item bg-gray-50/50 border-gray-200/60 rounded-xl p-4 flex items-center">
                 <div
-                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-gray-500 text-white ml-3">
+                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-gray-500 text-white ml-3 mr-2">
                     <i class="fas fa-calendar-plus"></i>
                 </div>
                 <div class="flex-1">
@@ -810,7 +803,7 @@
         class="sidebar-card bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
         <div class="flex items-center mb-6">
             <div
-                class="w-12 h-12 bg-[#2f5c69]/10 rounded-xl flex items-center justify-center ml-4">
+                class="w-12 h-12 bg-[#2f5c69]/10 rounded-xl flex items-center justify-center ml-4 mr-2">
                 <i class="fas fa-user text-[#2f5c69] text-xl"></i>
             </div>
             <h2 class="text-2xl font-bold text-gray-800">{{ __('app.client_information') }}</h2>
@@ -820,7 +813,7 @@
             <div
                 class="info-item bg-gray-50/50 border-gray-200/60 rounded-xl p-4 flex items-center">
                 <div
-                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#2f5c69] text-white ml-3">
+                    class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#2f5c69] text-white ml-3 mr-2">
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="flex-1">
@@ -833,7 +826,7 @@
                 <div
                     class="info-item bg-green-50 border-green-100 rounded-xl p-4 flex items-center">
                     <div
-                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-green-500 text-white ml-3">
+                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-green-500 text-white ml-3 mr-2">
                         <i class="fas fa-phone"></i>
                     </div>
                     <div class="flex-1">
@@ -847,7 +840,7 @@
                 <div
                     class="info-item bg-blue-50 border-blue-100 rounded-xl p-4 flex items-center">
                     <div
-                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-blue-500 text-white ml-3">
+                        class="info-item-icon w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center bg-blue-500 text-white ml-3 mr-2">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <div class="flex-1">
@@ -863,7 +856,7 @@
         class="sidebar-card bg-white shadow-xl border border-gray-100/50 rounded-2xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
         <div class="flex items-center mb-6">
             <div
-                class="w-12 h-12 bg-[#f3a446]/10 rounded-xl flex items-center justify-center ml-4">
+                class="w-12 h-12 bg-[#f3a446]/10 rounded-xl flex items-center justify-center ml-4 mr-2">
                 <i class="fas fa-bolt text-[#f3a446] text-xl"></i>
             </div>
             <h2 class="text-2xl font-bold text-gray-800">{{ __('app.quick_actions') }}</h2>
@@ -874,18 +867,18 @@
                 @if (auth()->user()->isConsultant() && $tender->status === 'open')
                     @if ($userProposal)
                         <a href="{{ route('proposals.edit', $userProposal->id) }}"
-                            class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
+                            class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
                             <i class="fas fa-edit ml-3 text-lg"></i>
                             {{ __('app.edit_proposal') }}
                         </a>
                         <a href="{{ route('proposals.show', $userProposal->id) }}"
-                            class="w-full flex items-center justify-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
+                            class="w-full flex items-center justify-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
                             <i class="fas fa-eye ml-3 text-lg"></i>
                             {{ __('app.view_my_proposal_details') }}
                         </a>
                     @else
                         <a href="{{ route('proposals.create', $tender->id) }}"
-                            class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
+                            class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
                             <i class="fas fa-paper-plane ml-3 text-lg"></i>
                             {{ __('app.submit_proposal_now') }}
                         </a>
@@ -894,14 +887,14 @@
 
                 @if (auth()->user()->isClient() && auth()->id() == $tender->client_id)
                     <a href="{{ route('tenders.edit', $tender->id) }}"
-                        class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
+                        class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
                         <i class="fas fa-edit ml-3 text-lg"></i>
                         {{ __('app.edit_tender') }}
                     </a>
 
                     @if ($tender->proposals->count() > 0)
                         <a href="{{ route('tenders.compare-proposals', $tender->id) }}"
-                            class="w-full flex items-center justify-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
+                            class="w-full flex items-center justify-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
                             <i class="fas fa-chart-bar ml-3 text-lg"></i>
                             {{ __('app.compare_proposals') }}
                         </a>
@@ -922,7 +915,7 @@
                 @endif
             @else
                 <a href="{{ route('login') }}"
-                    class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg">
+                    class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
                     <i class="fas fa-sign-in-alt ml-3 text-lg"></i>
                     {{ __('app.login_to_participate') }}
                 </a>

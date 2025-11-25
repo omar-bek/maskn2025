@@ -57,7 +57,7 @@
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl hover:translate-y-[-2px] transition-all duration-300 animated-card" style="animation-delay: 0.1s;">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-gradient-to-r from-[#f3a446] to-[#ffb35f] rounded-lg flex items-center justify-center shadow-md">
+                        <div class="w-12 h-12 bg-gradient-to-r from-[#f3a446] to-[#ffb35f] rounded-lg flex items-center justify-center shadow-md mr-2">
                             <i class="fas fa-home text-white text-lg"></i>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl hover:translate-y-[-2px] transition-all duration-300 animated-card" style="animation-delay: 0.2s;">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-gradient-to-r from-[#2f5c69] to-[#1a262a] rounded-lg flex items-center justify-center shadow-md">
+                        <div class="w-12 h-12 bg-gradient-to-r from-[#2f5c69] to-[#1a262a] rounded-lg flex items-center justify-center shadow-md mr-2">
                             <i class="fas fa-check-circle text-white text-lg"></i>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl hover:translate-y-[-2px] transition-all duration-300 animated-card" style="animation-delay: 0.3s;">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-gradient-to-r from-[#f3a446] to-[#ffb35f] rounded-lg flex items-center justify-center shadow-md">
+                        <div class="w-12 h-12 bg-gradient-to-r from-[#f3a446] to-[#ffb35f] rounded-lg flex items-center justify-center shadow-md mr-2">
                             <i class="fas fa-money-bill-wave text-white text-lg"></i>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
             <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl hover:translate-y-[-2px] transition-all duration-300 animated-card" style="animation-delay: 0.4s;">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-gradient-to-r from-[#2f5c69] to-[#1a262a] rounded-lg flex items-center justify-center shadow-md">
+                        <div class="w-12 h-12 bg-gradient-to-r from-[#2f5c69] to-[#1a262a] rounded-lg flex items-center justify-center shadow-md mr-2">
                             <i class="fas fa-star text-white text-lg"></i>
                         </div>
                     </div>
@@ -213,27 +213,27 @@
                     <div class="p-6">
                         <div class="space-y-3">
                             <a href="{{ route('tenders.index') }}" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-[#f3a446]/5 hover:border-[#f3a446]/30 transition-colors">
-                                <i class="fas fa-search text-[#f3a446] ml-3"></i>
+                                <i class="fas fa-search text-[#f3a446] ml-3 pr-2"></i>
                                 <span class="text-sm font-medium text-gray-900">{{ __('app.consultant_dashboard.quick_actions.browse_tenders') }}</span>
                             </a>
                             <a href="{{ route('proposals.index') }}" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-[#2f5c69]/5 hover:border-[#2f5c69]/20 transition-colors">
-                                <i class="fas fa-file-alt text-[#2f5c69] ml-3"></i>
+                                <i class="fas fa-file-alt text-[#2f5c69] ml-3 pr-2"></i>
                                 <span class="text-sm font-medium text-gray-900">{{ __('app.consultant_dashboard.quick_actions.my_proposals') }}</span>
                             </a>
                             <a href="{{ route('designs.create') }}" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-[#f3a446]/5 hover:border-[#f3a446]/30 transition-colors">
-                                <i class="fas fa-plus text-[#f3a446] ml-3"></i>
+                                <i class="fas fa-plus text-[#f3a446] ml-3 pr-2"></i>
                                 <span class="text-sm font-medium text-gray-900">{{ __('app.consultant_dashboard.quick_actions.create_design') }}</span>
                             </a>
                             <a href="{{ route('designs.index') }}" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-[#2f5c69]/5 hover:border-[#2f5c69]/20 transition-colors">
-                                <i class="fas fa-home text-[#2f5c69] ml-3"></i>
+                                <i class="fas fa-home text-[#2f5c69] ml-3 pr-2"></i>
                                 <span class="text-sm font-medium text-gray-900">{{ __('app.consultant_dashboard.quick_actions.my_designs') }}</span>
                             </a>
                             <a href="{{ route('consultant.portfolio') }}" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-[#f3a446]/5 hover:border-[#f3a446]/30 transition-colors">
-                                <i class="fas fa-images text-[#f3a446] ml-3"></i>
+                                <i class="fas fa-images text-[#f3a446] ml-3 pr-2"></i>
                                 <span class="text-sm font-medium text-gray-900">{{ __('app.consultant_dashboard.quick_actions.portfolio') }}</span>
                             </a>
                             <a href="{{ route('consultant.profile') }}" class="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-[#2f5c69]/5 hover:border-[#2f5c69]/20 transition-colors">
-                                <i class="fas fa-user text-[#2f5c69] ml-3"></i>
+                                <i class="fas fa-user text-[#2f5c69] ml-3 pr-2"></i>
                                 <span class="text-sm font-medium text-gray-900">{{ __('app.consultant_dashboard.quick_actions.edit_profile') }}</span>
                             </a>
                         </div>
