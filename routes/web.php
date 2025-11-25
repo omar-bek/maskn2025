@@ -195,6 +195,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 Route::prefix('client')->name('client.')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ClientDashboardController::class, 'profile'])->name('profile');
+    Route::get('/profile/edit', [ClientDashboardController::class, 'editProfile'])->name('profile.edit');
+    Route::post('/profile', [ClientDashboardController::class, 'updateProfile'])->name('profile.update');
     Route::get('/saved-designs', [ClientDashboardController::class, 'savedDesigns'])->name('saved-designs');
     Route::get('/favorite-consultants', [ClientDashboardController::class, 'favoriteConsultants'])->name('favorite-consultants');
     Route::get('/my-tenders', [ClientDashboardController::class, 'myTenders'])->name('my-tenders');
@@ -204,6 +206,8 @@ Route::prefix('client')->name('client.')->middleware(['auth'])->group(function (
 Route::prefix('consultant')->name('consultant.')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Consultant\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [App\Http\Controllers\Consultant\DashboardController::class, 'profile'])->name('profile');
+    Route::get('/profile/edit', [App\Http\Controllers\Consultant\DashboardController::class, 'editProfile'])->name('profile.edit');
+    Route::post('/profile', [App\Http\Controllers\Consultant\DashboardController::class, 'updateProfile'])->name('profile.update');
     Route::get('/projects', [App\Http\Controllers\Consultant\DashboardController::class, 'projects'])->name('projects');
     Route::get('/portfolio', [App\Http\Controllers\Consultant\DashboardController::class, 'portfolio'])->name('portfolio');
     Route::get('/inquiries', [App\Http\Controllers\Consultant\DashboardController::class, 'inquiries'])->name('inquiries');
@@ -214,6 +218,8 @@ Route::prefix('consultant')->name('consultant.')->middleware(['auth'])->group(fu
 Route::prefix('contractor')->name('contractor.')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [ContractorDashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ContractorDashboardController::class, 'profile'])->name('profile');
+    Route::get('/profile/edit', [ContractorDashboardController::class, 'editProfile'])->name('profile.edit');
+    Route::post('/profile', [ContractorDashboardController::class, 'updateProfile'])->name('profile.update');
     Route::get('/projects', [ContractorDashboardController::class, 'projects'])->name('projects');
     Route::get('/bids', [ContractorDashboardController::class, 'bids'])->name('bids');
     Route::get('/team', [ContractorDashboardController::class, 'team'])->name('team');

@@ -65,4 +65,13 @@ class Profile extends Model
     {
         return is_array($this->services) ? $this->services : [];
     }
+
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->avatar) {
+            return asset('storage/' . ltrim($this->avatar, '/'));
+        }
+
+        return null;
+    }
 }

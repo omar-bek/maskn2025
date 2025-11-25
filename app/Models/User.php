@@ -28,7 +28,8 @@ class User extends Authenticatable
         'country',
         'is_verified',
         'is_active',
-        'email_verified_at'
+        'email_verified_at',
+        'avatar'
     ];
 
     /**
@@ -128,5 +129,14 @@ class User extends Authenticatable
             default:
                 return route('home');
         }
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->avatar) {
+            return asset('storage/' . ltrim($this->avatar, '/'));
+        }
+
+        return null;
     }
 }

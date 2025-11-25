@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $design['title'] . ' - انشاءات')
+@section('title', $design->title . ' - انشاءات')
 
 @section('content')
     <!-- Breadcrumb -->
@@ -11,7 +11,7 @@
                 <i class="fas fa-chevron-left text-gray-400"></i>
                 <a href="{{ route('designs.index') }}" class="text-gray-500 hover:text-blue-600">التصاميم</a>
                 <i class="fas fa-chevron-left text-gray-400"></i>
-                <span class="text-gray-900">{{ $design['title'] }}</span>
+                <span class="text-gray-900">{{ $design->title }}</span>
             </nav>
         </div>
     </section>
@@ -23,23 +23,30 @@
                 <!-- Main Content -->
                 <div class="lg:col-span-2">
                     <!-- Main Image -->
-                    <div class="bg-gray-200 h-96 rounded-lg mb-6 flex items-center justify-center">
-                        <i class="fas fa-home text-6xl text-gray-400"></i>
+                    <div class="bg-gray-200 h-96 rounded-lg mb-6 overflow-hidden">
+                        <img src="{{ $design->main_image_url }}" alt="{{ $design->title }}"
+                            class="w-full h-full object-cover">
                     </div>
 
                     <!-- Image Gallery -->
-                    <div class="grid grid-cols-3 gap-4 mb-8">
-                        @foreach ($design['images'] as $image)
-                            <div class="bg-gray-200 h-24 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-image text-2xl text-gray-400"></i>
-                            </div>
-                        @endforeach
-                    </div>
+                    @php
+                        $galleryImages = $design->images_urls ?? [];
+                    @endphp
+                    @if (count($galleryImages) > 0)
+                        <div class="grid grid-cols-3 gap-4 mb-8">
+                            @foreach ($galleryImages as $imageUrl)
+                                <div class="bg-gray-200 h-24 rounded-lg overflow-hidden">
+                                    <img src="{{ $imageUrl }}" alt="{{ $design->title }}"
+                                        class="w-full h-full object-cover">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
 
                     <!-- Description -->
                     <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                         <h2 class="text-2xl font-bold text-gray-900 mb-4">وصف التصميم</h2>
-                        <p class="text-gray-600 leading-relaxed">{{ $design['description'] }}</p>
+                        <p class="text-gray-600 leading-relaxed">{{ $design->description }}</p>
                     </div>
 
                     <!-- Features -->
@@ -47,10 +54,10 @@
                         <h2 class="text-2xl font-bold text-gray-900 mb-4">المميزات</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @php
-                                $features =
-                                    is_array($design->features)
-                                        ? $design->features
-                                        : (json_decode($design->features ?? '[]', true) ?: []);
+                                $features = is_array($design->features)
+                                    ? $design->features
+                                    : (json_decode($design->features ?? '[]', true) ?:
+                                    []);
                             @endphp
                             @foreach ($features as $feature)
                                 <div class="flex items-center">
@@ -67,17 +74,17 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="text-center p-4 bg-gray-50 rounded-lg">
                                 <i class="fas fa-bed text-2xl text-blue-600 mb-2"></i>
-                                <div class="text-2xl font-bold text-gray-900">{{ $design['bedrooms'] }}</div>
+                                <div class="text-2xl font-bold text-gray-900">{{ $design->bedrooms }}</div>
                                 <div class="text-gray-600">غرف نوم</div>
                             </div>
                             <div class="text-center p-4 bg-gray-50 rounded-lg">
                                 <i class="fas fa-bath text-2xl text-blue-600 mb-2"></i>
-                                <div class="text-2xl font-bold text-gray-900">{{ $design['bathrooms'] }}</div>
+                                <div class="text-2xl font-bold text-gray-900">{{ $design->bathrooms }}</div>
                                 <div class="text-gray-600">حمامات</div>
                             </div>
                             <div class="text-center p-4 bg-gray-50 rounded-lg">
                                 <i class="fas fa-building text-2xl text-blue-600 mb-2"></i>
-                                <div class="text-2xl font-bold text-gray-900">{{ $design['floors'] }}</div>
+                                <div class="text-2xl font-bold text-gray-900">{{ $design->floors }}</div>
                                 <div class="text-gray-600">طوابق</div>
                             </div>
                         </div>
@@ -89,29 +96,29 @@
                     <!-- Price Card -->
                     <div class="bg-white rounded-lg shadow-md p-6 mb-6 sticky top-4">
                         <div class="text-center mb-6">
-                            <div class="text-3xl font-bold text-green-600 mb-2">{{ $design['price'] }} درهم</div>
+                            <div class="text-3xl font-bold text-green-600 mb-2">{{ $design->price }} درهم</div>
                             <div class="text-gray-600">سعر التصميم</div>
                         </div>
 
                         <div class="space-y-4 mb-6">
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">المساحة:</span>
-                                <span class="font-semibold">{{ $design['area'] }}</span>
+                                <span class="font-semibold">{{ $design->area }}</span>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">النمط:</span>
                                 <span
-                                    class="bg-teal-100 text-teal-800 px-2 py-1 rounded text-sm">{{ $design['style'] }}</span>
+                                    class="bg-teal-100 text-teal-800 px-2 py-1 rounded text-sm">{{ $design->style }}</span>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">المصمم:</span>
-                                <span class="font-semibold">{{ $design['architect'] }}</span>
+                                <span class="font-semibold">{{ $design->architect }}</span>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">التقييم:</span>
                                 <div class="flex items-center">
                                     <i class="fas fa-star text-yellow-400 ml-1"></i>
-                                    <span class="font-semibold">{{ $design['rating'] }}</span>
+                                    <span class="font-semibold">{{ $design->rating }}</span>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +167,7 @@
                                 <i class="fas fa-user text-teal-600"></i>
                             </div>
                             <div>
-                                <div class="font-semibold">{{ $design['architect'] }}</div>
+                                <div class="font-semibold">{{ $design->architect }}</div>
                                 <div class="text-gray-600 text-sm">مصمم معماري</div>
                             </div>
                         </div>

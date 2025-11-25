@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -92,6 +93,67 @@ class DashboardController extends Controller
         }
 
         return view('client.profile', compact('user'));
+    }
+
+    public function editProfile()
+    {
+        $user = Auth::user();
+
+        if (!$user->isClient()) {
+            abort(403, __('app.unauthorized_client_only'));
+        }
+
+        return view('client.profile-edit', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        if (!$user->isClient()) {
+            abort(403, __('app.unauthorized_client_only'));
+        }
+
+        $validated = $request->validate([
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'city' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|string|max:20',
+            'bio' => 'nullable|string|max:1000',
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
+
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+
+            $user->avatar = $avatarPath;
+        }
+
+        $profile = $user->profile()->firstOrCreate([]);
+
+        if (array_key_exists('bio', $validated)) {
+            $profile->bio_ar = $validated['bio'];
+            $profile->bio_en = $validated['bio'];
+            $profile->save();
+        }
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+
+        foreach (['phone', 'city', 'whatsapp'] as $field) {
+            if (array_key_exists($field, $validated)) {
+                $user->{$field} = $validated[$field];
+            }
+        }
+
+        $user->save();
+
+        return redirect()->route('client.profile')->with('success', 'تم تحديث الملف الشخصي بنجاح.');
     }
 
     public function savedDesigns()

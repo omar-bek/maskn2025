@@ -125,7 +125,7 @@
                 <div
                     class="bg-white rounded-2xl shadow-lg border-2 border-transparent overflow-hidden hover:shadow-xl hover:border-[#f3a446] transition-all duration-300 transform hover:-translate-y-1">
                     <div class="relative h-48">
-                        @if($land->images && count($land->images) > 0)
+                        @if($land->images && is_array($land->images) && count($land->images) > 0)
                             <img src="{{ $land->images[0] }}" alt="{{ $land->title }}"
                                 class="w-full h-full object-cover">
                         @else

@@ -35,7 +35,7 @@
                     <img src="{{ $design->main_image_url }}" alt="{{ $design->title }}"
                         class="w-full h-72 object-cover rounded-xl shadow-lg border-4 border-[#f3a446]/20 mb-4">
                     <div class="flex gap-2 flex-wrap justify-center">
-                        @if ($design->images && count($design->images) > 0)
+                        @if ($design->images && is_array($design->images) && count($design->images) > 0)
                             @foreach (array_slice($design->images, 0, 3) as $image)
                                 <img src="{{ asset('storage/' . $image) }}" alt="{{ $design->title }}"
                                     class="w-16 h-16 object-cover rounded-lg shadow-md hover:scale-105 transition duration-300 cursor-pointer">

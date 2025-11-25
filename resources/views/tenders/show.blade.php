@@ -3,6 +3,9 @@
 @section('title', $tender->title . ' - انشاءات')
 
 @section('content')
+@php
+    $designImages = $tender->design->images_urls ?? [];
+@endphp
    
 <section class="hero-section text-white relative bg-gradient-to-br from-[#2f5c69] to-[#1a262a] pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"> <div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
 <div class="flex-1 w-full animate-fade-in order-2 md:order-1">
@@ -311,9 +314,9 @@
                         </div>
                     </div>
 
-                    @if ($tender->design->images && count($tender->design->images) > 1)
+                    @if (!empty($designImages) && count($designImages) > 1)
                         <div class="mt-3 flex gap-2 overflow-x-auto pb-2">
-                            @foreach ($tender->design->images as $index => $image)
+                            @foreach ($designImages as $index => $image)
                                 <img src="{{ $image }}" alt="{{ __('app.image_alt', ['number' => $index + 1]) }}"
                                     class="w-16 h-16 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity duration-200"
                                     onclick="openImageModal('{{ $image }}')">
@@ -350,7 +353,7 @@
                             {{ __('app.view_full_details') }}
                         </a>
 
-                        @if ($tender->design->images && count($tender->design->images) > 1)
+                        @if (!empty($designImages) && count($designImages) > 1)
                             <button onclick="openGalleryModal()"
                                 class="inline-flex items-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-5 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
                                 <i class="fas fa-images ml-2"></i>
@@ -990,8 +993,8 @@
 
             <div class="h-24 overflow-x-auto overflow-y-hidden">
                 <div id="galleryThumbnailContainer" class="flex space-x-2 space-x-reverse h-full py-2">
-                    @if ($tender->design->images)
-                        @foreach ($tender->design->images as $index => $image)
+                    @if (!empty($designImages))
+                        @foreach ($designImages as $index => $image)
                             <img src="{{ $image }}" alt="صورة مصغرة {{ $index + 1 }}"
                                 class="gallery-thumbnail h-20 w-20 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-[#f3a446]/50 opacity-70 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
                                 onclick="changeGalleryImage(this, '{{ $image }}')">
@@ -1099,7 +1102,7 @@
 
         // Gallery modal functionality
         function openGalleryModal() {
-            const images = @json($tender->design->images ?? []);
+    const images = @json($designImages ?? []);
             if (images.length > 0) {
                 document.getElementById('galleryMainImage').src = images[0];
                 document.getElementById('galleryModal').classList.remove('hidden');

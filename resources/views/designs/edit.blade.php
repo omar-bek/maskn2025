@@ -310,7 +310,7 @@
                                 <tr>
                                     <td class="py-3 pr-4 text-sm font-medium text-gray-700">صور إضافية</td>
                                     <td class="py-3">
-                                        @if ($design->images && count($design->images) > 0)
+                                        @if ($design->images && is_array($design->images) && count($design->images) > 0)
                                             <div class="mb-4">
                                                 <p class="text-sm text-gray-600 mb-2">الصور الحالية:</p>
                                                 <div class="grid grid-cols-3 gap-2">

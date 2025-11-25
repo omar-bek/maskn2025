@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Consultant;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -75,9 +77,64 @@ class DashboardController extends Controller
         return view('consultant.profile', compact('user'));
     }
 
+    public function editProfile()
+    {
+        $user = Auth::user();
+        return view('consultant.profile-edit', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'bio' => 'nullable|string|max:1000',
+            'specialization' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'whatsapp' => 'nullable|string|max:20',
+        ]);
+
+        $profile = $user->profile()->firstOrCreate([]);
+
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
+
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+
+            $user->avatar = $avatarPath;
+        }
+
+        if (array_key_exists('bio', $validated)) {
+            $profile->bio_ar = $validated['bio'];
+            $profile->bio_en = $validated['bio'];
+        }
+
+        if (array_key_exists('specialization', $validated)) {
+            $profile->specializations = $validated['specialization']
+                ? [$validated['specialization']]
+                : [];
+        }
+
+        $profile->save();
+
+        foreach (['city', 'phone', 'whatsapp'] as $field) {
+            if (array_key_exists($field, $validated)) {
+                $user->{$field} = $validated[$field];
+            }
+        }
+
+        $user->save();
+
+        return redirect()->route('consultant.profile')->with('success', 'تم تحديث الملف الشخصي بنجاح.');
+    }
+
     public function portfolio()
     {
-        $portfolio = [];
+        $portfolio = collect([]);
         return view('consultant.portfolio', compact('portfolio'));
     }
 

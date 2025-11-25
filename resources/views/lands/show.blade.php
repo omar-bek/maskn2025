@@ -57,7 +57,7 @@
             <div class="lg:col-span-2">
                 <!-- Image Gallery -->
                 <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden mb-8">
-                    @if($land->images && count($land->images) > 0)
+                    @if($land->images && is_array($land->images) && count($land->images) > 0)
                         <!-- Main Image -->
                         <div class="relative h-96">
                             <img id="main-image" src="{{ $land->images[0] }}" alt="{{ $land->title }}" class="w-full h-full object-cover">
@@ -74,7 +74,7 @@
                         </div>
 
                         <!-- Thumbnail Images -->
-                        @if(count($land->images) > 1)
+                        @if(is_array($land->images) && count($land->images) > 1)
                         <div class="p-4 border-t border-gray-100">
                             <div class="flex space-x-2 space-x-reverse overflow-x-auto">
                                 @foreach($land->images as $index => $image)
