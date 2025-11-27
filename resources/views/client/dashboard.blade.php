@@ -36,11 +36,8 @@
               </p>
             </div>
             <div class="flex space-x-3 space-x-reverse">
-              <a href="{{ route('tenders.create') }}" class="btn-primary">
-                <i class="fas fa-plus ml-2"></i>
-                {{ __('app.client_dashboard.header.create_tender') }}
-              </a>
-              <a href="{{ route('tenders.index') }}" class="btn-secondary-light">
+             
+              <a href="{{ route('tenders.index') }}" class="btn-primary">
                 <i class="fas fa-list ml-2"></i>
                 {{ __('app.client_dashboard.header.all_tenders') }}
               </a>

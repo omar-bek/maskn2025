@@ -15,12 +15,12 @@
           </h1>
           <div class="flex flex-wrap gap-x-6 gap-y-3 text-base text-gray-700">
             <span class="flex items-center"
-              ><i class="fas fa-palette text-[#f3a446] ml-2"></i
+              ><i class="fas fa-palette text-[#f3a446] ml-2 mr-2"></i
               ><strong>{{ __("app.design_show.style") }}</strong
               ><span class="mr-1">{{ $design->style }}</span></span
             >
             <span class="flex items-center"
-              ><i class="fas fa-ruler-combined text-[#f3a446] ml-2"></i
+              ><i class="fas fa-ruler-combined text-[#f3a446] ml-2 mr-2"></i
               ><strong>{{ __("app.design_show.area") }}</strong
               ><span class="mr-1"
                 >{{ $design->area }}
@@ -28,22 +28,22 @@
               ></span
             >
             <span class="flex items-center"
-              ><i class="fas fa-map-marker-alt text-[#f3a446] ml-2"></i
+              ><i class="fas fa-map-marker-alt text-[#f3a446] ml-2 mr-2"></i
               ><strong>{{ __("app.design_show.location") }}</strong
               ><span class="mr-1">{{ $design->location }}</span></span
             >
             <span class="flex items-center"
-              ><i class="fas fa-layer-group text-[#f3a446] ml-2"></i
+              ><i class="fas fa-layer-group text-[#f3a446] ml-2 mr-2"></i
               ><strong>{{ __("app.design_show.floors") }}</strong
               ><span class="mr-1">{{ $design->floors }}</span></span
             >
             <span class="flex items-center"
-              ><i class="fas fa-bed text-[#f3a446] ml-2"></i
+              ><i class="fas fa-bed text-[#f3a446] ml-2 mr-2"></i
               ><strong>{{ __("app.design_show.bedrooms") }}</strong
               ><span class="mr-1">{{ $design->bedrooms }}</span></span
             >
             <span class="flex items-center"
-              ><i class="fas fa-bath text-[#f3a446] ml-2"></i
+              ><i class="fas fa-bath text-[#f3a446] ml-2 mr-2"></i
               ><strong>{{ __("app.design_show.bathrooms") }}</strong
               ><span class="mr-1">{{ $design->bathrooms }}</span></span
             >

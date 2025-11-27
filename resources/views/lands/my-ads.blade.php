@@ -5,33 +5,33 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">إعلاناتي</h1>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ __('app.my_ads_title') }}</h1>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                إدارة إعلانات الأراضي الخاصة بك وتتبع الأداء
+                {{ __('app.my_ads_desc') }}
             </p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div class="flex items-center gap-4">
-                    <h2 class="text-xl font-bold text-gray-900">روابط سريعة</h2>
+                    <h2 class="text-xl font-bold text-gray-900">{{ __('app.quick_links') }}</h2>
                 </div>
 
                 <div class="flex flex-wrap gap-3">
                     <a href="{{ route('lands.create') }}"
                         class="inline-flex items-center px-5 py-2.5 bg-[#f3a446] text-[#1a262a] rounded-xl font-bold hover:bg-[#f5b05a] transition-all transform hover:scale-105 shadow-lg">
-                        <i class="fas fa-plus ml-2"></i>
-                        إضافة أرض جديدة
+                        <i class="fas fa-plus mx-2"></i>
+                        {{ __('app.add_new_land') }}
                     </a>
                     <a href="{{ route('lands.my-offers') }}"
                         class="inline-flex items-center px-5 py-2.5 bg-[#2f5c69]/10 text-[#2f5c69] rounded-xl font-medium hover:bg-[#2f5c69]/20 transition-colors">
-                        <i class="fas fa-handshake ml-2"></i>
-                        العروض المقدمة
+                        <i class="fas fa-handshake mx-2"></i>
+                        {{ __('app.submitted_offers') }}
                     </a>
                     <a href="{{ route('lands.index') }}"
                         class="inline-flex items-center px-5 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors">
-                        <i class="fas fa-search ml-2"></i>
-                        تصفح الأراضي
+                        <i class="fas fa-search mx-2"></i>
+                        {{ __('app.browse_lands') }}
                     </a>
                 </div>
             </div>
@@ -43,9 +43,9 @@
                     <div class="p-3 bg-[#2f5c69]/10 rounded-xl">
                         <i class="fas fa-list text-2xl text-[#2f5c69]"></i>
                     </div>
-                    <div class="mr-4">
+                    <div class="mx-4">
                         <h3 class="text-2xl font-bold text-gray-900">{{ count($myLands) }}</h3>
-                        <p class="text-gray-600">إعلان إجمالي</p>
+                        <p class="text-gray-600">{{ __('app.total_ads') }}</p>
                     </div>
                 </div>
             </div>
@@ -55,9 +55,9 @@
                     <div class="p-3 bg-green-100 rounded-xl">
                         <i class="fas fa-eye text-2xl text-green-600"></i>
                     </div>
-                    <div class="mr-4">
+                    <div class="mx-4">
                         <h3 class="text-2xl font-bold text-gray-900">{{ $myLands->sum('views') }}</h3>
-                        <p class="text-gray-600">مشاهدات</p>
+                        <p class="text-gray-600">{{ __('app.views') }}</p>
                     </div>
                 </div>
             </div>
@@ -67,9 +67,9 @@
                     <div class="p-3 bg-[#f3a446]/10 rounded-xl">
                         <i class="fas fa-handshake text-2xl text-[#f3a446]"></i>
                     </div>
-                    <div class="mr-4">
+                    <div class="mx-4">
                         <h3 class="text-2xl font-bold text-gray-900">{{ $myLands->sum('offers_count') }}</h3>
-                        <p class="text-gray-600">عروض مقدمة</p>
+                        <p class="text-gray-600">{{ __('app.offers_count_stat') }}</p>
                     </div>
                 </div>
             </div>
@@ -79,10 +79,10 @@
                     <div class="p-3 bg-blue-100 rounded-xl">
                         <i class="fas fa-chart-line text-2xl text-blue-600"></i>
                     </div>
-                    <div class="mr-4">
+                    <div class="mx-4">
                         <h3 class="text-2xl font-bold text-gray-900">{{ $myLands->where('status', 'active')->count() }}
                         </h3>
-                        <p class="text-gray-600">إعلانات نشطة</p>
+                        <p class="text-gray-600">{{ __('app.active_ads') }}</p>
                     </div>
                 </div>
             </div>
@@ -91,31 +91,31 @@
         <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div class="flex items-center gap-4">
-                    <h2 class="text-xl font-bold text-gray-900">إعلاناتي</h2>
+                    <h2 class="text-xl font-bold text-gray-900">{{ __('app.my_ads_title') }}</h2>
                     <div class="flex gap-2">
                         <button
                             class="px-4 py-2 bg-[#f3a446] text-[#1a262a] rounded-xl text-sm font-bold hover:bg-[#f5b05a] transition-colors">
-                            الكل
+                            {{ __('app.all') }}
                         </button>
                         <button
                             class="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
-                            نشط
+                            {{ __('app.active') }}
                         </button>
                         <button
                             class="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
-                            معلق
+                            {{ __('app.pending') }}
                         </button>
                         <button
                             class="px-4 py-2 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
-                            مكتمل
+                            {{ __('app.completed') }}
                         </button>
                     </div>
                 </div>
 
                 <a href="{{ route('lands.create') }}"
                     class="bg-[#2f5c69] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#1a262a] transition-all transform hover:scale-105 shadow-lg">
-                    <i class="fas fa-plus ml-2"></i>
-                    إضافة إعلان جديد
+                    <i class="fas fa-plus mx-2"></i>
+                    {{ __('app.add_new_land') }}
                 </a>
             </div>
         </div>
@@ -136,14 +136,14 @@
                         @endif
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
-                        <div class="absolute top-4 right-4">
+                        <div class="absolute top-4 right-4 rtl:right-4 ltr:left-auto ltr:right-4">
                             <span class="px-3 py-1.5 rounded-full text-xs font-bold shadow-lg
                                 {{ $land->status === 'active' ? 'bg-green-100 text-green-800' :
                                     ($land->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800') }}">
                                 {{ $land->status_text }}
                             </span>
                         </div>
-                        <div class="absolute top-4 left-4">
+                        <div class="absolute top-4 left-4 rtl:left-4 ltr:right-auto ltr:left-4">
                             <span class="px-3 py-1.5 rounded-full text-xs font-bold shadow-lg
                                 {{ $land->transaction_type === 'sale' ? 'bg-[#f3a446]/20 text-[#f3a446]' : 'bg-[#2f5c69]/20 text-[#2f5c69]' }}
                                 {{ $land->transaction_type === 'both' ? 'bg-purple-100 text-purple-800' : '' }}">
@@ -151,7 +151,7 @@
                             </span>
                         </div>
 
-                        <div class="absolute bottom-4 right-4 text-right">
+                        <div class="absolute bottom-4 right-4 text-right rtl:text-right ltr:text-left rtl:right-4 ltr:left-4">
                             <p class="text-2xl font-bold text-white shadow-lg">{{ $land->formatted_price }}</p>
                             <p class="text-sm text-gray-200">{{ $land->created_at->format('Y-m-d') }}</p>
                         </div>
@@ -163,11 +163,11 @@
 
                         <div class="flex items-center gap-6 mb-4">
                             <div class="flex items-center text-sm text-gray-700 font-medium">
-                                <i class="fas fa-map-marker-alt text-[#2f5c69] ml-2"></i>
+                                <i class="fas fa-map-marker-alt text-[#2f5c69] mx-2"></i>
                                 <span>{{ $land->location }}</span>
                             </div>
                             <div class="flex items-center text-sm text-gray-700 font-medium">
-                                <i class="fas fa-ruler-combined text-[#2f5c69] ml-2"></i>
+                                <i class="fas fa-ruler-combined text-[#2f5c69] mx-2"></i>
                                 <span>{{ $land->formatted_area }}</span>
                             </div>
                         </div>
@@ -177,32 +177,32 @@
                         <div
                             class="flex items-center justify-between mb-5 p-4 bg-gray-50/50 rounded-xl border border-gray-200/50">
                             <div class="flex items-center text-sm font-bold text-gray-800">
-                                <i class="fas fa-eye text-green-500 ml-2"></i>
-                                <span>{{ $land->views }} مشاهدة</span>
+                                <i class="fas fa-eye text-green-500 mx-2"></i>
+                                <span>{{ $land->views }} {{ __('app.views_suffix') }}</span>
                             </div>
                             <div class="flex items-center text-sm font-bold text-gray-800">
-                                <i class="fas fa-handshake text-[#f3a446] ml-2"></i>
-                                <span>{{ $land->offers_count }} عرض</span>
+                                <i class="fas fa-handshake text-[#f3a446] mx-2"></i>
+                                <span>{{ $land->offers_count }} {{ __('app.offers_suffix') }}</span>
                             </div>
                         </div>
 
                         <div class="flex gap-3">
                             <a href="{{ route('lands.show', $land->id) }}"
                                 class="flex-1 bg-[#f3a446] text-[#1a262a] text-center py-3 px-4 rounded-xl font-bold hover:bg-[#f5b05a] transition-colors shadow-lg hover:shadow-xl transform hover:scale-105">
-                                عرض التفاصيل
+                                {{ __('app.view_details') }}
                             </a>
                             <a href="{{ route('lands.edit', $land->id) }}"
                                 class="flex-shrink-0 bg-gray-100 text-gray-700 py-3 px-4 rounded-xl font-bold hover:bg-gray-200 transition-colors"
-                                title="تعديل">
+                                title="{{ __('app.edit') }}">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form method="POST" action="{{ route('lands.destroy', $land->id) }}" style="display: inline;"
-                                onsubmit="return confirm('هل أنت متأكد من حذف هذا الإعلان؟')">
+                                onsubmit="return confirm('{{ __('app.confirm_delete') }}')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
                                     class="flex-shrink-0 bg-red-100 text-red-700 py-3 px-4 rounded-xl font-bold hover:bg-red-200 transition-colors"
-                                    title="حذف">
+                                    title="{{ __('app.delete') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -216,12 +216,12 @@
             <div class="text-center py-12">
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-12">
                     <i class="fas fa-list text-6xl text-gray-300 mb-6"></i>
-                    <h3 class="text-3xl font-bold text-gray-900 mb-2">لا توجد إعلانات</h3>
-                    <p class="text-gray-600 text-lg mb-8">ابدأ بنشر إعلانك الأول للحصول على عروض</p>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-2">{{ __('app.no_ads') }}</h3>
+                    <p class="text-gray-600 text-lg mb-8">{{ __('app.no_ads_desc') }}</p>
                     <a href="{{ route('lands.create') }}"
                         class="bg-[#f3a446] text-[#1a262a] px-8 py-3 rounded-xl font-bold text-lg hover:bg-[#f5b05a] transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
-                        <i class="fas fa-plus ml-2"></i>
-                        إضافة إعلان جديد
+                        <i class="fas fa-plus mx-2"></i>
+                        {{ __('app.add_new_land') }}
                     </a>
                 </div>
             </div>

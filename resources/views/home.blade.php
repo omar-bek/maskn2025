@@ -904,7 +904,7 @@
               href="{{ route('designs.create') }}"
               class="cta-button-primary flex items-center justify-center"
             >
-              <i class="fas fa-plus ml-3"></i>
+              <i class="fas fa-plus ml-3 pr-2"></i>
               <span>{{ __('app.cta_section.create_design') }}</span>
             </a>
           @else
@@ -912,7 +912,7 @@
               href="{{ route('tenders.create') }}"
               class="cta-button-primary flex items-center justify-center"
             >
-              <i class="fas fa-file-contract ml-3"></i>
+              <i class="fas fa-file-contract ml-3 pr-2"></i>
               <span>{{ __('app.cta_section.create_tender') }}</span>
             </a>
           @endif
@@ -921,7 +921,7 @@
             href="{{ route('register') }}"
             class="cta-button-primary flex items-center justify-center"
           >
-            <i class="fas fa-user-plus ml-3"></i>
+            <i class="fas fa-user-plus ml-3 pr-2"></i>
             <span>{{ __('app.cta_section.join_now') }}</span>
           </a>
         @endauth
@@ -930,7 +930,7 @@
           href="{{ route('designs.index') }}"
           class="cta-button-secondary flex items-center justify-center"
         >
-          <i class="fas fa-eye ml-3"></i>
+          <i class="fas fa-eye ml-3 pr-2"></i>
           <span>{{ __('app.cta_section.browse_designs') }}</span>
         </a>
       </div>

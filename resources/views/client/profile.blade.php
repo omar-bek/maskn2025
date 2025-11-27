@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'الملف الشخصي - ' . ($user->name ?? ''))
+@section('title', __('app.profile') . ' - ' . ($user->name ?? ''))
 
 @section('content')
     <div class="bg-gray-50 py-16 min-h-screen">
@@ -27,21 +27,21 @@
                             @endif
                         </div>
                         <div>
-                            <p class="text-sm uppercase tracking-widest text-white/70">الملف الشخصي</p>
+                            <p class="text-sm uppercase tracking-widest text-white/70">{{ __('app.profile') }}</p>
                             <h1 class="text-3xl font-extrabold">{{ $user->name }}</h1>
-                            <p class="text-gray-300 mt-2">عضو منذ {{ optional($user->created_at)->translatedFormat('F Y') }}</p>
+                            <p class="text-gray-300 mt-2">{{ __('app.member_since') }} {{ optional($user->created_at)->translatedFormat('F Y') }}</p>
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-3">
                         <a href="{{ route('client.profile.edit') }}"
                             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-[#1a262a] font-semibold shadow-lg hover:bg-gray-100 transition">
                             <i class="fas fa-edit"></i>
-                            تعديل الملف الشخصي
+                            {{ __('app.edit_profile') }}
                         </a>
                         <a href="{{ route('client.dashboard') }}"
                             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-white/40 text-white font-semibold hover:bg-white/10 transition">
                             <i class="fas fa-tachometer-alt"></i>
-                            لوحة التحكم
+                            {{ __('app.dashboard') }}
                         </a>
                     </div>
                 </div>
@@ -53,15 +53,15 @@
                 @endphp
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 pb-8">
                     <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
-                        <p class="text-sm text-gray-200 mb-1">إجمالي المنافسات</p>
+                        <p class="text-sm text-gray-200 mb-1">{{ __('app.total_tenders') }}</p>
                         <p class="text-3xl font-bold">{{ $totalTenders }}</p>
                     </div>
                     <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
-                        <p class="text-sm text-gray-200 mb-1">المنافسات النشطة</p>
+                        <p class="text-sm text-gray-200 mb-1">{{ __('app.active_tenders') }}</p>
                         <p class="text-3xl font-bold">{{ $activeTenders }}</p>
                     </div>
                     <div class="bg-white/10 rounded-2xl p-5 border border-white/10">
-                        <p class="text-sm text-gray-200 mb-1">المنافسات الممنوحة</p>
+                        <p class="text-sm text-gray-200 mb-1">{{ __('app.awarded_tenders') }}</p>
                         <p class="text-3xl font-bold">{{ $awardedTenders }}</p>
                     </div>
                 </div>
@@ -71,32 +71,32 @@
                 <div class="lg:col-span-2 space-y-8">
                     <div class="bg-white rounded-2xl shadow-lg border border-gray-100">
                         <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-                            <h2 class="text-xl font-bold text-[#1a262a]">معلومات التواصل</h2>
+                            <h2 class="text-xl font-bold text-[#1a262a]">{{ __('app.contact_info') }}</h2>
                             <a href="{{ route('client.profile.edit') }}" class="text-sm text-[#2f5c69] font-semibold hover:underline">
-                                تعديل المعلومات
+                                {{ __('app.edit_info') }}
                             </a>
                         </div>
                         <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="border border-gray-100 rounded-xl p-4">
-                                <p class="text-sm text-gray-500 mb-1">البريد الإلكتروني</p>
+                                <p class="text-sm text-gray-500 mb-1">{{ __('app.email') }}</p>
                                 <p class="text-base font-semibold text-[#1a262a]">{{ $user->email }}</p>
                             </div>
                             <div class="border border-gray-100 rounded-xl p-4">
-                                <p class="text-sm text-gray-500 mb-1">رقم الهاتف</p>
-                                <p class="text-base font-semibold text-[#1a262a]">{{ $user->phone ?? 'غير مضاف' }}</p>
+                                <p class="text-sm text-gray-500 mb-1">{{ __('app.phone') }}</p>
+                                <p class="text-base font-semibold text-[#1a262a]">{{ $user->phone ?? __('app.not_added') }}</p>
                             </div>
                             <div class="border border-gray-100 rounded-xl p-4">
-                                <p class="text-sm text-gray-500 mb-1">واتساب</p>
-                                <p class="text-base font-semibold text-[#1a262a]">{{ $user->whatsapp ?? 'غير مضاف' }}</p>
+                                <p class="text-sm text-gray-500 mb-1">{{ __('app.whatsapp') }}</p>
+                                <p class="text-base font-semibold text-[#1a262a]">{{ $user->whatsapp ?? __('app.not_added') }}</p>
                             </div>
                             <div class="border border-gray-100 rounded-xl p-4">
-                                <p class="text-sm text-gray-500 mb-1">المدينة</p>
-                                <p class="text-base font-semibold text-[#1a262a]">{{ $user->city ?? 'غير مضاف' }}</p>
+                                <p class="text-sm text-gray-500 mb-1">{{ __('app.city') }}</p>
+                                <p class="text-base font-semibold text-[#1a262a]">{{ $user->city ?? __('app.not_added') }}</p>
                             </div>
                             <div class="md:col-span-2 border border-gray-100 rounded-xl p-4">
-                                <p class="text-sm text-gray-500 mb-1">نبذة تعريفية</p>
+                                <p class="text-sm text-gray-500 mb-1">{{ __('app.bio') }}</p>
                                 <p class="text-gray-700 leading-relaxed">
-                                    {{ optional($user->profile)->bio ?? 'لا توجد نبذة مضافة بعد. قم بتحديث ملفك الشخصي لإبراز معلوماتك.' }}
+                                    {{ optional($user->profile)->bio ?? __('app.no_bio_added') }}
                                 </p>
                             </div>
                         </div>
@@ -104,9 +104,9 @@
 
                     <div class="bg-white rounded-2xl shadow-lg border border-gray-100">
                         <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-                            <h2 class="text-xl font-bold text-[#1a262a]">آخر المنافسات</h2>
+                            <h2 class="text-xl font-bold text-[#1a262a]">{{ __('app.recent_tenders') }}</h2>
                             <a href="{{ route('client.my-tenders') }}" class="text-sm text-[#2f5c69] font-semibold hover:underline">
-                                عرض جميع المنافسات
+                                {{ __('app.view_all_tenders') }}
                             </a>
                         </div>
                         <div class="p-6 space-y-4">
@@ -121,13 +121,13 @@
                                             <p class="text-sm text-gray-500">{{ $tender->created_at->diffForHumans() }}</p>
                                         </div>
                                         <span class="text-xs font-bold px-3 py-1 rounded-full bg-[#f3a446]/15 text-[#f3a446]">
-                                            {{ $tender->status ?? 'نشط' }}
+                                            {{ $tender->status ?? __('app.active') }}
                                         </span>
                                     </div>
                                 @endforeach
                             @else
                                 <div class="text-center py-8 text-gray-500">
-                                    <p>لا توجد منافسات حتى الآن</p>
+                                    <p>{{ __('app.no_tenders_yet') }}</p>
                                 </div>
                             @endif
                         </div>
@@ -137,28 +137,28 @@
                 <div class="space-y-8">
                     <div class="bg-white rounded-2xl shadow-lg border border-gray-100">
                         <div class="px-6 py-4 border-b border-gray-100">
-                            <h2 class="text-xl font-bold text-[#1a262a]">حالة الحساب</h2>
+                            <h2 class="text-xl font-bold text-[#1a262a]">{{ __('app.account_status') }}</h2>
                         </div>
                         <div class="p-6 space-y-5">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-sm font-semibold text-[#1a262a]">الحساب مفعّل</p>
-                                    <p class="text-xs text-gray-500">يمكنك استخدام جميع الميزات</p>
+                                    <p class="text-sm font-semibold text-[#1a262a]">{{ __('app.account_active') }}</p>
+                                    <p class="text-xs text-gray-500">{{ __('app.all_features_available') }}</p>
                                 </div>
-                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-600">نعم</span>
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-600">{{ __('app.yes') }}</span>
                             </div>
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-sm font-semibold text-[#1a262a]">البريد الإلكتروني</p>
-                                    <p class="text-xs text-gray-500">تم التحقق من البريد</p>
+                                    <p class="text-sm font-semibold text-[#1a262a]">{{ __('app.email') }}</p>
+                                    <p class="text-xs text-gray-500">{{ __('app.email_verified') }}</p>
                                 </div>
-                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-600">نعم</span>
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-600">{{ __('app.yes') }}</span>
                             </div>
                             <div class="pt-4 border-t border-gray-100">
                                 <a href="{{ route('client.profile.edit') }}"
                                     class="inline-flex items-center justify-center w-full gap-2 px-4 py-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition">
                                     <i class="fas fa-shield-alt"></i>
-                                    إدارة الأمان
+                                    {{ __('app.security_management') }}
                                 </a>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
 
                     <div class="bg-white rounded-2xl shadow-lg border border-gray-100">
                         <div class="px-6 py-4 border-b border-gray-100">
-                            <h2 class="text-xl font-bold text-[#1a262a]">إجراءات سريعة</h2>
+                            <h2 class="text-xl font-bold text-[#1a262a]">{{ __('app.quick_actions') }}</h2>
                         </div>
                         <div class="p-6 space-y-3">
                             <a href="{{ route('tenders.create') }}"
@@ -176,8 +176,8 @@
                                         <i class="fas fa-plus"></i>
                                     </span>
                                     <div>
-                                        <p class="text-sm font-semibold text-[#1a262a]">إنشاء منافسة</p>
-                                        <p class="text-xs text-gray-500">ابدأ منافسة جديدة</p>
+                                        <p class="text-sm font-semibold text-[#1a262a]">{{ __('app.create_tender') }}</p>
+                                        <p class="text-xs text-gray-500">{{ __('app.start_new_tender') }}</p>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-left text-gray-400"></i>
@@ -189,8 +189,8 @@
                                         <i class="fas fa-file-alt"></i>
                                     </span>
                                     <div>
-                                        <p class="text-sm font-semibold text-[#1a262a]">منافساتي</p>
-                                        <p class="text-xs text-gray-500">عرض جميع منافساتي</p>
+                                        <p class="text-sm font-semibold text-[#1a262a]">{{ __('app.my_tenders') }}</p>
+                                        <p class="text-xs text-gray-500">{{ __('app.view_my_tenders') }}</p>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-left text-gray-400"></i>
@@ -202,8 +202,8 @@
                                         <i class="fas fa-bookmark"></i>
                                     </span>
                                     <div>
-                                        <p class="text-sm font-semibold text-[#1a262a]">التصاميم المحفوظة</p>
-                                        <p class="text-xs text-gray-500">عرض التصاميم المحفوظة</p>
+                                        <p class="text-sm font-semibold text-[#1a262a]">{{ __('app.saved_designs') }}</p>
+                                        <p class="text-xs text-gray-500">{{ __('app.view_saved_designs') }}</p>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-left text-gray-400"></i>

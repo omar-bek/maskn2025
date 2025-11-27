@@ -64,7 +64,7 @@
         <div
           class="inline-flex items-center bg-[#f3a446]/20 backdrop-blur-sm rounded-full px-6 py-3 mb-6 -mt-12 border border-[#f3a446]/30"
         >
-          <i class="fas fa-file-contract text-[#f3a446] text-2xl ml-3 "></i>
+          <i class="fas fa-file-contract text-[#f3a446] text-2xl ml-3 mr-2 "></i>
           <span class="text-lg font-semibold text-white">{{
             __("app.tenders_hero.badge")
           }}</span>
@@ -197,10 +197,10 @@
         id="statusFilter"
         class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 focus:ring-4 focus:ring-[#f3a446]/20 focus:border-[#f3a446] transition-all duration-300 bg-gray-50/50 backdrop-blur-sm group-hover:bg-white group-hover:shadow-lg appearance-none cursor-pointer"
       >
-        <option value="">{{ __("app.status.all") }}</option>
-        <option value="open">{{ __("app.status.open") }}</option>
-        <option value="closed">{{ __("app.status.closed") }}</option>
-        <option value="awarded">{{ __("app.status.awarded") }}</option>
+        <option value="">{{ __("app.all") }}</option>
+        <option value="open">{{ __("app.open") }}</option>
+        <option value="closed">{{ __("app.closed") }}</option>
+        <option value="awarded">{{ __("app.awarded") }}</option>
       </select>
       <div
         class="absolute inset-y-0 end-0 pe-4 flex items-center pointer-events-none"
@@ -256,21 +256,21 @@
           class="quick-filter-btn bg-[#2f5c69]/10 text-[#2f5c69] hover:bg-[#2f5c69]/20 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
         >
           <i class="fas fa-circle text-xs me-2"></i>
-          {{ __("app.status.open") }}
+          {{ __("app.open") }}
         </button>
         <button
           onclick="setQuickFilter('closed')"
           class="quick-filter-btn bg-red-100 text-red-800 hover:bg-red-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
         >
           <i class="fas fa-lock text-xs me-2"></i>
-          {{ __("app.status.closed") }}
+          {{ __("app.closed") }}
         </button>
         <button
           onclick="setQuickFilter('awarded')"
           class="quick-filter-btn bg-blue-100 text-blue-800 hover:bg-blue-200 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
         >
           <i class="fas fa-trophy text-xs me-2"></i>
-          {{ __("app.status.awarded") }}
+          {{ __("app.awarded") }}
         </button>
         <button
           onclick="clearFilters()"
@@ -312,21 +312,21 @@
                 class="status-badge bg-[#2f5c69] text-white w-28 h-10 flex items-center justify-center rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm animate-pulse"
               >
                 <i class="fas fa-circle text-xs pr-1 pl-1"></i>
-                {{ __("app.status.open") }}
+                {{ __("app.open") }}
               </span>
             @elseif($tender->status === 'closed')
               <span
                 class="status-badge bg-red-600 text-white w-28 h-10 flex items-center justify-center rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm"
               >
                 <i class="fas fa-times-circle text-xs pr-1 pl-1"></i>
-                {{ __("app.status.closed") }}
+                {{ __("app.closed") }}
               </span>
             @elseif($tender->status === 'awarded')
               <span
                 class="status-badge bg-blue-600 text-white w-28 h-10 flex items-center justify-center rounded-2xl text-sm font-bold shadow-2xl border-2 border-white/20 backdrop-blur-sm"
               >
                 <i class="fas fa-trophy text-xs pr-1 pl-1"></i>
-                {{ __("app.status.awarded") }}
+                {{ __("app.awarded") }}
               </span>
             @endif
           </div>
@@ -409,30 +409,23 @@
               }}</span>
             </div>
           </div>
-          <div class="flex gap-4">
-            <a
-              href="{{ route('tenders.show', $tender->id) }}"
-              class="flex-1 bg-[#f3a446] text-[#1a262a] text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl hover:bg-[#f5b05a] group"
-            >
-              <i
-                class="fas fa-eye ml-2 text-base group-hover:scale-110 transition-transform duration-300"
-              ></i>
-              {{ __("app.tenders_list.view_details_button") }}
+<div class="flex justify-center gap-4 w-full mt-4">
+    <a href="{{ route('tenders.show', $tender->id) }}"
+        class="flex items-center justify-center bg-[#f3a446] text-[#1a262a] py-3 px-6 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl hover:bg-[#f5b05a] group min-w-[140px] whitespace-nowrap">
+        <i class="fas fa-eye mr-2 rtl:ml-2 rtl:mr-0 text-base group-hover:scale-110 transition-transform duration-300"></i>
+        {{ __('app.tenders_list.view_details_button') }}
+    </a>
+
+    @auth
+        @if (auth()->user()->isConsultant() && $tender->status === 'open')
+            <a href="{{ route('proposals.create', $tender->id) }}"
+                class="flex items-center justify-center bg-transparent text-[#2f5c69] border-2 border-[#2f5c69] hover:bg-[#2f5c69] hover:text-white py-3 px-6 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl group min-w-[140px] whitespace-nowrap">
+                <i class="fas fa-paper-plane mr-2 rtl:ml-2 rtl:mr-0 text-base group-hover:scale-110 transition-transform duration-300"></i>
+                {{ __('app.tenders_list.submit_proposal_button') }}
             </a>
-            @auth
-              @if (auth()->user()->isConsultant() && $tender->status === 'open')
-                <a
-                  href="{{ route('proposals.create', $tender->id) }}"
-                  class="flex-1 bg-transparent text-[#2f5c69] border-2 border-[#2f5c69] hover:bg-[#2f5c69] hover:text-white text-center py-4 px-5 rounded-2xl font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl group"
-                >
-                  <i
-                    class="fas fa-paper-plane ml-2 text-base group-hover:scale-110 transition-transform duration-300"
-                  ></i>
-                  {{ __("app.tenders_list.submit_proposal_button") }}
-                </a>
-              @endif
-            @endauth
-          </div>
+        @endif
+    @endauth
+</div>
         </div>
       </div>
     @empty

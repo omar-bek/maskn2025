@@ -446,7 +446,7 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
-                <h1 class="hero-title text-5xl font-bold mb-6">
+                <h1 class="hero-title text-5xl font-bold mb-6 pb-5">
                     {{ __('app.designs_hero.title') }}
                 </h1>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -523,7 +523,7 @@
                             </div>
                             <div class="design-actions">
                                 <a href="{{ route('designs.show-with-pricing', $design->id) }}"
-                                    class="btn-primary  text-center">{{ __('app.designs_grid.view_with_pricing') }}</a>
+                                    class="btn-primary  text-center ml-5 mr-5">{{ __('app.designs_grid.view_with_pricing') }}</a>
                                 <a href="{{ route('designs.show', $design->id) }}"
                                     class="btn-secondary text-center">{{ __('app.view_details') }}</a>
 

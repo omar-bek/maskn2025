@@ -362,7 +362,7 @@ html.ltr body {
             >{{ __('app.header.tenders') }}</a
           >
           <a
-            href="{{ route('lands.create') }}"
+            href="{{ route('lands.index') }}"
             class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('lands.create') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
             aria-label="{{ __('app.header.sell_exchange_lands') }}"
             >{{ __('app.header.sell_exchange_lands') }}</a
@@ -383,12 +383,7 @@ html.ltr body {
                 >{{ __('app.header.my_proposals') }}</a
               >
             @elseif(auth()->user()->isClient())
-              <a
-                href="{{ route('tenders.create') }}"
-                class="nav-link text-gray-700 hover:text-[#f3a446] transition-colors px-3 py-1 rounded-full {{ request()->routeIs('tenders.create') ? 'bg-[#2f5c69] text-white font-semibold' : '' }}"
-                aria-label="{{ __('app.header.create_tender') }}"
-                >{{ __('app.header.create_tender') }}</a
-              >
+             
             @endif
           @endauth
         </div>
@@ -594,7 +589,7 @@ html.ltr body {
           ><span>{{ __('app.header.tenders') }}</span>
         </a>
         <a
-          href="{{ route('lands.create') }}"
+          href="{{ route('lands.index') }}"
           class="mobile-nav-link flex items-center gap-3 text-gray-700 hover:text-[#f3a446] p-2 rounded-lg {{ request()->routeIs('lands.create') ? 'text-white font-semibold bg-[#2f5c69]' : '' }}"
           aria-label="{{ __('app.header.sell_exchange_lands') }}"
         >
@@ -711,7 +706,6 @@ html.ltr body {
     </nav>
   </div>
 </header>
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.querySelector('.mobile-menu-toggle');
@@ -1008,52 +1002,67 @@ html.ltr body {
             @endauth
           </ul>
         </div>
-
-        <div>
-          <h3
-            class="text-xl font-bold text-white mb-6 border-b-2 border-[#f3a446]/30 pb-3 inline-block"
-          >
-            {{ __("app.footer.services.title") }}
-          </h3>
-          <ul class="space-y-3">
-            <li>
-              <a href="#" class="footer-link-item">
-                <i class="fas fa-hammer"></i>
-                <span>{{ __("app.footer.services.houses") }}</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer-link-item">
-                <i class="fas fa-city"></i>
-                <span>{{ __("app.footer.services.villas") }}</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer-link-item">
+<div>
+    <h3 class="text-xl font-bold text-white mb-6 border-b-2 border-[#f3a446]/30 pb-3 inline-block">
+        {{ __("app.footer.services.title") }}
+    </h3>
+    <ul class="space-y-3">
+        <li>
+            <a href="#" class="footer-link-item">
+                <i class="fas fa-home"></i>
+                <span>{{ __("app.footer.services.residential_design") }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="footer-link-item">
                 <i class="fas fa-building"></i>
-                <span>{{ __("app.footer.services.apartments") }}</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer-link-item">
-                <i class="fas fa-store"></i>
-                <span>{{ __("app.footer.services.commercial") }}</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer-link-item">
-                <i class="fas fa-lightbulb"></i>
-                <span>{{ __("app.footer.services.consultations") }}</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer-link-item">
+                <span>{{ __("app.footer.services.commercial_design") }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="footer-link-item">
+                <i class="fas fa-drafting-compass"></i>
+                <span>{{ __("app.footer.services.engineering_consultations") }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="footer-link-item">
                 <i class="fas fa-tasks"></i>
                 <span>{{ __("app.footer.services.project_management") }}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="footer-link-item">
+                <i class="fas fa-truck-moving"></i>
+                <span>{{ __("app.footer.services.material_supply") }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="footer-link-item">
+                <i class="fas fa-couch"></i>
+                <span>{{ __("app.footer.services.interior_design") }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="footer-link-item">
+                <i class="fas fa-layer-group"></i>
+                <span>{{ __("app.footer.services.exterior_design") }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="footer-link-item">
+                <i class="fas fa-chair"></i>
+                <span>{{ __("app.footer.services.furniture_design") }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="footer-link-item">
+                <i class="fas fa-tree"></i>
+                <span>{{ __("app.footer.services.landscape_design") }}</span>
+            </a>
+        </li>
+    </ul>
+</div>
 
         <div>
           <h3

@@ -50,11 +50,11 @@
                         <div class="space-y-2 group">
                             <label for="name" class="block text-sm font-bold text-gray-300 ml-1 transition-colors group-focus-within:text-[#f3a446]">{{ __('app.register.name') }}</label>
                             <div class="relative transition-all duration-300 transform group-focus-within:scale-[1.01]">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                    <i class="fas fa-user text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
+                                <div class="absolute inset-y-0  pl-4 flex items-center pointer-events-none z-10">
+                                    <i class="fas fa-user pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                                 </div>
                                 <input id="name" name="name" type="text" required value="{{ old('name') }}"
-                                    class="block w-full pl-11 pr-4 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
+                                    class="block w-full pl-11 pr-8 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
                                     placeholder="{{ __('app.register.name') }}">
                             </div>
                             @error('name')
@@ -65,11 +65,11 @@
                         <div class="space-y-2 group">
                             <label for="email" class="block text-sm font-bold text-gray-300 ml-1 transition-colors group-focus-within:text-[#f3a446]">{{ __('app.register.email') }}</label>
                             <div class="relative transition-all duration-300 transform group-focus-within:scale-[1.01]">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                    <i class="fas fa-envelope text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
+                                <div class="absolute inset-y-0   pl-4 flex items-center pointer-events-none z-10">
+                                    <i class="fas fa-envelope pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                                 </div>
                                 <input id="email" name="email" type="email" required value="{{ old('email') }}"
-                                    class="block w-full pl-11 pr-4 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
+                                    class="block w-full pl-11 pr-8 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
                                     placeholder="name@example.com">
                             </div>
                             @error('email')
@@ -82,11 +82,11 @@
                         <div class="space-y-2 group">
                             <label for="phone" class="block text-sm font-bold text-gray-300 ml-1 transition-colors group-focus-within:text-[#f3a446]">{{ __('app.register.phone') }}</label>
                             <div class="relative transition-all duration-300 transform group-focus-within:scale-[1.01]">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                    <i class="fas fa-phone text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
+                                <div class="absolute inset-y-0 start-2 pl-4 flex items-center pointer-events-none z-10">
+                                    <i class="fas fa-phone pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                                 </div>
                                 <input id="phone" name="phone" type="tel" required value="{{ old('phone') }}"
-                                    class="block w-full pl-11 pr-4 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
+                                    class="block w-full pl-11 pr-8 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
                                     placeholder="01xxxxxxxxx">
                             </div>
                             @error('phone')
@@ -97,8 +97,8 @@
                         <div class="space-y-2 group">
                             <label for="user_type_id" class="block text-sm font-bold text-gray-300 ml-1 transition-colors group-focus-within:text-[#f3a446]">{{ __('app.register.account_type') }}</label>
                             <div class="relative transition-all duration-300 transform group-focus-within:scale-[1.01]">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                    <i class="fas fa-briefcase text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
+                                <div class="absolute inset-y-0 pl-4 flex items-center pointer-events-none z-10">
+                                    <i class="fas fa-briefcase pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                                 </div>
                                 <select id="user_type_id" name="user_type_id" required
                                     class="block w-full pl-11 pr-10 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm appearance-none">
@@ -116,7 +116,7 @@
                                         <option value="4" class="bg-[#1a262a]">{{ __('app.register.user_type_supplier') }}</option>
                                     @endif
                                 </select>
-                                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                <div class="absolute inset-y-0 end-3 flex items-center px-2 pointer-events-none">
                                     <i class="fas fa-chevron-down text-gray-500 text-xs mr-2"></i>
                                 </div>
                             </div>
@@ -130,11 +130,11 @@
                         <div class="space-y-2 group">
                             <label for="password" class="block text-sm font-bold text-gray-300 ml-1 transition-colors group-focus-within:text-[#f3a446]">{{ __('app.register.password') }}</label>
                             <div class="relative transition-all duration-300 transform group-focus-within:scale-[1.01]">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                    <i class="fas fa-lock text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
+                                <div class="absolute inset-y-0 pl-4 flex items-center pointer-events-none z-10">
+                                    <i class="fas fa-lock pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                                 </div>
                                 <input id="password" name="password" type="password" required
-                                    class="block w-full pl-11 pr-4 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
+                                    class="block w-full pl-11 pr-8 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
                                     placeholder="••••••••">
                             </div>
                             @error('password')
@@ -145,11 +145,11 @@
                         <div class="space-y-2 group">
                             <label for="password_confirmation" class="block text-sm font-bold text-gray-300 ml-1 transition-colors group-focus-within:text-[#f3a446]">{{ __('app.register.password_confirmation') }}</label>
                             <div class="relative transition-all duration-300 transform group-focus-within:scale-[1.01]">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                    <i class="fas fa-shield-alt text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
+                                <div class="absolute inset-y-0  pl-4 flex items-center pointer-events-none z-10">
+                                    <i class="fas fa-shield-alt pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                                 </div>
                                 <input id="password_confirmation" name="password_confirmation" type="password" required
-                                    class="block w-full pl-11 pr-4 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
+                                    class="block w-full pl-11 pr-8 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
                                     placeholder="••••••••">
                             </div>
                         </div>

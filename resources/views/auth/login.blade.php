@@ -49,12 +49,12 @@
                     <div class="space-y-2 group">
                         <label for="email" class="block text-sm font-bold text-gray-300 ml-1 transition-colors group-focus-within:text-[#f3a446]">{{ __('app.login.email') }}</label>
                         <div class="relative transition-all duration-300 transform group-focus-within:scale-[1.01]">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                <i class="fas fa-envelope text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
+                            <div class="absolute inset-y-0 pl-4 flex items-center pointer-events-none z-10">
+                                <i class="fas fa-envelope pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                             </div>
                             <input id="email" name="email" type="email" autocomplete="email" required
                                 value="{{ old('email') }}"
-                                class="block w-full pl-11 pr-4 py-4 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
+                                class="block w-full pl-11 pr-8 py-4 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
                                 placeholder="name@example.com">
                         </div>
                         @error('email')
@@ -67,11 +67,11 @@
                             <label for="password" class="block text-sm font-bold text-gray-300 transition-colors group-focus-within:text-[#f3a446]">{{ __('app.login.password') }}</label>
                         </div>
                         <div class="relative transition-all duration-300 transform group-focus-within:scale-[1.01]">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                <i class="fas fa-lock text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
+                            <div class="absolute inset-y-0  pl-4 flex items-center pointer-events-none z-10">
+                                <i class="fas fa-lock pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                             </div>
                             <input id="password" name="password" type="password" autocomplete="current-password" required
-                                class="block w-full pl-11 pr-4 py-4 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
+                                class="block w-full pl-11 pr-8 py-4 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm"
                                 placeholder="••••••••">
                         </div>
                         @error('password')
