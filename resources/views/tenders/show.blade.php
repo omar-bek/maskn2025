@@ -699,7 +699,7 @@
                 <a href="{{ route('login') }}"
                     class="inline-flex items-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-5 py-2 rounded-lg font-bold transition-colors shadow-lg transform hover:scale-105">
                     <i class="fas fa-sign-in-alt ml-2"></i>
-                    {{ __('app.login') }}
+                    {{ __('app.login.login_button') }}
                 </a>
             </div>
         @endauth
