@@ -143,22 +143,46 @@ class DesignController extends Controller
      */
     public function showWithPricing($id)
     {
-        $design = Design::with(['items.category', 'consultant'])
-            ->published()
-            ->findOrFail($id);
+        try {
+            $design = Design::with(['items.category', 'consultant'])
+                ->published()
+                ->findOrFail($id);
 
-        $itemsByCategory = $design->items()->with('category')->get()->groupBy('category.category_name');
-        $totalAmount = $design->items()->sum('total_price');
+            // Get items with category, filter out items without category
+            $items = $design->items()->with('category')->get();
+            
+            // Group by category name, handling null categories
+            $itemsByCategory = $items->filter(function ($item) {
+                return $item->category !== null;
+            })->groupBy(function ($item) {
+                return $item->category ? $item->category->category_name : 'غير مصنف';
+            });
 
-        // Get category totals
-        $categoryTotals = $design->items()
-            ->join('categories', 'items.category_id', '=', 'categories.id')
-            ->selectRaw('categories.id, categories.category_name, categories.category_order, SUM(items.total_price) as total')
-            ->groupBy('categories.id', 'categories.category_name', 'categories.category_order')
-            ->orderBy('categories.category_order')
-            ->get();
+            // Ensure it's always a collection
+            if (!$itemsByCategory) {
+                $itemsByCategory = collect();
+            }
 
-        return view('designs.show-with-pricing', compact('design', 'itemsByCategory', 'totalAmount', 'categoryTotals'));
+            $totalAmount = $design->items()->sum('total_price') ?? 0;
+
+            // Get category totals
+            $categoryTotals = $design->items()
+                ->join('categories', 'items.category_id', '=', 'categories.id')
+                ->selectRaw('categories.id, categories.category_name, categories.category_order, SUM(items.total_price) as total')
+                ->groupBy('categories.id', 'categories.category_name', 'categories.category_order')
+                ->orderBy('categories.category_order')
+                ->get();
+
+            // Ensure categoryTotals is always a collection
+            if (!$categoryTotals) {
+                $categoryTotals = collect();
+            }
+
+            return view('designs.show-with-pricing', compact('design', 'itemsByCategory', 'totalAmount', 'categoryTotals'));
+        } catch (\Exception $e) {
+            return redirect()->route('designs.index')
+                ->with('error', 'حدث خطأ أثناء تحميل صفحة التسعير: ' . $e->getMessage());
+        }
     }
 
     /**

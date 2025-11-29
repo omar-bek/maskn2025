@@ -831,6 +831,7 @@ return [
     'area' => 'Area',
     'view_full_details' => 'View Full Details',
     'image_gallery' => 'Image Gallery',
+    'click_to_view_gallery' => 'Click to view gallery',
     'tender_items_title' => 'Tender Items',
     'export_pdf' => 'Export PDF',
     'toggle_view' => 'Toggle View',

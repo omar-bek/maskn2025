@@ -828,6 +828,7 @@ return [
     'area' => 'المساحة',
     'view_full_details' => 'عرض التفاصيل الكاملة',
     'image_gallery' => 'معرض الصور',
+    'click_to_view_gallery' => 'اضغط لعرض المعرض',
     'tender_items_title' => 'بنود المناقصة',
     'export_pdf' => 'تصدير PDF',
     'toggle_view' => 'تبديل العرض',
