@@ -121,19 +121,7 @@
           </div>
         </div>
 
-        @auth
-          @if (auth()->user()->isClient())
-            <a
-              href="{{ route('tenders.create') }}"
-              class="inline-flex items-center bg-[#f3a446] text-[#1a262a] px-8 py-4 rounded-2xl font-bold text-lg hover:bg-[#f5b05a] transition-all duration-300 transform hover:scale-105 shadow-2xl border-2 border-[#f3a446] group mt-10"
-            >
-              <i
-                class="fas fa-plus ml-4 text-2xl text-[#1a262a] group-hover:rotate-90 transition-transform duration-300"
-              ></i>
-              {{ __("app.tenders_hero.create_button") }}
-            </a>
-          @endif
-        @endauth
+       
       </div>
     </div>
   </div>

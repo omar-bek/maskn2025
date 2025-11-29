@@ -871,18 +871,18 @@
                     @if ($userProposal)
                         <a href="{{ route('proposals.edit', $userProposal->id) }}"
                             class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
-                            <i class="fas fa-edit ml-3 text-lg"></i>
+                            <i class="fas fa-edit ml-3 text-lg mr-2"></i>
                             {{ __('app.edit_proposal') }}
                         </a>
                         <a href="{{ route('proposals.show', $userProposal->id) }}"
                             class="w-full flex items-center justify-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
-                            <i class="fas fa-eye ml-3 text-lg"></i>
+                            <i class="fas fa-eye ml-3 text-lg mr-2"></i>
                             {{ __('app.view_my_proposal_details') }}
                         </a>
                     @else
                         <a href="{{ route('proposals.create', $tender->id) }}"
                             class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
-                            <i class="fas fa-paper-plane ml-3 text-lg"></i>
+                            <i class="fas fa-paper-plane ml-3 text-lg mr-2"></i>
                             {{ __('app.submit_proposal_now') }}
                         </a>
                     @endif
@@ -891,14 +891,14 @@
                 @if (auth()->user()->isClient() && auth()->id() == $tender->client_id)
                     <a href="{{ route('tenders.edit', $tender->id) }}"
                         class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
-                        <i class="fas fa-edit ml-3 text-lg"></i>
+                        <i class="fas fa-edit ml-3 text-lg mr-2"></i>
                         {{ __('app.edit_tender') }}
                     </a>
 
                     @if ($tender->proposals->count() > 0)
                         <a href="{{ route('tenders.compare-proposals', $tender->id) }}"
                             class="w-full flex items-center justify-center bg-[#2f5c69] hover:bg-[#1a262a] text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
-                            <i class="fas fa-chart-bar ml-3 text-lg"></i>
+                            <i class="fas fa-chart-bar ml-3 text-lg mr-2"></i>
                             {{ __('app.compare_proposals') }}
                         </a>
                     @endif
@@ -910,7 +910,7 @@
                             <button type="submit"
                                 class="w-full flex items-center justify-center bg-red-600 hover:bg-red-700 text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg"
                                 onclick="return confirm('{{ __('app.close_tender_confirm') }}')">
-                                <i class="fas fa-lock ml-3 text-lg"></i>
+                                <i class="fas fa-lock ml-3 text-lg mr-2"></i>
                                 {{ __('app.close_tender') }}
                             </button>
                         </form>
@@ -919,7 +919,7 @@
             @else
                 <a href="{{ route('login') }}"
                     class="w-full flex items-center justify-center bg-[#f3a446] hover:bg-[#f5b05a] text-[#1a262a] px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg mr-2">
-                    <i class="fas fa-sign-in-alt ml-3 text-lg"></i>
+                    <i class="fas fa-sign-in-alt ml-3 text-lg mr-2"></i>
                     {{ __('app.login_to_participate') }}
                 </a>
             @endauth
