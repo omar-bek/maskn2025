@@ -2233,4 +2233,36 @@ return [
     'bathrooms' => 'Bathrooms',
     
 
+
+    'my_tenders' => 'My Tenders',
+    'manage_tenders_desc' => 'Manage your tenders and proposals',
+    'create_new_tender' => 'Create New Tender',
+    'back_to_dashboard' => 'Back to Dashboard',
+    'status_active' => 'Active',
+    'status_closed' => 'Closed',
+    'status_awarded' => 'Awarded',
+    'proposals_count' => 'Proposals',
+    'latest_proposals' => 'Latest Proposals',
+    'consultant_unspecified' => 'Unspecified',
+    'status_pending' => 'Pending',
+    'status_accepted' => 'Accepted',
+    'status_rejected' => 'Rejected',
+    'other_proposals_count' => 'and :count other proposals',
+    'view_details' => 'View Details',
+    'compare_proposals' => 'Compare Proposals',
+    'no_tenders' => 'No Tenders Found',
+    'no_tenders_hint' => 'You haven\'t created any tenders yet',
+    'currency' => 'SAR',
+
+
+    'saved_designs' => 'Saved Designs',
+    'saved_designs_desc' => 'Manage your saved designs',
+    'square_meter' => 'm²',
+    'currency' => 'AED',
+    'view_design' => 'View Design',
+    'remove_design' => 'Remove from Saved',
+    'no_saved_designs' => 'No Saved Designs',
+    'no_saved_designs_hint' => 'Start saving designs you like to review them later',
+    'browse_designs' => 'Browse Designs',
+
 ];

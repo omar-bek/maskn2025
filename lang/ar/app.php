@@ -2227,6 +2227,38 @@ return [
     'save_changes' => 'حفظ التعديلات',
     'bedrooms' => 'غرف نوم',
     'bathrooms' => 'حمامات',
+
+
+    'my_tenders' => 'مناقصاتي',
+    'manage_tenders_desc' => 'إدارة مناقصاتك والعروض المقدمة عليها',
+    'create_new_tender' => 'إنشاء مناقصة جديدة',
+    'back_to_dashboard' => 'العودة للداشبورد',
+    'status_active' => 'نشط',
+    'status_closed' => 'مغلق',
+    'status_awarded' => 'مُمنوح',
+    'proposals_count' => 'عرض',
+    'latest_proposals' => 'أحدث العروض',
+    'consultant_unspecified' => 'غير محدد',
+    'status_pending' => 'في الانتظار',
+    'status_accepted' => 'مقبول',
+    'status_rejected' => 'مرفوض',
+    'other_proposals_count' => 'و :count عرض آخر',
+    'view_details' => 'عرض التفاصيل',
+    'compare_proposals' => 'مقارنة العروض',
+    'no_tenders' => 'لا توجد مناقصات',
+    'no_tenders_hint' => 'لم تقم بإنشاء أي مناقصات بعد',
+    'currency' => 'ريال',
+
+
+    'saved_designs' => 'التصميمات المحفوظة',
+    'saved_designs_desc' => 'إدارة التصميمات التي قمت بحفظها',
+    'square_meter' => 'متر مربع',
+    'currency' => 'درهم',
+    'view_design' => 'عرض التصميم',
+    'remove_design' => 'إزالة من المحفوظات',
+    'no_saved_designs' => 'لا توجد تصميمات محفوظة',
+    'no_saved_designs_hint' => 'ابدأ بحفظ التصميمات التي تعجبك لمراجعتها لاحقاً',
+    'browse_designs' => 'استعرض التصميمات',
     
 ];
 

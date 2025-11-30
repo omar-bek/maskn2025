@@ -96,7 +96,7 @@
                             <i class="fas fa-project-diagram text-[#f3a446]"></i>
                             {{ __('app.recent_projects') }}
                         </h3>
-                        <a href="{{ route('contractor.projects') }}" class="text-sm text-[#2f5c69] hover:text-[#f3a446] font-medium transition-colors">{{ __('app.view_all') }}</a>
+                        <!-- <a href="{{ route('contractor.projects') }}" class="text-sm text-[#2f5c69] hover:text-[#f3a446] font-medium transition-colors">{{ __('app.view_all') }}</a> -->
                     </div>
                     <div class="p-6">
                         @if(isset($recentProjects) && count($recentProjects) > 0)
@@ -147,38 +147,7 @@
 
             <div class="lg:col-span-1 space-y-8">
                 
-                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                    <div class="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
-                        <h3 class="text-lg font-bold text-[#2f5c69] flex items-center gap-2">
-                            <i class="fas fa-bolt text-[#f3a446]"></i>
-                            {{ __('app.quick_actions') }}
-                        </h3>
-                    </div>
-                    <div class="p-4">
-                        <div class="grid grid-cols-2 gap-3">
-                            <a href="{{ route('contractor.projects') }}" class="flex flex-col items-center justify-center p-4 rounded-xl border border-gray-100 hover:border-[#2f5c69] hover:bg-[#2f5c69] group transition-all duration-300 text-center">
-                                <i class="fas fa-project-diagram text-2xl text-[#2f5c69] mb-2 group-hover:text-white transition-colors"></i>
-                                <span class="text-xs font-bold text-gray-600 group-hover:text-white transition-colors">{{ __('app.projects') }}</span>
-                            </a>
-                            <a href="{{ route('contractor.bids') }}" class="flex flex-col items-center justify-center p-4 rounded-xl border border-gray-100 hover:border-[#f3a446] hover:bg-[#f3a446] group transition-all duration-300 text-center">
-                                <i class="fas fa-gavel text-2xl text-[#f3a446] mb-2 group-hover:text-white transition-colors"></i>
-                                <span class="text-xs font-bold text-gray-600 group-hover:text-white transition-colors">{{ __('app.bids') }}</span>
-                            </a>
-                            <a href="{{ route('contractor.team') }}" class="flex flex-col items-center justify-center p-4 rounded-xl border border-gray-100 hover:border-[#2f5c69] hover:bg-[#2f5c69] group transition-all duration-300 text-center">
-                                <i class="fas fa-users-cog text-2xl text-[#2f5c69] mb-2 group-hover:text-white transition-colors"></i>
-                                <span class="text-xs font-bold text-gray-600 group-hover:text-white transition-colors">{{ __('app.team') }}</span>
-                            </a>
-                            <a href="{{ route('contractor.earnings') }}" class="flex flex-col items-center justify-center p-4 rounded-xl border border-gray-100 hover:border-[#f3a446] hover:bg-[#f3a446] group transition-all duration-300 text-center">
-                                <i class="fas fa-chart-pie text-2xl text-[#f3a446] mb-2 group-hover:text-white transition-colors"></i>
-                                <span class="text-xs font-bold text-gray-600 group-hover:text-white transition-colors">{{ __('app.finances') }}</span>
-                            </a>
-                             <a href="{{ route('contractor.equipment') }}" class="col-span-2 flex items-center justify-center p-3 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors gap-2">
-                                <i class="fas fa-tools text-gray-400"></i>
-                                <span class="text-xs font-bold text-gray-600">{{ __('app.equipment_management') }}</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                     <div class="px-6 py-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
@@ -223,7 +192,7 @@
                         @endif
                     </div>
                     <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 text-center">
-                         <a href="{{ route('contractor.team') }}" class="text-xs font-bold text-[#2f5c69] hover:text-[#f3a446] transition-colors">{{ __('app.manage_full_team') }}</a>
+                         <!-- <a href="{{ route('contractor.team') }}" class="text-xs font-bold text-[#2f5c69] hover:text-[#f3a446] transition-colors">{{ __('app.manage_full_team') }}</a> -->
                     </div>
                 </div>
 

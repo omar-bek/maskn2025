@@ -171,9 +171,9 @@
                                 <div
                                     class="w-3 h-3 rounded-full
                                 @if ($status->status === 'open') bg-green-500
-                                @elseif($status->status === 'closed') bg-gray-500
-                                @elseif($status->status === 'awarded') bg-purple-500
-                                @else bg-blue-500 @endif ml-3">
+                                @elseif($status->status === 'closed')
+                                @elseif($status->status === 'awarded')
+                                @else @endif ml-3">
                                 </div>
                                 <span class="text-gray-700">
                                     @if ($status->status === 'open')
@@ -203,9 +203,9 @@
                                 <div
                                     class="w-3 h-3 rounded-full
                                 @if ($status->status === 'pending') bg-yellow-500
-                                @elseif($status->status === 'accepted') bg-green-500
-                                @elseif($status->status === 'rejected') bg-red-500
-                                @else bg-blue-500 @endif ml-3">
+                                @elseif($status->status === 'accepted')
+                                @elseif($status->status === 'rejected')
+                                @else @endif ml-3">
                                 </div>
                                 <span class="text-gray-700">
                                     @if ($status->status === 'pending')

@@ -14,7 +14,7 @@
           {{ __('app.client_dashboard.access_denied.message') }}
         </p>
         <a href="{{ Auth::user()->getDashboardRoute() }}" class="btn-primary">
-          <i class="fas fa-tachometer-alt ml-2"></i>
+          <i class="fas fa-tachometer-alt me-2"></i>
           {{ __('app.client_dashboard.access_denied.button') }}
         </a>
       </div>
@@ -35,10 +35,10 @@
                 {{ __('app.client_dashboard.header.subtitle') }}
               </p>
             </div>
-            <div class="flex space-x-3 space-x-reverse">
-             
+            <div class="flex gap-3">
+              
               <a href="{{ route('tenders.index') }}" class="btn-primary">
-                <i class="fas fa-list ml-2"></i>
+                <i class="fas fa-list me-2"></i>
                 {{ __('app.client_dashboard.header.all_tenders') }}
               </a>
             </div>
@@ -59,7 +59,7 @@
                   <i class="fas fa-gavel text-[#f3a446] text-xl"></i>
                 </div>
               </div>
-              <div class="mr-4">
+              <div class="ms-4">
                 <p class="text-sm font-medium text-gray-600">
                   {{ __('app.client_dashboard.stats.tenders_created') }}
                 </p>
@@ -81,7 +81,7 @@
                   <i class="fas fa-file-alt text-[#f3a446] text-xl"></i>
                 </div>
               </div>
-              <div class="mr-4">
+              <div class="ms-4">
                 <p class="text-sm font-medium text-gray-600">
                   {{ __('app.client_dashboard.stats.proposals_received') }}
                 </p>
@@ -103,7 +103,7 @@
                   <i class="fas fa-check-circle text-[#f3a446] text-xl"></i>
                 </div>
               </div>
-              <div class="mr-4">
+              <div class="ms-4">
                 <p class="text-sm font-medium text-gray-600">
                   {{ __('app.client_dashboard.stats.accepted_proposals') }}
                 </p>
@@ -125,7 +125,7 @@
                   <i class="fas fa-clock text-[#f3a446] text-xl"></i>
                 </div>
               </div>
-              <div class="mr-4">
+              <div class="ms-4">
                 <p class="text-sm font-medium text-gray-600">
                   {{ __('app.client_dashboard.stats.active_tenders') }}
                 </p>
@@ -149,7 +149,7 @@
                 @if (count($recentActivities) > 0)
                   <div class="space-y-5">
                     @foreach ($recentActivities as $activity)
-                      <div class="flex items-start space-x-3 space-x-reverse">
+                      <div class="flex items-start gap-3">
                         <div class="flex-shrink-0">
                           <div
                             class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
@@ -189,49 +189,22 @@
               </div>
               <div class="p-6">
                 <div class="space-y-3">
-                  <a
-                    href="{{ route('tenders.create') }}"
-                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
-                  >
-                    <i class="fas fa-plus text-[#2f5c69] ml-3"></i>
-                    <span class="text-sm font-medium text-gray-800">{{
-                      __('app.client_dashboard.quick_actions.create_tender')
-                    }}</span>
-                  </a>
+                  
                   <a
                     href="{{ route('client.my-tenders') }}"
                     class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
                   >
-                    <i class="fas fa-list text-[#2f5c69] ml-3"></i>
+                    <i class="fas fa-list text-[#2f5c69] me-3"></i>
                     <span class="text-sm font-medium text-gray-800">{{
                       __('app.client_dashboard.quick_actions.my_tenders')
                     }}</span>
                   </a>
-                  <a
-                    href="{{ route('client.saved-designs') }}"
-                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
-                  >
-                    <i class="fas fa-bookmark text-[#2f5c69] ml-3"></i>
-                    <span class="text-sm font-medium text-gray-800">{{
-                      __('app.client_dashboard.quick_actions.saved_designs')
-                    }}</span>
-                  </a>
-                  <a
-                    href="{{ route('client.favorite-consultants') }}"
-                    class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
-                  >
-                    <i class="fas fa-heart text-[#2f5c69] ml-3"></i>
-                    <span class="text-sm font-medium text-gray-800">{{
-                      __(
-                        'app.client_dashboard.quick_actions.favorite_consultants'
-                      )
-                    }}</span>
-                  </a>
+                
                   <a
                     href="{{ route('designs.index') }}"
                     class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
                   >
-                    <i class="fas fa-home text-[#2f5c69] ml-3"></i>
+                    <i class="fas fa-home text-[#2f5c69] me-3"></i>
                     <span class="text-sm font-medium text-gray-800">{{
                       __('app.client_dashboard.quick_actions.browse_designs')
                     }}</span>
@@ -240,7 +213,7 @@
                     href="{{ route('client.profile') }}"
                     class="flex items-center p-4 rounded-lg border border-gray-200 hover:bg-[#f3a446]/10 hover:border-[#f3a446]/30 transition-colors duration-200"
                   >
-                    <i class="fas fa-user text-[#2f5c69] ml-3"></i>
+                    <i class="fas fa-user text-[#2f5c69] me-3"></i>
                     <span class="text-sm font-medium text-gray-800">{{
                       __('app.client_dashboard.quick_actions.edit_profile')
                     }}</span>
@@ -259,7 +232,7 @@
                 @if (count($recommendedConsultants) > 0)
                   <div class="space-y-4">
                     @foreach ($recommendedConsultants as $consultant)
-                      <div class="flex items-center space-x-3 space-x-reverse">
+                      <div class="flex items-center gap-3">
                         <div class="flex-shrink-0">
                           <div
                             class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"

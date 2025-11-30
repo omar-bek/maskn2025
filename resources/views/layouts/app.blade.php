@@ -323,9 +323,9 @@ html.ltr body {
         aria-label="{{ __('app.header.home') }}"
       >
         @if (\App\Models\SiteSetting::get('site_logo'))
-          <div class="logo-icon w-10 h-10">
+          <div class="logo-icon w-40 h-14">
             <img
-              src="{{ \App\Models\SiteSetting::get('site_logo') }}"
+              src="{{ asset('logo1.png') }}"
               alt="{{ __('app.header.logo_alt') }}"
               class="w-full h-full object-contain"
             />

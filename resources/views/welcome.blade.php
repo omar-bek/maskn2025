@@ -9,6 +9,14 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/x-icon" href="{{ asset('logo1.png') }}">
+
+
+         <meta property="og:title" content=" Enshaat Platform - منصة إنشاءات ">
+    <meta property="og:description" content="  منصة متكاملة تجمع بين أفضل الاستشاريين والمقاولين والموردين لتحويل أحلامك المعمارية إلى واقع ملموس. من التصميم حتى التسليم النهائي.">
+    <meta property="og:image" content="{{ asset('logo1.png') }}">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
 
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))

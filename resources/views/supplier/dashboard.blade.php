@@ -138,62 +138,7 @@
 
             <div class="lg:col-span-1 space-y-8">
                 
-                <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
-                    <div class="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
-                        <h3 class="text-lg font-bold text-[#1a262a]">{{ __('app.quick_actions') }}</h3>
-                    </div>
-                    <div class="p-4">
-                        <div class="grid grid-cols-1 gap-3">
-                            <a href="{{ route('supplier.catalog') }}" class="flex items-center p-3 rounded-xl hover:bg-gray-50 group transition duration-200">
-                                <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition duration-200">
-                                    <i class="fas fa-boxes"></i>
-                                </div>
-                                <span class="text-sm font-bold text-gray-700 mr-3 rtl:ml-3 rtl:mr-0 group-hover:text-blue-700 transition">{{ __('app.manage_catalog') }}</span>
-                                <i class="fas fa-chevron-left mr-auto rtl:ml-auto rtl:mr-0 text-gray-300 text-xs rtl:rotate-180"></i>
-                            </a>
-
-                            <a href="{{ route('supplier.products') }}" class="flex items-center p-3 rounded-xl hover:bg-gray-50 group transition duration-200">
-                                <div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition duration-200">
-                                    <i class="fas fa-box"></i>
-                                </div>
-                                <span class="text-sm font-bold text-gray-700 mr-3 rtl:ml-3 rtl:mr-0 group-hover:text-purple-700 transition">{{ __('app.products') }}</span>
-                                <i class="fas fa-chevron-left mr-auto rtl:ml-auto rtl:mr-0 text-gray-300 text-xs rtl:rotate-180"></i>
-                            </a>
-
-                            <a href="{{ route('supplier.orders') }}" class="flex items-center p-3 rounded-xl hover:bg-gray-50 group transition duration-200">
-                                <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition duration-200">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </div>
-                                <span class="text-sm font-bold text-gray-700 mr-3 rtl:ml-3 rtl:mr-0 group-hover:text-emerald-700 transition">{{ __('app.orders') }}</span>
-                                <i class="fas fa-chevron-left mr-auto rtl:ml-auto rtl:mr-0 text-gray-300 text-xs rtl:rotate-180"></i>
-                            </a>
-
-                            <a href="{{ route('supplier.inventory') }}" class="flex items-center p-3 rounded-xl hover:bg-gray-50 group transition duration-200">
-                                <div class="w-10 h-10 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center group-hover:bg-orange-600 group-hover:text-white transition duration-200">
-                                    <i class="fas fa-warehouse"></i>
-                                </div>
-                                <span class="text-sm font-bold text-gray-700 mr-3 rtl:ml-3 rtl:mr-0 group-hover:text-orange-700 transition">{{ __('app.inventory') }}</span>
-                                <i class="fas fa-chevron-left mr-auto rtl:ml-auto rtl:mr-0 text-gray-300 text-xs rtl:rotate-180"></i>
-                            </a>
-
-                            <a href="{{ route('supplier.revenue') }}" class="flex items-center p-3 rounded-xl hover:bg-gray-50 group transition duration-200">
-                                <div class="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition duration-200">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <span class="text-sm font-bold text-gray-700 mr-3 rtl:ml-3 rtl:mr-0 group-hover:text-red-700 transition">{{ __('app.financial_reports') }}</span>
-                                <i class="fas fa-chevron-left mr-auto rtl:ml-auto rtl:mr-0 text-gray-300 text-xs rtl:rotate-180"></i>
-                            </a>
-
-                            <a href="{{ route('supplier.profile') }}" class="flex items-center p-3 rounded-xl hover:bg-gray-50 group transition duration-200">
-                                <div class="w-10 h-10 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center group-hover:bg-gray-600 group-hover:text-white transition duration-200">
-                                    <i class="fas fa-user-cog"></i>
-                                </div>
-                                <span class="text-sm font-bold text-gray-700 mr-3 rtl:ml-3 rtl:mr-0 group-hover:text-gray-700 transition">{{ __('app.edit_profile') }}</span>
-                                <i class="fas fa-chevron-left mr-auto rtl:ml-auto rtl:mr-0 text-gray-300 text-xs rtl:rotate-180"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+              
 
                 <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
                     <div class="px-6 py-5 border-b border-gray-100 bg-red-50/30 flex items-center justify-between">

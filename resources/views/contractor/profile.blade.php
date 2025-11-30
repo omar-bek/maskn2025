@@ -135,9 +135,7 @@
                             <i class="fas fa-history text-[#f3a446] text-xl"></i>
                             <h2 class="text-xl font-bold text-[#2f5c69]">{{ __('app.recent_activities') }}</h2>
                         </div>
-                        <a href="{{ route('contractor.bids') }}" class="text-sm text-[#2f5c69] font-bold hover:text-[#f3a446] transition-colors">
-                            {{ __('app.view_all_bids') }}
-                        </a>
+                       
                     </div>
                     <div class="p-6 space-y-4">
                         @php
@@ -237,55 +235,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-                    <div class="px-6 py-5 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
-                        <i class="fas fa-bolt text-[#f3a446] text-xl"></i>
-                        <h2 class="text-xl font-bold text-[#2f5c69]">{{ __('app.quick_actions') }}</h2>
-                    </div>
-                    <div class="p-6 space-y-3">
-                        <a href="{{ route('contractor.bids') }}"
-                            class="flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#f3a446] hover:bg-[#f3a446] group transition-all duration-300">
-                            <div class="flex items-center gap-4">
-                                <span class="w-10 h-10 rounded-xl bg-[#f3a446]/10 text-[#f3a446] flex items-center justify-center group-hover:bg-white/20 group-hover:text-white transition-colors">
-                                    <i class="fas fa-file-signature"></i>
-                                </span>
-                                <div>
-                                    <p class="text-sm font-bold text-[#2f5c69] group-hover:text-white transition-colors">{{ __('app.my_bids') }}</p>
-                                    <p class="text-xs text-gray-400 group-hover:text-white/80 transition-colors">{{ __('app.manage_bids') }}</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-chevron-left text-gray-300 group-hover:text-white transition-colors"></i>
-                        </a>
-
-                        <a href="{{ route('contractor.projects') }}"
-                            class="flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#2f5c69] hover:bg-[#2f5c69] group transition-all duration-300">
-                            <div class="flex items-center gap-4">
-                                <span class="w-10 h-10 rounded-xl bg-[#2f5c69]/10 text-[#2f5c69] flex items-center justify-center group-hover:bg-white/20 group-hover:text-white transition-colors">
-                                    <i class="fas fa-project-diagram"></i>
-                                </span>
-                                <div>
-                                    <p class="text-sm font-bold text-[#2f5c69] group-hover:text-white transition-colors">{{ __('app.my_projects') }}</p>
-                                    <p class="text-xs text-gray-400 group-hover:text-white/80 transition-colors">{{ __('app.ongoing_work_details') }}</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-chevron-left text-gray-300 group-hover:text-white transition-colors"></i>
-                        </a>
-
-                        <a href="{{ route('contractor.team') }}"
-                            class="flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-[#f3a446] hover:bg-[#f3a446] group transition-all duration-300">
-                            <div class="flex items-center gap-4">
-                                <span class="w-10 h-10 rounded-xl bg-[#f3a446]/10 text-[#f3a446] flex items-center justify-center group-hover:bg-white/20 group-hover:text-white transition-colors">
-                                    <i class="fas fa-users"></i>
-                                </span>
-                                <div>
-                                    <p class="text-sm font-bold text-[#2f5c69] group-hover:text-white transition-colors">{{ __('app.my_team') }}</p>
-                                    <p class="text-xs text-gray-400 group-hover:text-white/80 transition-colors">{{ __('app.manage_team_members') }}</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-chevron-left text-gray-300 group-hover:text-white transition-colors"></i>
-                        </a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
