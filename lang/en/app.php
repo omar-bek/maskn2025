@@ -2265,4 +2265,182 @@ return [
     'no_saved_designs_hint' => 'Start saving designs you like to review them later',
     'browse_designs' => 'Browse Designs',
 
+
+
+    'design_form' => [
+        'auto_fill_info' => 'Consultant data has been auto-filled from your account. You can edit it as needed.',
+        'error_title' => 'Please correct the following errors:',
+        'sections' => [
+            'basic_info' => 'Basic Information',
+            'specifications' => 'Specifications',
+            'description' => 'Design Description',
+            'features' => 'Features',
+            'contact' => 'Contact Information',
+            'images' => 'Design Images',
+        ],
+        'fields' => [
+            'title' => 'Design Title',
+            'title_placeholder' => 'Ex: Modern Luxury Villa',
+            'style' => 'Design Style',
+            'select_style' => 'Select Style',
+            'price' => 'Design Price (AED)',
+            'price_placeholder' => 'Ex: 500000',
+            'area' => 'Area (sqm)',
+            'area_placeholder' => 'Ex: 400',
+            'bedrooms' => 'Bedrooms',
+            'bedrooms_placeholder' => 'Ex: 5',
+            'bathrooms' => 'Bathrooms',
+            'bathrooms_placeholder' => 'Ex: 4',
+            'floors' => 'Floors',
+            'floors_placeholder' => 'Ex: 3',
+            'location' => 'Location',
+            'location_placeholder' => 'Ex: Riyadh, Saudi Arabia',
+            'description' => 'Detailed Description',
+            'description_placeholder' => 'Write a detailed description...',
+            'consultant_name' => 'Consultant Name',
+            'consultant_name_placeholder' => 'Ex: Ahmed Mohamed',
+            'consultant_phone' => 'Phone Number',
+            'consultant_phone_placeholder' => 'Ex: +966501234567',
+            'consultant_email' => 'Email Address',
+            'consultant_email_placeholder' => 'Ex: info@example.com',
+            'main_image' => 'Main Image',
+            'current_image' => 'Current Image:',
+            'keep_image_hint' => 'Leave empty to keep the current image',
+            'additional_images' => 'Additional Images',
+            'keep_images_hint' => 'Leave empty to keep current images, or select new ones to replace',
+            'available_features' => 'Available Features',
+        ],
+        'styles' => [
+            'modern' => 'Modern',
+            'islamic' => 'Islamic',
+            'traditional' => 'Traditional',
+            'classic' => 'Classic',
+            'minimalist' => 'Minimalist',
+        ],
+        'features' => [
+            'garden' => 'Outdoor Garden',
+            'parking' => 'Car Parking',
+            'kitchen' => 'Equipped Kitchen',
+            'living_room' => 'Spacious Living Room',
+            'pool' => 'Private Pool',
+            'elevator' => 'Internal Elevator',
+            'balcony' => 'Balconies',
+            'storage' => 'Storage Areas',
+        ],
+    ],
+
+
+    'edit_header' => [
+            'title' => 'Edit Design:',
+            'subtitle' => 'Enter project details and detailed pricing',
+        ],
+        'pricing_section' => [
+            'title' => 'Detailed Project Pricing',
+            'subtitle' => 'Define cost details for each construction category',
+        ],
+
+
+
+
+
+
+
+    'construction' => [
+        'ac_title' => 'Air Conditioning Works',
+        'sanitary_title' => 'Sanitary & Plumbing Works',
+        'external_title' => 'External & Landscaping Works',
+        'summary' => [
+            'title' => 'Total Cost Summary',
+            'total_cost' => 'Total Cost:',
+            'total_items' => 'Total Items:',
+            'total_categories' => 'Total Categories:',
+            'avg_cost' => 'Average Cost:',
+            'currency' => 'AED',
+            'item_unit' => 'Item',
+            'category_unit' => 'Category',
+            'currency_per_item' => 'AED/Item',
+        ],
+        'actions' => [
+            'save' => 'Save Design',
+            'cancel' => 'Cancel',
+        ],
+        'placeholders' => [
+            'insulation_roof' => 'Example: Roof insulation',
+            'sewage' => 'Example: Installation of sewage network',
+            'garden' => 'Example: Garden and fencing works',
+        ],
+
+
+
+         'finishing_title' => 'Finishing Works',
+        'carpentry_title' => 'Carpentry Works',
+        'aluminum_glass_title' => 'Aluminum and Glass Works',
+        'electrical_title' => 'Electrical Works',
+        'table' => [
+            'item_name' => 'Item Name',
+            'quantity' => 'Quantity',
+            'unit' => 'Unit',
+            'unit_price' => 'Unit Price (AED)',
+            'total_price' => 'Total (AED)',
+            'actions' => 'Actions',
+        ],
+        'units' => [
+            'm2' => 'm²',
+            'm3' => 'm³',
+            'm' => 'm',
+            'piece' => 'Piece',
+            'liter' => 'Liter',
+            'kg' => 'Kg',
+            'ton' => 'Ton',
+        ],
+        'buttons' => [
+            'add_item' => 'Add Item',
+        ],
+        'placeholders' => [
+            'wooden_doors' => 'Example: Making wooden doors',
+            'painting' => 'Example: Painting internal walls',
+            'tiles' => 'Example: Installing bathroom tiles',
+            'iron_doors' => 'Example: Making iron doors',
+        ],
+
+
+        'below_ground_title' => 'Excavation and Concrete Works Below Ground Level',
+        'concrete_upper_title' => 'Concrete Works for Ground Floor and Above',
+        'brickwork_title' => 'Brickwork',
+        'insulation_title' => 'Insulation Works',
+        'table' => [
+            'item_name' => 'Item Name',
+            'quantity' => 'Quantity',
+            'unit' => 'Unit',
+            'unit_price' => 'Unit Price (AED)',
+            'total_price' => 'Total (AED)',
+            'actions' => 'Actions',
+        ],
+        'units' => [
+            'm2' => 'm²',
+            'm3' => 'm³',
+            'm' => 'm',
+            'piece' => 'Piece',
+        ],
+        'buttons' => [
+            'add_item' => 'Add Item',
+        ],
+        'placeholders' => [
+            'walls' => 'Example: Building external walls',
+            'plaster' => 'Example: Internal wall plastering',
+            'water' => 'Example: Installation of main water network',
+            'electric' => 'Example: Installation of main electricity network',
+        ],
+    ],
+
+
+    'preparatory_works'=> 'Preparatory Works',
+    'item_name'=> 'Item Name',
+    'quantity'=> 'Quantity',
+    'unit'=> 'Unit',
+    'unit_price_aed'=> 'Unit Price (AED)',
+    'total_aed'=> 'Total (AED)',
+    'operations'=> 'Operations',
+    'item_name_placeholder'=> 'Example: Excavation and Foundation',
+    'add_item'=> 'Add Item'
 ];

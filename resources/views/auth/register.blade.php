@@ -231,7 +231,7 @@
                         </button>
                     </form>
 
-                    <div class="mt-8">
+                    <!-- <div class="mt-8">
                         <div class="relative">
                             <div class="absolute inset-0 flex items-center">
                                 <div class="w-full border-t border-white/10"></div>
@@ -256,7 +256,7 @@
                                 <span class="relative z-10">{{ __('app.register.facebook_button') }}</span>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

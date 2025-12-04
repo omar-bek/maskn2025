@@ -2260,6 +2260,215 @@ return [
     'no_saved_designs_hint' => 'ابدأ بحفظ التصميمات التي تعجبك لمراجعتها لاحقاً',
     'browse_designs' => 'استعرض التصميمات',
     
+
+
+    'design_form' => [
+        'auto_fill_info' => 'تم ملء بيانات الاستشاري تلقائياً من حسابك. يمكنك تعديلها حسب الحاجة.',
+        'error_title' => 'يرجى تصحيح الأخطاء التالية:',
+        'sections' => [
+            'basic_info' => 'المعلومات الأساسية',
+            'specifications' => 'المواصفات',
+            'description' => 'وصف التصميم',
+            'features' => 'المميزات',
+            'contact' => 'معلومات التواصل',
+            'images' => 'صور التصميم',
+        ],
+        'fields' => [
+            'title' => 'عنوان التصميم',
+            'title_placeholder' => 'مثال: فيلا عصرية فاخرة',
+            'style' => 'نمط التصميم',
+            'select_style' => 'اختر النمط',
+            'price' => 'سعر التصميم (درهم)',
+            'price_placeholder' => 'مثال: 500000',
+            'area' => 'المساحة (متر مربع)',
+            'area_placeholder' => 'مثال: 400',
+            'bedrooms' => 'عدد غرف النوم',
+            'bedrooms_placeholder' => 'مثال: 5',
+            'bathrooms' => 'عدد الحمامات',
+            'bathrooms_placeholder' => 'مثال: 4',
+            'floors' => 'عدد الطوابق',
+            'floors_placeholder' => 'مثال: 3',
+            'location' => 'الموقع',
+            'location_placeholder' => 'مثال: الرياض، المملكة العربية السعودية',
+            'description' => 'الوصف التفصيلي',
+            'description_placeholder' => 'اكتب وصفاً مفصلاً للتصميم...',
+            'consultant_name' => 'اسم المصمم',
+            'consultant_name_placeholder' => 'مثال: أحمد محمد',
+            'consultant_phone' => 'رقم الهاتف',
+            'consultant_phone_placeholder' => 'مثال: +966501234567',
+            'consultant_email' => 'البريد الإلكتروني',
+            'consultant_email_placeholder' => 'مثال: info@example.com',
+            'main_image' => 'الصورة الرئيسية',
+            'current_image' => 'الصورة الحالية:',
+            'keep_image_hint' => 'اتركه فارغاً للاحتفاظ بالصورة الحالية',
+            'additional_images' => 'صور إضافية',
+            'keep_images_hint' => 'اتركه فارغاً للاحتفاظ بالصور الحالية، أو اختر صوراً جديدة لاستبدالها',
+            'available_features' => 'المميزات المتاحة',
+        ],
+        'styles' => [
+            'modern' => 'عصري',
+            'islamic' => 'إسلامي',
+            'traditional' => 'تقليدي',
+            'classic' => 'كلاسيكي',
+            'minimalist' => 'مينيمال',
+        ],
+        'features' => [
+            'garden' => 'حديقة خارجية',
+            'parking' => 'موقف سيارات',
+            'kitchen' => 'مطبخ مجهز',
+            'living_room' => 'غرفة معيشة واسعة',
+            'pool' => 'مسبح خاص',
+            'elevator' => 'مصعد داخلي',
+            'balcony' => 'شرفات',
+            'storage' => 'مخازن',
+        ],
+    ],
+
+
+    'edit_header' => [
+            'title' => 'تعديل التصميم:',
+            'subtitle' => 'أدخل تفاصيل المشروع والتسعير التفصيلي',
+        ],
+        'pricing_section' => [
+            'title' => 'التسعير التفصيلي للمشروع',
+            'subtitle' => 'حدد تفاصيل التكلفة لكل فئة من فئات البناء',
+        ],
+
+
+
+      
+        
+      
+
+    'construction' => [
+        'ac_title' => 'أعمال التكييف',
+        'sanitary_title' => 'أعمال الصحية',
+        'external_title' => 'الأعمال الخارجية',
+        'summary' => [
+            'title' => 'ملخص التكلفة الإجمالية',
+            'total_cost' => 'المجموع الكلي:',
+            'total_items' => 'عدد البنود:',
+            'total_categories' => 'عدد الفئات:',
+            'avg_cost' => 'متوسط التكلفة:',
+            'currency' => 'درهم',
+            'item_unit' => 'بند',
+            'category_unit' => 'فئة',
+            'currency_per_item' => 'درهم/بند',
+        ],
+        'actions' => [
+            'save' => 'حفظ التصميم',
+            'cancel' => 'إلغاء',
+        ],
+        'placeholders' => [
+            'insulation_roof' => 'مثال: عزل أسقف المباني',
+            'sewage' => 'مثال: تركيب شبكة الصرف الصحي',
+            'garden' => 'مثال: أعمال الحدائق والأسوار',
+        ],
+
+
+        
+        'below_ground_title' => 'أعمال الحفر والخرسانة أسفل منسوب الدور الأرضي',
+        'concrete_upper_title' => 'أعمال الخرسانة للدور الأرضي وما فوق',
+        'brickwork_title' => 'أعمال الطابوق',
+        'insulation_title' => 'أعمال العزل',
+        'table' => [
+            'item_name' => 'اسم البند',
+            'quantity' => 'الكمية',
+            'unit' => 'الوحدة',
+            'unit_price' => 'سعر الوحدة (درهم)',
+            'total_price' => 'المجموع (درهم)',
+            'actions' => 'العمليات',
+        ],
+        'units' => [
+            'm2' => 'م²',
+            'm3' => 'م³',
+            'm' => 'م',
+            'piece' => 'قطعة',
+        ],
+        'buttons' => [
+            'add_item' => 'إضافة بند',
+        ],
+        'placeholders' => [
+            'walls' => 'مثال: بناء الجدران الخارجية',
+            'plaster' => 'مثال: تبييض الجدران الداخلية',
+            'water' => 'مثال: تركيب شبكة المياه الرئيسية',
+            'electric' => 'مثال: تركيب شبكة الكهرباء الرئيسية',
+        ],
+
+
+         'below_ground_title' => 'أعمال الحفر والخرسانة أسفل منسوب الدور الأرضي',
+        'concrete_upper_title' => 'أعمال الخرسانة للدور الأرضي وما فوق',
+        'brickwork_title' => 'أعمال الطابوق',
+        'insulation_title' => 'أعمال العزل',
+        'table' => [
+            'item_name' => 'اسم البند',
+            'quantity' => 'الكمية',
+            'unit' => 'الوحدة',
+            'unit_price' => 'سعر الوحدة (درهم)',
+            'total_price' => 'المجموع (درهم)',
+            'actions' => 'العمليات',
+        ],
+        'units' => [
+            'm2' => 'م²',
+            'm3' => 'م³',
+            'm' => 'م',
+            'piece' => 'قطعة',
+        ],
+        'buttons' => [
+            'add_item' => 'إضافة بند',
+        ],
+        'placeholders' => [
+            'walls' => 'مثال: بناء الجدران الخارجية',
+            'plaster' => 'مثال: تبييض الجدران الداخلية',
+            'water' => 'مثال: تركيب شبكة المياه الرئيسية',
+            'electric' => 'مثال: تركيب شبكة الكهرباء الرئيسية',
+        ],
+    
+
+
+          'finishing_title' => 'أعمال التشطيب',
+        'carpentry_title' => 'أعمال النجارة',
+        'aluminum_glass_title' => 'أعمال الألومنيوم والزجاج',
+        'electrical_title' => 'أعمال الكهرباء',
+        'table' => [
+            'item_name' => 'اسم البند',
+            'quantity' => 'الكمية',
+            'unit' => 'الوحدة',
+            'unit_price' => 'سعر الوحدة (درهم)',
+            'total_price' => 'المجموع (درهم)',
+            'actions' => 'العمليات',
+        ],
+        'units' => [
+            'm2' => 'م²',
+            'm3' => 'م³',
+            'm' => 'م',
+            'piece' => 'قطعة',
+            'liter' => 'لتر',
+            'kg' => 'كيلو',
+            'ton' => 'طن',
+        ],
+        'buttons' => [
+            'add_item' => 'إضافة بند',
+        ],
+        'placeholders' => [
+            'wooden_doors' => 'مثال: صنع الأبواب الخشبية',
+            'painting' => 'مثال: دهان الجدران الداخلية',
+            'tiles' => 'مثال: تركيب بلاط الحمامات',
+            'iron_doors' => 'مثال: صنع أبواب حديدية',
+        ],
+    ],
+
+
+    'preparatory_works'=> 'الأعمال التحضيرية',
+    'item_name'=> 'اسم البند',
+    'quantity'=> 'الكمية',
+    'unit'=> 'الوحدة',
+    'unit_price_aed'=> 'سعر الوحدة (درهم)',
+    'total_aed'=> 'المجموع (درهم)',
+    'operations'=> 'العمليات',
+    'item_name_placeholder'=> 'مثال: حفر وتأسيس القواعد',
+    'add_item'=> 'إضافة بند'
 ];
+
 
 

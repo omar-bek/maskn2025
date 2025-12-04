@@ -9,1385 +9,1308 @@
     @endphp
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <div class="border-b pb-4 mb-6">
-                <h1 class="text-3xl font-bold text-gray-900">تعديل التصميم: {{ $design->title }}</h1>
-                <p class="text-gray-600 mt-2">أدخل تفاصيل المشروع والتسعير التفصيلي</p>
+        <div class="bg-white rounded-lg shadow-md border border-gray-100 p-4 md:p-6 mb-6 mt-20">
+    <div class="border-b border-[#f3a446]/30 pb-4 mb-4">
+        <div class="flex items-center mb-2">
+            <div class="w-10 h-10 rounded-lg bg-[#2f5c69]/10 flex items-center justify-center ml-3 rtl:ml-3 ltr:mr-3">
+                <i class="fas fa-edit text-[#2f5c69] text-lg"></i>
             </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-[#1a262a]">
+                {{ __('app.edit_header.title') }} <span class="text-[#2f5c69]">{{ $design->title }}</span>
+            </h1>
         </div>
+        <p class="text-gray-500 text-sm md:text-base pr-[3.25rem] rtl:pr-[3.25rem] ltr:pl-[3.25rem]">
+            {{ __('app.edit_header.subtitle') }}
+        </p>
+    </div>
+</div>
 
         <!-- Main Form -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <form action="{{ route('designs.update', $design->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+@auth
+    <div class="mb-6 bg-[#2f5c69]/10 border border-[#2f5c69]/20 rounded-lg p-4">
+        <div class="flex items-center">
+            <i class="fas fa-info-circle text-[#2f5c69] mr-2 ml-2"></i>
+            <p class="text-[#1a262a] text-sm">
+                {{ __('app.design_form.auto_fill_info') }}
+            </p>
+        </div>
+    </div>
+@endauth
 
-                @auth
-                    <!-- Auto-fill notification -->
-                    <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-info-circle text-blue-600 ml-2"></i>
-                            <p class="text-blue-800 text-sm">
-                                تم ملء بيانات الاستشاري تلقائياً من حسابك. يمكنك تعديلها حسب الحاجة.
-                            </p>
-                        </div>
+@if ($errors->any())
+    <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
+        <div class="flex items-start">
+            <i class="fas fa-exclamation-triangle text-red-600 mr-2 ml-2 mt-1"></i>
+            <div>
+                <h3 class="text-red-800 font-medium mb-2">{{ __('app.design_form.error_title') }}</h3>
+                <ul class="text-red-700 text-sm space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>• {{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+@endif
+
+<div class="border-b border-gray-200">
+    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-[#1a262a]">{{ __('app.design_form.sections.basic_info') }}</h2>
+    </div>
+    <div class="p-4 md:p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.title') }} *
+                </label>
+                <input type="text" name="title" required
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.title_placeholder') }}" 
+                    value="{{ old('title', $design->title) }}">
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.style') }} *
+                </label>
+                <select name="style" required
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors">
+                    <option value="">{{ __('app.design_form.fields.select_style') }}</option>
+                    @foreach(['modern', 'islamic', 'traditional', 'classic', 'minimalist'] as $style)
+                        <option value="{{ $style }}" {{ old('style', $design->style) == $style ? 'selected' : '' }}>
+                            {{ __('app.design_form.styles.' . $style) }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.price') }} *
+                </label>
+                <input type="number" name="price" required
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.price_placeholder') }}" 
+                    value="{{ old('price', $design->price) }}">
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.area') }} *
+                </label>
+                <input type="number" name="area" required
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.area_placeholder') }}" 
+                    value="{{ old('area', $design->area) }}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="border-b border-gray-200">
+    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-[#1a262a]">{{ __('app.design_form.sections.specifications') }}</h2>
+    </div>
+    <div class="p-4 md:p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.bedrooms') }}
+                </label>
+                <input type="number" name="bedrooms"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.bedrooms_placeholder') }}" 
+                    value="{{ old('bedrooms', $design->bedrooms) }}">
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.bathrooms') }}
+                </label>
+                <input type="number" name="bathrooms"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.bathrooms_placeholder') }}" 
+                    value="{{ old('bathrooms', $design->bathrooms) }}">
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.floors') }}
+                </label>
+                <input type="number" name="floors"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.floors_placeholder') }}" 
+                    value="{{ old('floors', $design->floors) }}">
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.location') }}
+                </label>
+                <input type="text" name="location"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.location_placeholder') }}"
+                    value="{{ old('location', $design->location) }}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="border-b border-gray-200">
+    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-[#1a262a]">{{ __('app.design_form.sections.description') }}</h2>
+    </div>
+    <div class="p-4 md:p-6">
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">
+                {{ __('app.design_form.fields.description') }} *
+            </label>
+            <textarea name="description" rows="4" required
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                placeholder="{{ __('app.design_form.fields.description_placeholder') }}">{{ old('description', $design->description) }}</textarea>
+        </div>
+    </div>
+</div>
+
+<div class="border-b border-gray-200">
+    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-[#1a262a]">{{ __('app.design_form.sections.features') }}</h2>
+    </div>
+    <div class="p-4 md:p-6">
+        <div class="space-y-4">
+            <label class="block text-sm font-medium text-gray-700">
+                {{ __('app.design_form.fields.available_features') }}
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                @php
+                    $featuresList = [
+                        'garden', 'parking', 'kitchen', 'living_room', 
+                        'pool', 'elevator', 'balcony', 'storage'
+                    ];
+                @endphp
+                
+                @foreach($featuresList as $featureKey)
+                    <label class="flex items-center p-3 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                        <input type="checkbox" name="features[]" value="{{ $featureKey }}"
+                            class="rounded text-[#f3a446] focus:ring-[#f3a446] mr-2 ml-2"
+                            {{ in_array($featureKey, old('features', $designFeatures ?? [])) ? 'checked' : '' }}>
+                        <span class="text-sm text-gray-700">{{ __('app.design_form.features.' . $featureKey) }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="border-b border-gray-200">
+    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-[#1a262a]">{{ __('app.design_form.sections.contact') }}</h2>
+    </div>
+    <div class="p-4 md:p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.consultant_name') }} *
+                </label>
+                <input type="text" name="consultant_name" required
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.consultant_name_placeholder') }}"
+                    value="{{ old('consultant_name', $design->consultant_name) }}">
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.consultant_phone') }}
+                </label>
+                <input type="tel" name="consultant_phone"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.consultant_phone_placeholder') }}"
+                    value="{{ old('consultant_phone', $design->consultant_phone) }}">
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.consultant_email') }}
+                </label>
+                <input type="email" name="consultant_email"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.consultant_email_placeholder') }}"
+                    value="{{ old('consultant_email', $design->consultant_email) }}">
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.location') }}
+                </label>
+                <input type="text" name="location"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors"
+                    placeholder="{{ __('app.design_form.fields.location_placeholder') }}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="border-b border-gray-200">
+    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-[#1a262a]">{{ __('app.design_form.sections.images') }}</h2>
+    </div>
+    <div class="p-4 md:p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.main_image') }}
+                </label>
+                @if ($design->main_image)
+                    <div class="mb-4 p-2 border border-gray-100 rounded-lg bg-gray-50">
+                        <p class="text-sm text-[#1a262a] mb-2 font-medium">{{ __('app.design_form.fields.current_image') }}</p>
+                        <img src="{{ asset('storage/' . $design->main_image) }}"
+                            alt="Main Image" class="w-32 h-32 object-cover rounded-lg shadow-sm">
                     </div>
-                @endauth
+                @endif
+                <input type="file" name="main_image" accept="image/*"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#f3a446]/10 file:text-[#f3a446] hover:file:bg-[#f3a446]/20">
+                <p class="text-xs text-gray-500 mt-1">{{ __('app.design_form.fields.keep_image_hint') }}</p>
+            </div>
 
-                @if ($errors->any())
-                    <!-- Error messages -->
-                    <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
-                        <div class="flex items-start">
-                            <i class="fas fa-exclamation-triangle text-red-600 ml-2 mt-1"></i>
-                            <div>
-                                <h3 class="text-red-800 font-medium mb-2">يرجى تصحيح الأخطاء التالية:</h3>
-                                <ul class="text-red-700 text-sm space-y-1">
-                                    @foreach ($errors->all() as $error)
-                                        <li>• {{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">
+                    {{ __('app.design_form.fields.additional_images') }}
+                </label>
+                @if ($design->images && is_array($design->images) && count($design->images) > 0)
+                    <div class="mb-4 p-2 border border-gray-100 rounded-lg bg-gray-50">
+                        <p class="text-sm text-[#1a262a] mb-2 font-medium">{{ __('app.design_form.fields.current_image') }}</p>
+                        <div class="grid grid-cols-3 gap-2">
+                            @foreach ($design->images as $image)
+                                <img src="{{ asset('storage/' . $image) }}" alt="Additional Image"
+                                    class="w-20 h-20 object-cover rounded-lg shadow-sm">
+                            @endforeach
                         </div>
                     </div>
                 @endif
-
-                <!-- Basic Information Table -->
-                <div class="border-b">
-                    <div class="bg-gray-50 px-6 py-4 border-b">
-                        <h2 class="text-xl font-semibold text-gray-800">المعلومات الأساسية</h2>
-                    </div>
-                    <div class="p-6">
-                        <table class="w-full">
-                            <tbody class="space-y-4">
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700 w-1/4">عنوان التصميم *</td>
-                                    <td class="py-3">
-                                        <input type="text" name="title" required
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: فيلا عصرية فاخرة" value="{{ old('title', $design->title) }}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">نمط التصميم *</td>
-                                    <td class="py-3">
-                                        <select name="style" required
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                            <option value="">اختر النمط</option>
-                                            <option value="modern"
-                                                {{ old('style', $design->style) == 'modern' ? 'selected' : '' }}>عصري
-                                            </option>
-                                            <option value="islamic"
-                                                {{ old('style', $design->style) == 'islamic' ? 'selected' : '' }}>إسلامي
-                                            </option>
-                                            <option value="traditional"
-                                                {{ old('style', $design->style) == 'traditional' ? 'selected' : '' }}>تقليدي
-                                            </option>
-                                            <option value="classic"
-                                                {{ old('style', $design->style) == 'classic' ? 'selected' : '' }}>كلاسيكي
-                                            </option>
-                                            <option value="minimalist"
-                                                {{ old('style', $design->style) == 'minimalist' ? 'selected' : '' }}>مينيمال
-                                            </option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">سعر التصميم (درهم) *</td>
-                                    <td class="py-3">
-                                        <input type="number" name="price" required
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: 500000" value="{{ old('price', $design->price) }}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">المساحة (متر مربع) *</td>
-                                    <td class="py-3">
-                                        <input type="number" name="area" required
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: 400" value="{{ old('area', $design->area) }}">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Specifications Table -->
-                <div class="border-b">
-                    <div class="bg-gray-50 px-6 py-4 border-b">
-                        <h2 class="text-xl font-semibold text-gray-800">المواصفات</h2>
-                    </div>
-                    <div class="p-6">
-                        <table class="w-full">
-                            <tbody>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700 w-1/4">عدد غرف النوم</td>
-                                    <td class="py-3">
-                                        <input type="number" name="bedrooms"
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: 5" value="{{ old('bedrooms', $design->bedrooms) }}">
-                                    </td>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700 w-1/4">عدد الحمامات</td>
-                                    <td class="py-3">
-                                        <input type="number" name="bathrooms"
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: 4" value="{{ old('bathrooms', $design->bathrooms) }}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">عدد الطوابق</td>
-                                    <td class="py-3">
-                                        <input type="number" name="floors"
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: 3" value="{{ old('floors', $design->floors) }}">
-                                    </td>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">الموقع</td>
-                                    <td class="py-3">
-                                        <input type="text" name="location"
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: الرياض، المملكة العربية السعودية"
-                                            value="{{ old('location', $design->location) }}">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Description -->
-                <div class="border-b">
-                    <div class="bg-gray-50 px-6 py-4 border-b">
-                        <h2 class="text-xl font-semibold text-gray-800">وصف التصميم</h2>
-                    </div>
-                    <div class="p-6">
-                        <table class="w-full">
-                            <tbody>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700 w-1/4">الوصف التفصيلي *</td>
-                                    <td class="py-3">
-                                        <textarea name="description" rows="4" required
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="اكتب وصفاً مفصلاً للتصميم...">{{ old('description', $design->description) }}</textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Features -->
-                <div class="border-b">
-                    <div class="bg-gray-50 px-6 py-4 border-b">
-                        <h2 class="text-xl font-semibold text-gray-800">المميزات</h2>
-                    </div>
-                    <div class="p-6">
-                        <table class="w-full">
-                            <tbody>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700 w-1/4">المميزات المتاحة</td>
-                                    <td class="py-3">
-                                        <div class="grid grid-cols-2 gap-4">
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="features[]" value="حديقة خارجية"
-                                                    class="ml-3"
-                                                    {{ in_array('حديقة خارجية', old('features', $designFeatures)) ? 'checked' : '' }}>
-                                                <span class="text-sm text-gray-700">حديقة خارجية</span>
-                                            </label>
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="features[]" value="موقف سيارات"
-                                                    class="ml-3"
-                                                    {{ in_array('موقف سيارات', old('features', $designFeatures)) ? 'checked' : '' }}>
-                                                <span class="text-sm text-gray-700">موقف سيارات</span>
-                                            </label>
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="features[]" value="مطبخ مجهز"
-                                                    class="ml-3"
-                                                    {{ in_array('مطبخ مجهز', old('features', $designFeatures)) ? 'checked' : '' }}>
-                                                <span class="text-sm text-gray-700">مطبخ مجهز</span>
-                                            </label>
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="features[]" value="غرفة معيشة واسعة"
-                                                    class="ml-3"
-                                                    {{ in_array('غرفة معيشة واسعة', old('features', $designFeatures)) ? 'checked' : '' }}>
-                                                <span class="text-sm text-gray-700">غرفة معيشة واسعة</span>
-                                            </label>
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="features[]" value="مسبح خاص" class="ml-3"
-                                                    {{ in_array('مسبح خاص', old('features', $designFeatures)) ? 'checked' : '' }}>
-                                                <span class="text-sm text-gray-700">مسبح خاص</span>
-                                            </label>
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="features[]" value="مصعد داخلي"
-                                                    class="ml-3"
-                                                    {{ in_array('مصعد داخلي', old('features', $designFeatures)) ? 'checked' : '' }}>
-                                                <span class="text-sm text-gray-700">مصعد داخلي</span>
-                                            </label>
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="features[]" value="شرفات" class="ml-3"
-                                                    {{ in_array('شرفات', old('features', $designFeatures)) ? 'checked' : '' }}>
-                                                <span class="text-sm text-gray-700">شرفات</span>
-                                            </label>
-                                            <label class="flex items-center">
-                                                <input type="checkbox" name="features[]" value="مخازن" class="ml-3"
-                                                    {{ in_array('مخازن', old('features', $designFeatures)) ? 'checked' : '' }}>
-                                                <span class="text-sm text-gray-700">مخازن</span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Contact Information -->
-                <div class="border-b">
-                    <div class="bg-gray-50 px-6 py-4 border-b">
-                        <h2 class="text-xl font-semibold text-gray-800">معلومات التواصل</h2>
-                    </div>
-                    <div class="p-6">
-                        <table class="w-full">
-                            <tbody>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700 w-1/4">اسم المصمم *</td>
-                                    <td class="py-3">
-                                        <input type="text" name="consultant_name" required
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: أحمد محمد"
-                                            value="{{ old('consultant_name', $design->consultant_name) }}">
-                                    </td>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700 w-1/4">رقم الهاتف</td>
-                                    <td class="py-3">
-                                        <input type="tel" name="consultant_phone"
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: +966501234567"
-                                            value="{{ old('consultant_phone', $design->consultant_phone) }}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">البريد الإلكتروني</td>
-                                    <td class="py-3">
-                                        <input type="email" name="consultant_email"
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: info@example.com"
-                                            value="{{ old('consultant_email', $design->consultant_email) }}">
-                                    </td>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">الموقع</td>
-                                    <td class="py-3">
-                                        <input type="text" name="location"
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                            placeholder="مثال: الرياض، المملكة العربية السعودية">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Images -->
-                <div class="border-b">
-                    <div class="bg-gray-50 px-6 py-4 border-b">
-                        <h2 class="text-xl font-semibold text-gray-800">صور التصميم</h2>
-                    </div>
-                    <div class="p-6">
-                        <table class="w-full">
-                            <tbody>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700 w-1/4">الصورة الرئيسية</td>
-                                    <td class="py-3">
-                                        @if ($design->main_image)
-                                            <div class="mb-4">
-                                                <p class="text-sm text-gray-600 mb-2">الصورة الحالية:</p>
-                                                <img src="{{ asset('storage/' . $design->main_image) }}"
-                                                    alt="الصورة الحالية" class="w-32 h-32 object-cover rounded-lg">
-                                            </div>
-                                        @endif
-                                        <input type="file" name="main_image" accept="image/*"
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                        <p class="text-sm text-gray-500 mt-1">اتركه فارغاً للاحتفاظ بالصورة الحالية</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 pr-4 text-sm font-medium text-gray-700">صور إضافية</td>
-                                    <td class="py-3">
-                                        @if ($design->images && is_array($design->images) && count($design->images) > 0)
-                                            <div class="mb-4">
-                                                <p class="text-sm text-gray-600 mb-2">الصور الحالية:</p>
-                                                <div class="grid grid-cols-3 gap-2">
-                                                    @foreach ($design->images as $image)
-                                                        <img src="{{ asset('storage/' . $image) }}" alt="صورة إضافية"
-                                                            class="w-20 h-20 object-cover rounded-lg">
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        @endif
-                                        <input type="file" name="images[]" accept="image/*" multiple
-                                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                        <p class="text-sm text-gray-500 mt-1">اتركه فارغاً للاحتفاظ بالصور الحالية، أو اختر
-                                            صوراً جديدة لاستبدالها</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <input type="file" name="images[]" accept="image/*" multiple
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#f3a446] focus:border-[#f3a446] transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#f3a446]/10 file:text-[#f3a446] hover:file:bg-[#f3a446]/20">
+                <p class="text-xs text-gray-500 mt-1">{{ __('app.design_form.fields.keep_images_hint') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- Pricing Section -->
                 <div class="border-b">
-                    <div class="bg-gray-50 px-6 py-4 border-b">
-                        <h2 class="text-xl font-semibold text-gray-800">التسعير التفصيلي للمشروع</h2>
-                        <p class="text-sm text-gray-600 mt-1">حدد تفاصيل التكلفة لكل فئة من فئات البناء</p>
-                    </div>
+                   <div class="bg-white rounded-lg shadow-md border border-gray-100 p-4 md:p-6 mb-6">
+    <div class="border-b border-[#f3a446]/30 pb-4 mb-4">
+        <div class="flex items-center mb-2">
+            <div class="w-10 h-10 rounded-lg bg-[#2f5c69]/10 flex items-center justify-center ml-3 rtl:ml-3 ltr:mr-3">
+                <i class="fas fa-edit text-[#2f5c69] text-lg"></i>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-[#1a262a]">
+                {{ __('app.edit_header.title') }} <span class="text-[#2f5c69]">{{ $design->title }}</span>
+            </h1>
+        </div>
+        <p class="text-gray-500 text-sm md:text-base pr-[3.25rem] rtl:pr-[3.25rem] ltr:pl-[3.25rem]">
+            {{ __('app.edit_header.subtitle') }}
+        </p>
+    </div>
+</div>
                     <div class="p-6">
                         <div class="space-y-6">
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">الاعمال التحضيرية</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-1-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[1][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: حفر وتأسيس القواعد">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[1][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[1][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م³">م³</option>
-                                                            <option value="م²">م²</option>
-                                                            <option value="م">م</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[1][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[1][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[1][0][category_id]" value="1">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="1">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+                            <div class="border border-gray-200 rounded-xl shadow-lg bg-white">
+    <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3 rounded-t-xl">
+        <h3 class="text-xl font-bold ">{{ __('app.preparatory_works') }}</h3>
+    </div>
+    <div class="p-4 sm:p-6">
+        <div class="overflow-x-auto">
+            <table class="min-w-full border-collapse border border-gray-300">
+                <thead class="bg-blue-50">
+                    <tr>
+                        <th class="border border-gray-300 px-3 py-3 text-right text-sm font-bold text-gray-700 w-2/5 sm:w-1/3">
+                            {{ __('app.item_name') }}
+                        </th>
+                        <th class="border border-gray-300 px-3 py-3 text-center text-sm font-bold text-gray-700 w-1/12">
+                            {{ __('app.quantity') }}
+                        </th>
+                        <th class="border border-gray-300 px-3 py-3 text-center text-sm font-bold text-gray-700 w-1/12">
+                            {{ __('app.unit') }}
+                        </th>
+                        <th class="border border-gray-300 px-3 py-3 text-center text-sm font-bold text-gray-700 w-1/6">
+                            {{ __('app.unit_price_aed') }}
+                        </th>
+                        <th class="border border-gray-300 px-3 py-3 text-center text-sm font-bold text-gray-700 w-1/6">
+                            {{ __('app.total_aed') }}
+                        </th>
+                        <th class="border border-gray-300 px-3 py-3 text-center text-sm font-bold text-gray-700 w-1/12">
+                            {{ __('app.operations') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="category-1-items">
+                    <tr class="pricing-row bg-white hover:bg-gray-50 transition duration-150">
+                        <td class="border border-gray-300 px-3 py-2">
+                            <input type="text" name="pricing[1][0][item_name]"
+                                class="w-full border border-gray-300 rounded px-2 py-1 text-sm text-right focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="{{ __('app.item_name_placeholder') }}">
+                        </td>
+                        <td class="border border-gray-300 px-3 py-2">
+                            <input type="number" name="pricing[1][0][quantity]" step="0.01"
+                                class="w-full border border-gray-300 rounded px-2 py-1 text-sm text-center pricing-quantity focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="0.00">
+                        </td>
+                        <td class="border border-gray-300 px-3 py-2">
+                            <select name="pricing[1][0][unit]"
+                                class="w-full border border-gray-300 rounded px-2 py-1 text-sm text-center focus:ring-blue-500 focus:border-blue-500">
+                                <option value="م³">م³</option>
+                                <option value="م²">م²</option>
+                                <option value="م">م</option>
+                                <option value="قطعة">قطعة</option>
+                            </select>
+                        </td>
+                        <td class="border border-gray-300 px-3 py-2">
+                            <input type="number" name="pricing[1][0][unit_price]" step="0.01"
+                                class="w-full border border-gray-300 rounded px-2 py-1 text-sm text-center pricing-unit-price focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="0.00">
+                        </td>
+                        <td class="border border-gray-300 px-3 py-2">
+                            <input type="number" name="pricing[1][0][total_price]" step="0.01"
+                                class="w-full border border-gray-300 rounded px-2 py-1 text-sm text-center pricing-total bg-gray-100 text-gray-700 cursor-not-allowed"
+                                readonly>
+                        </td>
+                        <td class="border border-gray-300 px-3 py-2 text-center">
+                            <button type="button"
+                                class="text-red-600 hover:text-red-800 remove-item-btn transition duration-150"
+                                aria-label="حذف البند">
+                                <i class="fas fa-trash"></i> 
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <input type="hidden" name="pricing[1][0][category_id]" value="1">
+        <button type="button"
+            class="mt-4 text-blue-600 hover:text-blue-800 text-sm font-medium add-item-btn flex items-center"
+            data-category="1">
+            <i class="fas fa-plus ml-2" dir="ltr"></i>
+            {{ __('app.add_item') }}
+        </button>
+    </div>
+</div>
 
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال الحفر والخرسانة أسفل منسوب الدور الأرضي</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-2-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[2][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: بناء الجدران الخارجية">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[2][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[2][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م²">م²</option>
-                                                            <option value="م³">م³</option>
-                                                            <option value="م">م</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[2][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[2][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[2][0][category_id]" value="2">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="2">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.below_ground_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-2-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[2][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.walls') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[2][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[2][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="m3">{{ __('app.construction.units.m3') }}</option>
+                                    <option value="m">{{ __('app.construction.units.m') }}</option>
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[2][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[2][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[2][0][category_id]" value="2">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="2">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال الخرسانة للدور الأرضي وما فوق -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال الخرسانة للدور الأرضي وما فوق</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-3-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[3][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: تبييض الجدران الداخلية">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[3][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[3][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م²">م²</option>
-                                                            <option value="م³">م³</option>
-                                                            <option value="م">م</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[3][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[3][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[3][0][category_id]" value="3">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="3">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.concrete_upper_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-3-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[3][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.plaster') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[3][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[3][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="m3">{{ __('app.construction.units.m3') }}</option>
+                                    <option value="m">{{ __('app.construction.units.m') }}</option>
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[3][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[3][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[3][0][category_id]" value="3">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="3">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال الطابوق -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال الطابوق</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-4-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[4][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: تركيب شبكة المياه الرئيسية">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[4][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[4][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م">م</option>
-                                                            <option value="م²">م²</option>
-                                                            <option value="م³">م³</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[4][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[4][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[4][0][category_id]" value="4">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="4">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.brickwork_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-4-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[4][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.water') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[4][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[4][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m">{{ __('app.construction.units.m') }}</option>
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="m3">{{ __('app.construction.units.m3') }}</option>
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[4][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[4][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[4][0][category_id]" value="4">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="4">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال العزل -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال العزل</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-5-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[5][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: تركيب شبكة الكهرباء الرئيسية">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[5][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[5][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م">م</option>
-                                                            <option value="م²">م²</option>
-                                                            <option value="م³">م³</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[5][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[5][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[5][0][category_id]" value="5">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="5">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.insulation_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-5-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[5][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.electric') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[5][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[5][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m">{{ __('app.construction.units.m') }}</option>
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="m3">{{ __('app.construction.units.m3') }}</option>
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[5][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[5][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[5][0][category_id]" value="5">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="5">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال التشطيب -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال التشطيب</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-6-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[6][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: صنع الأبواب الخشبية">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[6][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[6][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="قطعة">قطعة</option>
-                                                            <option value="م²">م²</option>
-                                                            <option value="م">م</option>
-                                                            <option value="م³">م³</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[6][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[6][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[6][0][category_id]" value="6">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="6">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.finishing_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-6-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[6][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.wooden_doors') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[6][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[6][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="m">{{ __('app.construction.units.m') }}</option>
+                                    <option value="m3">{{ __('app.construction.units.m3') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[6][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[6][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[6][0][category_id]" value="6">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="6">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال النجارة -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال النجارة</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-7-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[7][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: دهان الجدران الداخلية">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[7][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[7][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م²">م²</option>
-                                                            <option value="لتر">لتر</option>
-                                                            <option value="كيلو">كيلو</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[7][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[7][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[7][0][category_id]" value="7">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="7">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.carpentry_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-7-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[7][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.painting') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[7][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[7][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="liter">{{ __('app.construction.units.liter') }}</option>
+                                    <option value="kg">{{ __('app.construction.units.kg') }}</option>
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[7][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[7][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[7][0][category_id]" value="7">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="7">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال الألومنيوم والزجاج -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال الألومنيوم والزجاج</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-8-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[8][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: تركيب بلاط الحمامات">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[8][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[8][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م²">م²</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                            <option value="م">م</option>
-                                                            <option value="كيلو">كيلو</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[8][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[8][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[8][0][category_id]" value="8">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="8">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.aluminum_glass_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-8-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[8][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.tiles') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[8][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[8][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                    <option value="m">{{ __('app.construction.units.m') }}</option>
+                                    <option value="kg">{{ __('app.construction.units.kg') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[8][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[8][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[8][0][category_id]" value="8">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="8">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال الكهرباء -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال الكهرباء</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-9-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[9][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: صنع أبواب حديدية">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[9][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[9][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="قطعة">قطعة</option>
-                                                            <option value="م²">م²</option>
-                                                            <option value="كيلو">كيلو</option>
-                                                            <option value="طن">طن</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[9][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[9][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[9][0][category_id]" value="9">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="9">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.electrical_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-9-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[9][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.iron_doors') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[9][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[9][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="kg">{{ __('app.construction.units.kg') }}</option>
+                                    <option value="ton">{{ __('app.construction.units.ton') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[9][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[9][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[9][0][category_id]" value="9">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="9">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.ac_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-10-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[10][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.insulation_roof') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[10][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[10][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="m3">{{ __('app.construction.units.m3') }}</option>
+                                    <option value="kg">{{ __('app.construction.units.kg') }}</option>
+                                    <option value="liter">{{ __('app.construction.units.liter') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[10][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[10][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[10][0][category_id]" value="10">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="10">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال التكييف -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال التكييف</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-10-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[10][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: عزل أسقف المباني">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[10][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[10][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م²">م²</option>
-                                                            <option value="م³">م³</option>
-                                                            <option value="كيلو">كيلو</option>
-                                                            <option value="لتر">لتر</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[10][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[10][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[10][0][category_id]" value="10">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="10">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.sanitary_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-11-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[11][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.sewage') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[11][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[11][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m">{{ __('app.construction.units.m') }}</option>
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="m3">{{ __('app.construction.units.m3') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[11][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[11][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[11][0][category_id]" value="11">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="11">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- أعمال الصحية -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">أعمال الصحية</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-11-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[11][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: تركيب شبكة الصرف الصحي">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[11][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[11][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م">م</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                            <option value="م²">م²</option>
-                                                            <option value="م³">م³</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[11][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[11][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[11][0][category_id]" value="11">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="11">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
+    <div class="border rounded-lg bg-gray-50 shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-br from-[#2f5c69] to-[#1a262a] text-white px-4 py-3">
+            <h3 class="text-lg font-semibold">{{ __('app.construction.external_title') }}</h3>
+        </div>
+        <div class="p-4">
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 min-w-[600px]">
+                    <thead class="bg-white">
+                        <tr>
+                            <th class="border border-gray-300 px-3 py-2 text-start text-sm font-semibold text-gray-700">
+                                {{ __('app.construction.table.item_name') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.quantity') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-24">
+                                {{ __('app.construction.table.unit') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.unit_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-32">
+                                {{ __('app.construction.table.total_price') }}
+                            </th>
+                            <th class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700 w-16">
+                                {{ __('app.construction.table.actions') }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-12-items">
+                        <tr class="pricing-row bg-white hover:bg-gray-50 transition-colors">
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="text" name="pricing[12][0][item_name]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="{{ __('app.construction.placeholders.garden') }}">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[12][0][quantity]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <select name="pricing[12][0][unit]"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-[#f3a446] focus:border-[#f3a446] outline-none">
+                                    <option value="m2">{{ __('app.construction.units.m2') }}</option>
+                                    <option value="m">{{ __('app.construction.units.m') }}</option>
+                                    <option value="piece">{{ __('app.construction.units.piece') }}</option>
+                                    <option value="m3">{{ __('app.construction.units.m3') }}</option>
+                                </select>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[12][0][unit_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price focus:ring-[#f3a446] focus:border-[#f3a446] outline-none"
+                                    placeholder="0.00">
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2">
+                                <input type="number" name="pricing[12][0][total_price]" step="0.01"
+                                    class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
+                                    readonly>
+                            </td>
+                            <td class="border border-gray-300 px-3 py-2 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-800 remove-item-btn transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="pricing[12][0][category_id]" value="12">
+            <button type="button"
+                class="mt-3 text-[#2f5c69] hover:text-[#1a262a] font-medium text-sm add-item-btn flex items-center transition-colors"
+                data-category="12">
+                <i class="fas fa-plus mr-2"></i> {{ __('app.construction.buttons.add_item') }}
+            </button>
+        </div>
+    </div>
 
-                            <!-- الأعمال الخارجية -->
-                            <div class="border rounded-lg bg-gray-50">
-                                <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg">
-                                    <h3 class="text-lg font-semibold">الأعمال الخارجية</h3>
-                                </div>
-                                <div class="p-4">
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full border-collapse border border-gray-300">
-                                            <thead class="bg-white">
-                                                <tr>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-right text-sm font-semibold text-gray-700">
-                                                        اسم البند</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الكمية</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        الوحدة</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        سعر الوحدة (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        المجموع (درهم)</th>
-                                                    <th
-                                                        class="border border-gray-300 px-3 py-2 text-center text-sm font-semibold text-gray-700">
-                                                        العمليات</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="category-12-items">
-                                                <tr class="pricing-row">
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="text" name="pricing[12][0][item_name]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                                                            placeholder="مثال: أعمال الحدائق والأسوار">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[12][0][quantity]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-quantity"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <select name="pricing[12][0][unit]"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
-                                                            <option value="م²">م²</option>
-                                                            <option value="م">م</option>
-                                                            <option value="قطعة">قطعة</option>
-                                                            <option value="م³">م³</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[12][0][unit_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-unit-price"
-                                                            placeholder="0.00">
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2">
-                                                        <input type="number" name="pricing[12][0][total_price]"
-                                                            step="0.01"
-                                                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm pricing-total bg-gray-100"
-                                                            readonly>
-                                                    </td>
-                                                    <td class="border border-gray-300 px-3 py-2 text-center">
-                                                        <button type="button"
-                                                            class="text-red-600 hover:text-red-800 remove-item-btn">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <input type="hidden" name="pricing[12][0][category_id]" value="12">
-                                    <button type="button"
-                                        class="mt-2 text-blue-600 hover:text-blue-800 text-sm add-item-btn"
-                                        data-category="12">
-                                        <i class="fas fa-plus ml-1"></i> إضافة بند
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+    <div class="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm">
+        <h3 class="text-lg font-bold text-[#2f5c69] mb-3">{{ __('app.construction.summary.title') }}</h3>
+        <table class="w-full">
+            <tbody>
+                <tr>
+                    <td class="py-2 text-start text-sm font-medium text-gray-700 w-1/4">
+                        {{ __('app.construction.summary.total_cost') }}
+                    </td>
+                    <td class="py-2">
+                        <span class="text-2xl font-bold text-[#2f5c69]" id="total-cost">0.00</span>
+                        <span class="text-sm text-gray-600 mr-2">{{ __('app.construction.summary.currency') }}</span>
+                    </td>
+                    <td class="py-2 text-start text-sm font-medium text-gray-700 w-1/4">
+                        {{ __('app.construction.summary.total_items') }}
+                    </td>
+                    <td class="py-2">
+                        <span class="text-xl font-bold text-green-600" id="total-items">0</span>
+                        <span class="text-sm text-gray-600 mr-2">{{ __('app.construction.summary.item_unit') }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2 text-start text-sm font-medium text-gray-700 w-1/4">
+                        {{ __('app.construction.summary.total_categories') }}
+                    </td>
+                    <td class="py-2">
+                        <span class="text-xl font-bold text-purple-600">12</span>
+                        <span
+                            class="text-sm text-gray-600 mr-2">{{ __('app.construction.summary.category_unit') }}</span>
+                    </td>
+                    <td class="py-2 text-start text-sm font-medium text-gray-700 w-1/4">
+                        {{ __('app.construction.summary.avg_cost') }}
+                    </td>
+                    <td class="py-2">
+                        <span class="text-xl font-bold text-[#f3a446]" id="avg-cost">0.00</span>
+                        <span
+                            class="text-sm text-gray-600 mr-2">{{ __('app.construction.summary.currency_per_item') }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-                        <!-- Total Summary -->
-                        <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <h3 class="text-lg font-bold text-blue-800 mb-3">ملخص التكلفة الإجمالية</h3>
-                            <table class="w-full">
-                                <tbody>
-                                    <tr>
-                                        <td class="py-2 text-right text-sm font-medium text-blue-700 w-1/4">المجموع الكلي:
-                                        </td>
-                                        <td class="py-2">
-                                            <span class="text-2xl font-bold text-blue-600" id="total-cost">0.00</span>
-                                            <span class="text-sm text-blue-700 mr-2">درهم</span>
-                                        </td>
-                                        <td class="py-2 text-right text-sm font-medium text-green-700 w-1/4">عدد البنود:
-                                        </td>
-                                        <td class="py-2">
-                                            <span class="text-xl font-bold text-green-600" id="total-items">0</span>
-                                            <span class="text-sm text-green-700 mr-2">بند</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-2 text-right text-sm font-medium text-purple-700 w-1/4">عدد الفئات:
-                                        </td>
-                                        <td class="py-2">
-                                            <span class="text-xl font-bold text-purple-600">12</span>
-                                            <span class="text-sm text-purple-700 mr-2">فئة</span>
-                                        </td>
-                                        <td class="py-2 text-right text-sm font-medium text-orange-700 w-1/4">متوسط
-                                            التكلفة:</td>
-                                        <td class="py-2">
-                                            <span class="text-xl font-bold text-orange-600" id="avg-cost">0.00</span>
-                                            <span class="text-sm text-orange-700 mr-2">درهم/بند</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Submit Buttons -->
-                <div class="bg-gray-50 px-6 py-4">
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button type="submit"
-                            class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
-                            <i class="fas fa-save ml-2"></i>
-                            حفظ التصميم
-                        </button>
-                        <a href="{{ route('designs.index') }}"
-                            class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-lg font-semibold text-center hover:bg-gray-50 transition duration-300">
-                            إلغاء
-                        </a>
-                    </div>
-                </div>
+    <div class="bg-white py-4">
+        <div class="flex flex-col sm:flex-row gap-4">
+            <button type="submit"
+                class="flex-1 bg-gradient-to-r from-[#2f5c69] to-[#1a262a] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300 flex items-center justify-center">
+                <i class="fas fa-save mr-2 ml-2"></i>
+                {{ __('app.construction.actions.save') }}
+            </button>
+            <a href="{{ route('designs.index') }}"
+                class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-lg font-semibold text-center hover:bg-gray-50 transition duration-300">
+                {{ __('app.construction.actions.cancel') }}
+            </a>
+        </div>
+    </div>
             </form>
         </div>
     </div>

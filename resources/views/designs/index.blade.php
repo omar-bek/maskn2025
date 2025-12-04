@@ -521,23 +521,31 @@
                                     @endforeach
                                 @endif
                             </div>
-                            <div class="design-actions">
-                                <a href="{{ route('designs.show-with-pricing', $design->id) }}"
-                                    class="btn-primary  text-center ml-5 mr-5">{{ __('app.designs_grid.view_with_pricing') }}</a>
-                                <a href="{{ route('designs.show', $design->id) }}"
-                                    class="btn-secondary text-center">{{ __('app.view_details') }}</a>
+                            <div class="design-actions grid grid-cols-2 gap-3 w-full">
+    <a href="{{ route('designs.show-with-pricing', $design->id) }}"
+       class="btn-primary text-center w-full flex items-center justify-center">
+       {{ __('app.designs_grid.view_with_pricing') }}
+    </a>
 
-                                @auth
-                                    @if (auth()->user()->isConsultant() && auth()->id() == $design->consultant_id)
-                                        <a href="{{ route('designs.edit', $design->id) }}"
-                                            class="btn-primary bg-blue-600 hover:bg-blue-700">{{ __('app.designs_grid.edit') }}</a>
-                                        <button onclick="deleteDesign({{ $design->id }})"
-                                            class="btn-secondary bg-red-600 hover:bg-red-700 text-white">
-                                            {{ __('app.designs_grid.delete') }}
-                                        </button>
-                                    @endif
-                                @endauth
-                            </div>
+    <a href="{{ route('designs.show', $design->id) }}"
+       class="btn-secondary text-center w-full flex items-center justify-center">
+       {{ __('app.view_details') }}
+    </a>
+
+    @auth
+        @if (auth()->user()->isConsultant() && auth()->id() == $design->consultant_id)
+            <a href="{{ route('designs.edit', $design->id) }}"
+               class="btn-primary bg-blue-600 hover:bg-blue-700 w-full flex items-center justify-center">
+               {{ __('app.designs_grid.edit') }}
+            </a>
+
+            <button onclick="deleteDesign({{ $design->id }})"
+                    class="btn-secondary bg-red-600 hover:bg-red-700 text-white w-full flex items-center justify-center">
+                {{ __('app.designs_grid.delete') }}
+            </button>
+        @endif
+    @endauth
+</div>
                         </div>
                     </div>
                 @empty
