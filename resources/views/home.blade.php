@@ -3,7 +3,7 @@
 @section('content')
 
 
-<section class="hero-section bg-[#2f5c69] text-white relative pt-32 pb-16 lg:pt-24 lg:pb-12 lg:rounded-b-[50px] border-b-8 border-b-[#f3a446]">
+<section class="hero-section bg-[#2f5c69] text-white relative pt-40 pb-20 lg:pt-24 lg:pb-12 lg:rounded-b-[50px] border-b-8 border-b-[#f3a446]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
@@ -45,56 +45,53 @@
                             {{ __('app.join_now') }}
                         </a>
                     @endauth
-                    
-                    <button class="hidden lg:flex bg-white text-[#2f5c69] w-14 h-14 rounded-full items-center justify-center shadow-md hover:bg-gray-200 transition-colors">
-                        <i class="fas fa-play"></i>
-                    </button>
                 </div>
             </div>
 
-            <div class="relative animate-slide-in flex items-center justify-center min-h-[200px] lg:min-h-[500px] order-1 lg:order-2">
-                <div class="relative scale-90 sm:scale-100">
+            <div class="relative animate-slide-in flex items-center justify-center min-h-[400px] md:min-h-[500px] lg:min-h-[600px] order-1 lg:order-2">
+                <div class="relative scale-100 lg:scale-110">
                     <img src="{{ asset('images/home3.png') }}"
                             alt="{{ __('app.hero_image_alt') }}"
-                            class="relative z-10 w-[220px] h-[220px] lg:w-[350px] lg:h-[350px] object-cover rounded-full shadow-2xl transition-transform duration-500 hover:rotate-3 border-4 border-[#f3a446]/20">
+                            class="relative z-10 w-[240px] h-[240px] lg:w-[350px] lg:h-[350px] object-cover rounded-full shadow-2xl border-4 border-[#f3a446]/20">
 
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] lg:w-[420px] lg:h-[420px] border-2 border-[#f3a446]/40 rounded-full animate-pulse">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] lg:w-[460px] lg:h-[460px] border-2 border-[#f3a446]/30 rounded-full animate-pulse">
                         
-                        <div class="absolute -top-2 right-4 lg:right-16 group z-20">
-                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-sm lg:text-xl shadow-lg transition-all duration-300 group-hover:scale-110">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-semibold text-[10px] lg:text-xs px-2  rounded-md bottom-full mb-2 right-1/2 translate-x-1/2 shadow-md whitespace-nowrap">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 group z-30">
+                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-bold text-[11px] lg:text-xs px-3 py-1.5 rounded-md bottom-full mb-3 left-1/2 -translate-x-1/2 shadow-xl whitespace-nowrap z-50">
                                 {{ __('app.certified_consultants') }}
                             </span>
+                            <div class="w-12 h-12 lg:w-16 lg:h-16 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-lg lg:text-2xl shadow-lg transition-all duration-300 group-hover:scale-110">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
                         </div>
 
-                        <div class="absolute -bottom-2 left-4 lg:left-16 group z-20">
-                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#f1f7ff] border border-gray-200 text-[#2f5c69] rounded-full flex items-center justify-center text-sm lg:text-xl shadow-lg transition-all duration-300 group-hover:scale-110">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-semibold text-[10px] lg:text-xs px-2 py-1 rounded-md top-full mt-2 left-1/2 -translate-x-1/2 shadow-md whitespace-nowrap">
+                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 group z-30">
+                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-bold text-[11px] lg:text-xs px-3 mt-5 top-full rounded-md  left-1/2 -translate-x-1/2 shadow-xl whitespace-nowrap z-50">
                                 {{ __('app.trusted_contractors') }}
                             </span>
+                            <div class="w-12 h-12 lg:w-16 lg:h-16 bg-[#f1f7ff] border border-gray-200 text-[#2f5c69] rounded-full flex items-center justify-center text-lg lg:text-2xl shadow-lg transition-all duration-300 group-hover:scale-110">
+                                <i class="fas fa-tools"></i>
+                            </div>
                         </div>
 
-                        <div class="absolute top-1/2 -left-4 lg:-left-8 transform -translate-y-1/2 group z-20">
-                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-sm lg:text-xl shadow-lg transition-all duration-300 group-hover:scale-110">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-semibold text-[10px] lg:text-xs px-2 py-1 rounded-md left-[-10px] lg:left-[-30px] top-1/2 -translate-y-1/2 -translate-x-full shadow-md whitespace-nowrap">
+                        <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 group z-30">
+                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-bold text-[11px] lg:text-xs px-3 py-1.5 rounded-md bottom-full mb-3 left-1/2 -translate-x-1/2 shadow-xl whitespace-nowrap z-50">
                                 {{ __('app.request_service') }}
                             </span>
+                            <div class="w-12 h-12 lg:w-16 lg:h-16 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-lg lg:text-2xl shadow-lg transition-all duration-300 group-hover:scale-110">
+                                <i class="fas fa-handshake"></i>
+                            </div>
                         </div>
 
-                        <div class="absolute top-1/2 -right-4 lg:-right-8 transform -translate-y-1/2 group z-20">
-                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#f1f7ff] text-[#2f5c69] rounded-full flex items-center justify-center text-sm lg:text-xl shadow-lg transition-all duration-300 group-hover:scale-110">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-semibold text-[10px] lg:text-xs px-2 py-1 rounded-md right-[-10px] lg:right-[-30px] top-1/2 -translate-y-1/2 translate-x-full shadow-md whitespace-nowrap">
+                        <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 group z-30">
+                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-bold text-[11px] lg:text-xs px-3 py-1.5 rounded-md bottom-full mb-3 left-1/2 -translate-x-1/2 shadow-xl whitespace-nowrap z-50">
                                 {{ __('app.fast_performance') }}
                             </span>
+                            <div class="w-12 h-12 lg:w-16 lg:h-16 bg-[#f1f7ff] text-[#2f5c69] rounded-full flex items-center justify-center text-lg lg:text-2xl shadow-lg transition-all duration-300 group-hover:scale-110">
+                                <i class="fas fa-bolt"></i>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -112,7 +109,7 @@
         bottom: -40px;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 30;
+        z-index: 40;
         width: 80px;
         height: 80px;
         background-color: #2f5c69; 
@@ -128,20 +125,17 @@
         background-origin: border-box;
         background-clip: padding-box, border-box;
     }
-
     .scroll-down-button i { animation: bounce 2s infinite; }
-
     @keyframes bounce {
         0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
         40% { transform: translateY(-8px); }
         60% { transform: translateY(-4px); }
     }
-
     @media (max-width: 768px) {
         .scroll-down-button {
-            width: 50px;
-            height: 50px;
-            bottom: -25px;
+            width: 54px;
+            height: 54px;
+            bottom: -27px;
             font-size: 1rem;
         }
     }
