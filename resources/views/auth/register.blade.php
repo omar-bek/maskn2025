@@ -131,6 +131,7 @@
                                         <i
                                             class="fas fa-briefcase pr-3 text-gray-500 group-focus-within:text-[#f3a446] transition-colors duration-300"></i>
                                     </div>
+                                    
                                     <select id="user_type_id" name="user_type_id" required
                                         class="block w-full pl-11 pr-10 py-3.5 bg-[#0a0f1c]/40 border border-white/10 rounded-xl text-gray-100 placeholder-gray-500 focus:ring-1 focus:ring-[#f3a446] focus:border-[#f3a446] transition-all duration-300 sm:text-sm shadow-inner backdrop-blur-sm appearance-none">
                                         <option value="" class="bg-[#1a262a] text-gray-400">
@@ -139,7 +140,7 @@
                                             @foreach ($userTypes as $userType)
                                                 <option value="{{ $userType->id }}" class="bg-[#1a262a]"
                                                     {{ old('user_type_id') == $userType->id ? 'selected' : '' }}>
-                                                    {{ $userType->display_name_ar }}
+                                                    {{ app()->getLocale() == 'ar' ? $userType->display_name_ar : ($userType->display_name_en ?? $userType->display_name_ar) }}
                                                 </option>
                                             @endforeach
                                         @else
@@ -149,7 +150,6 @@
                                                 {{ __('app.register.user_type_consultant') }}</option>
                                             <option value="3" class="bg-[#1a262a]">
                                                 {{ __('app.register.user_type_contractor') }}</option>
-                                            {{--  <option value="4" class="bg-[#1a262a]">{{ __('app.register.user_type_supplier') }}</option>  --}}
                                         @endif
                                     </select>
                                     <div class="absolute inset-y-0 end-3 flex items-center px-2 pointer-events-none">
@@ -230,33 +230,6 @@
                                 class="relative uppercase tracking-wider">{{ __('app.register.create_account_button') }}</span>
                         </button>
                     </form>
-
-                    <!-- <div class="mt-8">
-                        <div class="relative">
-                            <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-t border-white/10"></div>
-                            </div>
-                            <div class="relative flex justify-center text-sm">
-                                <span
-                                    class="px-4 bg-[#1e282d] text-gray-400 rounded-full border border-white/5">{{ __('app.register.or_divider') }}</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 grid grid-cols-2 gap-4">
-                            <a href="#"
-                                class="relative flex items-center justify-center w-full px-4 py-3 border border-white/10 rounded-xl shadow-lg bg-[#0a0f1c]/30 text-sm font-bold text-gray-300 hover:bg-[#2f5c69] hover:border-[#f3a446]/30 hover:text-white transition-all duration-300 group overflow-hidden">
-                                <i
-                                    class="fab fa-google text-red-500 text-lg mr-2 group-hover:text-white transition-colors relative z-10"></i>
-                                <span class="relative z-10">{{ __('app.register.google_button') }}</span>
-                            </a>
-                            <a href="#"
-                                class="relative flex items-center justify-center w-full px-4 py-3 border border-white/10 rounded-xl shadow-lg bg-[#0a0f1c]/30 text-sm font-bold text-gray-300 hover:bg-[#2f5c69] hover:border-[#f3a446]/30 hover:text-white transition-all duration-300 group overflow-hidden">
-                                <i
-                                    class="fab fa-facebook text-blue-500 text-lg mr-2 group-hover:text-white transition-colors relative z-10"></i>
-                                <span class="relative z-10">{{ __('app.register.facebook_button') }}</span>
-                            </a>
-                        </div>
-                    </div> -->
                 </div>
 
             </div>
@@ -696,133 +669,43 @@
 
     <style>
         @keyframes blob {
-            0% {
-                transform: translate(0px, 0px) scale(1);
-            }
-
-            33% {
-                transform: translate(30px, -50px) scale(1.1);
-            }
-
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-
-            100% {
-                transform: translate(0px, 0px) scale(1);
-            }
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
         }
-
         @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
         }
-
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            10%,
-            30%,
-            50%,
-            70%,
-            90% {
-                transform: translateX(-4px);
-            }
-
-            20%,
-            40%,
-            60%,
-            80% {
-                transform: translateX(4px);
-            }
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+            20%, 40%, 60%, 80% { transform: translateX(4px); }
         }
-
-        .animate-blob {
-            animation: blob 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .animate-float {
-            animation: float 5s ease-in-out infinite;
-        }
-
-        .animate-fade-in-up {
-            animation: fadeInUp 0.7s ease-out forwards;
-        }
-
-        .animate-shake {
-            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
-        }
-
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-            animation-delay: 4s;
-        }
-
-        .font-tajawal {
-            font-family: 'Tajawal', sans-serif;
-        }
-
-        .perspective-1000 {
-            perspective: 1000px;
-        }
-
-        /* Custom Scrollbar for Light Mode */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            /* Light gray track */
-            border-radius: 4px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            /* Gray-300 thumb */
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #2f5c69;
-            /* Brand Teal on hover */
-        }
+        .animate-blob { animation: blob 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); }
+        .animate-float { animation: float 5s ease-in-out infinite; }
+        .animate-fade-in-up { animation: fadeInUp 0.7s ease-out forwards; }
+        .animate-shake { animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        .font-tajawal { font-family: 'Tajawal', sans-serif; }
+        .perspective-1000 { perspective: 1000px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #2f5c69; }
     </style>
 
     <script>
         function toggleModal(modalId) {
             const modal = document.getElementById(modalId);
             const modalContent = modal.querySelector('.modal-content');
-
             if (modal.classList.contains('opacity-0')) {
                 modal.classList.remove('opacity-0', 'pointer-events-none');
                 setTimeout(() => {
@@ -837,7 +720,6 @@
                 document.body.style.overflow = 'auto';
             }
         }
-
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape") {
                 const openModals = document.querySelectorAll('[role="dialog"]:not(.opacity-0)');
@@ -845,5 +727,4 @@
             }
         });
     </script>
-
 @endsection

@@ -99,30 +99,27 @@ class DashboardController extends Controller
         $profile = $user->profile()->firstOrCreate([]);
 
         if ($request->hasFile('avatar')) {
-            $avatarPath = $request->file('avatar')->store('avatars', 'public');
-
             if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
                 Storage::disk('public')->delete($user->avatar);
             }
 
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
             $user->avatar = $avatarPath;
         }
 
-        if (array_key_exists('bio', $validated)) {
+        if (isset($validated['bio'])) {
             $profile->bio_ar = $validated['bio'];
             $profile->bio_en = $validated['bio'];
         }
 
-        if (array_key_exists('specialization', $validated)) {
-            $profile->specializations = $validated['specialization']
-                ? [$validated['specialization']]
-                : [];
+        if (isset($validated['specialization'])) {
+            $profile->specializations = $validated['specialization'] ? [$validated['specialization']] : [];
         }
 
         $profile->save();
 
         foreach (['city', 'phone', 'whatsapp'] as $field) {
-            if (array_key_exists($field, $validated)) {
+            if (isset($validated[$field])) {
                 $user->{$field} = $validated[$field];
             }
         }

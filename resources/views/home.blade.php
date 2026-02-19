@@ -3,22 +3,21 @@
 @section('content')
 
 
-<section class="hero-section bg-[#2f5c69] text-white relative pt-20 pb-12 lg:rounded-b-[50px] border-b-8 border-b-[#f3a446]">
+<section class="hero-section bg-[#2f5c69] text-white relative pt-32 pb-16 lg:pt-24 lg:pb-12 lg:rounded-b-[50px] border-b-8 border-b-[#f3a446]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class=" animate-fade-in">
-                
-
-                <h1 class="text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            <div class="text-center lg:text-start animate-fade-in order-2 lg:order-1">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
                     {{ __('app.hero_title_line1') }}
-                    <span class="text-[#f3a446]">{{ __('app.hero_title_line2') }}</span>
+                    <span class="text-[#f3a446] block lg:inline">{{ __('app.hero_title_line2') }}</span>
                 </h1>
 
-                <p class="text-xl text-gray-300 mb-10 leading-relaxed">
+                <p class="text-lg lg:text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                     {{ __('app.hero_description') }}
                 </p>
 
-                <div class="flex flex-col sm:flex-row-reverse gap-4 justify-end">
+                <div class="flex flex-col sm:flex-row-reverse gap-4 justify-center lg:justify-end">
                     <a href="{{ route('designs.index') }}"
                         class="bg-transparent text-white border-2 border-white font-bold text-lg py-3 px-8 rounded-lg shadow-sm hover:bg-white hover:text-[#2f5c69] transition-colors flex items-center justify-center gap-2">
                         <i class="fas fa-eye"></i>
@@ -47,65 +46,57 @@
                         </a>
                     @endauth
                     
-                    <button class="bg-white text-[#2f5c69] w-14 h-14 rounded-full flex items-center justify-center shadow-md hover:bg-gray-200 transition-colors">
+                    <button class="hidden lg:flex bg-white text-[#2f5c69] w-14 h-14 rounded-full items-center justify-center shadow-md hover:bg-gray-200 transition-colors">
                         <i class="fas fa-play"></i>
                     </button>
                 </div>
             </div>
 
-            <div class="relative animate-slide-in flex items-center justify-center min-h-[350px] lg:min-h-[500px]">
+            <div class="relative animate-slide-in flex items-center justify-center min-h-[200px] lg:min-h-[500px] order-1 lg:order-2">
+                <div class="relative scale-90 sm:scale-100">
+                    <img src="{{ asset('images/home3.png') }}"
+                            alt="{{ __('app.hero_image_alt') }}"
+                            class="relative z-10 w-[220px] h-[220px] lg:w-[350px] lg:h-[350px] object-cover rounded-full shadow-2xl transition-transform duration-500 hover:rotate-3 border-4 border-[#f3a446]/20">
 
-                <img src="{{ asset('images/home3.png') }}"
-                        alt="{{ __('app.hero_image_alt') }}"
-                        class="relative z-10 w-[260px] h-[260px] lg:w-[350px] lg:h-[350px] object-cover rounded-full shadow-2xl transition-transform duration-500 hover:rotate-3">
-
-                <div class="absolute w-[310px] h-[310px] lg:w-[420px] lg:h-[420px] border-2 border-[#f3a446]/60 rounded-full animate-pulse">
-
-                    <div class="absolute -top-4 right-10 lg:right-16 group">
-                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-lg lg:text-xl shadow-lg 
-                                    transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-400/50">
-                            <i class="fas fa-user-tie"></i>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] lg:w-[420px] lg:h-[420px] border-2 border-[#f3a446]/40 rounded-full animate-pulse">
+                        
+                        <div class="absolute -top-2 right-4 lg:right-16 group z-20">
+                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-sm lg:text-xl shadow-lg transition-all duration-300 group-hover:scale-110">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-semibold text-[10px] lg:text-xs px-2  rounded-md bottom-full mb-2 right-1/2 translate-x-1/2 shadow-md whitespace-nowrap">
+                                {{ __('app.certified_consultants') }}
+                            </span>
                         </div>
-                        <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                    font-semibold text-xs px-3 py-1 rounded-md bottom-[65px] lg:bottom-[70px] right-1/2 translate-x-1/2 shadow-md whitespace-nowrap">
-                            {{ __('app.certified_consultants') }}
-                        </span>
-                    </div>
 
-                    <div class="absolute -bottom-4 left-10 lg:left-16 group">
-                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-[#f1f7ff] border border-gray-200 text-[#2f5c69] rounded-full flex items-center justify-center text-lg lg:text-xl shadow-lg 
-                                    transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-300/60">
-                            <i class="fas fa-tools"></i>
+                        <div class="absolute -bottom-2 left-4 lg:left-16 group z-20">
+                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#f1f7ff] border border-gray-200 text-[#2f5c69] rounded-full flex items-center justify-center text-sm lg:text-xl shadow-lg transition-all duration-300 group-hover:scale-110">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-semibold text-[10px] lg:text-xs px-2 py-1 rounded-md top-full mt-2 left-1/2 -translate-x-1/2 shadow-md whitespace-nowrap">
+                                {{ __('app.trusted_contractors') }}
+                            </span>
                         </div>
-                        <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                    font-semibold text-xs px-3 py-1 rounded-md top-[65px] lg:top-[70px] left-1/2 -translate-x-1/2 shadow-md whitespace-nowrap">
-                            {{ __('app.trusted_contractors') }}
-                        </span>
-                    </div>
 
-                    <div class="absolute top-1/2 -left-6 lg:-left-8 transform -translate-y-1/2 group">
-                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-lg lg:text-xl shadow-lg 
-                                    transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-400/50">
-                            <i class="fas fa-handshake"></i>
+                        <div class="absolute top-1/2 -left-4 lg:-left-8 transform -translate-y-1/2 group z-20">
+                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#f3a446] text-white rounded-full flex items-center justify-center text-sm lg:text-xl shadow-lg transition-all duration-300 group-hover:scale-110">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-semibold text-[10px] lg:text-xs px-2 py-1 rounded-md left-[-10px] lg:left-[-30px] top-1/2 -translate-y-1/2 -translate-x-full shadow-md whitespace-nowrap">
+                                {{ __('app.request_service') }}
+                            </span>
                         </div>
-                        <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                    font-semibold text-xs px-3 py-1 rounded-md left-[-30px] top-1/2 -translate-y-1/2 shadow-md whitespace-nowrap">
-                            {{ __('app.request_service') }}
-                        </span>
-                    </div>
 
-                    <div class="absolute top-1/2 -right-6 lg:-right-8 transform -translate-y-1/2 group">
-                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-[#f1f7ff] text-[#2f5c69] rounded-full flex items-center justify-center text-lg lg:text-xl shadow-lg 
-                                    transition-all duration-300 group-hover:scale-110 group-hover:shadow-blue-300/60">
-                            <i class="fas fa-bolt"></i>
+                        <div class="absolute top-1/2 -right-4 lg:-right-8 transform -translate-y-1/2 group z-20">
+                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#f1f7ff] text-[#2f5c69] rounded-full flex items-center justify-center text-sm lg:text-xl shadow-lg transition-all duration-300 group-hover:scale-110">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white font-semibold text-[10px] lg:text-xs px-2 py-1 rounded-md right-[-10px] lg:right-[-30px] top-1/2 -translate-y-1/2 translate-x-full shadow-md whitespace-nowrap">
+                                {{ __('app.fast_performance') }}
+                            </span>
                         </div>
-                        <span class="absolute opacity-0 group-hover:opacity-100 transition-all bg-[#1c3944] text-white 
-                                    font-semibold text-xs px-3 py-1 rounded-md right-[-30px] top-1/2 -translate-y-1/2 shadow-md whitespace-nowrap">
-                            {{ __('app.fast_performance') }}
-                        </span>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -116,111 +107,36 @@
 </section>
 
 <style>
-    .slanted-bar {
-        position: relative;
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    .top-slant-strip {
-        height: 6px;
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 20;
-    }
-
-    .stat-number {
-        font-family: 'Cairo', sans-serif;
-        color: #2f5c69;
-        transition: color 0.3s ease;
-    }
-    
-    .stat-label {
-        font-family: 'Cairo', sans-serif;
-        color: #3c6f7d;
-        font-weight: 700;
-    }
-
-.scroll-down-button {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 30;
-    width: 80px;
-    height: 80px;
-    
-    background-color: #2f5c69; 
-    
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.25rem;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-
-    border: 4px solid transparent;
-
-    background-image: 
-        linear-gradient(#2f5c69, #2f5c69), 
-        conic-gradient(from 90deg, #f3a446 0deg 180deg, transparent 180deg 360deg);
-    
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-}
-
-.scroll-down-button:hover {
-    transform: translateX(-50%) scale(1.1);
-}
-
-.scroll-down-button i {
-     animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-8px);
-    }
-    60% {
-        transform: translateY(-4px);
-    }
-}
-
-@media (max-width: 768px) {
     .scroll-down-button {
-        width: 50px;
-        height: 50px;
-        bottom: -25px;
-        font-size: 1rem;
-    }
-}
-    .scroll-down-button:hover {
-        transform: translateX(-50%) scale(1.1);
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        width: 80px;
+        height: 80px;
+        background-color: #2f5c69; 
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+        transition: all 0.3s ease;
+        border: 4px solid transparent;
+        background-image: linear-gradient(#2f5c69, #2f5c69), conic-gradient(from 90deg, #f3a446 0deg 180deg, transparent 180deg 360deg);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
     }
 
-    .scroll-down-button i {
-         animation: bounce 2s infinite;
-    }
-    
+    .scroll-down-button i { animation: bounce 2s infinite; }
+
     @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {
-            transform: translateY(0);
-        }
-        40% {
-            transform: translateY(-8px);
-        }
-        60% {
-            transform: translateY(-4px);
-        }
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-8px); }
+        60% { transform: translateY(-4px); }
     }
-    
+
     @media (max-width: 768px) {
         .scroll-down-button {
             width: 50px;
@@ -230,7 +146,6 @@
         }
     }
 </style>
-
 <div class="relative" id="stats-section">
   <div class="top-slant-strip"></div>
 

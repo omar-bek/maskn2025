@@ -8,25 +8,41 @@
 <html lang="{{ str_replace('_', '-', $currentLocale) }}" dir="{{ $isRtl ? 'rtl' : 'ltr' }}" class="{{ $isRtl ? 'rtl' : 'ltr' }}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'انشاءات - منصة تصميم البيوت الرائدة')</title>
-    <meta name="description" content="@yield('description', 'منصة انشاءات لتصميم البيوت العصرية والإسلامية - تجمع بين أفضل الاستشاريين والمقاولين')">
-    <meta name="keywords" content="@yield('keywords', 'تصميم بيوت, بناء منازل, استشاري معماري, مقاول بناء, مناقصات, تصميم اسلامي, فيلا, شقة')">
-    <meta name="author" content="منصة انشاءات">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0f766e">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="انشاءات">
-    <meta name="msapplication-TileColor" content="#0f766e">
-    <meta name="msapplication-config" content="/browserconfig.xml">
-    <meta property="og:title" content="@yield('title', 'انشاءات - منصة تصميم البيوت الرائدة')">
-    <meta property="og:description" content="@yield('description', 'منصة انشاءات لتصميم البيوت العصرية والإسلامية')">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <!-- Preload critical resources -->
+   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<title>@yield('title', 'انشاءات - منصة تصميم البيوت الرائدة')</title>
+<meta name="description" content="@yield('description', 'منصة انشاءات لتصميم البيوت العصرية والإسلامية - تجمع بين أفضل الاستشاريين والمقاولين')">
+<meta name="keywords" content="@yield('keywords', 'تصميم بيوت, بناء منازل, استشاري معماري, مقاول بناء, مناقصات, تصميم اسلامي, فيلا, شقة')">
+<meta name="author" content="منصة انشاءات">
+<meta name="robots" content="index, follow">
+
+<meta name="theme-color" content="#0f766e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="انشاءات">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:title" content="@yield('title', 'انشاءات - منصة تصميم البيوت الرائدة')">
+<meta property="og:description" content="@yield('description', 'منصة انشاءات لتصميم البيوت العصرية والإسلامية')">
+<meta property="og:image" content="{{ asset('logo.png') }}">
+<meta property="og:image:secure_url" content="{{ asset('logo.png') }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ url()->current() }}">
+<meta name="twitter:title" content="@yield('title', 'انشاءات - منصة تصميم البيوت الرائدة')">
+<meta name="twitter:description" content="@yield('description', 'منصة انشاءات لتصميم البيوت العصرية والإسلامية')">
+<meta name="twitter:image" content="{{ asset('logo.png') }}">
+
+<meta name="msapplication-TileColor" content="#0f766e">
+<meta name="msapplication-config" content="/browserconfig.xml">
+
+
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         as="style">
     <link rel="preload" href="{{ asset('css/custom.css') }}" as="style">
@@ -1081,10 +1097,7 @@ html.ltr body {
             {{ __("app.footer.contact.title") }}
           </h3>
           <ul class="space-y-4">
-            <li class="flex items-start gap-3 text-gray-300">
-              <i class="fas fa-phone text-[#f3a446] text-lg mt-1"></i>
-              <span dir="ltr">{{ __("app.footer.contact.phone") }}</span>
-            </li>
+            
             <li class="flex items-start gap-3 text-gray-300">
               <i class="fas fa-envelope text-[#f3a446] text-lg mt-1"></i>
               <span>{{ __("app.footer.contact.email") }}</span>

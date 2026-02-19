@@ -61,25 +61,18 @@ class AuthController extends Controller
     /**
      * Show registration form
      */
-    public function showRegistrationForm()
-    {
-        if (Auth::check()) {
-            return $this->redirectBasedOnUserType();
-        }
-
-        $userTypes = UserType::where('name', '!=', 'admin')->get();
-
-        // If no user types exist, create them
-        if ($userTypes->isEmpty()) {
-            $this->createDefaultUserTypes();
-            $userTypes = UserType::where('name', '!=', 'admin')->get();
-        }
-
-        // Debug: Log user types to see what we're getting
-        Log::info('User Types for registration:', $userTypes->toArray());
-
-        return view('auth.register', compact('userTypes'));
+public function showRegistrationForm()
+{
+    if (Auth::check()) {
+        return $this->redirectBasedOnUserType();
     }
+
+    $this->createDefaultUserTypes();
+
+    $userTypes = UserType::where('name', '!=', 'admin')->get();
+
+    return view('auth.register', compact('userTypes'));
+}
 
     /**
      * Handle registration request
