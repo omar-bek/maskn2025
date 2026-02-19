@@ -391,12 +391,11 @@
   }
 </style>
 
-
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap");
 
   .future-section {
-    /* background-color: #2f5c69; */
+    font-family: 'Cairo', sans-serif;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -404,154 +403,128 @@
     padding-bottom: 4rem;
   }
 
-  @keyframes subtleFloat {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-
-  .animate-subtle-float {
-    animation: subtleFloat 4s ease-in-out infinite;
-  }
-
+  /* تحسين شكل الكرت ليصبح أكثر حداثة */
   .process-step-modern {
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    background-color: rgba(255, 255, 255, 0.95);
-    border-left: 5px solid #f3a446;
-    padding: 18px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.98);
+    border-right: 6px solid #f3a446; /* تغيير الجهة لتناسب العربي أو جعلها border-s */
+    padding: 25px;
+    height: 100%; /* لتوحيد أطوال الكروت في الصف الواحد */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   .step-number-small {
-    width: 48px;
-    height: 48px;
-    font-size: 1.125rem;
+    width: 54px;
+    height: 54px;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
   .content-green-frame {
     border: 2px solid #f3a446;
-    border-radius: 20px;
-    padding: 40px 30px;
-    background-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    padding: 50px 40px;
     background-color: #2f5c69;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* إضافة لمسة جمالية للخلفية */
+  .content-green-frame::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(243, 164, 70, 0.05) 0%, transparent 70%);
+    pointer-events: none;
   }
 </style>
 
 <section class="future-section">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
     <div class="content-green-frame">
-      <div class="text-center mb-6">
-        <h2
-          class="text-3xl font-extrabold text-[#f3a446] mb-2 tracking-tight"
-        >
+      <div class="text-center mb-12 relative z-10">
+        <h2 class="text-4xl font-black text-[#f3a446] mb-4 tracking-tight">
           {{ __('app.how_it_works.title') }}
         </h2>
-        <p class="text-md text-gray-200 max-w-2xl mx-auto font-normal">
+        <div class="h-1 w-20 bg-[#f3a446] mx-auto mb-4 rounded-full"></div>
+        <p class="text-lg text-gray-100 max-w-2xl mx-auto font-light leading-relaxed">
           {{ __('app.how_it_works.subtitle') }}
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-        <div class="space-y-3">
-          <div
-            class="process-step-modern group flex items-center gap-4 rounded-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.01]"
-          >
-            <div
-              class="step-number step-number-small flex-shrink-0 flex items-center justify-center rounded-full bg-[#2f5c69] border-2 border-[#f3a446] text-white font-extrabold transition-all duration-300 ease-in-out group-hover:bg-[#f3a446] group-hover:text-[#2f5c69] group-hover:scale-110 group-hover:rotate-3"
-            >
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+        
+        <div class="process-step-modern group rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <div class="flex items-start gap-5">
+            <div class="step-number-small flex-shrink-0 flex items-center justify-center rounded-2xl bg-[#2f5c69] border-2 border-[#f3a446] text-[#f3a446] font-black transition-all duration-500 group-hover:bg-[#f3a446] group-hover:text-white group-hover:rotate-[360deg]">
               1
             </div>
             <div>
-              <h3
-                class="text-lg font-bold text-gray-900 mb-0.5 transition-colors duration-300 group-hover:text-[#2f5c69]"
-              >
+              <h3 class="text-xl font-bold text-[#2f5c69] mb-2">
                 {{ __('app.how_it_works.steps.step_1.title') }}
               </h3>
-              <p class="text-gray-700 text-sm">
+              <p class="text-gray-600 text-sm leading-relaxed">
                 {{ __('app.how_it_works.steps.step_1.description') }}
               </p>
             </div>
           </div>
+        </div>
 
-          <div
-            class="process-step-modern group flex items-center gap-4 rounded-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.01]"
-          >
-            <div
-              class="step-number step-number-small flex-shrink-0 flex items-center justify-center rounded-full bg-[#2f5c69] border-2 border-[#f3a446] text-white font-extrabold transition-all duration-300 ease-in-out group-hover:bg-[#f3a446] group-hover:text-[#2f5c69] group-hover:scale-110 group-hover:rotate-3"
-            >
+        <div class="process-step-modern group rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <div class="flex items-start gap-5">
+            <div class="step-number-small flex-shrink-0 flex items-center justify-center rounded-2xl bg-[#2f5c69] border-2 border-[#f3a446] text-[#f3a446] font-black transition-all duration-500 group-hover:bg-[#f3a446] group-hover:text-white group-hover:rotate-[360deg]">
               2
             </div>
             <div>
-              <h3
-                class="text-lg font-bold text-gray-900 mb-0.5 transition-colors duration-300 group-hover:text-[#2f5c69]"
-              >
+              <h3 class="text-xl font-bold text-[#2f5c69] mb-2">
                 {{ __('app.how_it_works.steps.step_2.title') }}
               </h3>
-              <p class="text-gray-700 text-sm">
+              <p class="text-gray-600 text-sm leading-relaxed">
                 {{ __('app.how_it_works.steps.step_2.description') }}
               </p>
             </div>
           </div>
+        </div>
 
-          <div
-            class="process-step-modern group flex items-center gap-4 rounded-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.01]"
-          >
-            <div
-              class="step-number step-number-small flex-shrink-0 flex items-center justify-center rounded-full bg-[#2f5c69] border-2 border-[#f3a446] text-white font-extrabold transition-all duration-300 ease-in-out group-hover:bg-[#f3a446] group-hover:text-[#2f5c69] group-hover:scale-110 group-hover:rotate-3"
-            >
+        <div class="process-step-modern group rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <div class="flex items-start gap-5">
+            <div class="step-number-small flex-shrink-0 flex items-center justify-center rounded-2xl bg-[#2f5c69] border-2 border-[#f3a446] text-[#f3a446] font-black transition-all duration-500 group-hover:bg-[#f3a446] group-hover:text-white group-hover:rotate-[360deg]">
               3
             </div>
             <div>
-              <h3
-                class="text-lg font-bold text-gray-900 mb-0.5 transition-colors duration-300 group-hover:text-[#2f5c69]"
-              >
+              <h3 class="text-xl font-bold text-[#2f5c69] mb-2">
                 {{ __('app.how_it_works.steps.step_3.title') }}
               </h3>
-              <p class="text-gray-700 text-sm">
+              <p class="text-gray-600 text-sm leading-relaxed">
                 {{ __('app.how_it_works.steps.step_3.description') }}
               </p>
             </div>
           </div>
+        </div>
 
-          <div
-            class="process-step-modern group flex items-center gap-4 rounded-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.01]"
-          >
-            <div
-              class="step-number step-number-small flex-shrink-0 flex items-center justify-center rounded-full bg-[#2f5c69] border-2 border-[#f3a446] text-white font-extrabold transition-all duration-300 ease-in-out group-hover:bg-[#f3a446] group-hover:text-[#2f5c69] group-hover:scale-110 group-hover:rotate-3"
-            >
+        <div class="process-step-modern group rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <div class="flex items-start gap-5">
+            <div class="step-number-small flex-shrink-0 flex items-center justify-center rounded-2xl bg-[#2f5c69] border-2 border-[#f3a446] text-[#f3a446] font-black transition-all duration-500 group-hover:bg-[#f3a446] group-hover:text-white group-hover:rotate-[360deg]">
               4
             </div>
             <div>
-              <h3
-                class="text-lg font-bold text-gray-900 mb-0.5 transition-colors duration-300 group-hover:text-[#2f5c69]"
-              >
+              <h3 class="text-xl font-bold text-[#2f5c69] mb-2">
                 {{ __('app.how_it_works.steps.step_4.title') }}
               </h3>
-              <p class="text-gray-700 text-sm">
+              <p class="text-gray-600 text-sm leading-relaxed">
                 {{ __('app.how_it_works.steps.step_4.description') }}
               </p>
             </div>
           </div>
         </div>
 
-        <div
-          class="relative flex justify-center items-center animate-subtle-float"
-        >
-          <img
-            src="{{ asset('images/ensha.png') }}"
-            alt="{{ __('app.how_it_works.image_alt') }}"
-            class="w-[70%] h-auto object-cover rounded-2xl shadow-xl transition-all duration-500 ease-in-out hover:scale-[1.02] border-2 border-[#f3a446] shadow-[#f3a446]/30"
-          />
-        </div>
       </div>
     </div>
   </div>
@@ -565,7 +538,7 @@
    
 
     <!-- Testimonials Section -->
-<style>
+<!-- <style>
   @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap");
 
   .modern-section {
@@ -747,7 +720,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
     <!-- CTA Section -->
 <style>
