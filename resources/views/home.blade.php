@@ -3,7 +3,7 @@
 @section('content')
 
 
-<section class="hero-section bg-[#2f5c69] text-white relative pt-32 pb-20 lg:pt-24 lg:pb-12 lg:rounded-b-[50px] border-b-8 border-b-[#f3a446]">
+<section class="hero-section bg-[#2f5c69] text-white relative pt-32 pb-20 lg:pt-32 lg:pb-12 lg:rounded-b-[50px] border-b-8 border-b-[#f3a446]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             

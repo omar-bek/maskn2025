@@ -27,17 +27,19 @@
 <meta property="og:url" content="{{ url()->current() }}">
 <meta property="og:title" content="@yield('title', 'انشاءات - منصة تصميم البيوت الرائدة')">
 <meta property="og:description" content="@yield('description', 'منصة انشاءات لتصميم البيوت العصرية والإسلامية')">
-<meta property="og:image" content="{{ asset('logo1.png') }}">
-<meta property="og:image:secure_url" content="{{ asset('logo1.png') }}">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
+<meta property="og:image" content="{{ asset('logo2.png') }}">
+<meta property="og:image:secure_url" content="{{ asset('logo2.png') }}">
 <meta property="og:image:height" content="630">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:type" content="image/png">
+
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="{{ url()->current() }}">
 <meta name="twitter:title" content="@yield('title', 'انشاءات - منصة تصميم البيوت الرائدة')">
 <meta name="twitter:description" content="@yield('description', 'منصة انشاءات لتصميم البيوت العصرية والإسلامية')">
-<meta name="twitter:image" content="{{ asset('logo1.png') }}">
+<meta name="twitter:image" content="{{ asset('logo2.png') }}">
 
 <meta name="msapplication-TileColor" content="#0f766e">
 <meta name="msapplication-config" content="/browserconfig.xml">
