@@ -317,25 +317,20 @@ html.ltr body {
     class="header-content w-full px-4 py-3 transition-all duration-300 bg-white/95 border-b-2 border-[#f3a446] backdrop-blur-md shadow-lg flex items-center justify-between relative z-50"
   >
     <div class="flex items-center gap-6">
-      <a
-        href="{{ route('home') }}"
-        class="logo flex items-center gap-3"
-        aria-label="{{ __('app.header.home') }}"
-      >
-        @if (\App\Models\SiteSetting::get('site_logo'))
-          <div class="logo-icon w-40 h-14">
-            <img
-              src="{{ asset('logo1.png') }}"
-              alt="{{ __('app.header.logo_alt') }}"
-              class="w-full h-full object-contain"
-            />
-          </div>
-        @else
-          <div
-            class="logo-icon w-10 h-10 bg-[#f3a446]/20 rounded-full"
-          ></div>
-        @endif
-      </a>
+<a
+  href="{{ route('home') }}"
+  class="logo flex items-center gap-3"
+  aria-label="{{ __('app.header.home') }}"
+>
+  <div class="logo-icon w-40 h-14">
+    <img
+      src="{{ asset('logo1.png') }}"
+      alt="{{ __('app.header.logo_alt') }}"
+      class="w-full h-full object-contain"
+    />
+  </div>
+</a>
+
 
       <nav
         class="hidden md:block"
@@ -487,9 +482,24 @@ html.ltr body {
       @endauth
     </div>
 
-    <div class="user-avatar absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden w-10 h-10 bg-[#f3a446] text-[#2f5c69] flex items-center justify-center rounded-full shadow-sm z-10">
-      <i class="fas fa-user"></i>
-    </div>
+   @php
+    $user = Auth::user();
+    $avatarUrl = null;
+    if ($user) {
+        $path = $user->avatar_url ?? optional($user->profile)->avatar_url;
+        if ($path) {
+            $avatarUrl = str_starts_with($path, 'http') ? $path : asset('storage/' . str_replace('public/', '', $path));
+        }
+    }
+@endphp
+
+<div class="user-avatar absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden w-10 h-10 bg-[#f3a446] text-[#2f5c69] flex items-center justify-center rounded-full shadow-sm z-10 overflow-hidden">
+    @if($avatarUrl)
+        <img src="{{ $avatarUrl }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+    @else
+        <i class="fas fa-user"></i>
+    @endif
+</div>
 
     <div class="flex items-center md:hidden">
       <div class="relative language-dropdown">
@@ -982,7 +992,7 @@ html.ltr body {
               </a>
             </li>
             <li>
-              <a href="{{ route('lands.create') }}" class="footer-link-item">
+              <a href="{{ route('lands.index') }}" class="footer-link-item">
                 <!-- <i class="fas">{{ __("app.footer.links.icon") }}</i> -->
                 <span>{{ __("app.footer.links.lands") }}</span>
               </a>
@@ -1008,56 +1018,56 @@ html.ltr body {
     </h3>
     <ul class="space-y-3">
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-home"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="fas fa-home ml-2"></i>
                 <span>{{ __("app.footer.services.residential_design") }}</span>
             </a>
         </li>
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-building"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="ml-2 fas fa-building"></i>
                 <span>{{ __("app.footer.services.commercial_design") }}</span>
             </a>
         </li>
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-drafting-compass"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="ml-2 fas fa-drafting-compass"></i>
                 <span>{{ __("app.footer.services.engineering_consultations") }}</span>
             </a>
         </li>
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-tasks"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="ml-2 fas fa-tasks"></i>
                 <span>{{ __("app.footer.services.project_management") }}</span>
             </a>
         </li>
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-truck-moving"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="ml-2 fas fa-truck-moving"></i>
                 <span>{{ __("app.footer.services.material_supply") }}</span>
             </a>
         </li>
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-couch"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="ml-2 fas fa-couch"></i>
                 <span>{{ __("app.footer.services.interior_design") }}</span>
             </a>
         </li>
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-layer-group"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="ml-2 fas fa-layer-group"></i>
                 <span>{{ __("app.footer.services.exterior_design") }}</span>
             </a>
         </li>
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-chair"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="ml-2 fas fa-chair"></i>
                 <span>{{ __("app.footer.services.furniture_design") }}</span>
             </a>
         </li>
         <li>
-            <a href="#" class="footer-link-item">
-                <i class="fas fa-tree"></i>
+            <a href="{{ route('designs.index') }}" class="footer-link-item">
+                <i class="ml-2 fas fa-tree"></i>
                 <span>{{ __("app.footer.services.landscape_design") }}</span>
             </a>
         </li>

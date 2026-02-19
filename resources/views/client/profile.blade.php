@@ -14,7 +14,11 @@
             <div class="bg-gradient-to-r from-[#1a262a] to-[#2f5c69] text-white rounded-3xl shadow-2xl overflow-hidden mb-10">
                 <div class="px-8 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     @php
-                        $avatarUrl = $user->avatar_url ?? optional($user->profile)->avatar_url;
+                        $path = $user->avatar_url ?? optional($user->profile)->avatar_url;
+                        $avatarUrl = null;
+                        if ($path) {
+                            $avatarUrl = str_starts_with($path, 'http') ? $path : asset('storage/' . str_replace('public/', '', $path));
+                        }
                     @endphp
                     <div class="flex items-center gap-4">
                         <div class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-white/40 shadow-lg">

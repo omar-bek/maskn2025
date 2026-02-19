@@ -15,8 +15,14 @@
          <meta property="og:title" content=" Enshaat Platform - منصة إنشاءات ">
     <meta property="og:description" content="  منصة متكاملة تجمع بين أفضل الاستشاريين والمقاولين والموردين لتحويل أحلامك المعمارية إلى واقع ملموس. من التصميم حتى التسليم النهائي.">
     <meta property="og:image" content="{{ asset('logo1.png') }}">
-    <meta property="og:url" content="">
+    <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ asset('logo1.png') }}">
+    <meta name="twitter:title" content="Enshaat Platform - منصة إنشاءات">
+    <meta name="twitter:description" content="منصة متكاملة تجمع بين أفضل الاستشاريين والمقاولين والموردين لتحويل أحلامك المعمارية إلى واقع ملموس. من التصميم حتى التسليم النهائي.">
+
 
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))

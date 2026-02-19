@@ -9,21 +9,27 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up()
+{
+    if (Schema::hasTable('tenders')) {
         Schema::table('tenders', function (Blueprint $table) {
-            $table->text('client_notes')->nullable()->after('requirements');
+            $table->text('client_notes')->nullable();
         });
     }
+}
+
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+   public function down()
+{
+    if (Schema::hasTable('tenders')) {
         Schema::table('tenders', function (Blueprint $table) {
             $table->dropColumn('client_notes');
         });
     }
+}
+
 };
 
